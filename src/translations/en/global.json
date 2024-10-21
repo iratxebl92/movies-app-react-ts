@@ -1,0 +1,24 @@
+
+{
+"header": {
+    "nav": {
+        "home": "Home",
+        "movies": "Movies",
+        "tv-shows": "Tv Shows"
+    },
+    "theme": {
+        "dark": "Dark",
+        "light": "Light"
+    }
+},
+"body": {
+    "trending": "Trending",
+    "top-rated": "Top rated",
+    "popular": "Popular",
+    "day": "Day",
+    "week": "Week",
+    "search": "Search",
+    "search-message": "A corner for film and television lovers. Start your search here. Explore Now",
+    "premieres": "Premieres"
+}
+}
