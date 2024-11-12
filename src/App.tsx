@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import {useTranslation} from "react-i18next"
 import { Header } from "./components/Header";
+import { MoviesApp } from "./components/MoviesApp";
 
 function App() {
   const [t, i18n] = useTranslation("global") //el archivo del que sacamos la traducción
+  
   const [theme, setTheme] = useState(() => {
     if(window.matchMedia('(prefers-color-scheme:dark)').matches){
       return "dark"
@@ -29,8 +31,9 @@ function App() {
 
   return (
     <>
-    <Header/>
-    {/* <h1>{t("header.nav.home")} </h1>
+    <MoviesApp/>
+   
+     {/* <h1>{t("header.nav.home")} </h1>
     <br />
     <button className="bg-slate-200 mr-3" onClick={() => i18n.changeLanguage("es")}>
       ES
@@ -45,7 +48,9 @@ function App() {
         >
           Cambiar
         </button>
-      </div> */}
+      </div>  */}
+
+
     </>
   );
 }
