@@ -3,35 +3,39 @@ import "./App.css";
 import {useTranslation} from "react-i18next"
 import { Header } from "./components/Header";
 import { MoviesApp } from "./components/MoviesApp";
+import { MoviesProvider } from "./context/MoviesProvider";
+import { MoviesContext } from "./context/MoviesContext";
 
 function App() {
   const [t, i18n] = useTranslation("global") //el archivo del que sacamos la traducción
   
-  const [theme, setTheme] = useState(() => {
-    if(window.matchMedia('(prefers-color-scheme:dark)').matches){
-      return "dark"
-    }
-    return "light"
-  });
+  // const [theme, setTheme] = useState(() => {
+  //   if(window.matchMedia('(prefers-color-scheme:dark)').matches){
+  //     return "dark"
+  //   }
+  //   return "light"
+  // });
 
-  const handleChangeTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
+  // const handleChangeTheme = () => {
+  //   setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  // };
 
-  useEffect(() => {
-    if(theme === 'dark'){
-      document.querySelector('html')?.classList.add('dark')
-    } else {
-      document.querySelector('html')?.classList.remove('dark')
+  // useEffect(() => {
+  //   if(theme === 'dark'){
+  //     document.querySelector('html')?.classList.add('dark')
+  //   } else {
+  //     document.querySelector('html')?.classList.remove('dark')
 
-    }
+  //   }
     
-  }, [theme])
+  // }, [theme])
    
 
   return (
     <>
+    <MoviesProvider>
     <MoviesApp/>
+    </MoviesProvider>
    
      {/* <h1>{t("header.nav.home")} </h1>
     <br />

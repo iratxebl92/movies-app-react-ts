@@ -22,7 +22,7 @@ export const Header = () => {
           </button>
         </div>
         <div
-          className={`h-auto w-screen pb-5 bg-slate-400 dark:bg-dark backdrop-blur-md text-center fixed top-0 right-0 transform transition-transform duration-500 ease-linear ${
+          className={`h-auto w-full pb-5 bg-slate-400 dark:bg-dark backdrop-blur-md text-center fixed top-0 right-0 transform transition-transform duration-500 ease-linear ${
             isOpenHeader ? "translate-x-0" : "translate-x-full "
           }`}
         >
