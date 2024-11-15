@@ -55,7 +55,7 @@ export const MenuItems = () => {
             <div className= {` ${prueba ? 'md:hidden' : ''} bg-slate-400 flex md:content-center md:w-12 md:h-16 md:text-center md:relative md:top-5 md:right-8 md:rounded-md`} >
               <button
                 onClick={() => i18n.changeLanguage("es")}
-                className="mr-1  hover:cursor-pointer"
+                className="mr-1 ml-1  hover:cursor-pointer"
               >
                 ES
               </button>
