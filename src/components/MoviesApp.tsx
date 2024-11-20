@@ -5,7 +5,7 @@ import { Header } from "./Header";
 export const MoviesApp = () => {
   return (
     <>
-      <Header />
+    <Header />
      <Body/>
     </>
   );

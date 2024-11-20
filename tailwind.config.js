@@ -28,17 +28,23 @@ export default {
         3: '3px',
       },
       backgroundImage: {
-        "search-bg": "url('https://image.tmdb.org/t/p/original/p9uplKCEPJq4xGJPJJV46KW1dsA.jpg')"
+        "search-bg": "url('/images/popcorn.jpg')"
       },
       height: {
-        "320": "20rem"
+        "17.5": "17.5rem",
+        "320": "20rem",
+        "600": "600px"
       },
       width: {
+        "75": "75rem",
         "100": "6.25rem",
         "200": "12.5rem",
         "300": "18.75rem",
         "500": "31.25rem",
-      }
+      },
+      maxWidth: {
+        '1920': '120rem',
+      },
     },
   },
   plugins: [],

@@ -8,9 +8,8 @@ export const Header = () => {
 
   return (
     <>
-    <div>
-
-      <div className="flex justify-between pr-0 font-heading dark:text-white md:dark:bg-dark bg-opacity-50 backdrop-blur-md">
+    <header className="relative z-10 flex justify-between pr-0 font-heading dark:text-white md:dark:bg-dark bg-opacity-50 backdrop-blur-md ">
+      
         <div className="text-start py-5 pl-5 flex">
           <p className="text-black md:dark:text-white">KoaFilms</p>
           <LogoIcon/>
@@ -23,7 +22,7 @@ export const Header = () => {
         </div>
         <div
           className={`h-auto w-full pb-5 bg-slate-400 dark:bg-dark backdrop-blur-md text-center fixed top-0 right-0 transform transition-transform duration-500 ease-linear ${
-            isOpenHeader ? "translate-x-0" : "translate-x-full "
+            isOpenHeader ? "translate-x-0 block" : "translate-x-full hidden"
           }`}
         >
           <div className="relative mt-10">
@@ -39,8 +38,7 @@ export const Header = () => {
         <div className="hidden md:flex md:items-center md:max-w-4/12 mr-10">
           <MenuItems/>
         </div>
-      </div>
-    </div>
+    </header>
     </>
   );
 };

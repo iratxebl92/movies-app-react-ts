@@ -21,7 +21,7 @@ export const MenuItems = () => {
 
   return (
     <nav>
-      <ul className="md:flex md:flex-row md:space-x-4">
+      <ul className="md:flex md:flex-row md:space-x-4 md:mr-1">
         <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer ">
           {" "}
           {t("header.nav.home")}{" "}
