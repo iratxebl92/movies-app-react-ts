@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Card = () => {
   return (
-    <div className='flex flex-col min-w-40'>
+    <div className='flex flex-col w-40 '>
         <div>
             <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/oArnlWvky2KtWoGC0ChaDboEvcH.jpg" alt="" />
         </div>

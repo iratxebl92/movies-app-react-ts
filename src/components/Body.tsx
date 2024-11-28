@@ -1,6 +1,6 @@
 import { MoviesHome } from './MoviesHome'
 import { Search } from './Search'
-import { Slider } from './Slider'
+
 
 export const Body = () => {
   return (
