@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import {QueryClientProvider, QueryClient} from 'react-query'
 import "./App.css";
 import {useTranslation} from "react-i18next"
 import { Header } from "./components/Header";
 import { MoviesApp } from "./components/MoviesApp";
 import { MoviesProvider } from "./context/MoviesProvider";
 import { MoviesContext } from "./context/MoviesContext";
+
+
+const queryClient = new QueryClient()
 
 function App() {
   const [t, i18n] = useTranslation("global") //el archivo del que sacamos la traducción
@@ -33,9 +37,11 @@ function App() {
 
   return (
     <>
+    <QueryClientProvider client={queryClient}>
     <MoviesProvider>
     <MoviesApp/>
     </MoviesProvider>
+    </QueryClientProvider>
    
      {/* <h1>{t("header.nav.home")} </h1>
     <br />
