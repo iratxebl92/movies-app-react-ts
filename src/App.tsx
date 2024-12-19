@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import {QueryClientProvider, QueryClient} from 'react-query'
 import "./App.css";
 import {useTranslation} from "react-i18next"
-import { Header } from "./components/Header";
-import { MoviesApp } from "./components/MoviesApp";
+import { Header } from "./components/Header/Header";
+import { MoviesApp } from "./pages/MoviesApp";
 import { MoviesProvider } from "./context/MoviesProvider";
 import { MoviesContext } from "./context/MoviesContext";
 

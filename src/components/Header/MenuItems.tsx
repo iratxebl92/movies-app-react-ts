@@ -1,7 +1,7 @@
 import { FaMoon } from "react-icons/fa";
 import { IoSunnyOutline } from "react-icons/io5";
 import { TfiWorld } from "react-icons/tfi";
-import { MoviesContext } from "../context/MoviesContext";
+import { MoviesContext } from "../../context/MoviesContext";
 import { useContext, useState } from "react";
 
 export const MenuItems = () => {

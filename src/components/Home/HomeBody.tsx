@@ -1,8 +1,8 @@
 import { MoviesHome } from './MoviesHome'
-import { Search } from './Search'
+import { Search } from '../Search'
 
 
-export const Body = () => {
+export const HomeBody = () => {
   return (
     <div className='dark:bg-dark h-full'>
       <div className='max-w-1920  m-auto'>
