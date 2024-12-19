@@ -1,17 +1,12 @@
+import { useTrendingMovies } from '../hooks/useMovies';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useQuery } from "react-query";
 import 'swiper/css';
 import { Card } from './Card';
-import  apiClient from '../services/apiClient';
+
 
 export const Slider = () => {
 
-  const { data, status } = useQuery("movies", 
-    async () => {
-      return await apiClient.findTrendingMovies()
-    }
-
-  );
+  const { data, status } = useTrendingMovies()
 
   console.log(data, "DATA")
 
@@ -38,3 +33,4 @@ export const Slider = () => {
   );
 };
 
+//TODO: Mirar para hacer este componente reutilizable, de manera que luego tenga otro que sea TrendingMovies y ahi utilice este Slider
