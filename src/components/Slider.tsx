@@ -2,20 +2,16 @@ import { useTrendingMovies } from '../hooks/useMovies';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Card } from './Card';
+import { IMovie } from '../interfaces/IMovie';
+
+type SliderProps = {
+  data: {
+    results: IMovie[]; 
+  };
+}
+export const Slider = ({data}: SliderProps) => {
 
 
-export const Slider = () => {
-
-  const { data, status } = useTrendingMovies()
-
-  console.log(data, "DATA")
-
-  if (status === "loading") {
-    return <p>Recuperando los productos...</p>;
-  }
-  if (status === "error") {
-    return <p>Error</p>;
-  }
   console.log(data?.results,"RESUUUL");
 
   return (

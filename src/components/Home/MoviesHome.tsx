@@ -1,12 +1,13 @@
-import { Slider } from "../Slider"
+import { TopRated } from "./TopRated"
+import { Trending } from "./Trending"
 
 
 
 export const MoviesHome = () => {
   return (
     <div className="mt-10 max-w-75">
-        <Slider/>
-        <Slider/>
+        <Trending/>
+        <TopRated/>
     </div>
   )
 }

@@ -5,3 +5,7 @@ export const useTrendingMovies = () => {
   return useQuery("trendingMovies", apiClient.findTrendingMovies);
 };
 
+export const useTopRatedMovies = () => {
+  return useQuery("topRatedMovies", apiClient.findTopRated)
+}
+
