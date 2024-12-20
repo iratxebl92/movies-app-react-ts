@@ -7,10 +7,6 @@ type MoviesProps = {
 
 export const Card = ({movie}: MoviesProps ) => {
   
-  console.log(movie)
-
-
-
   return (
     
 

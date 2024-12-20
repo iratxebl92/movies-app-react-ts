@@ -11,9 +11,6 @@ type SliderProps = {
 }
 export const Slider = ({data}: SliderProps) => {
 
-
-  console.log(data?.results,"RESUUUL");
-
   return (
     <Swiper
     className='mySwiper'

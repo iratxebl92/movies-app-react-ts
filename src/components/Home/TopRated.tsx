@@ -6,7 +6,6 @@ export const TopRated = () => {
 
 const {data, status} = useTopRatedMovies()
 
-console.log(data, "DATA")
   
 if (status === "loading") {
   return <p>Recuperando los productos...</p>;
