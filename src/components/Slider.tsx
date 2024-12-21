@@ -26,4 +26,3 @@ export const Slider = ({data}: SliderProps) => {
   );
 };
 
-//TODO: Mirar para hacer este componente reutilizable, de manera que luego tenga otro que sea TrendingMovies y ahi utilice este Slider

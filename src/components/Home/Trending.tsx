@@ -5,7 +5,6 @@ import { Slider } from "../Slider"
 
 export const Trending = () => {
 
-
   const { data, status } = useTrendingMovies()
 
   
