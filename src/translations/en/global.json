@@ -1,24 +1,32 @@
-
 {
-"header": {
-    "nav": {
+    "header": {
+      "nav": {
         "home": "Home",
         "movies": "Movies",
-        "tv-shows": "Tv Shows"
-    },
-    "theme": {
+        "tv-shows": "TV Shows"
+      },
+      "theme": {
         "dark": "Dark",
         "light": "Light"
+      }
+    },
+    "body": {
+      "trending": "Trending",
+      "top-rated": "Top Rated",
+      "popular": "Popular",
+      "search": "Search",
+      "search-message": "A corner for movie and TV show lovers. Start your search here",
+      "premieres": "Premieres"
+    },
+    "tab": {
+      "type": {
+        "movies": "Movies",
+        "tv-show": "TV Shows"
+      },
+      "periods": {
+        "week": "Week",
+        "day": "Day"
+      }
     }
-},
-"body": {
-    "trending": "Trending",
-    "top-rated": "Top rated",
-    "popular": "Popular",
-    "day": "Day",
-    "week": "Week",
-    "search": "Search",
-    "search-message": "A corner for film and television lovers. Start your search here. Explore Now",
-    "premieres": "Premieres"
-}
-}
+  }
+  

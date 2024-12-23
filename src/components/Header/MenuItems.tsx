@@ -5,8 +5,9 @@ import { MoviesContext } from "../../context/MoviesContext";
 import { useContext, useState } from "react";
 
 export const MenuItems = () => {
+  
 
-  const [prueba, setPrueba] = useState(true)
+  const [languageModal, setLanguageModal] = useState(true)
 
   const context = useContext(MoviesContext);
 
@@ -16,8 +17,13 @@ export const MenuItems = () => {
 
   const { theme, handleChangeTheme, t, i18n } = context;
   const handleChangeLanguage = () => {
-    setPrueba( !prueba)
+    setLanguageModal( !languageModal)
   };
+
+  const closeLanguageModal = (language:string) => {
+    i18n.changeLanguage(language)
+    setLanguageModal(!languageModal)
+  }
 
   return (
     <nav>
@@ -52,16 +58,16 @@ export const MenuItems = () => {
 
 
 
-            <div className= {` ${prueba ? 'md:hidden' : ''} bg-slate-400 flex md:content-center md:w-12 md:h-16 md:text-center md:relative md:top-5 md:right-8 md:rounded-md`} >
+            <div className= {` ${languageModal ? 'md:hidden' : ''} bg-slate-400 flex md:content-center md:w-12 md:h-16 md:text-center md:relative md:top-5 md:right-8 md:rounded-md`} >
               <button
-                onClick={() => i18n.changeLanguage("es")}
+                onClick={() => closeLanguageModal("es")}
                 className="mr-1 ml-1  hover:cursor-pointer"
               >
                 ES
               </button>
               <p className="md:content-center">|</p>
               <button
-                onClick={() => i18n.changeLanguage("en")}
+                onClick={() => closeLanguageModal("en")}
                 className="ml-1  hover:cursor-pointer"
               >
                 EN

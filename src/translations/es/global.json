@@ -1,24 +1,34 @@
-
 {
     "header": {
-        "nav": {
-            "home": "Inicio",
-            "movies": "Películas",
-            "tv-shows": "Series"
-        },
-        "theme": {
-            "dark": "Oscuro",
-            "light": "Claro"
-        }
+      "nav": {
+        "home": "Inicio",
+        "movies": "Películas",
+        "tv-shows": "Series"
+      },
+      "theme": {
+        "dark": "Oscuro",
+        "light": "Claro"
+      }
     },
     "body": {
-        "trending": "Tendencia",
-        "top-rated": "Mejores valoradas",
-        "popular": "Populares",
-        "day": "Día",
+      "trending": "Tendencia",
+      "top-rated": "Mejores valoradas",
+      "popular": "Populares",
+      "day": "Día",
+      "week": "Semana",
+      "search": "Buscar",
+      "search-message": "Un rincón para los amantes del cine y televisión. Empieza tu búsqueda aquí",
+      "premieres": "Estrenos"
+    },
+    "tab": {
+      "type": {
+        "movies": "Películas",
+        "tv-show": "Series"
+      },
+      "periods": {
         "week": "Semana",
-        "search": "Buscar",
-        "search-message": "Un rincón para los amantes del cine y televisión. Empieza tu búsqueda aquí",
-        "premieres": "Estrenos"
+        "day": "Día"
+      }
     }
-    }
+  }
+  
