@@ -4,12 +4,15 @@ import { SwitchTab } from "../SwitchTab";
 import { TopRated } from "./TopRated";
 import { Trending } from "./Trending";
 import { MoviesContextType } from "../../interfaces/Context";
+import i18next from "i18next";
 
 export const MoviesHome = () => {
 
    const {t} = useContext(MoviesContext) as MoviesContextType
+   console.log(i18next.language, "i18")
    const contentTypes = [t("tab.type.movies"), t("tab.type.tv-show")];
    const timePeriods = [t("tab.periods.week"), t("tab.periods.day")];
+
 
   return (
     <div className="mt-10 max-w-7xl mx-auto">

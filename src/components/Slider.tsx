@@ -18,7 +18,7 @@ export const Slider = ({data}: SliderProps) => {
       slidesPerView="auto"
     >
       {data?.results.map((movie:any) => (
-      <SwiperSlide key={movie.id} className='flex flex-col w-40'>
+      <SwiperSlide key={movie.id} className='flex flex-col w-40 lg:w-48'>
           <Card movie={movie} />
         </SwiperSlide>
         ))}
