@@ -1,9 +1,8 @@
 
 
-
-export const trendingWeekFilms = '/trending/all/week?language=es-ES'
-
-export const topRated = '/movie/top_rated?language=es-ES'
+// tmdbService.ts
+export const getTrendingWeekFilms = (language: string) => `/trending/movie/week?language=${language}`;
+export const getTopRated = (language: string) => `/movie/top_rated?language=${language}`;
 
 
 
