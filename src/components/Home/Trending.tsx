@@ -8,8 +8,8 @@ import { MoviesContextType } from "../../interfaces/Context";
 
 
 export const Trending = () => {
-  const {t, contentTypes} = useContext(MoviesContext) as MoviesContextType
-  const { data, status } = useTrendingMovies()
+  const {t, contentTypes, contentSelected} = useContext(MoviesContext) as MoviesContextType
+  const { data, status } = useTrendingMovies(contentSelected)
 
   
     if (status === "loading") {

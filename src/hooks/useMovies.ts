@@ -4,9 +4,9 @@ import { useContext } from "react";
 import apiClient from "../services/apiClient";
 import { MoviesContext } from "../context/MoviesContext";
 
-export const useTrendingMovies = () => {
+export const useTrendingMovies = (content:string) => {
   const { i18n }:any = useContext(MoviesContext); 
-  return useQuery(["trendingMovies", i18n.language], () => apiClient.findTrendingMovies(i18n.language));
+  return useQuery(["trendingMovies", i18n.language, content], () => apiClient.findTrendingMovies(i18n.language, content));
 };
 
 export const useTopRatedMovies = () => {

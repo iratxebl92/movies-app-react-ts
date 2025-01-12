@@ -1,4 +1,3 @@
-import { useTrendingMovies } from '../hooks/useMovies';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Card } from './Card';

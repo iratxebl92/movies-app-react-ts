@@ -13,7 +13,8 @@ export const MoviesProvider = ({children}: MoviesProviderProps) => {
   const [t, i18n] = useTranslation("global") //el archivo del que sacamos la traducción
   const contentTypes = [t("tab.type.movies"), t("tab.type.tv-show")];
   const timePeriods = [t("tab.periods.week"), t("tab.periods.day")];
-  
+  const [contentSelected, setContentSelected] = useState('movie')
+  console.log(contentSelected, "contentSelected en Contexto")
 
   const [theme, setTheme] = useState(() => {
     if(window.matchMedia('(prefers-color-scheme:dark)').matches){
@@ -38,7 +39,14 @@ export const MoviesProvider = ({children}: MoviesProviderProps) => {
 
 return (
     <MoviesContext.Provider value={{ 
-      theme, handleChangeTheme, t, i18n, contentTypes, timePeriods
+      theme, 
+      handleChangeTheme, 
+      t, 
+      i18n, 
+      contentTypes, 
+      timePeriods,
+      contentSelected, 
+      setContentSelected
       }}>
       {children}
     </MoviesContext.Provider>

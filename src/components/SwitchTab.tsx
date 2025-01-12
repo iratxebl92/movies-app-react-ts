@@ -1,11 +1,28 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { MoviesContext } from "../context/MoviesContext";
+import { MoviesContextType } from "../interfaces/Context";
 
 type SwitchTabProps = {
   options: string[];
 };
 
 export const SwitchTab = ({ options }: SwitchTabProps) => {
-  const [selected, setSelected] = useState<Number>(0);
+
+  const { contentSelected, setContentSelected} = useContext(MoviesContext) as MoviesContextType
+  const [selected, setSelected] = useState<number>(contentSelected === "movie" ? 0 : 1); //Asegura que cambie entre los botones desde el principio
+
+
+  // useEffect(() => {
+  //   setSelected(contentSelected === "movie" ? 0 : 1);
+  // }, [contentSelected]);
+
+  const handleSelection = (index: number) => {
+    setSelected(index);
+
+    
+    const newContent = index === 0 ? "movie" : "tv"; 
+    setContentSelected(newContent);
+  };
 
   return (
     <div className="flex justify-end">
@@ -19,7 +36,7 @@ export const SwitchTab = ({ options }: SwitchTabProps) => {
         {options.map((option, index) => (
           <button
             key={index}
-            onClick={() => setSelected(index)}
+            onClick={() => handleSelection(index)}
             className={`relative z-10 flex-1 px-4 py-2 text-center transition-colors duration-300 ${
               selected === index ? "text-white" : "text-gray-600"
             }`}
