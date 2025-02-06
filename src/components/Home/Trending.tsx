@@ -13,7 +13,6 @@ export const Trending = () => {
   const {t, contentTypes, contentSelected} = useContext(MoviesContext) as MoviesContextType
   const { data, status } = useTrendingMovies(contentSelected)
 
- 
 
     if (status === "error") {
       return <p>Error</p>;
@@ -21,7 +20,7 @@ export const Trending = () => {
     }
   
   return (
-    <>
+    
     <div className="">
       <div className="flex justify-between">
    
@@ -30,6 +29,6 @@ export const Trending = () => {
           </div>
     <Slider data={data} status={status} />
     </div>
-    </>
+    
   )
 }

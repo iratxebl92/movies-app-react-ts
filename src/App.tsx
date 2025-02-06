@@ -1,24 +1,17 @@
-
-import {QueryClientProvider, QueryClient} from 'react-query'
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
 import { MoviesApp } from "./pages/MoviesApp";
 import { MoviesProvider } from "./context/MoviesProvider";
 
-
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
-
   return (
-    <>
     <QueryClientProvider client={queryClient}>
-    <MoviesProvider>
-    <MoviesApp/>
-    </MoviesProvider>
+      <MoviesProvider>
+        <MoviesApp />
+      </MoviesProvider>
     </QueryClientProvider>
-  
-    </>
   );
 }
 

@@ -19,9 +19,10 @@ export const SwitchTab = ({ options }: SwitchTabProps) => {
   const handleSelection = (index: number) => {
     setSelected(index);
 
-    
-    const newContent = index === 0 ? "movie" : "tv"; 
-    setContentSelected(newContent);
+    //ESTO HACE QUE CAMBIE ENTRE PELIS Y SERIES PERO ES PROBLEMATICO CON LOS OTROS SLIDERS4++
+    // const newContent = index === 0 ? "movie" : "tv"; 
+    // setContentSelected(newContent);
+
   };
 
   return (
