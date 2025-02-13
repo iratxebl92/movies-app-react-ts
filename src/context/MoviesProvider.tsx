@@ -1,6 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
 import { MoviesContext } from "./MoviesContext";
-import {useTranslation} from "react-i18next"
 
 
 type MoviesProviderProps = {
@@ -10,9 +9,8 @@ type MoviesProviderProps = {
 
 export const MoviesProvider = ({children}: MoviesProviderProps) => {
 
-  const [t, i18n] = useTranslation("global") //el archivo del que sacamos la traducción
-  const contentTypes = [t("tab.type.movies"), t("tab.type.tv-show")];
-  const timePeriods = [t("tab.periods.week"), t("tab.periods.day")];
+  const contentTypes = ["movie", "tv"];
+  const timePeriods = ["week", "day"];
   const [contentSelected, setContentSelected] = useState('movie')
   console.log(contentSelected, "contentSelected en Contexto")
 
@@ -41,8 +39,6 @@ return (
     <MoviesContext.Provider value={{ 
       theme, 
       handleChangeTheme, 
-      t, 
-      i18n, 
       contentTypes, 
       timePeriods,
       contentSelected, 

@@ -4,12 +4,11 @@ import { Slider } from "../Slider";
 import { SwitchTab } from "../SwitchTab";
 import { MoviesContext } from "../../context/MoviesContext";
 import { MoviesContextType } from "../../interfaces/Context";
-import { SwiperSlide } from "swiper/react";
-import { div } from "motion/react-client";
+
 
 export const TopRated = () => {
   const { data, status } = useTopRatedMovies();
-  const { t, timePeriods } = useContext(MoviesContext) as MoviesContextType;
+  const { timePeriods } = useContext(MoviesContext) as MoviesContextType;
   const skeletonSlides = Array.from({ length: 5 });
 
   // if (status === "success") {
@@ -36,7 +35,7 @@ export const TopRated = () => {
     <>
       <div className="flex justify-between">
         <span className="text-2xl ml-3 font-bold dark:text-white">
-          {t("body.top-rated")}
+          Top Rated
         </span>
         <SwitchTab options={timePeriods} />
       </div>

@@ -10,7 +10,7 @@ import { SwiperSlide } from "swiper/react";
 
 
 export const Trending = () => {
-  const {t, contentTypes, contentSelected} = useContext(MoviesContext) as MoviesContextType
+  const {contentTypes, contentSelected} = useContext(MoviesContext) as MoviesContextType
   const { data, status } = useTrendingMovies(contentSelected)
 
 
@@ -24,7 +24,7 @@ export const Trending = () => {
     <div className="">
       <div className="flex justify-between">
    
-            <span className="text-2xl ml-3 font-bold dark:text-white"> {t("body.trending")} </span>
+            <span className="text-2xl ml-3 font-bold dark:text-white"> Trending </span>
             <SwitchTab options={contentTypes} />
           </div>
     <Slider data={data} status={status} />
