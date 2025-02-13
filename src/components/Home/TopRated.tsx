@@ -6,9 +6,13 @@ import { SwitchTab } from "../SwitchTab";
 
 export const TopRated = () => {
   // Usamos el store de Zustand para acceder a los valores
-  const { timePeriods, contentSelected } = useMoviesStore()
+  const { topRatedOption, topRatedSelected } = useMoviesStore()
 
-  const { data, status } = useTopRatedMovies(contentSelected);
+  const { data, status } = useTopRatedMovies(topRatedSelected);
+
+  const onTabChange = (tab:string) =>{
+    topRatedOption(tab === "Películas" ? "movie" : "tv")
+  }
 
   if (status === "error") {
     return <p>Error</p>;
@@ -18,11 +22,11 @@ export const TopRated = () => {
     <>
       <div className="flex justify-between">
         <span className="text-2xl ml-3 font-bold dark:text-white">
-          Top Rated
+          Mejor Valorado
         </span>
-        <SwitchTab options={timePeriods} />
+        <SwitchTab options={['Películas', 'Series']} onTabChange={onTabChange} />
       </div>
-      <Slider data={data} />
+      <Slider data={data} status={status} />
     </>
   );
 };

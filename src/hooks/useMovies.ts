@@ -16,3 +16,10 @@ export const useTopRatedMovies = (content: string) => {
     queryFn: () => apiClient.findTopRated(content),
   });
 };
+
+export const usePopularMovies = (content: string) => {
+  return useQuery({
+    queryKey: ["popularMovies", content],
+    queryFn: () => apiClient.findPopular(content),
+  });
+}

@@ -1,22 +1,26 @@
 
 
 import { create } from 'zustand';
-
+type ContentType = 'movie' | 'tv';
 interface MoviesStore {
   theme: 'light' | 'dark';
-  contentSelected: 'movie' | 'tv';
-  contentTypes: string[];
-  timePeriods: string[];
-  setContentSelected: (content: 'movie' | 'tv') => void;
+  topRatedSelected: ContentType;
+  popularSelected: ContentType;
+  trendingSelected: 'week' | 'day';
+  topRatedOption: (content: 'movie' | 'tv') => void;
+  trendingOption: (content: 'week' | 'day') => void;
+  popularOption: (content: 'movie' | 'tv') => void;
   toggleTheme: () => void;
 }
 
 export const useMoviesStore = create<MoviesStore>((set) => ({
   theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-  contentSelected: 'movie',
-  contentTypes: ['movie', 'tv'],
-  timePeriods: ['week', 'day'],
-  setContentSelected: (content) => set({ contentSelected: content }),
+  trendingSelected: 'week',
+  topRatedSelected: 'movie',
+  popularSelected: 'movie',
+  topRatedOption: (content) => set({ topRatedSelected: content }),
+  popularOption: (content) => set({ popularSelected: content }),
+  trendingOption: (content) => set({ trendingSelected: content }),
   toggleTheme: () => set((state) => {
     const newTheme = state.theme === 'light' ? 'dark' : 'light';
     if (newTheme === 'dark') {

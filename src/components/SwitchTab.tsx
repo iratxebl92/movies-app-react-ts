@@ -1,19 +1,19 @@
 
 import { useState } from "react";
-import { useMoviesStore } from "../config/store/store";
+
 
 type SwitchTabProps = {
   options: string[];
+  onTabChange: (tab: string) => void
 };
 
-export const SwitchTab = ({ options }: SwitchTabProps) => {
-  const { contentSelected, setContentSelected } = useMoviesStore();
-  const [selected, setSelected] = useState<number>(contentSelected === "movie" ? 0 : 1);
+export const SwitchTab = ({ options, onTabChange }: SwitchTabProps) => {
+  const [selected, setSelected] = useState<number>(0);
 
-  const handleSelection = (index: number) => {
+  const handleSelection = (index: number, option:string) => {
     setSelected(index);
-    const newContent = index === 0 ? "movie" : "tv";
-    setContentSelected(newContent);
+    onTabChange(option)
+    
   };
 
   return (
@@ -28,7 +28,7 @@ export const SwitchTab = ({ options }: SwitchTabProps) => {
         {options.map((option, index) => (
           <button
             key={index}
-            onClick={() => handleSelection(index)}
+            onClick={() => handleSelection(index, option)}
             className={`relative z-10 flex-1 px-4 py-2 text-center transition-colors duration-300 ${
               selected === index ? "text-white" : "text-gray-600"
             }`}

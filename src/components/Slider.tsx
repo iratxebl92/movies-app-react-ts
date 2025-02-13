@@ -11,7 +11,6 @@ type SliderProps = {
 };
 
 export const Slider = ({ data, status }: SliderProps) => {
-  console.log(status)
   const skeletonSlides = Array.from({ length: 5 }); 
 
   return (
