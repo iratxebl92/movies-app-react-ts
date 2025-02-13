@@ -1,28 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import { MoviesContext } from "../context/MoviesContext";
-import { MoviesContextType } from "../interfaces/Context";
+
+import { useState } from "react";
+import { useMoviesStore } from "../config/store/store";
 
 type SwitchTabProps = {
   options: string[];
 };
 
 export const SwitchTab = ({ options }: SwitchTabProps) => {
-
-  const { contentSelected, setContentSelected} = useContext(MoviesContext) as MoviesContextType
-  const [selected, setSelected] = useState<number>(contentSelected === "movie" ? 0 : 1); //Asegura que cambie entre los botones desde el principio
-
-
-  // useEffect(() => {
-  //   setSelected(contentSelected === "movie" ? 0 : 1);
-  // }, [contentSelected]);
+  const { contentSelected, setContentSelected } = useMoviesStore();
+  const [selected, setSelected] = useState<number>(contentSelected === "movie" ? 0 : 1);
 
   const handleSelection = (index: number) => {
     setSelected(index);
-
-    //ESTO HACE QUE CAMBIE ENTRE PELIS Y SERIES PERO ES PROBLEMATICO CON LOS OTROS SLIDERS4++
-    // const newContent = index === 0 ? "movie" : "tv"; 
-    // setContentSelected(newContent);
-
+    const newContent = index === 0 ? "movie" : "tv";
+    setContentSelected(newContent);
   };
 
   return (

@@ -1,37 +1,26 @@
+
 import { FaMoon } from "react-icons/fa";
 import { IoSunnyOutline } from "react-icons/io5";
-import { MoviesContext } from "../../context/MoviesContext";
-import { useContext, useState } from "react";
+import { useMoviesStore } from "../../config/store/store";
+
 
 export const MenuItems = () => {
-  
-
-
-
-  const context = useContext(MoviesContext);
-
-  if (!context) {
-    throw new Error("MenuItems must be used with a MoviesProvider");
-  }
-
-  const { theme, handleChangeTheme} = context;
-
-
+  const { theme, toggleTheme } = useMoviesStore();
 
   return (
     <nav>
       <ul className="md:flex md:flex-row md:space-x-4 md:mr-1">
         <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer ">
-         Inicio
+          Inicio
         </li>
         <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer ">
           Películas
         </li>
         <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer ">
-         Seríes
+          Seríes
         </li>
-        <li className=" dark:text-white md:pr-5  md:hover:underline hover:decoration-3 md:hover:decoration-details">
-          <button onClick={handleChangeTheme}>
+        <li className="dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details">
+          <button onClick={toggleTheme}>
             {theme === "light" ? (
               <FaMoon className="inline hover:cursor-pointer " />
             ) : (

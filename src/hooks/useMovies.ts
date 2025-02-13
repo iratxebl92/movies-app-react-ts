@@ -3,6 +3,7 @@ import apiClient from "../services/apiClient";
 import { MoviesContext } from "../context/MoviesContext";
 
 export const useTrendingMovies = (content: string) => {
+//content es movie o tv
   return useQuery({
     queryKey: ["trendingMovies", content],
     queryFn: () => apiClient.findTrendingMovies( content),
