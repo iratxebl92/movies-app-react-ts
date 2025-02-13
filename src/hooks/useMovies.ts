@@ -1,25 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/apiClient";
-import { MoviesContext } from "../context/MoviesContext";
 
-export const useTrendingMovies = (content: string) => {
+
+export const useTrendingMovies = (content: string, language: string) => {
+
+  console.log(language, "idioma")
 //content es movie o tv
   return useQuery({
-    queryKey: ["trendingMovies", content],
-    queryFn: () => apiClient.findTrendingMovies( content),
+    queryKey: ["trendingMovies", content, language],
+    queryFn: () => apiClient.findTrendingMovies( content, language),
   });
 };
 
-export const useTopRatedMovies = (content: string) => {
+export const useTopRatedMovies = (content: string, language: string) => {
   return useQuery({
-    queryKey: ["topRatedMovies", content],
-    queryFn: () => apiClient.findTopRated(content),
+    queryKey: ["topRatedMovies", content, language],
+    queryFn: () => apiClient.findTopRated(content, language),
   });
 };
 
-export const usePopularMovies = (content: string) => {
+export const usePopularMovies = (content: string, language: string) => {
   return useQuery({
-    queryKey: ["popularMovies", content],
-    queryFn: () => apiClient.findPopular(content),
+    queryKey: ["popularMovies", content, language],
+    queryFn: () => apiClient.findPopular(content, language),
   });
 }

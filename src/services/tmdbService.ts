@@ -1,9 +1,9 @@
 
 
 // tmdbService.ts
-export const getTrendingWeekFilms = (content:string) => `/trending/movie/${content}?language=es-ES`;
-export const getTopRated = (content: string) => `/${content}/top_rated?language=es-ES`;
-export const getPopular = (content: string) => `/${content}/popular?language=es-ES`;
+export const getTrendingWeekFilms = (content:string,  language:string) => `/trending/movie/${content}?language=${language}`;
+export const getTopRated = (content: string, language:string) => `/${content}/top_rated?language=${language}`;
+export const getPopular = (content: string, language:string) => `/${content}/popular?language=${language}`;
 
 
 

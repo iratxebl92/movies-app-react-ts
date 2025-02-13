@@ -12,17 +12,18 @@ export const apiBase: AxiosInstance = axios.create({
   },
 });
 
-const findTrendingMovies = async (content:string) => {
-  const response = await apiBase.get(getTrendingWeekFilms( content));
+const findTrendingMovies = async (content:string, language: string) => {
+  console.log(language, "dentro")
+  const response = await apiBase.get(getTrendingWeekFilms( content,  language));
   return response.data;
 };
 
-const findTopRated = async (content:string) => {
-  const response = await apiBase.get(getTopRated(content));
+const findTopRated = async (content:string, language: string) => {
+  const response = await apiBase.get(getTopRated(content, language));
   return response.data;
 };
-const findPopular = async (content:string) => { 
-  const response = await apiBase.get(getPopular(content));
+const findPopular = async (content:string, language: string) => { 
+  const response = await apiBase.get(getPopular(content, language));
   return response.data;
 };
 
