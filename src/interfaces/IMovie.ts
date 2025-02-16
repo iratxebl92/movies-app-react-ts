@@ -1,7 +1,9 @@
 export interface IMovie {
     adult?: boolean
     backdrop_path: string
+    genres: Array<{ id: number; name: string }> | Array<any>
     genre_ids: Array<number>
+    homepage: string
     id: number
     original_language: string
     original_title: string
@@ -12,6 +14,7 @@ export interface IMovie {
     poster_path: string
     release_date?: string
     first_air_date?: string
+    tagline?: string
     title?: string
     name?: string
     video?: boolean

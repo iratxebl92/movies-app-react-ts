@@ -25,3 +25,9 @@ export const usePopularMovies = (content: string, language: string) => {
     queryFn: () => apiClient.findPopular(content, language),
   });
 }
+export const useDetails = (content: string, id: number, language: string) => {
+  return useQuery({
+    queryKey: ["details", content, id, language],
+    queryFn: () => apiClient.findDetails(content, id, language),
+  });
+}

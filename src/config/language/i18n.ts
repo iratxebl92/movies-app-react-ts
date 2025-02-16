@@ -4,7 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 i18n
   .use(LanguageDetector) // Detecta el idioma del navegador
-  .use(initReactI18next)
+  .use(initReactI18next)  // Permite que React use i18n
   .init({
     resources: {
       en: {
