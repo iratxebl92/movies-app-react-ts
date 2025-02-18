@@ -12,11 +12,13 @@ export interface IMovie {
     overview: string
     popularity: string | number
     poster_path: string
+    production_companies: Array<{ id: number; name: string }> | Array<any>
     release_date?: string
     first_air_date?: string
     tagline?: string
     title?: string
     name?: string
+    status?: string
     video?: boolean
     vote_average: string | number
     vote_count: number

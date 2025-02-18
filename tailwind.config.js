@@ -19,10 +19,11 @@ export default {
        "dark":"#2C3E50",
         "text-dark": "#fff",
         "details": "#bcacdb",
+        "customGray": "#82858a",
       },
       fontFamily: {
         heading: ['Oswald', 'sans-serif'], 
-        sans: ['Montserrat', 'sans-serif'],     // Fuente para el texto general
+        sans: ['Montserrat', 'sans-serif'],    
       },
       textDecorationThickness: {
         3: '3px',

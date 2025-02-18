@@ -31,3 +31,9 @@ export const useDetails = (content: string, id: number, language: string) => {
     queryFn: () => apiClient.findDetails(content, id, language),
   });
 }
+export const useCast = (content: string, id: number) => {
+  return useQuery({
+    queryKey: ["cast", content, id],
+    queryFn: () => apiClient.findCast(content, id),
+  });
+}

@@ -1,15 +1,17 @@
-import { useDetails } from "../../hooks/useMovies"
+import { useCast, useDetails } from "../../hooks/useMovies"
+import { Cast } from "./Cast"
+import { CastSlider } from "./CastSlider"
 import { DetailsBanner } from "./DetailsBanner"
 
 export const DetailsBody = () => {
 
     const {data, status} =  useDetails("hola", 5, "hola")
-
-    console.log(data, "data details")
+    const {data: castData} = useCast("hola", 5) //creo alias castData para no confundir con data de useDetails y xq no se puede repetir
 
   return (
-    <div className="max-w-7xl text-center align-center justify-center mx-auto px-5">
+    <div className="dark:bg-dark max-w-7xl text-center align-center justify-center mx-auto px-5">
        <DetailsBanner data={data} />
+       <CastSlider castData={castData} />
     </div>
   )
 }
