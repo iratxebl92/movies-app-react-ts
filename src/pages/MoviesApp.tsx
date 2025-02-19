@@ -7,10 +7,10 @@ import { Home } from "./Home/Home";
 export const MoviesApp = () => {
 
   return (
-    <>
+    <div className="dark:bg-dark dark:text-white h-screen">
     <Header />
      {/* <Home/> */}
      <Details/>
-    </>
+    </div>
   );
 };

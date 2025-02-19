@@ -27,10 +27,11 @@ export const MenuItems = () => {
             )}
           </button>
         </li>
-        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details">
+        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-detail">
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
+                className="dark:bg-dark dark:text-white"
               >
                 <option value="en">EN</option> 
                 <option value="es">ES</option>

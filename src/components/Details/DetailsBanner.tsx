@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { CircleRating } from "../../core/components/Icons/CircleRating";
 import { PlayIcon } from "../../core/components/Icons/PlayIcon";
 import { ICrew } from "../../interfaces/ICrew";
@@ -11,7 +12,10 @@ type DetailsBannerProps = {
 };
 
 export const DetailsBanner = ({ data, castData }: DetailsBannerProps) => {
+  const {t} = useTranslation();
+  console.log(data)
   const date = data?.release_date?.substring(0, 4);
+  const newDate = data?.release_date?.split("-").reverse().join("-");
   const rate = data?.vote_average?.toString().substring(0, 3);
   const director = castData?.crew?.filter((crew) => crew.job === "Director");
   const writer = castData?.crew?.filter((crew) => crew.job === "Screenplay");
@@ -51,48 +55,48 @@ export const DetailsBanner = ({ data, castData }: DetailsBannerProps) => {
           </div>
         </div>
 
-        <div className=" mt-6 flex flex-row items-center ">
+        <div className=" mt-6 flex flex-row items-center">
           <CircleRating rating={rate} />
           <div className="flex items-center ml-7 cursor-pointer">
             <PlayIcon />
-            <p className="ml-4 text-xl">Trailer</p>
+            <p className="ml-4 text-xl dark:text-textDark">Trailer</p>
           </div>
         </div>
 
         <div className="flex flex-col text-start mt-6">
-          <p className="font-bold">Overview</p>
-          <p className="text-sm/6 mr-20">{data?.overview} </p>
+          <p className="font-bold dark:text-textDark">{t('overview')} </p>
+          <p className="text-sm/6 mr-20 dark:text-textDark">{data?.overview} </p>
         </div>
 
         <div className=" text-start text-base leading-10">
           <div className="flex flex-row mt-6 gap-4">
             <p>
               {" "}
-              <span className="font-bold">Status:</span>{" "}
-              <span className="text-gray-500">{data?.status} </span>{" "}
+              <span className="font-bold dark:text-textDark">{t('status')}</span>{" "}
+              <span className="text-gray-50 dark:text-gray-300">{data?.status} </span>{" "}
             </p>
             <p>
               {" "}
-              <span className="font-bold">Release Date:</span>{" "}
-              <span className="text-gray-500">Nov 18, 1997</span>{" "}
+              <span className="font-bold dark:text-textDark">{t('releaseDate')}</span>{" "}
+              <span className="text-gray-500 dark:text-gray-300">{newDate}</span>{" "}
             </p>
             <p>
               {" "}
-              <span className="font-bold">Runtime:</span>{" "}
-              <span className="text-gray-500">3h 14m</span>{" "}
+              <span className="font-bold dark:text-textDark">{t('runtime')}</span>{" "}
+              <span className="text-gray-500 dark:text-gray-300">{data?.runtime} min </span>{" "}
             </p>
           </div>
           <hr className="lg:mr-20" />
           <p>
             {" "}
-            <span className="font-bold">Director:</span>{" "}
-            <span className="text-gray-500">{directorNames || "N/A"}</span>{" "}
+            <span className="font-bold dark:text-textDark">{t('director')}</span>{" "}
+            <span className="text-gray-500 dark:text-gray-300">{directorNames || "N/A"}</span>{" "}
           </p>
           <hr className="lg:mr-20" />
           <p>
             {" "}
-            <span className="font-bold">Writer:</span>{" "}
-            <span className="text-gray-500">{writerNames || "N/A"}</span>{" "}
+            <span className="font-bold dark:text-textDark">{t('writer')}</span>{" "}
+            <span className="text-gray-500 dark:text-gray-300">{writerNames || "N/A"}</span>{" "}
           </p>
           <hr className="lg:mr-20" />
         </div>

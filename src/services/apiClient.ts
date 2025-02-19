@@ -13,7 +13,6 @@ export const apiBase: AxiosInstance = axios.create({
 });
 
 const findTrendingMovies = async (content:string, language: string) => {
-  console.log(language, "dentro")
   const response = await apiBase.get(getTrending( content,  language));
   return response.data;
 };
@@ -32,7 +31,6 @@ const findDetails = async (content:string, id: number, language: string) => {
 }
 const findCast = async (content:string, id: number) => {
   const response = await apiBase.get(getCast(content, id));
-  console.log(response, "response")
   return response.data;
 }
 

@@ -4,7 +4,6 @@ import apiClient from "../services/apiClient";
 
 export const useTrendingMovies = (content: string, language: string) => {
 
-  console.log(language, "idioma")
 //content es movie o tv
   return useQuery({
     queryKey: ["trendingMovies", content, language],

@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { run } from 'node:test';
 
 i18n
   .use(LanguageDetector) // Detecta el idioma del navegador
@@ -16,6 +17,14 @@ i18n
           home: "Home",
           movies: "Movies",
           tv: "TV Shows",
+          cast: "(See all)",
+          topCast: "Top Cast",
+          overview: "Overview",
+          status: "Status:",
+          releaseDate: "Release Date:",
+          runtime: "Runtime:",
+          director: "Director:",
+          writer: "Writer:",
         },
       },
       es: {
@@ -27,6 +36,14 @@ i18n
           home:  "Inicio",
           movies: "Películas",
           tv: "Series",
+          cast: "(Ver completo)",
+          topCast: "Reparto Principal",
+          overview: "Resumen",
+          status: "Estado:",
+          releaseDate: "Fecha de Estreno:",
+          runtime: "Duración:",
+          director: "Dirección:",
+          writer: "Guionista:",
         },
       },
     },

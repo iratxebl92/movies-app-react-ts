@@ -17,9 +17,10 @@ export default {
       colors: {
 
        "dark":"#2C3E50",
-        "text-dark": "#fff",
+        "textDark": "#D1D5DB",
         "details": "#bcacdb",
         "customGray": "#82858a",
+        "customColorTex": "rgb(199, 208, 224)",
       },
       fontFamily: {
         heading: ['Oswald', 'sans-serif'], 

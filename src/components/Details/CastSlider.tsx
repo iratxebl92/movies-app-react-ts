@@ -5,6 +5,7 @@ import { ICast } from "../../interfaces/ICast";
 import { ICrew } from "../../interfaces/ICrew";
 import { CastModal } from "./CastModal";
 import { useMoviesStore } from "../../config/store/store";
+import { useTranslation } from "react-i18next";
 
 type CastSliderProps = {
   castData: {
@@ -13,21 +14,21 @@ type CastSliderProps = {
   };
 };
 export const CastSlider = ({ castData }: CastSliderProps) => {
-
+  const {t} = useTranslation();
   const {openModal, setOpenModal} = useMoviesStore();
   return (
     <>
     <div>
       <p className="flex items-center text-start font-bold text-2xl mb-2">
-        Top Cast
+        {t('topCast')}
        
           <button 
-            className="text-slate-600 font-normal text-sm ml-2"
+            className="text-slate-600 font-normal text-sm ml-2 dark:text-textDark"
             onClick={() => {
              setOpenModal(true)
             }}
             >
-          (See all)
+          {t('cast')}
           </button>
 
       </p>

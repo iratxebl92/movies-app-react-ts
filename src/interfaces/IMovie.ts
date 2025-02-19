@@ -18,6 +18,7 @@ export interface IMovie {
     tagline?: string
     title?: string
     name?: string
+    runtime?: number
     status?: string
     video?: boolean
     vote_average: string | number
