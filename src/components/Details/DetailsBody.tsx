@@ -10,7 +10,7 @@ export const DetailsBody = () => {
 
   return (
     <div className="dark:bg-dark max-w-7xl text-center align-center justify-center mx-auto px-5">
-       <DetailsBanner data={data} />
+       <DetailsBanner data={data} castData={castData} />
        <CastSlider castData={castData} />
     </div>
   )
