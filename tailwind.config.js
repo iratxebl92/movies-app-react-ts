@@ -32,11 +32,13 @@ export default {
         "search-bg": "url('/images/popcorn.jpg')"
       },
       height: {
+        "15": "15rem",
         "17.5": "17.5rem",
         "320": "20rem",
         "600": "600px"
       },
       width: {
+        "43": "43rem",
         "75": "75rem",
         "100": "6.25rem",
         "200": "12.5rem",

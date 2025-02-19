@@ -18,10 +18,10 @@ export const CastModal = ({ castData }: CastModalProps) => {
 
   return (
     <Transition appear show={openModal} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={() => setOpenModal(false)}>
+      <Dialog as="div" className="relative z-10" onClose={() => setOpenModal(false)}>
         <div className="fixed inset-0 bg-black bg-opacity-50" />
         <div className="fixed inset-0 flex items-center justify-center p-4 " onClick={() => setOpenModal(false)}>
-          <div className="max-w-4xl max-h-screen bg-white p-6 rounded-lg shadow-xl relative">
+          <div className="w-43 max-h-screen bg-white p-6 rounded-lg shadow-xl relative">
 
             <button
               onClick={() => setOpenModal(false)}
