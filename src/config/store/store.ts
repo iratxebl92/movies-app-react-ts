@@ -16,6 +16,8 @@ interface MoviesStore {
   trendingOption: (content: 'week' | 'day') => void;
   popularOption: (content: ContentType) => void;
   toggleTheme: () => void;
+  openModal: boolean;
+  setOpenModal: (open: boolean) => void;
 }
 
 export const useMoviesStore = create<MoviesStore>((set) => ({
@@ -40,4 +42,6 @@ export const useMoviesStore = create<MoviesStore>((set) => ({
     }
     return { theme: newTheme };
   }),
+  openModal: false,
+  setOpenModal: (open: boolean) => set({ openModal: open }),
 }));

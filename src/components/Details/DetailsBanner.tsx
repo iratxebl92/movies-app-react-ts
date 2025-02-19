@@ -74,7 +74,7 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
           <p> <span className="font-bold">Writer:</span> <span className="text-gray-500">James Cameron</span> </p>
           <hr className="lg:mr-20"/>
         </div>
-          <div>
+          {/* <div>
             <p className="font-bold text-start mt-6">Production Companies</p>
             <div className="flex flex-row mt-4">
               {data?.production_companies?.map((company) => {
@@ -89,7 +89,7 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
                 );
               })}
             </div>
-          </div>
+          </div> */}
       </div>
     </div>
   );
