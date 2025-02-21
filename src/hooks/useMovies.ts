@@ -36,3 +36,9 @@ export const useCast = (content: string, id: number) => {
     queryFn: () => apiClient.findCast(content, id),
   });
 }
+export const useImages = (content: string, id: number) => {
+  return useQuery({
+    queryKey: ["images", content, id],
+    queryFn: () => apiClient.findImages(content, id),
+  });
+}

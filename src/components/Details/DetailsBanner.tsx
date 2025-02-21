@@ -73,7 +73,7 @@ export const DetailsBanner = ({ data, castData }: DetailsBannerProps) => {
             <p>
               {" "}
               <span className="font-bold dark:text-textDark">{t('status')}</span>{" "}
-              <span className="text-gray-50 dark:text-gray-300">{data?.status} </span>{" "}
+              <span className="text-gray-500 dark:text-gray-300">{data?.status} </span>{" "}
             </p>
             <p>
               {" "}

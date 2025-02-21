@@ -16,7 +16,8 @@ export default {
       }, 
       colors: {
 
-       "dark":"#2C3E50",
+       "dark":"#282C34",
+       "light":"#EDEFF4",
         "textDark": "#D1D5DB",
         "details": "#bcacdb",
         "customGray": "#82858a",
@@ -39,6 +40,8 @@ export default {
         "600": "600px"
       },
       width: {
+        "24": "24rem",
+        "30": "30rem",
         "43": "43rem",
         "75": "75rem",
         "100": "6.25rem",
@@ -54,3 +57,8 @@ export default {
   plugins: [],
 }
 
+// posible dark --> "#2C3E50"
+/*
+     "dark":"#121212",
+       "light":"#FAFAFA",
+*/ 

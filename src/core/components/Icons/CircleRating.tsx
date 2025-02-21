@@ -1,14 +1,16 @@
 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import { useMoviesStore } from '../../../config/store/store';
 
 
 export const CircleRating = ({rating}:any) => {
+  const {theme} = useMoviesStore();
  
   return (
     <div className='circleRating'>
    <CircularProgressbar
-   className='w-16' 
+   className='w-16 ' 
     value={rating} 
     text={rating}  
     maxValue={10}  
@@ -17,7 +19,7 @@ export const CircleRating = ({rating}:any) => {
         pathColor:
         rating < 5 ? "red" : rating < 7 ? "orange" : "green",
         textSize: '30px',
-        textColor: 'black',
+        textColor: `${theme === 'dark' ? '#e5e7eb' : 'black'}`,
         pathTransitionDuration: 0.5,
         
     })} />

@@ -7,7 +7,7 @@ import { Home } from "./Home/Home";
 export const MoviesApp = () => {
 
   return (
-    <div className="dark:bg-dark dark:text-white h-screen">
+    <div className="dark:bg-dark dark:text-white bg-light min-h-screen">
     <Header />
      {/* <Home/> */}
      <Details/>
