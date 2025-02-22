@@ -14,17 +14,17 @@ type CastModalProps = {
 
 export const CastModal = ({ castData }: CastModalProps) => {
   const { cast, crew } = castData;
-  const { openModal, setOpenModal } = useMoviesStore();
+  const { openCastModal, setOpenCastModal } = useMoviesStore();
 
   return (
-    <Transition appear show={openModal} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={() => setOpenModal(false)}>
+    <Transition appear show={openCastModal} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={() => setOpenCastModal(false)}>
         <div className="fixed inset-0 bg-black bg-opacity-50" />
-        <div className="fixed inset-0 flex items-center justify-center p-4 " onClick={() => setOpenModal(false)}>
+        <div className="fixed inset-0 flex items-center justify-center p-4 " onClick={() => setOpenCastModal(false)}>
           <div className="w-43 max-h-screen bg-white p-6 rounded-lg shadow-xl relative">
 
             <button
-              onClick={() => setOpenModal(false)}
+              onClick={() => setOpenCastModal(false)}
               className="absolute top-2 right-4 text-2xl font-bold text-gray-500 hover:text-gray-800"
             >
               <IoMdClose/>

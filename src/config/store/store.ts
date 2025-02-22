@@ -1,4 +1,3 @@
-
 import { create } from 'zustand';
 import i18n from '../language/i18n';
 
@@ -16,12 +15,14 @@ interface MoviesStore {
   trendingOption: (content: 'week' | 'day') => void;
   popularOption: (content: ContentType) => void;
   toggleTheme: () => void;
-  openModal: boolean;
-  setOpenModal: (open: boolean) => void;
+  openCastModal: boolean;
+  setOpenCastModal: (open: boolean) => void;
+  openBackdropModal: boolean;
+  setOpenBackdropModal: (open: boolean) => void;
 }
 
 export const useMoviesStore = create<MoviesStore>((set) => ({
-  theme: window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+  theme: typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
   language: i18n.language, // Inicializamos con el idioma actual
   trendingSelected: 'week',
   topRatedSelected: 'movie',
@@ -42,6 +43,8 @@ export const useMoviesStore = create<MoviesStore>((set) => ({
     }
     return { theme: newTheme };
   }),
-  openModal: false,
-  setOpenModal: (open: boolean) => set({ openModal: open }),
+  openCastModal: false,
+  setOpenCastModal: (open: boolean) => set({ openCastModal: open }),
+  openBackdropModal: false,
+  setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
 }));

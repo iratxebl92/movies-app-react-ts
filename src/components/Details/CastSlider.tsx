@@ -15,7 +15,7 @@ type CastSliderProps = {
 };
 export const CastSlider = ({ castData }: CastSliderProps) => {
   const {t} = useTranslation();
-  const {openModal, setOpenModal} = useMoviesStore();
+  const {openCastModal, setOpenCastModal} = useMoviesStore();
   return (
     <>
     <div>
@@ -25,7 +25,7 @@ export const CastSlider = ({ castData }: CastSliderProps) => {
           <button 
             className="text-slate-600 font-normal text-sm ml-2 dark:text-textDark"
             onClick={() => {
-             setOpenModal(true)
+              setOpenCastModal(true)
             }}
             >
           {t('cast')}
@@ -41,7 +41,7 @@ export const CastSlider = ({ castData }: CastSliderProps) => {
       </Swiper>
     </div>
     {
-      openModal && <CastModal castData={castData} />
+      openCastModal && <CastModal castData={castData} />
     }
 
         </>

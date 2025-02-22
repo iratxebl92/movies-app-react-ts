@@ -1,17 +1,22 @@
 import { useTranslation } from "react-i18next";
 import { useImages } from "../../hooks/useMovies";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useMoviesStore } from "../../config/store/store";
+import { BackdropModal } from "./BackdropModal";
 
 export const Backdrops = () => {
   const { data } = useImages("hola", 5);
   const { t } = useTranslation();
-  console.log(data?.backdrops, "backdrops");
+  const { openBackdropModal, setOpenBackdropModal } = useMoviesStore();
+ console.log(data, "DATA BACKDROPS");
 
   return (
     <>
       <div className="flex align-center text-center content-center">
         <p className=" font-bold text-2xl ">Backdrops</p>
-        <button className="text-slate-600 font-normal text-sm ml-2 dark:text-textDark">
+        <button className="text-slate-600 font-normal text-sm ml-2 dark:text-textDark"
+          onClick={() => setOpenBackdropModal(true)}
+        >
           {t("cast")}
         </button>
       </div>
@@ -33,6 +38,9 @@ export const Backdrops = () => {
           })}
         </Swiper>
       </div>
+      {
+        openBackdropModal && <BackdropModal backdrops={data?.backdrops} />
+      }
     </>
   );
 };
