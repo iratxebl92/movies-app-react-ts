@@ -8,7 +8,7 @@ export const Backdrops = () => {
   const { data } = useImages("hola", 5);
   const { t } = useTranslation();
   const { openBackdropModal, setOpenBackdropModal } = useMoviesStore();
- console.log(data, "DATA BACKDROPS");
+ 
 
   return (
     <>

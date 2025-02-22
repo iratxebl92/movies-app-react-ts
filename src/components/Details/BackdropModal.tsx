@@ -1,23 +1,24 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { useMoviesStore } from "../../config/store/store";
 import { IoMdClose } from "react-icons/io";
 import { Gallery } from "react-grid-gallery";
 import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 import { IBackdrops } from "../../interfaces/IBackdrops";
-
+import { Fullscreen, Counter } from "yet-another-react-lightbox/plugins";
+import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/counter.css";
 
 type BackdropsModalProps = {
   backdrops: IBackdrops[];
 };
 
 type Image = {
-  src: string
-  width: number
-  height: number
-  thumbnail: string
-}
+  src: string;
+  width: number;
+  height: number;
+  thumbnail: string;
+};
 
 export const BackdropModal = ({ backdrops }: BackdropsModalProps) => {
   const { openBackdropModal, setOpenBackdropModal } = useMoviesStore();
@@ -30,7 +31,6 @@ export const BackdropModal = ({ backdrops }: BackdropsModalProps) => {
     height: 1080,
     thumbnail: `https://www.themoviedb.org/t/p/w300/${element.file_path}`,
   }));
-
   return (
     <Transition appear show={openBackdropModal} as={Fragment}>
       <Dialog
@@ -38,8 +38,8 @@ export const BackdropModal = ({ backdrops }: BackdropsModalProps) => {
         className="relative z-10"
         onClose={() => setOpenBackdropModal(false)}
       >
-        <div className="fixed inset-0 bg-black bg-opacity-50"  />
-        <div className="fixed inset-0 flex items-center justify-center p-4" >
+        <div className="fixed inset-0 bg-black bg-opacity-50" />
+        <div className="fixed inset-0 flex items-center justify-center p-4">
           <div className="w-[80vw] max-h-[90vh] overflow-y-auto custom-scrollbar bg-white  rounded-lg shadow-xl relative p-7">
             <button
               onClick={() => setOpenBackdropModal(false)}
@@ -61,7 +61,8 @@ export const BackdropModal = ({ backdrops }: BackdropsModalProps) => {
                 close={() => setLightboxIndex(null)}
                 index={lightboxIndex}
                 slides={images.map((img) => ({ src: img.src }))}
-
+                plugins={[Fullscreen, Counter]}
+               
               />
             )}
           </div>
