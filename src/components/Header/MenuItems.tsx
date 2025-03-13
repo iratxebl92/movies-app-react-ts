@@ -2,6 +2,7 @@ import { FaMoon } from "react-icons/fa";
 import { IoSunnyOutline } from "react-icons/io5";
 import { useMoviesStore } from "../../config/store/store";
 import { useTranslation } from "react-i18next"; // Importar el hook de i18n
+import { NavLink } from "react-router-dom";
 
 export const MenuItems = () => {
   const { theme, toggleTheme, language, setLanguage } = useMoviesStore();
@@ -9,13 +10,13 @@ export const MenuItems = () => {
   return (
     <nav>
       <ul className="md:flex md:flex-row md:space-x-4 md:mr-1">
-        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer ">
+        <NavLink to="/" className={({isActive}) => isActive ? "text-orange-500 uppercase font-bold" : "dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details"}>
           {t('home')} 
-        </li>
-        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer ">
+        </NavLink>
+        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer">
           {t('movies')} 
         </li>
-        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer ">
+        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-details hover:cursor-pointer">
           {t('tv')} 
         </li>
         <li className="dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details">
