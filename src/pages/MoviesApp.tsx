@@ -1,7 +1,6 @@
 
+import { Outlet } from "react-router-dom";
 import { Header } from "../components/Header/Header";
-import { Details } from "./Details/Details";
-import { Home } from "./Home/Home";
 
 
 export const MoviesApp = () => {
@@ -9,8 +8,7 @@ export const MoviesApp = () => {
   return (
     <div className="dark:bg-dark dark:text-white bg-light min-h-screen">
     <Header />
-     {/* <Home/> */}
-     <Details/>
+     <Outlet/>
     </div>
   );
 };
