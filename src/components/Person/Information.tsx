@@ -1,11 +1,24 @@
 import { CiInstagram, CiTwitter } from "react-icons/ci";
 import { FaTiktok } from "react-icons/fa";
+import { ReadMore } from "../ReadMore";
 
 export const Information = () => {
   return (
     <div className="p-4 m-4">
       <h2 className="text-4xl pb-4">Leonardo DiCaprio</h2>
-      <p className="mb-6 leading-7">
+      <ReadMore id="read-more-text" text='        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quo facilis voluptates ducimus dignissimos temporibus suscipit accusantium tenetur reiciendis hic culpa maxime eos, recusandae, repellendus consectetur? Et a quasi labore.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nam delectus harum. Cum, laudantium cumque assumenda soluta reiciendis dolore modi amet vero at hic laborum, obcaecati rem dolorem vel. Praesentium?
+        Quod odio vitae, asperiores optio voluptas enim et fugit adipisci at consequuntur nostrum. Odio blanditiis labore quis ullam rerum quod, impedit nobis aliquam. Est ut minima obcaecati, a non asperiores!
+        Aliquid quam laudantium modi eos, deserunt autem velit inventore praesentium quidem dolores sunt accusamus officiis aperiam placeat doloremque odit. Ullam vel ipsam numquam quia nisi rem molestiae laudantium ipsa saepe!
+        Culpa, non libero. Quo nostrum temporibus ab, maxime tempora asperiores consequuntur iure labore omnis soluta eaque doloribus. Fuga, id officia cum reprehenderit quod, porro aspernatur rerum dolor repellendus commodi ea.
+        Amet sunt voluptatem nesciunt velit nihil reprehenderit quo, molestias, similique deserunt voluptatum dolor natus ipsum sequi rem libero eveniet eaque. Laboriosam quaerat enim consequuntur eligendi labore, mollitia minus ad esse.
+        Commodi quod laborum architecto inventore possimus reprehenderit, necessitatibus magni blanditiis. Quidem hic cumque iusto. Facilis, maxime ab numquam inventore assumenda suscipit asperiores non debitis accusamus magni laboriosam eius eveniet provident.
+        Suscipit, facere. Libero aperiam id nemo placeat. Aliquid praesentium, quam accusamus eveniet, dolorem consectetur fugiat iste atque non in beatae laudantium error doloremque ea blanditiis hic nulla! Earum, inventore animi?
+        Quibusdam odio placeat pariatur nihil maxime nulla, eligendi sit atque fugit! Deserunt numquam saepe ipsum quidem iusto reiciendis minus placeat provident voluptatibus illo, at accusantium optio nulla ratione sequi quod!
+        Asperiores repudiandae magni, cumque quis omnis molestiae voluptate obcaecati fuga modi nihil libero, quisquam labore itaque sed illo saepe voluptas. Consectetur officia earum commodi laudantium laborum rem accusantium optio iste!
+        Optio quia, tenetur doloribus laudantium earum saepe error? Soluta tenetur reiciendis necessitatibus, voluptatem vel nemo totam hic, ad voluptatum repellat, enim repellendus ea non. Eos esse iure hic impedit consequatur!'/>
+
+      {/* <p className="mb-6 leading-7">
         Leonardo Wilhelm DiCaprio (born November 11, 1974) is an American actor
         and film producer. Known for his work in biopics and period films,
         DiCaprio is the recipient of numerous accolades, including an Academy
@@ -55,7 +68,7 @@ export const Information = () => {
         the Ordre des Arts et des Lettres for his contributions to the arts, and
         in 2016, he appeared in Time magazine's 100 most influential people in
         the world
-      </p>
+      </p> */}
       <div className="grid grid-cols-3">
         <div>
             <p className="font-bold">Known For</p>

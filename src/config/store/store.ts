@@ -10,10 +10,12 @@ interface MoviesStore {
   topRatedSelected: ContentType;
   popularSelected: ContentType;
   trendingSelected: 'week' | 'day';
+  personContentSelected: 'movie' | 'tv'
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: 'week' | 'day') => void;
   popularOption: (content: ContentType) => void;
+  personContentOption: (content: ContentType) => void;
   toggleTheme: () => void;
   openCastModal: boolean;
   setOpenCastModal: (open: boolean) => void;
@@ -27,6 +29,7 @@ export const useMoviesStore = create<MoviesStore>((set) => ({
   trendingSelected: 'week',
   topRatedSelected: 'movie',
   popularSelected: 'movie',
+  personContentSelected: 'movie',
   setLanguage: (lang) => {
     i18n.changeLanguage(lang); // Cambiamos el idioma en i18n
     set({ language: lang }); // Actualizamos el estado global
@@ -34,6 +37,7 @@ export const useMoviesStore = create<MoviesStore>((set) => ({
   topRatedOption: (content) => set({ topRatedSelected: content }),
   popularOption: (content) => set({ popularSelected: content }),
   trendingOption: (content) => set({ trendingSelected: content }),
+  personContentOption: (content) => set({personContentSelected: content}),
   toggleTheme: () => set((state) => {
     const newTheme = state.theme === 'light' ? 'dark' : 'light';
     if (newTheme === 'dark') {

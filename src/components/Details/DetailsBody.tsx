@@ -2,7 +2,6 @@ import { useCast, useDetails } from "../../hooks/useMovies"
 import { Backdrops } from "./Backdrops"
 import { CastSlider } from "./CastSlider"
 import { DetailsBanner } from "./DetailsBanner"
-import { OptionsTab } from "./OptionsTab"
 
 export const DetailsBody = () => {
 
@@ -13,7 +12,7 @@ export const DetailsBody = () => {
     <div className=" dark:bg-dark max-w-7xl text-center align-center justify-center mx-auto px-5">
        <DetailsBanner data={data} castData={castData} />
        <CastSlider castData={castData} />
-       <OptionsTab/>
+
        {/* <Backdrops /> */}
     </div>
   )

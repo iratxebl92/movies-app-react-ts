@@ -42,3 +42,10 @@ export const useImages = (content: string, id: number) => {
     queryFn: () => apiClient.findImages(content, id),
   });
 }
+
+export const usePersonMovies = (content: string, id: number) => {
+  return useQuery({
+    queryKey: ["personMovies", content, id],
+    queryFn: () => apiClient.findPersonContent(content, id),
+  });
+}

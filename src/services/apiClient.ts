@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { BASE_URL } from "../utils/constants";
-import { getTrending, getTopRated, getPopular, getDetails, getCast, getImages } from "./tmdbService";
+import { getTrending, getTopRated, getPopular, getDetails, getCast, getImages, getPersonContent } from "./tmdbService";
 
 const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OGQyNTEwOTFkMDg5MmQzMWI2NTk4YzcyMDI2NDA3MiIsIm5iZiI6MTY0NzAyMDE5MS42MTMsInN1YiI6IjYyMmI4ODlmNTMyYWNiMDA2Yzc5ODE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.APN2znN3b6fwwbwqmA5-i3Sx1PwCvbI9MNOhoLAvbzE';
 
@@ -37,6 +37,11 @@ const findImages = async(content:string, id: number) => {
   const response = await apiBase.get(getImages(content, id));
   return response.data;
 }
+const findPersonContent = async(content:string, id: number) => {
+  const response = await apiBase.get(getPersonContent(content, id));
+  return response.data;
+}
+
 
 const apiClient = {
   findTrendingMovies,
@@ -44,7 +49,8 @@ const apiClient = {
   findPopular,
   findDetails,
   findCast,
-  findImages
+  findImages, 
+  findPersonContent,
 };
 
 export default apiClient;

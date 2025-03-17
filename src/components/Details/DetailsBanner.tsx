@@ -13,7 +13,6 @@ type DetailsBannerProps = {
 
 export const DetailsBanner = ({ data, castData }: DetailsBannerProps) => {
   const {t} = useTranslation();
-  console.log(data)
   const date = data?.release_date?.substring(0, 4);
   const newDate = data?.release_date?.split("-").reverse().join("-");
   const rate = data?.vote_average?.toString().substring(0, 3);
