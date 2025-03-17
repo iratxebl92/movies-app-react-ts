@@ -13,24 +13,33 @@ type SwitchTabProps = {
 export const SwitchTab = ({
   options,
   onTabChange,
-  className = "flex justify-end",
-  containerClassName = "relative flex items-center w-56 rounded-2xl bg-gray-200 overflow-hidden mr-3 mb-3",
-  buttonClassName = "relative z-10 flex-1 px-4 py-2 text-center transition-colors duration-300 text-gray-600",
-  activeButtonClassName = "text-white",
-  activeBgClassName = "absolute top-0 left-0 h-full w-1/2 bg-details rounded-2xl transition-transform duration-300 ease-in-out",
+  className = "",
+  containerClassName = "",
+  buttonClassName = "",
+  activeButtonClassName = "",
+  activeBgClassName = "",
 }: SwitchTabProps) => {
   const [selected, setSelected] = useState<number>(0);
 
-  const handleSelection = (index: number, option: string) => {
-    setSelected(index);
-    onTabChange(option);
+  const defaultClasses = {
+    wrapper: "flex justify-end",
+    container:
+      "relative flex items-center w-56 rounded-2xl bg-gray-200 overflow-hidden mr-3 mb-3",
+    button:
+      "relative z-10 flex-1 px-4 py-2 text-center transition-colors duration-300 text-gray-600",
+    activeButton: "text-white",
+    activeBg:
+      "absolute top-0 left-0 h-full w-1/2 bg-details rounded-2xl transition-transform duration-300 ease-in-out",
   };
 
+  const mergeClasses = (defaultClass: string, customClass?: string) =>
+    `${defaultClass} ${customClass || ""}`.trim();
+
   return (
-    <div className={className}>
-      <div className={containerClassName}>
+    <div className={mergeClasses(defaultClasses.wrapper, className)}>
+      <div className={mergeClasses(defaultClasses.container, containerClassName)}>
         <div
-          className={`${activeBgClassName} ${
+          className={`${mergeClasses(defaultClasses.activeBg, activeBgClassName)} ${
             selected === 1 ? "translate-x-full" : "translate-x-0"
           }`}
         ></div>
@@ -38,9 +47,12 @@ export const SwitchTab = ({
         {options.map((option, index) => (
           <button
             key={index}
-            onClick={() => handleSelection(index, option)}
-            className={`${buttonClassName} ${
-              selected === index ? activeButtonClassName : ""
+            onClick={() => {
+              setSelected(index);
+              onTabChange(option);
+            }}
+            className={`${mergeClasses(defaultClasses.button, buttonClassName)} ${
+              selected === index ? mergeClasses(defaultClasses.activeButton, activeButtonClassName) : ""
             }`}
           >
             {option}

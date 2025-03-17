@@ -1,29 +1,23 @@
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 
+type PhotosProps = {
+  data: {
+    profiles: { file_path: string }[]; // Definimos directamente la estructura de profiles
+  };
+};
+export const Photos = ({data}: PhotosProps) => {
 
-export const Photos = () => {
-
-
-    const images = [
-        'https://image.tmdb.org/t/p/h632/ts9l18VkDSooRGDWIeQegNVHciC.jpg', 
-        'https://image.tmdb.org/t/p/h632/zwxeqY7AV9VS2J0nTXp3onRErBg.jpg', 
-        'https://image.tmdb.org/t/p/h632/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg',
-        'https://image.tmdb.org/t/p/h632/ts9l18VkDSooRGDWIeQegNVHciC.jpg', 
-        'https://image.tmdb.org/t/p/h632/zwxeqY7AV9VS2J0nTXp3onRErBg.jpg', 
-        'https://image.tmdb.org/t/p/h632/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg'
-    ]
-
-
+console.log(data, "data photos")
   return (
     <>
     <div>
  
-      <Swiper className="mySwiper ml-4" spaceBetween={15} slidesPerView="auto">
-        {images.map((image: any) => (
-          <SwiperSlide className="flex flex-col w-40 lg:w-56">
+      <Swiper className="mySwiper" spaceBetween={15} slidesPerView="auto">
+        {data?.profiles?.map((image, index) => (
+          <SwiperSlide key={index}  className="flex flex-col w-40 lg:w-56">
             <div className="mb-2 dark:text-white ">
-                <img src={image} alt="" className="rounded-lg" />
+                <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${image.file_path}`} alt="" className="rounded-lg" />
             </div>
 
 

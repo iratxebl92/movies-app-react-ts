@@ -11,18 +11,16 @@ export const MediaGallery = ({data, status}:MediaGalleryPropr) => {
 
   
 const gallery = [...(data?.cast || []), ...(data?.crew || [])]; //Unimos ambos arrays con spread operator
-  console.log(gallery)
-  
+
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-7 overflow-hidden ">
    {
 
       gallery.map((item, key) => (
-      <Card movie={item} />
+      <Card movie={item} style={{width:"85%", }} />
       ))
-
-    
+ 
    }
     </div>
   )

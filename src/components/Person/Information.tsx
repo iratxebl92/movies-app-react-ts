@@ -4,7 +4,7 @@ import { ReadMore } from "../ReadMore";
 
 export const Information = () => {
   return (
-    <div className="p-4 m-4">
+    <div className="">
       <h2 className="text-4xl pb-4">Leonardo DiCaprio</h2>
       <ReadMore id="read-more-text" text='        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo quo facilis voluptates ducimus dignissimos temporibus suscipit accusantium tenetur reiciendis hic culpa maxime eos, recusandae, repellendus consectetur? Et a quasi labore.
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus nam delectus harum. Cum, laudantium cumque assumenda soluta reiciendis dolore modi amet vero at hic laborum, obcaecati rem dolorem vel. Praesentium?
