@@ -10,7 +10,7 @@ interface MoviesStore {
   topRatedSelected: ContentType;
   popularSelected: ContentType;
   trendingSelected: 'week' | 'day';
-  personContentSelected: 'movie' | 'tv'
+  personContentSelected: 'movie' | 'tv',
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: 'week' | 'day') => void;
@@ -51,4 +51,5 @@ export const useMoviesStore = create<MoviesStore>((set) => ({
   setOpenCastModal: (open: boolean) => set({ openCastModal: open }),
   openBackdropModal: false,
   setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
-}));
+}
+));

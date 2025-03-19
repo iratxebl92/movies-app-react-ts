@@ -12,4 +12,5 @@ export const getRecommendations = (content: string, id: number) => `/movie/674/r
 export const getSimmilar = (content: string, id: number) => `/movie/674/similar`;
 export const getPersonContent = (content: string, id: number) => `/person/6193/${content}_credits`;
 export const getPersonImages = (id:number) => `https://api.themoviedb.org/3/person/6193/images`;
+export const getPersonInformation = (id: number, language: string) => `https://api.themoviedb.org/3/person/6193?language=${language}`;
 

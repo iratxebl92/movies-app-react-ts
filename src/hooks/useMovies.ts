@@ -55,4 +55,10 @@ export const usePersonImages = ( id: number) => {
     queryFn: () => apiClient.findPersonImages(id),
   });
 }
+export const usePersonInformation = ( id: number, language: string) => {
+  return useQuery({
+    queryKey: ["personInformation",  id, language],
+    queryFn: () => apiClient.findPersonInformation(id, language),
+  });
+}
 

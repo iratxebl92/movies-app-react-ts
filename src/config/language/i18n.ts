@@ -25,6 +25,8 @@ i18n
           runtime: "Runtime:",
           director: "Director:",
           writer: "Writer:",
+          female: "Female",
+          male: "Male"
         },
       },
       es: {
@@ -44,6 +46,8 @@ i18n
           runtime: "Duración:",
           director: "Dirección:",
           writer: "Guionista:",
+          female: "Mujer",
+          male: "Hombre"
         },
       },
     },

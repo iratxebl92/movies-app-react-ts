@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { BASE_URL } from "../utils/constants";
-import { getTrending, getTopRated, getPopular, getDetails, getCast, getImages, getPersonContent, getPersonImages } from "./tmdbService";
+import { getTrending, getTopRated, getPopular, getDetails, getCast, getImages, getPersonContent, getPersonImages, getPersonInformation } from "./tmdbService";
 
 const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OGQyNTEwOTFkMDg5MmQzMWI2NTk4YzcyMDI2NDA3MiIsIm5iZiI6MTY0NzAyMDE5MS42MTMsInN1YiI6IjYyMmI4ODlmNTMyYWNiMDA2Yzc5ODE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.APN2znN3b6fwwbwqmA5-i3Sx1PwCvbI9MNOhoLAvbzE';
 
@@ -45,6 +45,10 @@ const findPersonImages = async( id: number) => {
   const response = await apiBase.get(getPersonImages( id));
   return response.data;
 }
+const findPersonInformation = async( id: number, language: string) => {
+  const response = await apiBase.get(getPersonInformation( id, language));
+  return response.data;
+}
 
 
 const apiClient = {
@@ -55,7 +59,8 @@ const apiClient = {
   findCast,
   findImages, 
   findPersonContent,
-  findPersonImages
+  findPersonImages,
+  findPersonInformation
 };
 
 export default apiClient;
