@@ -32,5 +32,5 @@ export const MediaGallery = () => {
 };
 //TODO: Hacer el type de data bien hecho
 {
-  /* <img className="rounded-xl w-full h-full" src={`https://www.themoviedb.org/t/p/original/${item.poster_path}`} alt="" /> */
+  /* <img className="rounded-xl w-full h-full" src={`https://www.themoviedb.org/t/p/original//gakVVTn9QDupSHvgXm6XHNdmRJf.jpg`} alt="" /> */
 }
