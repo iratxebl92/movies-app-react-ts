@@ -11,13 +11,13 @@ type DetailsBannerProps = {
   };
 };
 
-export const DetailsBanner = ({ data, castData }: DetailsBannerProps) => {
+export const DetailsBanner = ({ data }: DetailsBannerProps) => {
   const {t} = useTranslation();
   const date = data?.release_date?.substring(0, 4);
   const newDate = data?.release_date?.split("-").reverse().join("-");
   const rate = data?.vote_average?.toString().substring(0, 3);
-  const director = castData?.crew?.filter((crew) => crew.job === "Director");
-  const writer = castData?.crew?.filter((crew) => crew.job === "Screenplay");
+  const director = data?.credits?.crew?.filter((crew) => crew.job === "Director");
+  const writer = data?.credits?.crew?.filter((crew) => crew.job === "Screenplay");
 
   // Extraemos los nombres del director y escritor
   const directorNames = director?.map((crew) => crew.name).join(", ");

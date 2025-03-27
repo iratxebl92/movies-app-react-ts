@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import apiClient from "../services/apiClient";
 
 
+
 export const useTrendingMovies = (content: string, language: string) => {
 
 //content es movie o tv
@@ -24,18 +25,12 @@ export const usePopularMovies = (content: string, language: string) => {
     queryFn: () => apiClient.findPopular(content, language),
   });
 }
-export const useDetails = (content: string, id: number, language: string) => {
+export const useDetailsAndCast = (content: string, id: number, language: string) => {
   return useQuery({
-    queryKey: ["details", content, id, language],
-    queryFn: () => apiClient.findDetails(content, id, language),
+    queryKey: ["detailsAndCast", content, id, language], // Clave única para caché
+    queryFn: () => apiClient.findDetailsAndCast(content, id, language), // Llamada combinada
   });
-}
-export const useCast = (content: string, id: number) => {
-  return useQuery({
-    queryKey: ["cast", content, id],
-    queryFn: () => apiClient.findCast(content, id),
-  });
-}
+};
 export const useImages = (content: string, id: number) => {
   return useQuery({
     queryKey: ["images", content, id],

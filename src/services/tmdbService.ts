@@ -4,8 +4,8 @@
 export const getTrending = (content:string,  language:string) => `/trending/movie/${content}?language=${language}`;
 export const getTopRated = (content: string, language:string) => `/${content}/top_rated?language=${language}`;
 export const getPopular = (content: string, language:string) => `/${content}/popular?language=${language}`;
-export const getDetails = (content: string, id: number, language:string) => `/${content}/${id}?language=${language}`;
-export const getCast = (content: string, id: number) => `/${content}/${id}/credits`;
+export const getDetailsAndCast = (content: string, id: number, language: string) =>`/${content}/${id}?language=${language}&append_to_response=credits`; // 'append_to_response' añade el reparto
+  
 export const getImages = (content: string, id: number) => `/movie/674/images`;
 export const getVideo = (content: string, id: number) => `/movie/674/videos`;
 export const getRecommendations = (content: string, id: number) => `/movie/674/recommendations`;

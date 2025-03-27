@@ -17,6 +17,7 @@ export const Card = ({
   const movieVoteAverage = movie?.vote_average.toString().substr(0,3);
   const prueba =  (id:number, movie_type: any) => {
     const type = movie_type ? movie_type : "tv"
+    console.log(type, "TYPE")
    navigate(`/details/${type}/${id}`)
   }
  
