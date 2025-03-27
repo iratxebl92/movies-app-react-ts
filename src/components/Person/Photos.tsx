@@ -1,10 +1,12 @@
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import { usePersonImages } from "../../hooks/useMovies";
+import { useParams } from "react-router-dom";
 
 
 export const Photos = () => {
-  const {data}:any = usePersonImages(1)
+  const {id} = useParams()
+  const {data}:any = usePersonImages(id)
   return (
     <>
     <div>

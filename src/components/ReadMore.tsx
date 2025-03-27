@@ -12,10 +12,11 @@ export const ReadMore = ({ id, text, amountOfWords = 200 }: ReadMoreProps) => {
   // Convertimos cada párrafo en palabras y cortamos según `amountOfWords`
   let wordsCount = 0;
   const processedText = text.map((paragraph) => {
-    const words = paragraph.split(' '); // recoge todas las palabras de cada parrafo (en cada vuelta en el map recorre cada posición que es un parrafo)
+    const words = paragraph.split(' '); // recoge todas las palabras de cada parrafo (en cada vuelta en el map recorre cada posición que es un parrafo) Lo guarda en un array y cada palabra es una posición
+   
     wordsCount += words.length; //Añade a la variable el tamaño del texto
-    return wordsCount > amountOfWords ? null : paragraph; // Si wordsCount ya en esa vuelta supera a amountOfWords no hace nada, sino devuelve ese parrafo, digamos que se elimina del array que estamos creando.
-  }).filter(Boolean) as string[]; // Guarda los valores que son true
+    return wordsCount > amountOfWords ? null : paragraph; // Si wordsCount ya en esa vuelta supera a amountOfWords devuelve null y lo guarda en el array, sino devuelve ese parrafo.
+  }).filter(Boolean) as string[]; // Guarda los valores que son true de processedText(los que no se hayan guardado como "" o null)
   //Mirar apuntes
   
   const hiddenParagraphs = text.slice(processedText.length); //Guardaremos los parrafos desde la posición final de processedText, ya que desde ahi supera amountOfWords y aerán los que se muestren si damos a "Show more"

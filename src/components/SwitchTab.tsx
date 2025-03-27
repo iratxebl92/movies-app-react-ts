@@ -1,4 +1,5 @@
 import { useState } from "react";
+import cn from "clsx"; // ✅ Funciona correctamente
 
 type SwitchTabProps = {
   options: string[];
@@ -13,11 +14,11 @@ type SwitchTabProps = {
 export const SwitchTab = ({
   options,
   onTabChange,
-  className = "",
-  containerClassName = "",
-  buttonClassName = "",
-  activeButtonClassName = "",
-  activeBgClassName = "",
+  className,
+  containerClassName,
+  buttonClassName,
+  activeButtonClassName,
+  activeBgClassName,
 }: SwitchTabProps) => {
   const [selected, setSelected] = useState<number>(0);
 
@@ -32,16 +33,15 @@ export const SwitchTab = ({
       "absolute top-0 left-0 h-full w-1/2 bg-details rounded-2xl transition-transform duration-300 ease-in-out",
   };
 
-  const mergeClasses = (defaultClass: string, customClass?: string) =>
-    `${defaultClass} ${customClass || ""}`.trim();
-
   return (
-    <div className={mergeClasses(defaultClasses.wrapper, className)}>
-      <div className={mergeClasses(defaultClasses.container, containerClassName)}>
+    <div className={cn(defaultClasses.wrapper, className)}>
+      <div className={cn(defaultClasses.container, containerClassName)}>
         <div
-          className={`${mergeClasses(defaultClasses.activeBg, activeBgClassName)} ${
+          className={cn(
+            defaultClasses.activeBg,
+            activeBgClassName,
             selected === 1 ? "translate-x-full" : "translate-x-0"
-          }`}
+          )}
         ></div>
 
         {options.map((option, index) => (
@@ -51,9 +51,11 @@ export const SwitchTab = ({
               setSelected(index);
               onTabChange(option);
             }}
-            className={`${mergeClasses(defaultClasses.button, buttonClassName)} ${
-              selected === index ? mergeClasses(defaultClasses.activeButton, activeButtonClassName) : ""
-            }`}
+            className={cn(
+              defaultClasses.button,
+              buttonClassName,
+              selected === index && cn(defaultClasses.activeButton, activeButtonClassName)
+            )}
           >
             {option}
           </button>

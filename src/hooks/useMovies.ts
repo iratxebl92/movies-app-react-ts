@@ -62,3 +62,11 @@ export const usePersonInformation = ( id: number, language: string) => {
   });
 }
 
+export const usePersonSocialMedia = ( id: number) => {
+  return useQuery({
+    queryKey: ["personSocialMedia",  id],
+    queryFn: () => apiClient.findPersonSocialMedia(id),
+  });
+}
+
+

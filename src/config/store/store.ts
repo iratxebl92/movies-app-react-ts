@@ -11,6 +11,8 @@ interface MoviesStore {
   popularSelected: ContentType;
   trendingSelected: 'week' | 'day';
   personContentSelected: 'movie' | 'tv',
+  filterDepartments: string,
+  filterOptions: string,
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: 'week' | 'day') => void;
@@ -21,6 +23,9 @@ interface MoviesStore {
   setOpenCastModal: (open: boolean) => void;
   openBackdropModal: boolean;
   setOpenBackdropModal: (open: boolean) => void;
+  setDepartments: (value: string) => void;
+  setOptions: (value: string) => void;
+
 }
 
 export const useMoviesStore = create<MoviesStore>((set) => ({
@@ -30,6 +35,8 @@ export const useMoviesStore = create<MoviesStore>((set) => ({
   topRatedSelected: 'movie',
   popularSelected: 'movie',
   personContentSelected: 'movie',
+  filterDepartments: "all",
+ filterOptions: "vote_count.desc",
   setLanguage: (lang) => {
     i18n.changeLanguage(lang); // Cambiamos el idioma en i18n
     set({ language: lang }); // Actualizamos el estado global
@@ -51,5 +58,7 @@ export const useMoviesStore = create<MoviesStore>((set) => ({
   setOpenCastModal: (open: boolean) => set({ openCastModal: open }),
   openBackdropModal: false,
   setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
+  setDepartments:(value) => set({filterDepartments: value}),
+  setOptions:(value) => set({filterOptions: value})
 }
 ));

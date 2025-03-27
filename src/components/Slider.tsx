@@ -31,7 +31,7 @@ export const Slider = ({ data, status }: SliderProps) => {
         ))
       ) : (
         data?.results.map((movie: any) => (
-          <SwiperSlide key={movie.id} className="flex flex-col w-40 lg:w-48">
+          <SwiperSlide key={movie.id} className="flex flex-col w-40 lg:w-48 cursor-pointer">
             <Card movie={movie} />
           </SwiperSlide>
         ))

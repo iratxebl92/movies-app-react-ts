@@ -14,36 +14,33 @@ type CastSliderProps = {
   };
 };
 export const CastSlider = ({ castData }: CastSliderProps) => {
-  const {t} = useTranslation();
-  const {openCastModal, setOpenCastModal} = useMoviesStore();
+  const { t } = useTranslation();
+  const { openCastModal, setOpenCastModal } = useMoviesStore();
   return (
     <>
-    <div>
-      <p className="flex items-center text-start font-bold text-2xl mb-2">
-        {t('topCast')}
-       
-          <button 
+      <div>
+        <p className="flex items-center text-start font-bold text-2xl mb-2">
+          {t("topCast")}
+
+          <button
             className="text-slate-600 font-normal text-sm ml-2 dark:text-textDark"
             onClick={() => {
-              setOpenCastModal(true)
+              setOpenCastModal(true);
             }}
-            >
-          {t('cast')}
+          >
+            {t("cast")}
           </button>
+        </p>
+        <Swiper className="mySwiper" spaceBetween={15} slidesPerView="auto">
+          {castData?.cast.slice(0, 10).map((cast: ICast) => (
+            <SwiperSlide key={cast.id} className="flex flex-col w-40 lg:w-48">
 
-      </p>
-      <Swiper className="mySwiper" spaceBetween={15} slidesPerView="auto">
-        {castData?.cast.slice(0, 10).map((cast: ICast) => (
-          <SwiperSlide key={cast.id} className="flex flex-col w-40 lg:w-48">
-            <Cast cast={cast} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
-    {
-      openCastModal && <CastModal castData={castData} />
-    }
-
-        </>
+                <Cast cast={cast}/>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      {openCastModal && <CastModal castData={castData} />}
+    </>
   );
 };

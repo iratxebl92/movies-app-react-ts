@@ -1,26 +1,40 @@
-import { CiInstagram, CiTwitter } from "react-icons/ci";
-
 import { usePersonInformation } from "../../hooks/useMovies";
 import { ReadMore } from "../ReadMore";
 import { useTranslation } from "react-i18next";
 import { useMoviesStore } from "../../config/store/store";
+import { useParams } from "react-router-dom";
+import { SocialMedia } from "./SocialMedia";
+import { useEffect, useState } from "react";
+import { getBirthdayDate } from "../../utils/filters";
 
 
 export const Information = () => {
+  const {id} = useParams()
   const {language} = useMoviesStore()
-  const {data, status} = usePersonInformation(1, language) 
+  const {data, status} = usePersonInformation(id, language) 
   const {t} = useTranslation()
 
 const gender = data?.gender === 1 ? t('female') : t('male')
   const biographyArray = data && data.biography.split('\n') || []
+  const [date, setDate] = useState([])
+  
+  //TODO: Mirar con id 11669
+  useEffect(() => {
+    if (data?.birthday) {
+      setDate(getBirthdayDate(data?.birthday));
+    }
+  }, [data]);
 
   return (
     <div className="py-16">
       <h2 className="text-2xl md:text-4xl pb-4 font-semibold">{data?.name}</h2>
       <div>
-        {
-          biographyArray && <ReadMore id="biography-text" text={biographyArray} /> 
-        }
+      {
+      biographyArray[0] === '' ? 
+        <p>Sin información</p>
+        : 
+      (<ReadMore id="biography-text" text={biographyArray} />)
+      }
       </div>
       <div className="grid grid-cols-3 mt-6">
         <div>
@@ -37,7 +51,7 @@ const gender = data?.gender === 1 ? t('female') : t('male')
         </div>
         <div className="my-4">
             <p className="font-bold">Birthday</p>
-            <p>November 11, 1974 (50 years old)</p>
+            <p>{date.length ? date : "Sin información"}</p>
         </div>
         {
           data?.deathday &&
@@ -52,8 +66,7 @@ const gender = data?.gender === 1 ? t('female') : t('male')
         </div>
       </div>
       <div className="flex">
-        <a className="h-14 w-14"  href=""><CiInstagram style={{width:'100%', height: '100%'}} /></a>
-        <a  className="h-14 w-14" href=""><CiTwitter style={{width:'100%', height: '100%'}} /></a>
+       <SocialMedia id={id}/>
       </div>
     </div>
   );

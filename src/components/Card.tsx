@@ -1,5 +1,6 @@
 import * as motion from "motion/react-client"
 import { StarIcon } from "../core/components/Icons/StarIcon";
+import { NavLink, useNavigate } from "react-router-dom";
 
 type MoviesProps = {
   movie: any;
@@ -11,13 +12,18 @@ export const Card = ({
   movie,
   style = {},
 }: MoviesProps) => {
+  const navigate = useNavigate()
 
   const movieVoteAverage = movie?.vote_average.toString().substr(0,3);
-
+  const prueba =  (id:number, movie_type: any) => {
+    const type = movie_type ? movie_type : "tv"
+   navigate(`/details/${type}/${id}`)
+  }
+ 
 
   return (
     <motion.div whileHover={{ scale: 1.016}} whileTap={{ scale: 1.1 }} >
-      <div className="flex flex-col w-40 lg:w-48 mb-10 dark:text-white bg"style={style}>
+      <div className="flex flex-col cursor-pointer w-40 lg:w-48 mb-10 dark:text-white bg"style={style} onClick={() => prueba(movie.id, movie.media_type)}>
         <div className="">
           <img
             src={`https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`}

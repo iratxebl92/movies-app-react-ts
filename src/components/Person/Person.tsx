@@ -24,10 +24,6 @@ export const Person = () => {
         onTabChange={onTabChange}
         className="flex justify-center py-10"
       />
-      <div className="flex justify-end">
-        <SortSelector options={sortDepartaments} />
-        <SortSelector options={sortOptions} />
-      </div>
       <MediaGallery />
     </div>
   );
