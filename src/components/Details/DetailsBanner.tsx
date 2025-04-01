@@ -12,6 +12,7 @@ type DetailsBannerProps = {
 };
 
 export const DetailsBanner = ({ data }: DetailsBannerProps) => {
+  console.log(data, "Details Banner")
   const {t} = useTranslation();
   const date = data?.release_date?.substring(0, 4);
   const newDate = data?.release_date?.split("-").reverse().join("-");

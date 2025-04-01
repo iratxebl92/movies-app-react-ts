@@ -26,9 +26,11 @@ const findPopular = async (content:string, language: string) => {
   return response.data;
 };
 const findDetailsAndCast = async (content: string, id: number, language: string) => {
+
   const response = await apiBase.get(getDetailsAndCast(content, id, language));
   return response.data;
 }
+
 const findImages = async(content:string, id: number) => {
   const response = await apiBase.get(getImages(content, id));
   return response.data;
@@ -60,7 +62,7 @@ const apiClient = {
   findPersonImages,
   findPersonInformation,
   findPersonSocialMedia,
-  findDetailsAndCast
+  findDetailsAndCast,
 };
 
 export default apiClient;

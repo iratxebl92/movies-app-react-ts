@@ -4,6 +4,7 @@ import { useTopRatedMovies } from "../../hooks/useMovies";
 import { Slider } from "../Slider";
 import { SwitchTab } from "../SwitchTab";
 
+
 export const TopRated = () => {
   // Usamos el store de Zustand para acceder a los valores
   const { topRatedOption, topRatedSelected, language } = useMoviesStore();

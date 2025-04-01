@@ -26,6 +26,7 @@ export const usePopularMovies = (content: string, language: string) => {
   });
 }
 export const useDetailsAndCast = (content: string, id: number, language: string) => {
+
   return useQuery({
     queryKey: ["detailsAndCast", content, id, language], // Clave única para caché
     queryFn: () => apiClient.findDetailsAndCast(content, id, language), // Llamada combinada

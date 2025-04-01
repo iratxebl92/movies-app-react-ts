@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import {persist, createJSONStorage} from 'zustand/middleware'
 import i18n from '../language/i18n';
 
 
@@ -28,37 +29,44 @@ interface MoviesStore {
 
 }
 
-export const useMoviesStore = create<MoviesStore>((set) => ({
-  theme: typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-  language: i18n.language, // Inicializamos con el idioma actual
-  trendingSelected: 'week',
-  topRatedSelected: 'movie',
-  popularSelected: 'movie',
-  personContentSelected: 'movie',
-  filterDepartments: "all",
- filterOptions: "vote_count.desc",
-  setLanguage: (lang) => {
-    i18n.changeLanguage(lang); // Cambiamos el idioma en i18n
-    set({ language: lang }); // Actualizamos el estado global
-  },
-  topRatedOption: (content) => set({ topRatedSelected: content }),
-  popularOption: (content) => set({ popularSelected: content }),
-  trendingOption: (content) => set({ trendingSelected: content }),
-  personContentOption: (content) => set({personContentSelected: content}),
-  toggleTheme: () => set((state) => {
-    const newTheme = state.theme === 'light' ? 'dark' : 'light';
-    if (newTheme === 'dark') {
-      document.querySelector('html')?.classList.add('dark');
-    } else {
-      document.querySelector('html')?.classList.remove('dark');
+export const useMoviesStore = create<MoviesStore>()(
+  persist(
+    (set) => ({
+      theme: typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+      language: i18n.language, // Inicializamos con el idioma actual
+      trendingSelected: 'week',
+      topRatedSelected: 'movie',
+      popularSelected: 'movie',
+      personContentSelected: 'movie',
+      filterDepartments: 'all',
+      filterOptions: 'vote_count.desc',
+      setLanguage: (lang) => {
+        i18n.changeLanguage(lang); // Cambiamos el idioma en i18n
+        set({ language: lang }); // Actualizamos el estado global
+      },
+      topRatedOption: (content) => set({ topRatedSelected: content }),
+      popularOption: (content) => set({ popularSelected: content }),
+      trendingOption: (content) => set({ trendingSelected: content }),
+      personContentOption: (content) => set({ personContentSelected: content }),
+      toggleTheme: () => set((state) => {
+        const newTheme = state.theme === 'light' ? 'dark' : 'light';
+        if (newTheme === 'dark') {
+          document.querySelector('html')?.classList.add('dark');
+        } else {
+          document.querySelector('html')?.classList.remove('dark');
+        }
+        return { theme: newTheme };
+      }),
+      openCastModal: false,
+      setOpenCastModal: (open: boolean) => set({ openCastModal: open }),
+      openBackdropModal: false,
+      setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
+      setDepartments: (value) => set({ filterDepartments: value }),
+      setOptions: (value) => set({ filterOptions: value }),
+    }),
+    {
+      name: 'movies-store', // Nombre del localStorage
+      storage: createJSONStorage(() => localStorage), // Configura el almacenamiento para usar localStorage
     }
-    return { theme: newTheme };
-  }),
-  openCastModal: false,
-  setOpenCastModal: (open: boolean) => set({ openCastModal: open }),
-  openBackdropModal: false,
-  setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
-  setDepartments:(value) => set({filterDepartments: value}),
-  setOptions:(value) => set({filterOptions: value})
-}
-));
+  )
+);

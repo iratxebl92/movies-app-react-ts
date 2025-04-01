@@ -1,5 +1,6 @@
 import { useState } from "react";
 import cn from "clsx"; // ✅ Funciona correctamente
+import { useMoviesStore } from "../config/store/store";
 
 type SwitchTabProps = {
   options: string[];
@@ -21,7 +22,8 @@ export const SwitchTab = ({
   activeBgClassName,
 }: SwitchTabProps) => {
   const [selected, setSelected] = useState<number>(0);
-
+  const {personContentSelected, trendingSelected, topRatedSelected} = useMoviesStore()
+  console.log(options, "options")
   const defaultClasses = {
     wrapper: "flex justify-end",
     container:

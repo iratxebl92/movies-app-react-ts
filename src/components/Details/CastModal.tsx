@@ -13,7 +13,7 @@ type CastModalProps = {
 };
 
 export const CastModal = ({ castData }: CastModalProps) => {
-  const { cast, crew } = castData;
+  const { cast, crew } = castData && castData || [];
   const { openCastModal, setOpenCastModal } = useMoviesStore();
 
   return (
@@ -32,7 +32,7 @@ export const CastModal = ({ castData }: CastModalProps) => {
 
             <ul className="overflow-y-auto max-h-[calc(100vh-10rem)] mt-4 custom-scrollbar">
             <h2 className="text-lg font-bold">Cast</h2>
-              {cast.map((person: ICast) => (
+              {cast?.map((person: ICast) => (
                 <li key={person.id} className="flex flex-row justify-between mb-2 h-14 px-2 text-sm">
                   <div className="flex flex-row items-center">
                     <img
@@ -53,7 +53,7 @@ export const CastModal = ({ castData }: CastModalProps) => {
                 </li>
               ))}
               <h2 className="text-lg font-bold mt-4">Crew</h2>
-              {crew.map((person: ICrew) => (
+              {crew?.map((person: ICrew) => (
                 <li key={person.id} className="flex flex-row justify-between mb-2 h-14 px-2 text-sm">
                   <div className="flex flex-row items-center">
                     <img
