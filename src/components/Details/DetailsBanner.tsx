@@ -3,102 +3,152 @@ import { CircleRating } from "../../core/components/Icons/CircleRating";
 import { PlayIcon } from "../../core/components/Icons/PlayIcon";
 import { ICrew } from "../../interfaces/ICrew";
 import { IMovie } from "../../interfaces/IMovie";
+import { div } from "motion/react-client";
 
 type DetailsBannerProps = {
   data: IMovie;
-  castData: {
-    crew: ICrew[];
-  };
 };
 
 export const DetailsBanner = ({ data }: DetailsBannerProps) => {
-  console.log(data, "Details Banner")
-  const {t} = useTranslation();
+
+  console.log(data, "Details Banner DATAAA")
+ 
+  const { t } = useTranslation();
   const date = data?.release_date?.substring(0, 4);
   const newDate = data?.release_date?.split("-").reverse().join("-");
   const rate = data?.vote_average?.toString().substring(0, 3);
-  const director = data?.credits?.crew?.filter((crew) => crew.job === "Director");
-  const writer = data?.credits?.crew?.filter((crew) => crew.job === "Screenplay");
+  const director = data?.credits?.crew?.filter(
+    (crew) => crew.job === "Director"
+  );
+  const writer = data?.credits?.crew?.filter(
+    (crew) => crew.job === "Screenplay"
+  );
+
+
 
   // Extraemos los nombres del director y escritor
   const directorNames = director?.map((crew) => crew.name).join(", ");
   const writerNames = writer?.map((crew) => crew.name).join(", ");
 
+
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] gap-12 py-16">
-      <div>
+    <div className="relative w-full">
+      {/* Hero Banner Section */}
+      <div className="relative w-full h-[100vh] min-h-[600px] ">
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/50 to-dark z-10" />
+
         <img
-          className="inline max-w-96 rounded-3xl"
-          src={`https://www.themoviedb.org/t/p/original/${data?.poster_path}`}
-          alt=""
+          className="w-full h-full object-cover object-center"
+          src={`https://www.themoviedb.org/t/p/original/${data?.backdrop_path}`}
+          alt={data?.title}
         />
+        <div className="absolute inset-0 z-20 flex items-center px-4 md:px-8 lg:px-16">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
+            <div className="w-48 md:w-64 lg:w-72 rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
+              <img
+                className="w-full h-full object-cover"
+                src={`https://www.themoviedb.org/t/p/original/${data?.poster_path}`}
+                alt={data?.title}
+              />
+            </div>
+            <div className="text-white flex flex-col gap-2 md:gap-4">
+              <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">{data?.title}</h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-gray-200 italic">
+                {data?.tagline}
+              </p>
+              <div className="flex flex-wrap items-center gap-2 md:gap-4">
+                <div className="flex items-center gap-2 md:gap-4">
+                  <CircleRating rating={rate} />
+                  <span className="text-base md:text-xl">{date}</span>
+                  <span>•</span>
+                  <span className="text-base md:text-xl">{data?.runtime ? `${data?.runtime} min` : `${data?.number_of_episodes} episodes`}</span>
+                </div>
+              </div>
+              <div className="mt-4 md:mt-9">
+                <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-xl">
+                  <PlayIcon />
+                  <span className="text-sm text-white/80">Watch Trailer</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="">
-        <div className="mb-2 text-start">
-          <h2 className="text-4xl font-semibold "> {data?.title} </h2>
-          <h3 className="text-gray-500 italic"> {data?.tagline} </h3>
-        </div>
 
-        <div className="flex flex-row align-center">
-          <div className="flex flex-row text-xs">
-            {data?.genres?.map((genre) => {
-              return (
-                <p
-                  className=" mr-2 rounded-md p-1 bg-purple-500 text-white"
-                  key={genre.id}
-                >
-                  {" "}
-                  {genre.name}{" "}
+      {/* Details Section */}
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-12 max-w-[1920px]">
+        <div className="grid grid-cols-1 gap-8 md:gap-12">
+          <div>
+            <div className="mb-6 md:mb-8">
+              <h2 className="text-xl md:text-2xl font-bold mb-4 dark:text-textDark">
+                {t("overview")}
+              </h2>
+              <p className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                {data?.overview}
+              </p>
+            </div>
+            <div className="flex items-center">
+              <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8 items-center m-auto">
+                {data?.genres?.map((genre) => (
+                  <span
+                    key={genre.id}
+                    className="px-3 md:px-4 py-1 md:py-2 rounded-lg dark:bg-white/10 bg-gray-900/50 text-white text-sm h-fit"
+                  >
+                    {genre.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="text-start text-base leading-10">
+              <div className="flex flex-row mt-6 gap-4">
+                <p>
+                  <span className="font-bold dark:text-textDark">
+                    {t("status")}
+                  </span>{" "}
+                  <span className="text-gray-500 dark:text-gray-300">
+                    {data?.status}
+                  </span>
                 </p>
-              );
-            })}
+                <p>
+                  <span className="font-bold dark:text-textDark">
+                    {t("releaseDate")}
+                  </span>{" "}
+                  <span className="text-gray-500 dark:text-gray-300">
+                    {newDate}
+                  </span>
+                </p>
+                <p>
+                  <span className="font-bold dark:text-textDark">
+                    {t("runtime")}
+                  </span>{" "}
+                  <span className="text-gray-500 dark:text-gray-300">
+                    {data?.runtime} min
+                  </span>
+                </p>
+              </div>
+              <hr className="lg:mr-20" />
+              <p>
+                <span className="font-bold dark:text-textDark">
+                  {t("director")}
+                </span>{" "}
+                <span className="text-gray-500 dark:text-gray-300">
+                  {directorNames || "N/A"}
+                </span>
+              </p>
+              <hr className="lg:mr-20" />
+              <p>
+                <span className="font-bold dark:text-textDark">
+                  {t("writer")}
+                </span>{" "}
+                <span className="text-gray-500 dark:text-gray-300">
+                  {writerNames || "N/A"}
+                </span>
+              </p>
+              <hr className="lg:mr-20" />
+            </div>
           </div>
-        </div>
-
-        <div className=" mt-6 flex flex-row items-center">
-          <CircleRating rating={rate} />
-          <div className="flex items-center ml-7 cursor-pointer">
-            <PlayIcon />
-            <p className="ml-4 text-xl dark:text-textDark">Trailer</p>
-          </div>
-        </div>
-
-        <div className="flex flex-col text-start mt-6">
-          <p className="font-bold dark:text-textDark">{t('overview')} </p>
-          <p className="text-sm/6 mr-20 dark:text-textDark">{data?.overview} </p>
-        </div>
-
-        <div className=" text-start text-base leading-10">
-          <div className="flex flex-row mt-6 gap-4">
-            <p>
-              {" "}
-              <span className="font-bold dark:text-textDark">{t('status')}</span>{" "}
-              <span className="text-gray-500 dark:text-gray-300">{data?.status} </span>{" "}
-            </p>
-            <p>
-              {" "}
-              <span className="font-bold dark:text-textDark">{t('releaseDate')}</span>{" "}
-              <span className="text-gray-500 dark:text-gray-300">{newDate}</span>{" "}
-            </p>
-            <p>
-              {" "}
-              <span className="font-bold dark:text-textDark">{t('runtime')}</span>{" "}
-              <span className="text-gray-500 dark:text-gray-300">{data?.runtime} min </span>{" "}
-            </p>
-          </div>
-          <hr className="lg:mr-20" />
-          <p>
-            {" "}
-            <span className="font-bold dark:text-textDark">{t('director')}</span>{" "}
-            <span className="text-gray-500 dark:text-gray-300">{directorNames || "N/A"}</span>{" "}
-          </p>
-          <hr className="lg:mr-20" />
-          <p>
-            {" "}
-            <span className="font-bold dark:text-textDark">{t('writer')}</span>{" "}
-            <span className="text-gray-500 dark:text-gray-300">{writerNames || "N/A"}</span>{" "}
-          </p>
-          <hr className="lg:mr-20" />
         </div>
       </div>
     </div>

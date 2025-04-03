@@ -2,8 +2,8 @@ export const PlayIcon = () => {
     return (
       <div className="group">
         <svg
-          height="65px"
-          width="65px"
+          height="30px"
+          width="30px"
           version="1.1"
           id="Capa_1"
           xmlns="http://www.w3.org/2000/svg"

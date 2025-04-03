@@ -15,15 +15,16 @@ export const Card = ({
   const navigate = useNavigate()
 
   const movieVoteAverage = movie?.vote_average.toString().substr(0,3);
-  const prueba =  (id:number, movie_type: any) => {
-    const type = movie_type ? movie_type : "tv"
+  const prueba =  (id:number, first_air_date: any) => {
+
+    const type = first_air_date ? 'tv' : 'movie'
    navigate(`/details/${type}/${id}`)
   }
  
 
   return (
     <motion.div whileHover={{ scale: 1.016}} whileTap={{ scale: 1.1 }} >
-      <div className="flex flex-col cursor-pointer w-40 lg:w-48 mb-10 dark:text-white bg"style={style} onClick={() => prueba(movie.id, movie.media_type)}>
+      <div className="flex flex-col cursor-pointer w-40 lg:w-48 mb-10 dark:text-white bg"style={style} onClick={() => prueba(movie.id, movie.first_air_date)}>
         <div className="">
           <img
             src={`https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`}

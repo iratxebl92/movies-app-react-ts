@@ -23,6 +23,10 @@ export interface IMovie {
     video?: boolean
     vote_average: string | number
     vote_count: number
+    credits?: {
+        cast: Array<{ id: number; name: string }> | Array<any>
+        crew: Array<{ id: number; name: string }> | Array<any>
+    }
   }
 
 //   https://github.com/ionivetech/movie-app/blob/main/src/interfaces/IMovie.ts

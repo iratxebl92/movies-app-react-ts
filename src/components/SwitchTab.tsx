@@ -23,7 +23,6 @@ export const SwitchTab = ({
 }: SwitchTabProps) => {
   const [selected, setSelected] = useState<number>(0);
   const {personContentSelected, trendingSelected, topRatedSelected} = useMoviesStore()
-  console.log(options, "options")
   const defaultClasses = {
     wrapper: "flex justify-end",
     container:

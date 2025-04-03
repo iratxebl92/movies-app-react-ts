@@ -18,7 +18,7 @@ export const CastSlider = ({ castData }: CastSliderProps) => {
   const { openCastModal, setOpenCastModal } = useMoviesStore();
   return (
     <>
-      <div>
+      <div className="max-w-[1920px] mx-auto">
         <p className="flex items-center text-start font-bold text-2xl mb-2">
           {t("topCast")}
 

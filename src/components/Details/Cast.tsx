@@ -9,7 +9,7 @@ export const Cast = ({ cast }: any) => {
   };
 
   return (
-    <div className="mb-2 dark:text-white  " onClick={() => prueba(cast.id)}>
+    <div className="mb-2 dark:text-white" onClick={() => prueba(cast.id)}>
       <div>
         <motion.div whileHover={{ scale: 1.016 }} whileTap={{ scale: 1.1 }}>
           <div className="cursor-pointer">
@@ -29,8 +29,7 @@ export const Cast = ({ cast }: any) => {
           <div className="flex flex-col text-center text-sm w-40 mt-1">
             <p className="font-medium"> {cast?.name} </p>
             <p className="text-gray-600 dark:text-gray-300">
-              {" "}
-              {cast?.character}{" "}
+              {cast?.character}
             </p>
           </div>
         </motion.div>

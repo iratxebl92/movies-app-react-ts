@@ -1,6 +1,6 @@
-import React from 'react'
+
 import { SeasonHeader } from './SeasonHeader'
-import { Episodes } from './Episodes'
+
 
 export const Seasons = () => {
   return (

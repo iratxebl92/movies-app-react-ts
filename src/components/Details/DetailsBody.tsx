@@ -13,7 +13,7 @@ export const DetailsBody = () => {
   console.log(data, "data en DetailsBody")
 
   return (
-    <div className=" dark:bg-dark max-w-7xl text-center align-center justify-center mx-auto px-5">
+    <div className=" dark:bg-dark  text-center align-center justify-center mx-auto">
        <DetailsBanner data={data} />
        <CastSlider castData={data?.credits} />
 

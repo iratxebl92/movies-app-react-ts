@@ -19,7 +19,7 @@ export const CircleRating = ({rating}:any) => {
         pathColor:
         rating < 5 ? "red" : rating < 7 ? "orange" : "green",
         textSize: '30px',
-        textColor: `${theme === 'dark' ? '#e5e7eb' : 'black'}`,
+        textColor: '#e5e7eb',
         pathTransitionDuration: 0.5,
         
     })} />
