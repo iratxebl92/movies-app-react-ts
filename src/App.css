@@ -1,3 +1,25 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+/* 
+scroll-behavior: smooth:
+Hace que el scroll sea suave en lugar de instantáneo
+Mejora la experiencia de usuario
+scroll-padding-top: 0:
+Elimina cualquier padding adicional en el scroll
+Ayuda a prevenir saltos no deseados
+overflow-x: hidden:
+Previene el scroll horizontal
+Ayuda a mantener la consistencia del layout
+
+*/
+
 .circleRating {
     font-weight: bold;
 }
@@ -35,37 +57,5 @@
 .custom-scrollbar li:nth-child(even) {
   background-color: #e9e9e9; /* Color de fondo para filas pares */
 }
-.prueba {
-  --gradient-direction: 90deg;
-  z-index: 2;
-  inset: 0px;
-  height: 100%;
-  max-height: 600px;
-  min-width: 50%;
-  position: absolute;
-  margin-left: auto;
-  aspect-ratio: 16 / 9;
-  opacity: 1;
-}
-.prueba::before {
-  content: "";
-  z-index: 1;
-inset: 0px 0px 0px -20px;
-position: absolute;
-background: linear-gradient(var(--gradient-direction), #121212, rgba(18, 18, 18, 0.991) 6.67%, rgba(18, 18, 18, 0.964) 13.33%, rgba(18, 18, 18, 0.918) 20%, rgba(18, 18, 18, 0.853) 26.67%, rgba(18, 18, 18, 0.768) 33.33%, rgba(18, 18, 18, 0.668) 40%, rgba(18, 18, 18, 0.557) 46.67%, rgba(18, 18, 18, 0.443) 53.33%, rgba(18, 18, 18, 0.332) 60%, rgba(18, 18, 18, 0.232) 66.67%, rgba(18, 18, 18, 0.147) 73.33%, rgba(18, 18, 18, 0.082) 80%, rgba(18, 18, 18, 0.036) 86.67%, rgba(18, 18, 18, 0.009) 93.33%, rgba(18, 18, 18, 0));
-}
 
-.prueba.chRmAI::after {
-  content: "";
-  z-index: 1;
-  inset: 0px 0px -2px;
-  position: absolute;
-  background: linear-gradient(0deg, rgb(18, 18, 18), transparent 25%);
-}
 
-.image {
-  width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-}

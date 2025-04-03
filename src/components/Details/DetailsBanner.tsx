@@ -4,14 +4,19 @@ import { PlayIcon } from "../../core/components/Icons/PlayIcon";
 import { ICrew } from "../../interfaces/ICrew";
 import { IMovie } from "../../interfaces/IMovie";
 import { div } from "motion/react-client";
-
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
+import { Suspense } from 'react';
+import { LoadingSpinner } from "../../core/LoadingSpinner";
+import { useInitialScroll } from "../../hooks/useInitialScroll";
 type DetailsBannerProps = {
   data: IMovie;
 };
 
 export const DetailsBanner = ({ data }: DetailsBannerProps) => {
-
-  console.log(data, "Details Banner DATAAA")
+  useInitialScroll();
+  const [bannerRef, isBannerVisible] = useIntersectionObserver({
+    threshold: 0.5
+  });
  
   const { t } = useTranslation();
   const date = data?.release_date?.substring(0, 4);
@@ -33,9 +38,14 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
 
 
   return (
-    <div className="relative w-full">
+    <Suspense fallback={<LoadingSpinner />}>
+    <div ref={bannerRef}  className="relative w-full">
       {/* Hero Banner Section */}
-      <div className="relative w-full h-[100vh] min-h-[600px] ">
+      <div 
+          className={`relative w-full h-[100vh] min-h-[600px] transition-opacity duration-500 ${
+            isBannerVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
         <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/50 to-dark z-10" />
 
         <img
@@ -152,5 +162,25 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 };
+
+/*
+useInitialScroll():
+Asegura que la página empiece desde arriba
+Se ejecuta antes de que el contenido se muestre
+useIntersectionObserver:
+Configurado con threshold: 0.5 (se dispara cuando el 50% del elemento es visible)
+Controla la visibilidad del banner para las animaciones
+Suspense:
+Componente de React para manejar estados de carga
+Muestra el LoadingSpinner mientras el contenido se carga
+Estilos y clases:
+h-[100vh]: Altura completa del viewport
+min-h-[600px]: Altura mínima para evitar que se haga muy pequeño
+transition-opacity: Transición suave para la opacidad
+scrollMarginTop: '0px': Ayuda a prevenir el scroll automático
+
+
+*/
