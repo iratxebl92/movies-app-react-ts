@@ -56,14 +56,14 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
         <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/60 to-dark/50" /> 
         <div className="absolute inset-0 z-20 flex items-center px-4 md:px-8 lg:px-16">
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
-            <div className="w-48 md:w-64 lg:w-72 rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
+            <div className="w-48 md:w-64 lg:w-96 rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <img
                 className="w-full h-full object-cover"
                 src={`https://www.themoviedb.org/t/p/original/${data?.poster_path}`}
                 alt={data?.title}
               />
             </div>
-            <div className="text-white flex flex-col gap-2 md:gap-4">
+            <div className="text-white flex flex-col gap-2 md:gap-4 text-start">
               <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">{data?.title}</h1>
               <p className="text-lg md:text-xl lg:text-2xl text-gray-200 italic">
                 {data?.tagline}
@@ -76,42 +76,38 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
                   <span className="text-base md:text-xl">{data?.runtime ? `${data?.runtime} min` : `${data?.number_of_episodes} episodes`}</span>
                 </div>
               </div>
+              <div className="flex">
+                <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8 items-center">
+                  {data?.genres?.map((genre) => (
+                    <span
+                      key={genre.id}
+                      className="px-1 md:px-2 py-1 md:py-2 rounded-md dark:bg-gray-500 bg-gray-900/50 text-white text-xs h-fit"
+                    >
+                      {genre.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <p className="text-sm md:text-base text-gray-200 dark:text-gray-300 leading-relaxed max-w-xl text-start">
+                {data?.overview}
+              </p>
               <div className="mt-4 md:mt-9">
                 <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-xl">
                   <PlayIcon />
                   <span className="text-sm text-white/80">Watch Trailer</span>
                 </button>
               </div>
+              
+              
             </div>
           </div>
         </div>
       </div>
 
       {/* Details Section */}
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-12 max-w-[1920px]">
+      {/* <div className="container mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-12 max-w-[1920px]">
         <div className="grid grid-cols-1 gap-8 md:gap-12">
           <div>
-            <div className="mb-6 md:mb-8">
-              <h2 className="text-xl md:text-2xl font-bold mb-4 dark:text-textDark">
-                {t("overview")}
-              </h2>
-              <p className="text-base md:text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-                {data?.overview}
-              </p>
-            </div>
-            <div className="flex items-center">
-              <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8 items-center m-auto">
-                {data?.genres?.map((genre) => (
-                  <span
-                    key={genre.id}
-                    className="px-3 md:px-4 py-1 md:py-2 rounded-lg dark:bg-white/10 bg-gray-900/50 text-white text-sm h-fit"
-                  >
-                    {genre.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-
             <div className="text-start text-base leading-10">
               <div className="flex flex-row mt-6 gap-4">
                 <p>
@@ -161,7 +157,7 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
     </Suspense>
   );
