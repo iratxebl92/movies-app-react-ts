@@ -6,14 +6,15 @@ export const useInitialScroll = () => {
   const { pathname } = useLocation();
 
   useLayoutEffect(() => {
-    // Forzamos el scroll al inicio
-    window.scrollTo(0, 0);
-    
-    // Prevenimos el scroll automático del navegador
-    if (window.history.scrollRestoration) {
-      window.history.scrollRestoration = 'manual';
+    // Solo ejecutamos el scroll si estamos en una nueva ruta
+    if (window.location.pathname === pathname) {
+      window.scrollTo(0, 0);
+      
+      if (window.history.scrollRestoration) {
+        window.history.scrollRestoration = 'manual';
+      }
     }
-  }, [pathname]);
+  }, [pathname]); // Solo dependemos de pathname
 };
 
 

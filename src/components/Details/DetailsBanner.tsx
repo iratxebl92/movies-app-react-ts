@@ -3,7 +3,6 @@ import { CircleRating } from "../../core/components/Icons/CircleRating";
 import { PlayIcon } from "../../core/components/Icons/PlayIcon";
 import { ICrew } from "../../interfaces/ICrew";
 import { IMovie } from "../../interfaces/IMovie";
-import { div } from "motion/react-client";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { Suspense } from 'react';
 import { LoadingSpinner } from "../../core/LoadingSpinner";
@@ -42,17 +41,19 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
     <div ref={bannerRef}  className="relative w-full">
       {/* Hero Banner Section */}
       <div 
-          className={`relative w-full h-[100vh] min-h-[600px] transition-opacity duration-500 ${
+          className={`
+            after:content-['']
+            after:bg-gradient-to-t after:from-light/100 after:via-light/50 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/2  dark:after:from-dark/100 dark:after:via-dark/50
+            relative w-full h-[100vh] min-h-[600px] transition-opacity duration-500 ${
             isBannerVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
-        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/50 to-dark z-10" />
-
         <img
           className="w-full h-full object-cover object-center"
           src={`https://www.themoviedb.org/t/p/original/${data?.backdrop_path}`}
           alt={data?.title}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/60 to-dark/50" /> 
         <div className="absolute inset-0 z-20 flex items-center px-4 md:px-8 lg:px-16">
           <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
             <div className="w-48 md:w-64 lg:w-72 rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
