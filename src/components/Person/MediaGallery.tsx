@@ -12,10 +12,10 @@ export const MediaGallery = () => {
   const { data, status } = usePersonMovies(personContentSelected, id);
   const [visibleMovies, setVisibleMovies] = useState(20); // Mostramos inicialmente las peliculas o series que decidamos
   const gallery = filterDepartments === "acting" ? data?.cast :  [...(data?.cast || []), ...(data?.crew || [])]; //Unimos ambos arrays con spread operator
-  const disabled = useMemo(() => visibleMovies >= gallery.length, [visibleMovies, gallery.length]); //Añadimos gallery.length a la dependencia para que cuando estén los datos de la API cargados lo recalcule, sino siempre será mayor viibleMovies ya que de primeras gallery.length será 0 
+  const disabled = useMemo(() => visibleMovies >= gallery?.length, [visibleMovies, gallery?.length]); //Añadimos gallery.length a la dependencia para que cuando estén los datos de la API cargados lo recalcule, sino siempre será mayor viibleMovies ya que de primeras gallery.length será 0 
 
   const idsUnicos = new Set(); //Esto servirá para guardar los id de las películas/series que ya hemos agregado, para evitar duplicados.
-  
+  if (!gallery) return null; // Si no traer los datos de la API, no renderizamos nada
   const prueba = gallery
   .sort((a, b) => {
     const isDesc = filterOptions.includes('.desc'); // Verifica si debe ser descendente
@@ -37,14 +37,6 @@ export const MediaGallery = () => {
     return false;
   });
   
-
-  //  useEffect(() => {
-  //    console.log(filterDepartments, "departments in Media");
-  //  }, [filterDepartments]); // Se ejecuta solo cuando filterDepartments cambia
- 
-  //  useEffect(() => {
-  //    console.log(filterOptions, "option in Media");
-  //  }, [filterOptions]); // Se ejecuta solo cuando filterOptions cambia
   
   return (
     <>
