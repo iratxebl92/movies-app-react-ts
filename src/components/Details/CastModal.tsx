@@ -6,14 +6,14 @@ import { ICast } from '../../interfaces/ICast';
 import { ICrew } from "../../interfaces/ICrew";
 
 type CastModalProps = {
-  castData: {
+  castData?: {
     cast: ICast[];
     crew: ICrew[];
   };
 };
 
 export const CastModal = ({ castData }: CastModalProps) => {
-  const { cast, crew } = castData && castData || [];
+  const { cast = [], crew = [] } = castData || {};
   const { openCastModal, setOpenCastModal } = useMoviesStore();
 
   return (

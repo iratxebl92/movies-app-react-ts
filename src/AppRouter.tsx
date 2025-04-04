@@ -1,22 +1,22 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import { Home } from './pages/Home/Home'
-import { Details } from './pages/Details/Details'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { MoviesApp } from './pages/MoviesApp'
-import { Person } from './components/Person/Person'
-import { Seasons } from './components/Seasons/Seasons'
+import { LazyRoute } from './components/LazyRoute'
+import { lazyComponents, routes } from './routes/lazyRoutes'
 
 export const AppRouter = () => {
   return (
- <BrowserRouter>
- <Routes>
-    <Route element={<MoviesApp/>} >
-        <Route path='/' element={<Home/>} />
-        <Route path='/details/:type/:id' element={<Details/>} />
-        <Route path='/tv/id/seasons/2' element={<Seasons/>} />
-        <Route path='/person/:id' element={<Person/>} />
-
-    </Route>
- </Routes>
- </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MoviesApp />}>
+          {routes.map(({ path, component }) => (
+            <Route
+              key={path}
+              path={path}
+              element={<LazyRoute component={lazyComponents[component]} />}
+            />
+          ))}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }

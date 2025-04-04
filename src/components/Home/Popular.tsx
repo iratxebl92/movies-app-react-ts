@@ -5,25 +5,24 @@ import { usePopularMovies } from "../../hooks/useMovies";
 import { useTranslation } from "react-i18next";
 
 export const Popular = () => {
-  const { popularOption, popularSelected, language } = useMoviesStore();
-    const {t} = useTranslation();
-
+  const { popularSelected, popularOption, language } = useMoviesStore();
+  const { t } = useTranslation();
   const { data, status } = usePopularMovies(popularSelected, language);
 
   const onTabChange = (tab: string) => {
     popularOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
   };
-  const options = language === "es" ? ["Películas", "Series"] : ["Movies", "TV Shows"];
 
+  const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
 
   if (status === "error") {
     return <p>Error</p>;
   }
 
   return (
-    <div className="">
-      <div className="flex justify-between">
-        <span className="text-2xl ml-3 font-bold dark:text-white"> {t('popular')} </span>
+    <div className="mb-10">
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="text-2xl font-bold dark:text-white">{t('popular')}</h2>
         <SwitchTab options={options} onTabChange={onTabChange} />
       </div>
       <Slider data={data} status={status} />

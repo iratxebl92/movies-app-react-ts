@@ -4,34 +4,24 @@ import { useTopRatedMovies } from "../../hooks/useMovies";
 import { Slider } from "../Slider";
 import { SwitchTab } from "../SwitchTab";
 
-
 export const TopRated = () => {
-  // Usamos el store de Zustand para acceder a los valores
-  const { topRatedOption, topRatedSelected, language } = useMoviesStore();
-  const {t} = useTranslation();
+  const { topRatedSelected, topRatedOption, language } = useMoviesStore();
+  const { t } = useTranslation();
   const { data, status } = useTopRatedMovies(topRatedSelected, language);
 
-  // Cambia entre "movie" y "tv" dependiendo de la opción seleccionada
   const onTabChange = (tab: string) => {
     topRatedOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
   };
 
-  // Definir las opciones basadas en el idioma
-  const options = language === "es" ? ["Películas", "Series"] : ["Movies", "TV Shows"];
-
-  if (status === "error") {
-    return <p>Error</p>;
-  }
+  const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
 
   return (
-    <>
-      <div className="flex justify-between">
-        <span className="text-2xl ml-3 font-bold dark:text-white">
-          {t('topRated')}
-        </span>
+    <div className="mb-10">
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="text-2xl font-bold dark:text-white">{t('topRated')}</h2>
         <SwitchTab options={options} onTabChange={onTabChange} />
       </div>
       <Slider data={data} status={status} />
-    </>
+    </div>
   );
 };

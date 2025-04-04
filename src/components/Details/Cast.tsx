@@ -1,17 +1,26 @@
 import * as motion from "motion/react-client";
 import { useNavigate } from "react-router-dom";
+import { ICast } from "../../interfaces/ICast";
 
-export const Cast = ({ cast }: any) => {
+type CastProps = {
+  cast: ICast;
+};
+
+export const Cast = ({ cast }: CastProps) => {
   const navigate = useNavigate();
 
-  const prueba = (id) => {
-    navigate(`/person/${id}`);
+  const handleClick = () => {
+    navigate(`/person/${cast.id}`);
   };
 
   return (
-    <div className="mb-2 dark:text-white" onClick={() => prueba(cast.id)}>
+    <div className="mb-2 dark:text-white" onClick={handleClick}>
       <div>
-        <motion.div whileHover={{ scale: 1.016 }} whileTap={{ scale: 1.1 }}>
+        <motion.div 
+          whileHover={{ scale: 1.016 }} 
+          whileTap={{ scale: 1.1 }}
+          className="transition-transform duration-200"
+        >
           <div className="cursor-pointer">
             <img
               src={
@@ -21,14 +30,14 @@ export const Cast = ({ cast }: any) => {
               }
               className={`rounded-lg h-15 w-40 object-contain ${
                 !cast?.profile_path && "border-2"
-              } `}
+              }`}
               alt={cast?.name}
               title={cast?.name}
             />
           </div>
           <div className="flex flex-col text-center text-sm w-40 mt-1">
-            <p className="font-medium"> {cast?.name} </p>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="font-medium truncate">{cast?.name}</p>
+            <p className="text-gray-600 dark:text-gray-300 truncate">
               {cast?.character}
             </p>
           </div>
