@@ -88,7 +88,7 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
                   ))}
                 </div>
               </div>
-              <p className="text-sm md:text-base text-white dark:text-gray-300 leading-relaxed max-w-xl text-start">
+              <p className="text-sm md:text-base text-white dark:text-gray-300 leading-relaxed max-w-5xl text-start">
                 {data?.overview}
               </p>
               <div className="mt-4 md:mt-9">

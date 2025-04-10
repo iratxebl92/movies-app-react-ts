@@ -21,11 +21,14 @@ interface MoviesStore {
   personContentOption: (content: ContentType) => void;
   toggleTheme: () => void;
   openCastModal: boolean;
+  openVideoModal: boolean;
   setOpenCastModal: (open: boolean) => void;
   openBackdropModal: boolean;
   setOpenBackdropModal: (open: boolean) => void;
   setDepartments: (value: string) => void;
   setOptions: (value: string) => void;
+  setOpenVideoModal: (open: boolean) => void;
+  
 
 }
 
@@ -58,7 +61,9 @@ export const useMoviesStore = create<MoviesStore>()(
         return { theme: newTheme };
       }),
       openCastModal: false,
+      openVideoModal: false,
       setOpenCastModal: (open: boolean) => set({ openCastModal: open }),
+      setOpenVideoModal: (open: boolean) => set({ openVideoModal: open }),
       openBackdropModal: false,
       setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
       setDepartments: (value) => set({ filterDepartments: value }),

@@ -47,23 +47,30 @@ export const CastSlider = ({ castData, status = 'success' }: CastSliderProps) =>
         </div>
         <Swiper 
           className="mySwiper" 
-          spaceBetween={15} 
+          spaceBetween={10} 
           slidesPerView="auto"
          
         >
           {isLoading ? (
             skeletonSlides.map((_, index) => (
-              <SwiperSlide key={index} className="flex flex-col w-40 lg:w-48">
+              <SwiperSlide key={index} className="flex flex-col w-auto">
                 <div className="flex flex-col gap-3 h-60">
-                  <div className="w-full h-44 bg-gray-300 dark:bg-gray-700 rounded-lg animate-pulse"></div>
-                  <div className="w-3/4 h-4 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
-                  <div className="w-1/2 h-4 bg-gray-300 dark:bg-gray-700 rounded animate-pulse"></div>
+                  <div className="w-full h-44 bg-gray-300 dark:bg-gray-700 rounded-lg overflow-hidden">
+                    <div className="w-full h-full bg-shimmer dark:bg-shimmer-dark bg-[length:200%_100%] animate-shimmer"></div>
+                  </div>
+                  <div className="w-3/4 h-4 bg-gray-300 dark:bg-gray-700 rounded overflow-hidden">
+                    <div className="w-full h-full bg-shimmer dark:bg-shimmer-dark bg-[length:200%_100%] animate-shimmer"></div>
+                  </div>
+                  <div className="w-1/2 h-4 bg-gray-300 dark:bg-gray-700 rounded overflow-hidden">
+                    <div className="w-full h-full bg-shimmer dark:bg-shimmer-dark bg-[length:200%_100%] animate-shimmer"></div>
+                  </div>
                 </div>
               </SwiperSlide>
             ))
           ) : (
             castData?.cast?.slice(0, 10).map((cast: ICast) => (
-              <SwiperSlide key={cast.id} className="flex flex-col w-40 lg:w-48">
+              <SwiperSlide key={cast.id} className="flex flex-col !w-auto">
+                  {/* Usamos !w-auto para que el swiper slide sea de tamaño auto y fuerza la especificacion de width: auto; en el css por encima de la clase .swiper-slide */}
                 <Cast cast={cast} />
               </SwiperSlide>
             )) || null

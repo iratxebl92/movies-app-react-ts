@@ -65,4 +65,10 @@ export const usePersonSocialMedia = ( id: number) => {
   });
 }
 
+export const useVideos = (content:string, id: number) => {
+  return useQuery({
+    queryKey: ["videos", content, id],
+    queryFn: () => apiClient.findVideos(content, id),
+  });
+}
 

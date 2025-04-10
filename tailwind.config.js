@@ -52,6 +52,18 @@ export default {
       maxWidth: {
         '1920': '120rem',
       },
+      keyframes: {
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' }
+        }
+      },
+      animation: {
+        shimmer: 'shimmer 1.5s infinite'
+      },
+      backgroundImage: {
+        'shimmer': 'linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%)',
+        'shimmer-dark': 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%)'
+      }
     },
   },
   plugins: [],

@@ -1,4 +1,5 @@
 html {
+  height: 100vh;
   scroll-behavior: smooth;
   scroll-padding-top: 0;
 }
@@ -59,3 +60,6 @@ Ayuda a mantener la consistencia del layout
 }
 
 
+.swiper-slide {
+  width: auto;
+}

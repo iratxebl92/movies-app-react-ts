@@ -1,4 +1,8 @@
 import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa";
+import { Information } from "../components/Person/Information";
+import { Reviews } from "../components/Details/Reviews";
+import { Backdrops } from "../components/Details/Backdrops";
+import { Videos } from "../components/Details/Videos";
 
 export const sortOptions = [
   { key: "vote_count.desc", label: "Most Known For"},
@@ -41,6 +45,14 @@ export const sortOptions = [
     ["09", "Septiembre"], ["10", "Octubre"], ["11", "Noviembre"], ["12", "Diciembre"]
   ]);
   
+
+
+  export const detailsOptions = [
+    { key: "information", label: "Information", component: Information },
+    { key: "videos", label: "Videos", component: Videos },
+    { key: "images", label: "Backdrops", component: Backdrops },
+    { key: "reviews", label: "Reviews", component: Reviews},
+  ]
  
   export const getBirthdayDate = (date: string): string[] => {
     if (!date) return [];
