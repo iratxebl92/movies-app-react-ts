@@ -1,12 +1,48 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ReactPlayer from "react-player";
 import { useMoviesStore } from "../../config/store/store";
 import { IoMdClose } from "react-icons/io";
 
-export const ModalVideo = ({ selectedVideoKey}: {selectedVideoKey: string}) => {
-  const { openVideoModal, setOpenVideoModal } = useMoviesStore();
-  console.log(selectedVideoKey);
+export const ModalVideo = ({
+  selectedVideoKey,
+  videos,
+}: {
+  selectedVideoKey: string;
+  videos: any;
+}) => {
+  const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey } =
+    useMoviesStore();
+
+
+  const [prevDisabled, setPrevDisabled] = useState(false)
+  const [nextDisabled, setNextDisabled] = useState(false)
+
+  useEffect(() => {
+    if(currentVideoIndex === 0){
+      setPrevDisabled(true)
+    }
+    if(currentVideoIndex === videos.results.length - 1){
+      setNextDisabled(true)
+    }
+  }, [currentVideoIndex])
+
+  const handlePrev = () => {
+    if(currentVideoIndex !== 0){
+      setCurrentVideoIndex(currentVideoIndex - 1)
+      const prueba = videos.results[currentVideoIndex - 1]
+      setSelectedVideoKey(prueba.key)
+    } 
+  };
+
+  const handleNext = () => {
+    if(currentVideoIndex < videos.results.length - 1){
+      setCurrentVideoIndex(currentVideoIndex + 1)
+      const prueba = videos.results[currentVideoIndex + 1]
+      setSelectedVideoKey(prueba.key)
+    }
+  };
+
   return (
     <Transition appear show={openVideoModal} as={Fragment}>
       <Dialog
@@ -30,6 +66,20 @@ export const ModalVideo = ({ selectedVideoKey}: {selectedVideoKey: string}) => {
                 className="!w-full !h-full"
               />
             </div>
+          <button
+            onClick={handlePrev}
+            className={`absolute left-2 top-1/2 text-white text-3xl ${prevDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={prevDisabled}
+          >
+            ←
+          </button>
+          <button
+            onClick={handleNext}
+            className={`absolute right-2 top-1/2 text-white text-3xl ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={nextDisabled}
+          >
+            →
+          </button>
           </div>
         </div>
       </Dialog>

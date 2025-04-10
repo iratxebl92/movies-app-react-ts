@@ -28,6 +28,10 @@ interface MoviesStore {
   setDepartments: (value: string) => void;
   setOptions: (value: string) => void;
   setOpenVideoModal: (open: boolean) => void;
+  currentVideoIndex: number;
+  setCurrentVideoIndex: (index: number) => void;
+  selectedVideoKey: string;
+  setSelectedVideoKey: (key: string) => void;
   
 
 }
@@ -68,6 +72,10 @@ export const useMoviesStore = create<MoviesStore>()(
       setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
       setDepartments: (value) => set({ filterDepartments: value }),
       setOptions: (value) => set({ filterOptions: value }),
+      currentVideoIndex: 0,
+      setCurrentVideoIndex: (index: number) => set({ currentVideoIndex: index }),
+      selectedVideoKey: '',
+      setSelectedVideoKey: (key: string) => set({ selectedVideoKey: key }),
     }),
     {
       name: 'movies-store', // Nombre del localStorage
