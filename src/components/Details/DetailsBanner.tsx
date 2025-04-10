@@ -7,6 +7,7 @@ import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { Suspense } from 'react';
 import { LoadingSpinner } from "../../core/LoadingSpinner";
 import { useInitialScroll } from "../../hooks/useInitialScroll";
+import { IoPlayCircleOutline } from "react-icons/io5";
 type DetailsBannerProps = {
   data: IMovie;
 };
@@ -91,10 +92,11 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
               <p className="text-sm md:text-base text-white dark:text-gray-300 leading-relaxed max-w-5xl text-start">
                 {data?.overview}
               </p>
-              <div className="mt-4 md:mt-9">
-                <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 transition-colors p-2 rounded-xl">
-                  <PlayIcon />
-                  <span className="text-sm text-white/80">Watch Trailer</span>
+              <div className="mt-4 md:mt-9 ">
+                <button className="flex items-center gap-2 bg-black/60 hover:bg-slate-700 transition-colors p-2 rounded-xl">
+                  {/* <PlayIcon /> */}
+                  {/* <IoPlayCircleOutline className="text-white/80 w-10 h-10 " /> */}
+                  Watch Trailer
                 </button>
               </div>
               
