@@ -1,23 +1,27 @@
-import ReactPlayer from "react-player/lazy";
 import { LoadingSpinner } from "../../core/LoadingSpinner";
 import { useVideos } from "../../hooks/useMovies";
 import { useMoviesStore } from "../../config/store/store";
 import { ModalVideo } from "./ModalVideo";
 import * as motion from "motion/react-client";
-import { PlayIcon } from "../../core/components/Icons/PlayIcon";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import { useEffect } from "react";
 
 export const Videos = ({ id, type }: { id: number; type: string }) => {
   const {
     openVideoModal,
     setOpenVideoModal,
-    currentVideoIndex,
     setCurrentVideoIndex,
     selectedVideoKey,
     setSelectedVideoKey,
+    setVideos,
+    videos
   } = useMoviesStore();
 
-  const { data: videos, isLoading } = useVideos(type, id);
+
+  const { data, isLoading } = useVideos(type, id);
+  useEffect(() => {
+    setVideos(data)
+  }, [data])
   if (isLoading) return <LoadingSpinner />;
   if (!videos) return null;
 
@@ -52,8 +56,7 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
       {openVideoModal && (
         <ModalVideo
           selectedVideoKey={selectedVideoKey}
-          videos={videos}
-          currentVideoIndex={currentVideoIndex}
+          
         />
       )}
     </>

@@ -1,24 +1,25 @@
 import { useTranslation } from "react-i18next";
 import { CircleRating } from "../../core/components/Icons/CircleRating";
-import { PlayIcon } from "../../core/components/Icons/PlayIcon";
-import { ICrew } from "../../interfaces/ICrew";
 import { IMovie } from "../../interfaces/IMovie";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { Suspense } from 'react';
 import { LoadingSpinner } from "../../core/LoadingSpinner";
 import { useInitialScroll } from "../../hooks/useInitialScroll";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import { useVideos } from "../../hooks/useMovies";
+import { useMoviesStore } from "../../config/store/store";
+import { ModalVideo } from "./ModalVideo";
+
 type DetailsBannerProps = {
   data: IMovie;
+  type: string;
 };
 
-export const DetailsBanner = ({ data }: DetailsBannerProps) => {
+export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
   useInitialScroll();
-  const [bannerRef, isBannerVisible] = useIntersectionObserver({
-    threshold: 0.5
-  });
- 
   const { t } = useTranslation();
+  const { setOpenVideoModal, openVideoModal } = useMoviesStore()
+  const {data: videos} = useVideos(type, data?.id)
+  const trailer = videos?.results.find((video: {type: string}) => video.type === "Trailer") //guardamos solo el trailer
   const date = data?.release_date?.substring(0, 4);
   const newDate = data?.release_date?.split("-").reverse().join("-");
   const rate = data?.vote_average?.toString().substring(0, 3);
@@ -35,19 +36,19 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
   const directorNames = director?.map((crew) => crew.name).join(", ");
   const writerNames = writer?.map((crew) => crew.name).join(", ");
 
-
+const prueba = () => {
+setOpenVideoModal(true)
+}
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
-    <div ref={bannerRef}  className="relative w-full">
+    <div className="relative w-full">
       {/* Hero Banner Section */}
       <div 
           className={`
             after:content-['']
             after:bg-gradient-to-t after:from-light/100 after:via-light/50 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/2  dark:after:from-dark/100 dark:after:via-dark/50
-            relative w-full h-[100vh] min-h-[600px] transition-opacity duration-500 ${
-            isBannerVisible ? 'opacity-100' : 'opacity-0'
-          }`}
+            relative w-full h-[100vh] min-h-[600px] transition-opacity duration-500`}
         >
         <img
           className="w-full h-full object-cover object-center"
@@ -55,8 +56,8 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
           alt={data?.title}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/60 to-dark/50" /> 
-        <div className="absolute inset-0 z-20 flex items-center px-4 md:px-8 lg:px-16">
-          <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
+        <div className="absolute inset-0 flex items-center px-4 md:px-8 lg:px-16">
+          <div className="z-10 flex flex-col  lg:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
             <div className="w-48 md:w-64 lg:w-96 rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
               <img
                 className="w-full h-full object-cover"
@@ -93,12 +94,19 @@ export const DetailsBanner = ({ data }: DetailsBannerProps) => {
                 {data?.overview}
               </p>
               <div className="mt-4 md:mt-9 ">
-                <button className="flex items-center gap-2 bg-black/60 hover:bg-slate-700 transition-colors p-2 rounded-xl">
-                  {/* <PlayIcon /> */}
-                  {/* <IoPlayCircleOutline className="text-white/80 w-10 h-10 " /> */}
-                  Watch Trailer
+                <button className="flex items-center gap-2 bg-black/60 hover:bg-slate-700 transition-colors p-2 rounded-xl" onClick={prueba}>
+                   <IoPlayCircleOutline className="text-white/80 w-10 h-10 " /> 
+                  {t("watchTrailer")}
                 </button>
               </div>
+              {
+                openVideoModal && (
+                  <ModalVideo
+                    selectedVideoKey={trailer?.key}
+                  
+                  />
+                )
+              }
               
               
             </div>

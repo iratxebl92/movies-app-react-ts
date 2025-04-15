@@ -14,6 +14,7 @@ interface MoviesStore {
   personContentSelected: 'movie' | 'tv',
   filterDepartments: string,
   filterOptions: string,
+  videos: any,
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: 'week' | 'day') => void;
@@ -32,7 +33,7 @@ interface MoviesStore {
   setCurrentVideoIndex: (index: number) => void;
   selectedVideoKey: string;
   setSelectedVideoKey: (key: string) => void;
-  
+  setVideos: (videos: any) => void;
 
 }
 
@@ -47,6 +48,8 @@ export const useMoviesStore = create<MoviesStore>()(
       personContentSelected: 'movie',
       filterDepartments: 'all',
       filterOptions: 'vote_count.desc',
+      videos: null,
+      setVideos: (videos: any) => set({ videos: videos }),
       setLanguage: (lang) => {
         i18n.changeLanguage(lang); // Cambiamos el idioma en i18n
         set({ language: lang }); // Actualizamos el estado global

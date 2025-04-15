@@ -48,10 +48,10 @@ export const sortOptions = [
 
 
   export const detailsOptions = [
-    { key: "information", label: "Information", component: Information },
-    { key: "videos", label: "Videos", component: Videos },
-    { key: "images", label: "Backdrops", component: Backdrops },
-    { key: "reviews", label: "Reviews", component: Reviews},
+    { key: "information", label: "info", component: Information },
+    { key: "videos", label: "videos", component: Videos },
+    { key: "images", label: "images", component: Backdrops },
+    { key: "reviews", label: "reviews", component: Reviews},
   ]
  
   export const getBirthdayDate = (date: string): string[] => {

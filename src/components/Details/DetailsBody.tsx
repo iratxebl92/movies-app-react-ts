@@ -16,7 +16,7 @@ export const DetailsBody = () => {
 
   return (
     <div className="dark:bg-dark text-center align-center justify-center mx-auto">
-       <DetailsBanner data={data} />
+       <DetailsBanner data={data} type={type} />
        <CastSlider castData={data?.credits} status={status} />
        <CastModal castData={data?.credits} />
        <ContentShowcase data={data} type={type} />

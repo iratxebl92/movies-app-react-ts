@@ -4,21 +4,22 @@ import ReactPlayer from "react-player";
 import { useMoviesStore } from "../../config/store/store";
 import { IoMdClose } from "react-icons/io";
 
-export const ModalVideo = ({
-  selectedVideoKey,
-  videos,
-}: {
-  selectedVideoKey: string;
-  videos: any;
-}) => {
-  const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey } =
-    useMoviesStore();
+export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
+  
+    const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey, videos, setVideos } =
+      useMoviesStore();
+      
+      
+    const [prevDisabled, setPrevDisabled] = useState(false)
+    const [nextDisabled, setNextDisabled] = useState(false)
 
-
-  const [prevDisabled, setPrevDisabled] = useState(false)
-  const [nextDisabled, setNextDisabled] = useState(false)
 
   useEffect(() => {
+    console.log(videos, "videos en useEffect")
+  }, [videos])
+  
+  useEffect(() => {
+    if(!videos) return
     if(currentVideoIndex === 0){
       setPrevDisabled(true)
     }
@@ -42,20 +43,27 @@ export const ModalVideo = ({
       setSelectedVideoKey(prueba.key)
     }
   };
+  const submitCloseButton = () => {
+    setOpenVideoModal(false)
+    setCurrentVideoIndex(0)
+    setSelectedVideoKey(videos.results[0].key)
+    setVideos(null)
+  }
+  console.log(videos, "videos")
 
   return (
     <Transition appear show={openVideoModal} as={Fragment}>
       <Dialog
         as="div"
-        className="relative z-10"
+        className="relative z-20"
         onClose={() => setOpenVideoModal(false)}
       >
         <div className="fixed inset-0 bg-black bg-opacity-50" />
         <div className="fixed inset-0 flex items-center justify-center p-4">
           <div className="w-[80vw] max-h-[90vh] overflow-y-auto custom-scrollbar bg-black rounded-lg shadow-xl relative p-7">
             <button
-              onClick={() => setOpenVideoModal(false)}
-              className="absolute top-1 right-1 text-2xl font-bold text-gray-500 hover:text-gray-800"
+              onClick={() => submitCloseButton()}
+              className="absolute top-1 right-1 text-2xl font-bold text-gray-300 hover:cursor-pointer hover:text-gray-400"
             >
               <IoMdClose />
             </button>
@@ -66,20 +74,27 @@ export const ModalVideo = ({
                 className="!w-full !h-full"
               />
             </div>
-          <button
-            onClick={handlePrev}
-            className={`absolute left-2 top-1/2 text-white text-3xl ${prevDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={prevDisabled}
-          >
-            ←
-          </button>
-          <button
-            onClick={handleNext}
-            className={`absolute right-2 top-1/2 text-white text-3xl ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-            disabled={nextDisabled}
-          >
-            →
-          </button>
+            {
+              videos && (
+                <>
+                <button
+                onClick={handlePrev}
+                className={`absolute left-2 top-1/2 text-white text-3xl ${prevDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={prevDisabled}
+              >
+                ←
+              </button>
+              <button
+                onClick={handleNext}
+                className={`absolute right-2 top-1/2 text-white text-3xl ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={nextDisabled}
+              >
+                →
+              </button>
+              </>
+              )
+            }
+        
           </div>
         </div>
       </Dialog>

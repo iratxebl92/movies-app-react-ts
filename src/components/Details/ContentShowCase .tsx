@@ -3,6 +3,7 @@ import { useState } from "react"
 import { IMovie } from "../../interfaces/IMovie"
 import { detailsOptions } from "../../utils/filters"
 import { LoadingSpinner } from "../../core/LoadingSpinner"
+import { useTranslation } from "react-i18next"
 
 // Lazy loading de componentes
 const Season = lazy(() => import('./Season').then(module => ({ default: module.Season })))
@@ -24,6 +25,7 @@ type ContentShowcaseProps = {
 
 export const ContentShowcase  = ({data, type}: ContentShowcaseProps) => {
 const [selectedOption, setSelectedOption] = useState<any>('information')
+const {t} = useTranslation();
 
 const options: DetailOption[] = useMemo(() =>  type === "tv" 
 ? [...detailsOptions, {key: "seasons", label: "Seasons", component: Season}] 
@@ -52,7 +54,7 @@ return (
                         className="px-6 py-2 rounded-full focus:underline" 
                         key={option.key}
                     >
-                        {option.label}
+                        {t(option.label)}
                     </button>
                 ))
             }
