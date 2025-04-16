@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+import { Keywords } from '../components/Keywords';
 
 // Lazy components with proper type definitions
 export const lazyComponents = {
@@ -13,7 +14,9 @@ export const lazyComponents = {
   Person: lazy(() => import('../components/Person/Person').then(module => ({ 
     default: module.Person 
   }))),
-  
+  Keywords: lazy(() => import('../components/Keywords').then(module => ({ 
+    default: module.Keywords 
+  }))),
   Seasons: lazy(() => import('../components/Seasons/Seasons').then(module => ({ 
     default: module.Seasons 
   })))
@@ -39,6 +42,10 @@ export const routes: RouteConfig[] = [
   {
     path: '/person/:id',
     component: 'Person'
+  },
+  {
+    path: '/keywords/:idAndName',
+    component: 'Keywords'
   },
   {
     path: '/tv/id/seasons/2',

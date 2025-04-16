@@ -2,7 +2,7 @@ import { usePersonSocialMedia } from "../../hooks/useMovies";
 import { socialMedia } from "../../utils/filters";
 
 export const SocialMedia = ({ id }) => {
-  const { data, success } = usePersonSocialMedia(id);
+  const { data } = usePersonSocialMedia(id);
 
   
   // Si data no trae nada no hace todo lo de fuera del if

@@ -15,7 +15,6 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
 
 
   useEffect(() => {
-    console.log(videos, "videos en useEffect")
   }, [videos])
   
   useEffect(() => {
@@ -49,7 +48,6 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
     setSelectedVideoKey(videos.results[0].key)
     setVideos(null)
   }
-  console.log(videos, "videos")
 
   return (
     <Transition appear show={openVideoModal} as={Fragment}>

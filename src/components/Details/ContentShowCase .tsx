@@ -4,10 +4,11 @@ import { IMovie } from "../../interfaces/IMovie"
 import { detailsOptions } from "../../utils/filters"
 import { LoadingSpinner } from "../../core/LoadingSpinner"
 import { useTranslation } from "react-i18next"
+import { DetailsInformation } from "./DetailsInformation"
 
 // Lazy loading de componentes
 const Season = lazy(() => import('./Season').then(module => ({ default: module.Season })))
-const Information = lazy(() => import('./Information').then(module => ({ default: module.Information })))
+const Information = lazy(() => import('./DetailsInformation').then(module => ({ default: module.DetailsInformation })))
 const Videos = lazy(() => import('./Videos').then(module => ({ default: module.Videos })))
 const Backdrops = lazy(() => import('./Backdrops').then(module => ({ default: module.Backdrops })))
 const Reviews = lazy(() => import('./Reviews').then(module => ({ default: module.Reviews })))
@@ -31,8 +32,6 @@ const options: DetailOption[] = useMemo(() =>  type === "tv"
 ? [...detailsOptions, {key: "seasons", label: "Seasons", component: Season}] 
 : detailsOptions, [type])
 if(!data) return null
-console.log(data.id, "IDDD")
-
 
 /*
 El error dice Rendered more hooks than during the previous render y esto está relacionado con las reglas de los hooks. Antes tenia el if(!data) encima del useMemo y esto significa que en algunos renderizados el hook useMemo no se ejecutará (cuando data es null). En otros renderizados sí se ejecutará (cuando data tiene valor). React requiere que los hooks se ejecuten en el mismo orden y cantidad en cada renderizado
@@ -62,7 +61,7 @@ return (
         <Suspense fallback={<LoadingSpinner />}>
         <div className="pb-10">
             {
-                selectedOption === 'information' ?  <Information/> :
+                selectedOption === 'information' ?  <Information data={data} type={type} /> :
                 selectedOption === 'videos' ? <Videos id={data.id} type={type}/> :
                 selectedOption === 'images' ? <Backdrops/> :
                 selectedOption === 'reviews' ? <Reviews/> :

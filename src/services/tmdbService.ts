@@ -13,5 +13,6 @@ export const getSimmilar = (content: string, id: number) => `/movie/674/similar`
 export const getPersonContent = (content: string, id: number) => `/person/${id}/${content}_credits`;
 export const getPersonImages = (id:number) => `https://api.themoviedb.org/3/person/${id}/images`;
 export const getPersonInformation = (id: number, language: string) => `https://api.themoviedb.org/3/person/${id}?language=${language}`;
-export const getPersonSocialMedia = (id:number) => `https://api.themoviedb.org/3/person/${id}/external_ids`
-
+export const getPersonSocialMedia = (id:number) => `https://api.themoviedb.org/3/person/${id}/external_ids`;
+export const getKeywords = (content: string,id: number) => `https://api.themoviedb.org/3/${content}/${id}/keywords`;
+export const getContentKeywords = (content: string, id: string) => `https://api.themoviedb.org/3/discover/${content}?with_keywords=${id}`;

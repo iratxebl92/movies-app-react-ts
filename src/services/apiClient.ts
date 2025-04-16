@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { BASE_URL } from "../utils/constants";
-import { getTrending, getTopRated, getPopular, getDetails, getCast, getImages, getPersonContent, getPersonImages, getPersonInformation, getPersonSocialMedia, getDetailsAndCast, getVideo } from "./tmdbService";
+import { getTrending, getTopRated, getPopular, getImages, getPersonContent, getPersonImages, getPersonInformation, getPersonSocialMedia, getDetailsAndCast, getVideo, getKeywords, getContentKeywords } from "./tmdbService";
 
 const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OGQyNTEwOTFkMDg5MmQzMWI2NTk4YzcyMDI2NDA3MiIsIm5iZiI6MTY0NzAyMDE5MS42MTMsInN1YiI6IjYyMmI4ODlmNTMyYWNiMDA2Yzc5ODE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.APN2znN3b6fwwbwqmA5-i3Sx1PwCvbI9MNOhoLAvbzE';
 
@@ -11,6 +11,7 @@ export const apiBase: AxiosInstance = axios.create({
     Authorization: `Bearer ${API_KEY}`,
   },
 });
+
 
 const findTrendingMovies = async (content:string, language: string) => {
   const response = await apiBase.get(getTrending( content,  language));
@@ -55,6 +56,16 @@ const findVideos = async(content:string, id: number) => {
   const response = await apiBase.get(getVideo(content, id));
   return response.data;
 }
+const findKeywords = async(content:string, id: number) => {
+  const response = await apiBase.get(getKeywords(content, id));
+  return response.data;
+}
+const findContentKeywords = async(content:string, id: string) => {
+  const response = await apiBase.get(getContentKeywords(content, id));
+  return response.data;
+}
+
+
 
 const apiClient = {
   findTrendingMovies,
@@ -66,7 +77,9 @@ const apiClient = {
   findPersonInformation,
   findPersonSocialMedia,
   findDetailsAndCast,
-  findVideos
+  findVideos,
+  findKeywords,
+  findContentKeywords
 };
 
 export default apiClient;

@@ -72,3 +72,16 @@ export const useVideos = (content:string, id: number) => {
   });
 }
 
+export const useKeywords = (content:string, id: number) => {
+  return useQuery({
+    queryKey: ["keywords", content, id],
+    queryFn: () => apiClient.findKeywords(content, id),
+  });
+}
+export const useContentKeywords = (content:string, id: string) => {
+  return useQuery({
+    queryKey: ["contentKeywords", content, id],
+    queryFn: () => apiClient.findContentKeywords(content, id),
+  });
+}
+

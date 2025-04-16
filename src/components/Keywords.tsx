@@ -1,0 +1,56 @@
+import { useParams } from "react-router-dom"
+import { useContentKeywords } from "../hooks/useMovies"
+import { Card } from "./Card";
+import { IMovie } from "../interfaces/IMovie";
+import { SwitchTab } from "./SwitchTab";
+import { useMoviesStore } from "../config/store/store";
+
+
+export const Keywords = () => {
+  const { idAndName } = useParams(); // ${id}-${name.replace(/\s+/g, "-")}
+
+  if(!idAndName) return;
+
+  const [id, ...rest] = idAndName.split("-"); //Mirar abajo apuntes
+
+  const name = rest.join(" ");
+
+    const {language, keywordsOption, keywordsSelected} = useMoviesStore()
+    const {data, status} = useContentKeywords(keywordsSelected, id) 
+    const results = data?.results
+    const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
+
+    const onTabChange = (tab: string) => {
+      keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
+    };
+  return (
+    <div className="mt-7">
+      <p className="mb-10 text-3xl font-semibold text-center"> Results matching : <span className="font-bold"> {name} </span> </p>
+      <div className="flex justify-center">
+      <SwitchTab options={options} onTabChange={onTabChange} />
+      </div>
+    <div className="flex flex-wrap ml-24">
+    {
+      results?.map((result:IMovie) => (
+        <Card movie={result} style={{width: '200px', margin: "20px"}} />
+      ))
+    }
+    </div>
+    </div>
+  )
+}
+/*
+const { idAndName } = useParams();  --> trae todo lo de  ${id}-${name.replace(/\s+/g, "-")} por ejemplo 14909-alien-invasion
+Tenemos que separar el id y el name, para ello hacemos:
+  const [id, ...rest] = idAndName.split("-"); --> crea una const con lo de la izq del "-" y otra con la derecha del "-". Por ejemplo const id = 14909 y const rest = alien,invasion
+  Esto es lo mismo que hacer 
+      const parts = idAndName.split("-"); --> ["14909", "alien", "invasion"]
+      const [id, ...rest] = parts;
+    nos estamos ahorrando los pasos, desestructurando directamente con const [id, ...rest] = idAndName.split("-");
+    id toma el primer valor del array.
+    ...rest (con los ..., llamado rest operator) toma el resto de los elementos como un array nuevo.
+    Si pusieramos [id, rest] entonces id cogeria el 1er elemento y rest SOLO el segundo elemento
+Ahora hay que unir los elementos del array rest separandolos por un espacio -->const name = alien invasion
+
+
+*/

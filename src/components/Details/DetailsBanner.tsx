@@ -20,22 +20,8 @@ export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
   const { setOpenVideoModal, openVideoModal } = useMoviesStore()
   const {data: videos} = useVideos(type, data?.id)
   const trailer = videos?.results.find((video: {type: string}) => video.type === "Trailer") //guardamos solo el trailer
-  const date = data?.release_date?.substring(0, 4);
-  const newDate = data?.release_date?.split("-").reverse().join("-");
   const rate = data?.vote_average?.toString().substring(0, 3);
-  const director = data?.credits?.crew?.filter(
-    (crew) => crew.job === "Director"
-  );
-  const writer = data?.credits?.crew?.filter(
-    (crew) => crew.job === "Screenplay"
-  );
-
-
-
-  // Extraemos los nombres del director y escritor
-  const directorNames = director?.map((crew) => crew.name).join(", ");
-  const writerNames = writer?.map((crew) => crew.name).join(", ");
-
+  const date = data?.release_date?.substring(0, 4);
 const prueba = () => {
 setOpenVideoModal(true)
 }
@@ -113,61 +99,6 @@ setOpenVideoModal(true)
           </div>
         </div>
       </div>
-
-      {/* Details Section */}
-      {/* <div className="container mx-auto px-4 md:px-8 lg:px-16 py-8 md:py-12 max-w-[1920px]">
-        <div className="grid grid-cols-1 gap-8 md:gap-12">
-          <div>
-            <div className="text-start text-base leading-10">
-              <div className="flex flex-row mt-6 gap-4">
-                <p>
-                  <span className="font-bold dark:text-textDark">
-                    {t("status")}
-                  </span>{" "}
-                  <span className="text-gray-500 dark:text-gray-300">
-                    {data?.status}
-                  </span>
-                </p>
-                <p>
-                  <span className="font-bold dark:text-textDark">
-                    {t("releaseDate")}
-                  </span>{" "}
-                  <span className="text-gray-500 dark:text-gray-300">
-                    {newDate}
-                  </span>
-                </p>
-                <p>
-                  <span className="font-bold dark:text-textDark">
-                    {t("runtime")}
-                  </span>{" "}
-                  <span className="text-gray-500 dark:text-gray-300">
-                    {data?.runtime} min
-                  </span>
-                </p>
-              </div>
-              <hr className="lg:mr-20" />
-              <p>
-                <span className="font-bold dark:text-textDark">
-                  {t("director")}
-                </span>{" "}
-                <span className="text-gray-500 dark:text-gray-300">
-                  {directorNames || "N/A"}
-                </span>
-              </p>
-              <hr className="lg:mr-20" />
-              <p>
-                <span className="font-bold dark:text-textDark">
-                  {t("writer")}
-                </span>{" "}
-                <span className="text-gray-500 dark:text-gray-300">
-                  {writerNames || "N/A"}
-                </span>
-              </p>
-              <hr className="lg:mr-20" />
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>
     </Suspense>
   );

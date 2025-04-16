@@ -38,6 +38,7 @@ i18n
           watchAll: "Watch All",
           watchLatest: "Watch Latest",
           watchOldest: "Watch Oldest",
+          keywords: "Keywords"
           
 
         },
@@ -72,6 +73,8 @@ i18n
           watchAll: "Ver Todo",
           watchLatest: "Ver Último",
           watchOldest: "Ver Antiguo",
+          keywords: "Palabras clave"
+
           
         },
       },

@@ -10,6 +10,7 @@ interface MoviesStore {
   language: string;
   topRatedSelected: ContentType;
   popularSelected: ContentType;
+  keywordsSelected: ContentType;
   trendingSelected: 'week' | 'day';
   personContentSelected: 'movie' | 'tv',
   filterDepartments: string,
@@ -19,6 +20,7 @@ interface MoviesStore {
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: 'week' | 'day') => void;
   popularOption: (content: ContentType) => void;
+  keywordsOption: (content: ContentType) => void;
   personContentOption: (content: ContentType) => void;
   toggleTheme: () => void;
   openCastModal: boolean;
@@ -45,6 +47,7 @@ export const useMoviesStore = create<MoviesStore>()(
       trendingSelected: 'week',
       topRatedSelected: 'movie',
       popularSelected: 'movie',
+      keywordsSelected: 'movie',
       personContentSelected: 'movie',
       filterDepartments: 'all',
       filterOptions: 'vote_count.desc',
@@ -56,6 +59,7 @@ export const useMoviesStore = create<MoviesStore>()(
       },
       topRatedOption: (content) => set({ topRatedSelected: content }),
       popularOption: (content) => set({ popularSelected: content }),
+      keywordsOption: (content) => set({ keywordsSelected: content }),
       trendingOption: (content) => set({ trendingSelected: content }),
       personContentOption: (content) => set({ personContentSelected: content }),
       toggleTheme: () => set((state) => {
