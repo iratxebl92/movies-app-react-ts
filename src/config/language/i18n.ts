@@ -38,7 +38,8 @@ i18n
           watchAll: "Watch All",
           watchLatest: "Watch Latest",
           watchOldest: "Watch Oldest",
-          keywords: "Keywords"
+          keywords: "Keywords",
+          resultsKeywordsTitle: "Results matching:",
           
 
         },
@@ -73,7 +74,8 @@ i18n
           watchAll: "Ver Todo",
           watchLatest: "Ver Último",
           watchOldest: "Ver Antiguo",
-          keywords: "Palabras clave"
+          keywords: "Palabras clave",
+          resultsKeywordsTitle: "Resultados que coinciden con:",
 
           
         },

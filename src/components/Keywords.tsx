@@ -4,9 +4,12 @@ import { Card } from "./Card";
 import { IMovie } from "../interfaces/IMovie";
 import { SwitchTab } from "./SwitchTab";
 import { useMoviesStore } from "../config/store/store";
+import MovieSkeletonList from "./MovieSkeletonList";
+import { useTranslation } from "react-i18next";
 
 
 export const Keywords = () => {
+  const {t} = useTranslation()
   const { idAndName } = useParams(); // ${id}-${name.replace(/\s+/g, "-")}
 
   if(!idAndName) return;
@@ -17,24 +20,34 @@ export const Keywords = () => {
 
     const {language, keywordsOption, keywordsSelected} = useMoviesStore()
     const {data, status} = useContentKeywords(keywordsSelected, id) 
+    
     const results = data?.results
     const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
 
     const onTabChange = (tab: string) => {
       keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
     };
+
+    const isLoading = status === 'loading' || status === 'pending';
+
   return (
     <div className="mt-7">
-      <p className="mb-10 text-3xl font-semibold text-center"> Results matching : <span className="font-bold"> {name} </span> </p>
+      <p className="mb-10 text-3xl font-semibold text-center"> {t("resultsKeywordsTitle")} <span className="font-bold"> {name} </span> </p>
       <div className="flex justify-center">
       <SwitchTab options={options} onTabChange={onTabChange} />
       </div>
     <div className="flex flex-wrap ml-24">
-    {
+      {
+        isLoading ? (
+         <MovieSkeletonList/>
+        )
+        :
+    
       results?.map((result:IMovie) => (
         <Card movie={result} style={{width: '200px', margin: "20px"}} />
       ))
-    }
+    
+      }
     </div>
     </div>
   )
