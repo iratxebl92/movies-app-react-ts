@@ -50,7 +50,9 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
   }
 
   return (
-    <Transition appear show={openVideoModal} as={Fragment}>
+    <Transition appear show={openVideoModal} 
+    as={Fragment}
+    >
       <Dialog
         as="div"
         className="relative z-20"

@@ -1,8 +1,11 @@
 import { lazy } from 'react'
-import { Keywords } from '../components/Keywords';
+import { useLocation } from 'react-router-dom'
+
+
 
 // Lazy components with proper type definitions
 export const lazyComponents = {
+ 
   Home: lazy(() => import('../pages/Home/Home').then(module => ({ 
     default: module.Home 
   }))),
@@ -19,7 +22,13 @@ export const lazyComponents = {
   }))),
   Seasons: lazy(() => import('../components/Seasons/Seasons').then(module => ({ 
     default: module.Seasons 
-  })))
+  }))),
+  Movies: lazy(() => import('../components/Movies').then(module => ({ 
+    default: module.Movies 
+  }))),
+  TvShows: lazy(() => import('../components/TvShows').then(module => ({ 
+    default: module.TvShows 
+  }))),
 } as const
 
 // Type for route configuration
@@ -50,5 +59,13 @@ export const routes: RouteConfig[] = [
   {
     path: '/tv/id/seasons/2',
     component: 'Seasons'
+  },
+  {
+    path: '/movies',
+    component: 'Movies'
+  },
+  {
+    path: '/tv-shows',
+    component: 'TvShows'
   }
 ] 

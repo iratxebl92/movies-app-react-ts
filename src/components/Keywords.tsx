@@ -6,12 +6,13 @@ import { SwitchTab } from "./SwitchTab";
 import { useMoviesStore } from "../config/store/store";
 import MovieSkeletonList from "./MovieSkeletonList";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence, motion } from "motion/react"
+import { useState } from "react";
 
 
 export const Keywords = () => {
   const {t} = useTranslation()
   const { idAndName } = useParams(); // ${id}-${name.replace(/\s+/g, "-")}
-
   if(!idAndName) return;
 
   const [id, ...rest] = idAndName.split("-"); //Mirar abajo apuntes
@@ -30,7 +31,22 @@ export const Keywords = () => {
 
     const isLoading = status === 'loading' || status === 'pending';
 
+    const opacityMotionTransition = {
+      variants: {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 }
+      },
+      initial: "hidden",
+      animate: "visible",
+      exit: "hidden",
+      transition: { duration: 0.250 }
+    } as const;
+
   return (
+    <AnimatePresence initial={false}>
+      <motion.div key={keywordsSelected} {...opacityMotionTransition}>
+
+     
     <div className="mt-7">
       <p className="mb-10 text-3xl font-semibold text-center"> {t("resultsKeywordsTitle")} <span className="font-bold"> {name} </span> </p>
       <div className="flex justify-center">
@@ -50,6 +66,9 @@ export const Keywords = () => {
       }
     </div>
     </div>
+    </motion.div>
+
+        </AnimatePresence>
   )
 }
 /*

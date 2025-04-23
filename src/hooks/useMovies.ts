@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import apiClient from "../services/apiClient";
 
 
@@ -84,4 +84,33 @@ export const useContentKeywords = (content:string, id: string) => {
     queryFn: () => apiClient.findContentKeywords(content, id),
   });
 }
+export const useMovies = (content:string, language: string, page: number) => {
+  console.log(page, "page en useMovies")
+  return useQuery({
+    queryKey: ["movies", content, language, page],
+    queryFn: () => apiClient.findMovies(content, language, page),
+    placeholderData: keepPreviousData,
+    staleTime: 5000,
+  });
+}
 
+/*
+La queryKey es como el "ID" de los datos que estás pidiendo. React Query la usa para:
+
+Saber si ya tiene esos datos en caché.
+
+Decidir si necesita hacer una nueva petición o no.
+
+Controlar actualizaciones, revalidaciones, etc.
+
+
+Cada vez que page cambia (por ejemplo, al hacer setPage(prev => prev + 1)):
+
+React vuelve a renderizar tu componente.
+
+En esa nueva renderización, useQuery se ejecuta de nuevo.
+
+Como la queryKey ahora es diferente (por ejemplo, ["movies", "es", 2] en vez de ["movies", "es", 1]), React Query la considera una query nueva.
+
+Como esa combinación no está en caché, React Query dispara queryFn (tu apiClient.findMovies(...)) para traer los datos de esa página.
+*/
