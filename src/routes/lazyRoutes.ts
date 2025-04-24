@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import { useLocation } from 'react-router-dom'
+import { TvShows } from '../components/AllContent';
 
 
 
@@ -23,11 +24,11 @@ export const lazyComponents = {
   Seasons: lazy(() => import('../components/Seasons/Seasons').then(module => ({ 
     default: module.Seasons 
   }))),
-  Movies: lazy(() => import('../components/Movies').then(module => ({ 
-    default: module.Movies 
+  Movies: lazy(() => import('../components/AllContent').then(module => ({ 
+    default: module.AllContent 
   }))),
-  TvShows: lazy(() => import('../components/TvShows').then(module => ({ 
-    default: module.TvShows 
+  TvShows: lazy(() => import('../components/AllContent').then(module => ({ 
+    default: module.AllContent 
   }))),
 } as const
 
@@ -62,7 +63,7 @@ export const routes: RouteConfig[] = [
   },
   {
     path: '/movies',
-    component: 'Movies'
+    component: 'TvShows'
   },
   {
     path: '/tv-shows',

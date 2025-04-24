@@ -89,7 +89,7 @@ export const useMovies = (content:string, language: string, page: number) => {
   return useQuery({
     queryKey: ["movies", content, language, page],
     queryFn: () => apiClient.findMovies(content, language, page),
-    placeholderData: keepPreviousData,
+    placeholderData: keepPreviousData, // mantiene datos anteriores mientras carga los nuevos
     staleTime: 5000,
   });
 }

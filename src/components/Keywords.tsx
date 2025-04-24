@@ -7,7 +7,7 @@ import { useMoviesStore } from "../config/store/store";
 import MovieSkeletonList from "./MovieSkeletonList";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react"
-import { useState } from "react";
+
 
 
 export const Keywords = () => {
@@ -20,7 +20,7 @@ export const Keywords = () => {
   const name = rest.join(" ");
 
     const {language, keywordsOption, keywordsSelected} = useMoviesStore()
-    const {data, status} = useContentKeywords(keywordsSelected, id) 
+    const {data, status, isLoading} = useContentKeywords(keywordsSelected, id) 
     
     const results = data?.results
     const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
@@ -29,7 +29,7 @@ export const Keywords = () => {
       keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
     };
 
-    const isLoading = status === 'loading' || status === 'pending';
+
 
     const opacityMotionTransition = {
       variants: {

@@ -16,6 +16,6 @@ export const getPersonInformation = (id: number, language: string) => `https://a
 export const getPersonSocialMedia = (id:number) => `https://api.themoviedb.org/3/person/${id}/external_ids`;
 export const getKeywords = (content: string,id: number) => `https://api.themoviedb.org/3/${content}/${id}/keywords`;
 export const getContentKeywords = (content: string, id: string) => `https://api.themoviedb.org/3/discover/${content}?with_keywords=${id}`;
-export const getMovies = (content: string,  language: string, page: number) => `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&page=${page}&sort_by=popularity.desc&9659c14f30068211d6925230b38cb5d5=&language=${language}`;
+export const getMovies = (content: string,  language: string, page: number) => `https://api.themoviedb.org/3/discover/${content}?include_adult=false&include_video=false&page=${page}&sort_by=popularity.desc&9659c14f30068211d6925230b38cb5d5=&language=${language}`;
 
 

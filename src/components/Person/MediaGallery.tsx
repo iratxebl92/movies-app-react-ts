@@ -9,7 +9,8 @@ import { sortDepartaments, sortOptions } from "../../utils/filters";
 export const MediaGallery = () => {
   const {id} = useParams()
   const { personContentSelected, filterDepartments, filterOptions } = useMoviesStore();
-  const { data, status } = usePersonMovies(personContentSelected, id);
+  const { data, status, isLoading } = usePersonMovies(personContentSelected, id);
+  console.log(isLoading, "isLoading person")
   const [visibleMovies, setVisibleMovies] = useState(20); // Mostramos inicialmente las peliculas o series que decidamos
   const gallery = filterDepartments === "acting" ? data?.cast :  [...(data?.cast || []), ...(data?.crew || [])]; //Unimos ambos arrays con spread operator
   const disabled = useMemo(() => visibleMovies >= gallery?.length, [visibleMovies, gallery?.length]); //Añadimos gallery.length a la dependencia para que cuando estén los datos de la API cargados lo recalcule, sino siempre será mayor viibleMovies ya que de primeras gallery.length será 0 
