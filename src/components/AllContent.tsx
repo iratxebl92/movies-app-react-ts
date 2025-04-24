@@ -67,16 +67,17 @@ export const AllContent = () => {
 
   return (
     <>
-      <AnimatePresence mode="wait" initial={true}>
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={page} // Clave para re-renderizar con animación al cambiar de página
           {...opacityMotionTransition}
-          style={{ minHeight: "600px" }}
+          
+          className=""
         >
-          <div className="flex flex-wrap ml-24 relative">
+          <div className="flex flex-wrap ml-24">
             {isFetching || isLoading ? (
               // Si se está haciendo fetch entre páginas, mostrar skeleton encima
-              <div className="absolute top-0 right-0 p-2">
+              <div className="h-full w-full p-2">
                 <MovieSkeletonList />
               </div>
             ) : (
@@ -94,7 +95,7 @@ export const AllContent = () => {
       </AnimatePresence>
 
       {/* Renderizado del componente de paginación */}
-      <div className="flex justify-center py-11">
+      <div className="flex justify-center py-11 ">
 
       <Pagination
         handlePageClick={handleChangePage} // Función para manejar cambio de página
