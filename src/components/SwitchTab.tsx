@@ -1,6 +1,5 @@
 import { useState } from "react";
-import cn from "clsx"; // ✅ Funciona correctamente
-import { useMoviesStore } from "../config/store/store";
+import cn from "clsx"; 
 
 type SwitchTabProps = {
   options: string[];
@@ -10,6 +9,7 @@ type SwitchTabProps = {
   buttonClassName?: string;
   activeButtonClassName?: string;
   activeBgClassName?: string;
+  selectedIndex: number;
 };
 
 export const SwitchTab = ({
@@ -20,9 +20,9 @@ export const SwitchTab = ({
   buttonClassName,
   activeButtonClassName,
   activeBgClassName,
+  selectedIndex
 }: SwitchTabProps) => {
   const [selected, setSelected] = useState<number>(0);
-  const {personContentSelected, trendingSelected, topRatedSelected} = useMoviesStore()
   const defaultClasses = {
     wrapper: "flex justify-end",
     container:
@@ -33,7 +33,7 @@ export const SwitchTab = ({
     activeBg:
       "absolute top-0 left-0 h-full w-1/2 bg-details rounded-2xl transition-transform duration-300 ease-in-out",
   };
-
+console.log(selected, "selected")
   return (
     <div className={cn(defaultClasses.wrapper, className)}>
       <div className={cn(defaultClasses.container, containerClassName)}>
@@ -41,7 +41,7 @@ export const SwitchTab = ({
           className={cn(
             defaultClasses.activeBg,
             activeBgClassName,
-            selected === 1 ? "translate-x-full" : "translate-x-0"
+            selectedIndex === 1 ? "translate-x-full" : "translate-x-0"
           )}
         ></div>
 
@@ -55,7 +55,7 @@ export const SwitchTab = ({
             className={cn(
               defaultClasses.button,
               buttonClassName,
-              selected === index && cn(defaultClasses.activeButton, activeButtonClassName)
+              selectedIndex === index && cn(defaultClasses.activeButton, activeButtonClassName)
             )}
           >
             {option}

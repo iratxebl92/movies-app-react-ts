@@ -10,7 +10,9 @@ import { AnimatePresence, motion } from "motion/react"
 
 
 
+
 export const Keywords = () => {
+   const {keywordsOption, keywordsSelected, language} = useMoviesStore()
   const {t} = useTranslation()
   const { idAndName } = useParams(); // ${id}-${name.replace(/\s+/g, "-")}
   if(!idAndName) return;
@@ -18,12 +20,12 @@ export const Keywords = () => {
   const [id, ...rest] = idAndName.split("-"); //Mirar abajo apuntes
 
   const name = rest.join(" ");
-
-    const {language, keywordsOption, keywordsSelected} = useMoviesStore()
     const {data, status, isLoading} = useContentKeywords(keywordsSelected, id) 
     
     const results = data?.results
     const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
+
+    const selectedIndex = keywordsSelected === "movie" ? 0 : 1;
 
     const onTabChange = (tab: string) => {
       keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
@@ -44,13 +46,12 @@ export const Keywords = () => {
 
   return (
     <AnimatePresence initial={false}>
-      <motion.div key={keywordsSelected} {...opacityMotionTransition}>
-
-     
+      <motion.div key={keywordsOption} {...opacityMotionTransition}>
+    
     <div className="mt-7">
       <p className="mb-10 text-3xl font-semibold text-center"> {t("resultsKeywordsTitle")} <span className="font-bold"> {name} </span> </p>
       <div className="flex justify-center">
-      <SwitchTab options={options} onTabChange={onTabChange} />
+      <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />
       </div>
     <div className="flex flex-wrap ml-24">
       {

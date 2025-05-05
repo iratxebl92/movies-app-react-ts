@@ -5,10 +5,11 @@ import { Card } from "../Card";
 import { useParams } from "react-router-dom";
 import { SortSelector } from "../SortSelector";
 import { sortDepartaments, sortOptions } from "../../utils/filters";
+import { SwitchTab } from "../SwitchTab";
 
 export const MediaGallery = () => {
   const {id} = useParams()
-  const { personContentSelected, filterDepartments, filterOptions } = useMoviesStore();
+  const { personContentSelected, filterDepartments, filterOptions, personContentOption } = useMoviesStore();
   const { data, status, isLoading } = usePersonMovies(personContentSelected, id);
   console.log(isLoading, "isLoading person")
   const [visibleMovies, setVisibleMovies] = useState(20); // Mostramos inicialmente las peliculas o series que decidamos
@@ -37,10 +38,21 @@ export const MediaGallery = () => {
     }
     return false;
   });
-  
-  
+  const onTabChange = (tab: string) => {
+    personContentOption(
+      tab === "Películas" || tab === "Movies" ? "movie" : "tv"
+    );
+  };
+   const selectedIndex = personContentSelected === "movie" ? 0 : 1;
   return (
     <>
+          <SwitchTab
+        options={["Movies", "Tv Show"]}
+        onTabChange={onTabChange}
+        className="flex justify-center py-10"
+        selectedIndex={selectedIndex}
+        
+      />
           <div className="flex justify-end gap-6 mb-8">
         <SortSelector options={sortOptions} id="options"  />
         <SortSelector options={sortDepartaments} id="departaments" />

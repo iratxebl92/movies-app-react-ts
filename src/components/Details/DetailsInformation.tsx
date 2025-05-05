@@ -93,7 +93,7 @@ export const DetailsInformation = ({data, type}: DetailsInformationProps) => {
         <p className="text-start">{t("keywords")}</p>
         <div className="flex flex-wrap">
           {
-            keywords.keywords.map(({name, id}: {name: string, id: string}) => (
+            keywords?.keywords?.map(({name, id}: {name: string, id: string}) => (
               <Link key={id}  to={`/keywords/${id}-${name.replace(/\s+/g, "-")}`} className="rounded-lg border-[1px] border-gray-700 p-1 text-[.75rem] m-1 bg-slate-200 hover:bg-slate-300 text-black dark:bg-gray-500 dark:text-white dark:hover:bg-gray-600">
                  {name}
               </Link>
