@@ -65,7 +65,6 @@ const findContentKeywords = async(content:string, id: string) => {
   return response.data;
 }
 const findMovies = async(content:string, language: string, page: number) => {
-  console.log(page, "page en findMovies")
   const response = await apiBase.get(getMovies(content, language, page));
   return response.data;
 }

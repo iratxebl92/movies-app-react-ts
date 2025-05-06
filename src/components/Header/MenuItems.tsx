@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
 export const MenuItems = () => {
-  const { theme, toggleTheme, language, setLanguage } = useMoviesStore();
+  const { toggleTheme, language, setLanguage } = useMoviesStore();
   const { i18n, t } = useTranslation();
 
   // Sincronizar el estado `language` con i18next al montar
@@ -57,13 +57,17 @@ export const MenuItems = () => {
           {t("tv")}
         </NavLink>
         <li className="dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details">
-          <button onClick={toggleTheme}>
-            {theme === "light" ? (
-              <FaMoon className="inline hover:cursor-pointer " />
-            ) : (
-              <IoSunnyOutline className="inline hover:cursor-pointer " />
-            )}
-          </button>
+          <div className="dark:hidden">
+            <button  onClick={() => toggleTheme('dark')}>
+            <FaMoon className="inline hover:cursor-pointer" />
+            </button>
+
+          </div>
+          <div className="hidden dark:flex" >
+          <button onClick={() => toggleTheme('light')} >
+            <IoSunnyOutline className="inline hover:cursor-pointer"  />
+            </button>
+          </div>
         </li>
         <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-detail">
           <select

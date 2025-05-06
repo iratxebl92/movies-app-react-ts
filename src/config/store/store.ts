@@ -16,13 +16,14 @@ interface MoviesStore {
   filterDepartments: string,
   filterOptions: string,
   videos: any,
+  setTheme: (theme: any | undefined) => void;
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: 'week' | 'day') => void;
   popularOption: (content: ContentType) => void;
   keywordsOption: (content: ContentType) => void;
   personContentOption: (content: ContentType) => void;
-  toggleTheme: () => void;
+  toggleTheme: (content:any) => void;
   openCastModal: boolean;
   openVideoModal: boolean;
   setOpenCastModal: (open: boolean) => void;
@@ -42,7 +43,7 @@ interface MoviesStore {
 export const useMoviesStore = create<MoviesStore>()(
   persist(
     (set) => ({
-      theme: typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
+      theme:'dark' ,
       language: i18n.language, // Inicializamos con el idioma actual
       trendingSelected: 'week',
       topRatedSelected: 'movie',
@@ -53,6 +54,7 @@ export const useMoviesStore = create<MoviesStore>()(
       filterOptions: 'vote_count.desc',
       videos: null,
       setVideos: (videos: any) => set({ videos: videos }),
+      setTheme: (theme) => set({theme}),
       setLanguage: (lang) => {
         i18n.changeLanguage(lang); // Cambiamos el idioma en i18n
         set({ language: lang }); // Actualizamos el estado global
@@ -62,15 +64,7 @@ export const useMoviesStore = create<MoviesStore>()(
       keywordsOption: (content) => set({ keywordsSelected: content }),
       trendingOption: (content) => set({ trendingSelected: content }),
       personContentOption: (content) => set({ personContentSelected: content }),
-      toggleTheme: () => set((state) => {
-        const newTheme = state.theme === 'light' ? 'dark' : 'light';
-        if (newTheme === 'dark') {
-          document.querySelector('html')?.classList.add('dark');
-        } else {
-          document.querySelector('html')?.classList.remove('dark');
-        }
-        return { theme: newTheme };
-      }),
+      toggleTheme:(content) => set({theme:content}),
       openCastModal: false,
       openVideoModal: false,
       setOpenCastModal: (open: boolean) => set({ openCastModal: open }),

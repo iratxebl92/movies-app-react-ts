@@ -33,7 +33,7 @@ export const SwitchTab = ({
     activeBg:
       "absolute top-0 left-0 h-full w-1/2 bg-details rounded-2xl transition-transform duration-300 ease-in-out",
   };
-console.log(selected, "selected")
+
   return (
     <div className={cn(defaultClasses.wrapper, className)}>
       <div className={cn(defaultClasses.container, containerClassName)}>

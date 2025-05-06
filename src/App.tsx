@@ -1,10 +1,22 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
 import { AppRouter } from "./AppRouter";
+import { useMoviesStore } from "./config/store/store";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const {theme} = useMoviesStore()
+  console.log(theme, "theme en App")
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.querySelector('html')?.classList.add('dark');
+    } else {
+      document.querySelector('html')?.classList.remove('dark');
+    }
+  }, [theme])
+  
   return (
     <QueryClientProvider client={queryClient}>
        <AppRouter/>

@@ -18,7 +18,6 @@ export const MoviesApp = () => {
 
     return () => clearTimeout(timeout);
   }, [location.pathname]);
-console.log(location.pathname)
   return (
     <div className="dark:bg-dark dark:text-white bg-light min-h-screen">
       <Header />

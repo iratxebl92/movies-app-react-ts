@@ -85,7 +85,6 @@ export const useContentKeywords = (content:string, id: string) => {
   });
 }
 export const useMovies = (content:string, language: string, page: number) => {
-  console.log(page, "page en useMovies")
   return useQuery({
     queryKey: ["movies", content, language, page],
     queryFn: () => apiClient.findMovies(content, language, page),
