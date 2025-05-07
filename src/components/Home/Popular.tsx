@@ -15,7 +15,8 @@ export const Popular = () => {
     popularOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
   };
 
-  const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
+  
+  const options = [t('movies'), t('tv')]
   const selectedIndex = popularSelected === "movie" ? 0 : 1;
   if (status === "error") {
     return <p>Error</p>;

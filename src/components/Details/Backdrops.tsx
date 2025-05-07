@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useMoviesStore } from "../../config/store/store";
 import { BackdropModal } from "./BackdropModal";
 
-export const Backdrops = () => {
+export const Backdrops =  () => {
   const { data } = useImages("hola", 5);
   const { t } = useTranslation();
   const { openBackdropModal, setOpenBackdropModal } = useMoviesStore();
@@ -43,4 +43,4 @@ export const Backdrops = () => {
       }
     </>
   );
-};
+}

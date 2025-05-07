@@ -1,12 +1,12 @@
+import { useEffect } from "react";
 import { LoadingSpinner } from "../../core/LoadingSpinner";
 import { useVideos } from "../../hooks/useMovies";
 import { useMoviesStore } from "../../config/store/store";
 import { ModalVideo } from "./ModalVideo";
 import * as motion from "motion/react-client";
 import { IoPlayCircleOutline } from "react-icons/io5";
-import { useEffect } from "react";
 
-export const Videos = ({ id, type }: { id: number; type: string }) => {
+export const Videos =  ({ id, type }: { id: number; type: string }) => {
   const {
     openVideoModal,
     setOpenVideoModal,
@@ -27,7 +27,7 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-4 p-5 justify-center">
+      <div className="grid md:grid-cols-5 lg:grid-cols-7  gap-4 p-5 justify-start">
         {videos.results.map((video: any, index: number) => (
           <motion.div whileHover={{ scale: 1.016 }} className="h-full">
             <div key={video.id} className="relative md:w-60" index={index}>
@@ -61,5 +61,5 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
       )}
     </>
   );
-};
+}
 // https://www.youtube.com/watch?v=gk5mmrCVwSc es con la key https://api.themoviedb.org/3/tv/1668/videos?

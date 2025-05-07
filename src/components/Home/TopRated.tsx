@@ -14,7 +14,7 @@ export const TopRated = () => {
     topRatedOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
   };
 
-  const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
+  const options = [t('movies'), t('tv')]
   const selectedIndex = topRatedSelected === "movie" ? 0 : 1;
   return (
     <div className="mb-10">

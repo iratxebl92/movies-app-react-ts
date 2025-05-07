@@ -9,7 +9,7 @@ type DetailsInformationProps = {
   type: string
 }
 
-export const DetailsInformation = ({data, type}: DetailsInformationProps) => {
+export const DetailsInformation =  ({data, type}: DetailsInformationProps) => {
   const navigate = useNavigate()
 
   const {t} = useTranslation()

@@ -1,7 +1,7 @@
 
 
 // tmdbService.ts
-export const getTrending = (content:string,  language:string) => `/trending/movie/${content}?language=${language}`;
+export const getTrending = (content:string,  language:string) => `/trending/all/${content}?language=${language}`;
 export const getTopRated = (content: string, language:string) => `/${content}/top_rated?language=${language}`;
 export const getPopular = (content: string, language:string) => `/${content}/popular?language=${language}`;
 export const getDetailsAndCast = (content: string, id: number, language: string) =>`/${content}/${id}?language=${language}&append_to_response=credits`; // 'append_to_response' añade el reparto

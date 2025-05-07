@@ -15,8 +15,7 @@ export const Trending = () => {
     trendingOption(tab === "Semana" || tab === "Week" ? "week" : "day");
 
   };
-
-  const options = language === "es" ? ["Semana", "Día"] : ["Week", "Day"];
+  const options = [t('week'), t('day')]
   const selectedIndex = trendingSelected === "week" ? 0 : 1;
 
   return (

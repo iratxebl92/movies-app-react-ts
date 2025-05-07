@@ -4,6 +4,7 @@ import { IoSunnyOutline } from "react-icons/io5";
 import { useMoviesStore } from "../../config/store/store";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
+import LanguageSelector from "./LanguageSelector";
 
 export const MenuItems = () => {
   const { toggleTheme, language, setLanguage } = useMoviesStore();
@@ -16,12 +17,6 @@ export const MenuItems = () => {
     }
   }, [i18n.language, setLanguage]);
 
-  // Cambiar idioma en i18next al cambiar el select
-  const handleLanguageChange = (e) => {
-    const newLang = e.target.value;
-    i18n.changeLanguage(newLang);
-    setLanguage(newLang);
-  };
 
   return (
     <nav>
@@ -69,15 +64,16 @@ export const MenuItems = () => {
             </button>
           </div>
         </li>
-        <li className="md:pr-5 md:hover:underline md:hover:decoration-3 md:hover:decoration-detail">
-          <select
+        <li className="">
+          <LanguageSelector/>
+          {/* <select
             value={language}
             onChange={handleLanguageChange}
             className="dark:bg-dark dark:text-white"
           >
             <option value="es">ES</option>
             <option value="en">EN</option>
-          </select>
+          </select> */}
         </li>
       </ul>
     </nav>
