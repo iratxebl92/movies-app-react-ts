@@ -1,13 +1,12 @@
-import { useTranslation } from "react-i18next";
 import { CircleRating } from "../../core/components/Icons/CircleRating";
 import { IMovie } from "../../interfaces/IMovie";
 import { Suspense } from 'react';
 import { LoadingSpinner } from "../../core/LoadingSpinner";
 import { useInitialScroll } from "../../hooks/useInitialScroll";
-import { IoPlayCircleOutline } from "react-icons/io5";
 import { useVideos } from "../../hooks/useMovies";
 import { useMoviesStore } from "../../config/store/store";
 import { ModalVideo } from "./ModalVideo";
+import { ButtonWatchTrailer } from "../ButtonWatchTrailer";
 
 type DetailsBannerProps = {
   data: IMovie;
@@ -15,16 +14,17 @@ type DetailsBannerProps = {
 };
 
 export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
-   useInitialScroll();
-  const { t } = useTranslation();
-  const { setOpenVideoModal, openVideoModal } = useMoviesStore()
-  const {data: videos} = useVideos(type, data?.id)
-  const trailer = videos?.results.find((video: {type: string}) => video.type === "Trailer") //guardamos solo el trailer
-  const rate = data?.vote_average?.toString().substring(0, 3);
-  const date = data?.release_date?.substring(0, 4);
-const prueba = () => {
-setOpenVideoModal(true)
-}
+  //  useInitialScroll();
+   
+   const { openVideoModal } = useMoviesStore()
+   const {data: videos} = useVideos(type, data?.id)
+   const trailer = videos?.results.find((video: {type: string}) => video.type === "Trailer") //guardamos solo el trailer
+   const rate = data?.vote_average?.toString().substring(0, 3);
+   const date = data?.release_date?.substring(0, 4);
+   
+
+  
+
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
@@ -80,10 +80,7 @@ setOpenVideoModal(true)
                 {data?.overview}
               </p>
               <div className="mt-4 md:mt-9 ">
-                <button className="flex items-center gap-2 bg-black/60 hover:bg-slate-700 transition-colors p-2 rounded-xl" onClick={prueba}>
-                   <IoPlayCircleOutline className="text-white/80 w-10 h-10 " /> 
-                  {t("watchTrailer")}
-                </button>
+                <ButtonWatchTrailer/>
               </div>
               {
                 openVideoModal && (

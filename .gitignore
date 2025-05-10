@@ -26,7 +26,8 @@ dist-ssr
 .env
 
 
-docs/
 
 # Documentation
-docs/react-hooks-notes.md
+docs/
+
+

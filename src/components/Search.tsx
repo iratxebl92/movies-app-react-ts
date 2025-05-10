@@ -1,30 +1,96 @@
+import { useMoviesStore } from "../config/store/store";
+import {
+  useGenresList,
+  useReviews,
+  useUpcomingMovies,
+  useVideos,
+} from "../hooks/useMovies";
+import { ButtonWatchTrailer } from "./ButtonWatchTrailer";
+import { ModalVideo } from "./Details/ModalVideo";
+import { LoadingSpinner } from "../core/LoadingSpinner";
+import { Link } from "react-router-dom";
+
 export const Search = () => {
+  const { data: upcoming } = useUpcomingMovies();
+  const { openVideoModal } = useMoviesStore();
+  const results = upcoming?.results[3] || [];
+  const resultsGenresId = results?.genre_ids;
+  const { data: videos } = useVideos("movie", results.id);
+  const trailer = videos?.results.find(
+    (video: { type: string }) => video.type === "Trailer"
+  );
+  const rate = results?.vote_average?.toString().substring(0, 3);
+  const { data: genresList } = useGenresList("movie");
+  const { data: reviewsData } = useReviews("movie", results.id);
+
+  if (!resultsGenresId || !genresList || !reviewsData || !videos) {
+    return <LoadingSpinner />;
+  }
+  
+  const genres = genresList.genres.filter((genre: { id: number }) =>
+    resultsGenresId.includes(genre.id)
+  );
+ 
+
+
   return (
-    <div className="relative h-17.5 md:h-600 flex items-center justify-center bg-blue-900 mb-0">
-      {/* Capa de imagen */}
-      <div className="absolute inset-0">
+    <section className="relative">
+      <div
+        className="flex justify-end relative inset-0 opacity-100 
+          before:absolute before:left-0 before:bg-gradient-to-r before:from-dark before:to-transparent before:z-12 before:content-[''] before:w-96 before:h-full
+          after:absolute after:bottom-0 after:bg-gradient-to-t after:from-dark after:to-transparent after:z-12 after:content-[''] after:w-full after:h-72"
+      >
         <img
-          src="https://image.tmdb.org/t/p/original//8mjYwWT50GkRrrRdyHzJorfEfcl.jpg"
-          alt="Imagen de Cabecera"
-          className="w-full h-full object-cover opacity-70 object-top" // La imagen de fondo
+          className="w-full h-[400px] md:h-[800px] object-cover"
+          src={`https://image.tmdb.org/t/p/original//${results.backdrop_path}`}
+          alt=""
         />
-        <div className="absolute inset-0 bg-black opacity-30"></div> {/* Capa oscura encima de la imagen */}
       </div>
 
-      {/* Contenedor de texto y barra de búsqueda con z-index alto */}
-      <div className="relative z-10 text-center text-white">
-        <h1 className="text-5xl md:text-7xl mb-6">Bienvenid@</h1>
-        <div className="flex items-center justify-center">
-          <input
-            className="focus:outline-none border w-300 md:w-500 h-12 border-r-0 rounded-l-lg pl-3 text-black"
-            type="text"
-            placeholder="Busca tu pelicula"
-          />
-          <button className="border w-100 md:w-200 h-12 border-l-0 rounded-r-lg bg-details text-white">
-            Buscar
-          </button>
+      <div className="md:absolute md:bottom-10 md:w-2/4 md:ml-7 text-gray-100 p-4 font-semibold rounded-3xl ">
+        <p className="text-3xl">{results.title}</p>
+        <p className="text-gray-300 md:text-lg">{results.overview}</p>
+        <div className="mt-4">
+          <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8 items-center">
+            {genres.map((genre: { id: number; name: string }) => (
+              <span
+                key={genre.id}
+                className="px-1 md:px-2 py-1 md:py-2 rounded-md dark:bg-gray-500 bg-gray-900/50 text-white text-xs h-fit"
+              >
+                {genre.name}
+              </span>
+            ))}
+            <div className="flex items-center">
+              <svg
+                className="w-4 h-4 text-yellow-300 me-1"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 22 20"
+              >
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+              </svg>
+              <p className="ms-2 text-sm font-bold text-gray-900 dark:text-white">
+                {rate}
+              </p>
+              {reviewsData?.total_results && (
+                <>
+                  <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+                  <Link
+                    to={`/details/movie/${results.id}#reviews`}
+                    className="text-sm font-medium text-gray-900  hover:underline dark:text-white"
+                  >
+                    <span>{reviewsData.total_results} </span>{" "}
+                    <span> Reviews </span>
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+          <ButtonWatchTrailer />
         </div>
+        {openVideoModal && <ModalVideo selectedVideoKey={trailer?.key} />}
       </div>
-    </div>
+    </section>
   );
 };

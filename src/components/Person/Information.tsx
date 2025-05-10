@@ -4,27 +4,22 @@ import { useTranslation } from "react-i18next";
 import { useMoviesStore } from "../../config/store/store";
 import { useParams } from "react-router-dom";
 import { SocialMedia } from "./SocialMedia";
-import { useEffect, useState } from "react";
-import { getBirthdayDate } from "../../utils/filters";
+import { formatDate } from "../../utils/filters";
 
 
 export const Information = () => {
   const {id} = useParams()
   const {language} = useMoviesStore()
   const {data, status} = usePersonInformation(id, language) 
+
   const {t} = useTranslation()
-
-const gender = data?.gender === 1 ? t('female') : t('male')
-  const biographyArray = data && data.biography.split('\n') || []
-  const [date, setDate] = useState([])
   
-  //TODO: Mirar con id 11669
-  useEffect(() => {
-    if (data?.birthday) {
-      setDate(getBirthdayDate(data?.birthday));
-    }
-  }, [data]);
+  if(!data) return;
+  const gender = data?.gender === 0 ? t("notSpecified") : data?.gender === 1 ? t("female") : t("male")
 
+  const biographyArray = data && data.biography.split('\n') || []
+
+  console.log(data)
   return (
     <div className="py-16">
       <h2 className="text-2xl md:text-4xl pb-4 font-semibold">{data?.name}</h2>
@@ -36,32 +31,28 @@ const gender = data?.gender === 1 ? t('female') : t('male')
       (<ReadMore id="biography-text" text={biographyArray} />)
       }
       </div>
-      <div className="grid grid-cols-3 mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-5 my-6 gap-6 md:gap-4">
         <div>
-            <p className="font-bold">Known For</p>
+            <p className="font-bold">{t('knownFor')}</p>
             <p>{data?.known_for_department}</p>
         </div>
         <div>
-            <p className="font-bold">Known Credits</p>
-            <p>157</p>
-        </div>
-        <div>
-            <p className="font-bold">Gender</p>
+            <p className="font-bold">{t('gender')}</p>
             <p>{gender} </p>
         </div>
-        <div className="my-4">
-            <p className="font-bold">Birthday</p>
-            <p>{date.length ? date : "Sin información"}</p>
+        <div>
+            <p className="font-bold">{t('birthday')} </p>
+            <p>{data?.birthday? formatDate(data.birthday, language) : "Sin información"}</p>
         </div>
         {
           data?.deathday &&
-          <div className="my-4">
-            <p className="font-bold">Day of Death</p>
-            <p>November 11, 1974 (50 years old)</p>
+          <div>
+            <p className="font-bold">{t('deathDay')} </p>
+            <p> {formatDate(data?.deathday, language)} {`(${data?.deathday.slice(0,4) - data?.birthday.slice(0,4) } ${t("age")})`} </p>
         </div>       
         }
-        <div className="my-4">
-            <p className="font-bold">Place of Birth</p>
+        <div>
+            <p className="font-bold">{t('placeBirthday')} </p>
             <p>{data?.place_of_birth} </p>
         </div>
       </div>

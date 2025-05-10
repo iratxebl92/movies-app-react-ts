@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { Suspense, useEffect, useState } from "react";
 import { Header } from "../components/Header/Header";
-import MovieSkeletonList from "../components/MovieSkeletonList";
+import MovieSkeletonList from "../components/Skeleton/MovieSkeletonList";
 import { LoadingSpinner } from "../core/LoadingSpinner";
 
 export const MoviesApp = () => {
@@ -25,7 +25,10 @@ export const MoviesApp = () => {
         <LoadingSpinner />
       ) : (
         <Suspense fallback={<MovieSkeletonList />}>
+          <div className="max-w-[1550px] content-center m-auto lg:w-320">
           <Outlet />
+          </div>
+            
         </Suspense>
       )}
     </div>

@@ -10,6 +10,12 @@ i18n
     resources: {
       en: {
         translation: {
+          age: "years old",
+          knownFor: "Known for",
+          gender: "Gender",
+          birthday: "Birthday",
+          deathDay: "Day of Death",
+          placeBirthday: "Place of Birth",
           theme: "Theme",
           trending: "Trending",
           topRated: "Top Rated",
@@ -28,6 +34,7 @@ i18n
           writer: "Writer:",
           female: "Female",
           male: "Male",
+          notSpecified: "Not specified",
           info: "Information",
           videos: "Videos",
           reviews: "Reviews",
@@ -48,6 +55,12 @@ i18n
       },
       es: {
         translation: {
+          age: "años",
+          knownFor: "Se conoce por",
+          gender: "Género",
+          birthday: "Cumpleaños",
+          deathDay: "Fallecimiento",
+          placeBirthday: "Lugar de nacimiento",
           theme: "Tema",
           trending: "Tendencias",
           topRated: "Mejor Valorados",
@@ -66,6 +79,7 @@ i18n
           writer: "Guionista:",
           female: "Mujer",
           male: "Hombre",
+          notSpecified: "No especifica",
           info: "Información",
           videos: "Videos",
           reviews: "Reseñas",

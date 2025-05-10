@@ -1,8 +1,10 @@
+import { useMoviesStore } from "../../config/store/store";
 import { usePersonSocialMedia } from "../../hooks/useMovies";
 import { socialMedia } from "../../utils/filters";
 
 export const SocialMedia = ({ id }) => {
   const { data } = usePersonSocialMedia(id);
+  const {theme} = useMoviesStore()
 
   
   // Si data no trae nada no hace todo lo de fuera del if
@@ -23,7 +25,7 @@ export const SocialMedia = ({ id }) => {
           rel="noopener noreferrer"
           style={{ display: "flex", alignItems: "center", gap: "5px", textDecoration: "none", color: "black" }}
         >
-          <Icon style={{ fontSize: "24px" }} />
+          <Icon style={{ fontSize: "24px", color: theme === 'dark' ? 'white' : 'black' }} />
         </a>
       ))}
     </div>

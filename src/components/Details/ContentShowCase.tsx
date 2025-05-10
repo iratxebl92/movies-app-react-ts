@@ -1,10 +1,11 @@
-import React, { Suspense, lazy, useMemo } from "react"
+import React, { Suspense, lazy, useMemo, useEffect } from "react"
 import { useState } from "react"
 import { IMovie } from "../../interfaces/IMovie"
 import { detailsOptions } from "../../utils/filters"
 import { LoadingSpinner } from "../../core/LoadingSpinner"
 import { useTranslation } from "react-i18next"
 import { AnimatePresence, motion } from 'framer-motion';
+import { useLocation } from "react-router-dom";
 
 // Lazy loading de componentes para mejorar el rendimiento inicial
 // Cada componente se cargará solo cuando sea necesario
@@ -29,8 +30,16 @@ type ContentShowcaseProps = {
 
 export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
     // Estado para controlar qué pestaña está seleccionada
-    const [selectedOption, setSelectedOption] = useState<any>('information')
+    const [selectedOption, setSelectedOption] = useState<any>('reviews')
     const {t} = useTranslation();
+    const location = useLocation();
+
+    useEffect(() => {
+        const hash = location.hash.replace('#', '');
+        if (hash === 'reviews') {
+            setSelectedOption('reviews');
+        }
+    }, [location]);
 
     // Memorizamos las opciones para evitar recálculos innecesarios
     // Si es tipo "tv", añadimos la opción de temporadas
@@ -56,7 +65,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
             case 'images':
                 return <Backdrops/>;
             case 'reviews':
-                return <Reviews />;
+                return <Reviews id={data.id} type={type} />;
             case 'seasons':
                 return <Season/>;
             default:
@@ -80,7 +89,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
             </div>
 
             {/* Contenedor del contenido con altura mínima para evitar saltos */}
-            <div className="min-h-[600px]">
+            <div className="min-h-[600px] m-auto px-8 md:px-24">
                 {/* Suspense para manejar la carga de componentes lazy */}
                 <Suspense fallback={<LoadingSpinner />}>
                     {/* AnimatePresence maneja las animaciones de entrada/salida */}
@@ -92,6 +101,9 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
                             animate={{ opacity: 1, x: 0 }} // Estado final: visible y en posición
                             exit={{ opacity: 0, x: -20 }} // Estado de salida: invisible y 20px arriba
                             transition={{ duration: 0.3, ease: "easeInOut" }} // Configuración de la transición
+                            // Añadimos un ID dinámico al contenedor cuando estamos en la sección de reseñas
+                            // Esto permite que el scroll funcione correctamente cuando se accede con #reviews en la URL
+                            id={selectedOption === 'reviews' ? 'reviews' : undefined}
                         >
                             {renderContent()}
                         </motion.div>

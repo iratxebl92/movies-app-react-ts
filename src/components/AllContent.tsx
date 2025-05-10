@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMovies } from "../hooks/useMovies";
-import MovieSkeletonList from "./MovieSkeletonList";
+import MovieSkeletonList from "./Skeleton/MovieSkeletonList";
 import { Card } from "./Card";
 import { IMovie } from "../interfaces/IMovie";
 import { AnimatePresence, motion } from "motion/react";

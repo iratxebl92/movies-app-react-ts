@@ -8,7 +8,6 @@ const queryClient = new QueryClient();
 
 function App() {
   const {theme} = useMoviesStore()
-  console.log(theme, "theme en App")
   useEffect(() => {
     if (theme === 'dark') {
       document.querySelector('html')?.classList.add('dark');

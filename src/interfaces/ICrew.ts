@@ -5,6 +5,4 @@ export interface ICrew {
     job?: string
     profile_path?: string
     name: string
-    
-
 }

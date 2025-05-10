@@ -1,5 +1,5 @@
 import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa";
-import { Information } from "../components/Person/Information";
+import { DetailsInformation } from "../components/Details/DetailsInformation";
 import { Reviews } from "../components/Details/Reviews";
 import { Backdrops } from "../components/Details/Backdrops";
 import { Videos } from "../components/Details/Videos";
@@ -48,37 +48,36 @@ export const sortOptions = [
 
 
   export const detailsOptions = [
-    { key: "information", label: "info", component: Information },
+    { key: "information", label: "info", component: DetailsInformation },
     { key: "videos", label: "videos", component: Videos },
     { key: "images", label: "images", component: Backdrops },
     { key: "reviews", label: "reviews", component: Reviews},
   ]
  
-  export const getBirthdayDate = (date: string): string[] => {
-    if (!date) return [];
+  export const formatDate = (dateString: string, locale: string = "es-ES") => {
+    const date = new Date(dateString);
   
-    const parts = date.split("-");
-    if (parts.length !== 3) return []; // Verifica que el formato sea válido
-  
-    const [year = "", month = "", day = ""] = parts; // Asignamos valores por defecto
-  
-    const monthName: string = monthsMap.get(month) ?? month; // Garantizamos string
-  
-    return [day, " de ", monthName, " de ", year];
-  };
-
-  // El codigo de abajo funciona, PERO tiene errores de tipado, ya que split("-") devuelve un array de strings, pero TypeScript no puede garantizar que siempre tenga 3 elementos.
-// Añadiendo un valor por defecto aseguramos que ningun elemento sea nunca undefined y asi siempre serán 3 elementos
-
-
-  // export const getBirthdayDate = (date: string): string[] => {
-  //   if (!date) return []; // Manejo de caso indefinido
-  
-  //   const [year, month, day] = date.split('-');
-  //   const monthName = monthsMap.get((month)) ?? month; // Si no existe, mantiene el valor numérico
+    // Verificamos si la fecha tiene hora
+    const hasTime = dateString.includes('T');  // La 'T' en la fecha indica que tiene hora
     
-  //   return [day, " de ", monthName, " de ", year];
-  // };
+    const options: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+  
+    // Si tiene hora y minutos, los incluimos en las opciones
+    if (hasTime) {
+      options.hour = "2-digit";
+      options.minute = "2-digit";
+    }
+  
+
+    // Forzar la zona horaria UTC para evitar el desfase
+    //toLocaleString con timeZone: "UTC" asegura que el formato se realice en la zona horaria UTC.
+    //Esto evita que la fecha cambie de 30 de abril a 1 de mayo debido a la zona horaria local. (antes se me modificaban las fechas)
+    return date.toLocaleString(locale, { ...options, timeZone: "UTC" });
+  };
   //Map es una estructura de datos que almacena pares clave -> valor, similar a un Object, pero más eficiente cuando se trata de búsquedas.
   
   //TODO: Mirar bien y coger apuntes de https://chatgpt.com/c/67de9049-6208-8006-ba25-83676373e4ab

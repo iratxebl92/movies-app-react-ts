@@ -93,6 +93,28 @@ export const useMovies = (content:string, language: string, page: number) => {
   });
 }
 
+export const useUpcomingMovies = () => {
+  return useQuery({
+    queryKey: ["upcoming"],
+    queryFn: () => apiClient.findUpComingMovies(),
+  });
+}
+export const useGenresList = (content: string) => {
+  return useQuery({
+    queryKey: ["genresList"],
+    queryFn: () => apiClient.findGenresList(content),
+  });
+}
+export const useReviews = (content: string, id: number) => {
+  return useQuery({
+    queryKey: ["reviews"],
+    queryFn: () => apiClient.findReviews(content, id),
+  });
+}
+
+
+
+
 /*
 La queryKey es como el "ID" de los datos que estás pidiendo. React Query la usa para:
 
