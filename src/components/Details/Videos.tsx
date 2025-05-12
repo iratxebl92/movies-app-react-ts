@@ -5,6 +5,7 @@ import { useMoviesStore } from "../../config/store/store";
 import { ModalVideo } from "./ModalVideo";
 import * as motion from "motion/react-client";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import OptionsSelect from "../OptionsSelect";
 
 export const Videos =  ({ id, type }: { id: number; type: string }) => {
   const {
@@ -14,23 +15,32 @@ export const Videos =  ({ id, type }: { id: number; type: string }) => {
     selectedVideoKey,
     setSelectedVideoKey,
     setVideos,
-    videos
+    videos,
+    videosType,
   } = useMoviesStore();
 
+  
 
   const { data, isLoading } = useVideos(type, id);
+  console.log(data, "data")
   useEffect(() => {
     setVideos(data)
   }, [data])
   if (isLoading) return <LoadingSpinner />;
   if (!videos) return null;
-
+ 
+  const uniqueVideosTypes = [...new Set(videos.results.map((video: any) => video.type))]; //guardamos los tipos de videos sin repetir
+  const selectedVideos = data.results.filter((video: any) => video.type === videosType);
+  
   return (
     <>
-      <div className="grid md:grid-cols-5 lg:grid-cols-7  gap-4 p-5 justify-start">
-        {videos.results.map((video: any, index: number) => (
+
+    <OptionsSelect options={uniqueVideosTypes} style={{width: '300px', marginLeft: '20px'}}/>
+    
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-5 justify-start">
+        {selectedVideos.map((video: any, index: number) => (
           <motion.div whileHover={{ scale: 1.016 }} className="h-full">
-            <div key={video.id} className="relative md:w-60" index={index}>
+            <div key={video.id} className="relative " index={index}>
               <img
                 src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                 alt={video.name}

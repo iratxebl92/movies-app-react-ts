@@ -16,6 +16,8 @@ interface MoviesStore {
   filterDepartments: string,
   filterOptions: string,
   videos: any,
+  videosType: string,
+  setVideosType: (type: string) => void,
   setTheme: (theme: any | undefined) => void;
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
@@ -53,6 +55,8 @@ export const useMoviesStore = create<MoviesStore>()(
       filterDepartments: 'all',
       filterOptions: 'vote_count.desc',
       videos: null,
+      videosType: 'trailer',
+      setVideosType: (type: string) => set({ videosType: type }),
       setVideos: (videos: any) => set({ videos: videos }),
       setTheme: (theme) => set({theme}),
       setLanguage: (lang) => {
