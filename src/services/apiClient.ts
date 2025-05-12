@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { BASE_URL } from "../utils/constants";
-import { getTrending, getTopRated, getPopular, getImages, getPersonContent, getPersonImages, getPersonInformation, getPersonSocialMedia, getDetailsAndCast, getVideo, getKeywords, getContentKeywords, getMovies, getUpcomingMovies, getMoviesGenresList, getGenresList, getReviews } from "./tmdbService";
+import { getTrending, getTopRated, getPopular, getImages, getPersonContent, getPersonImages, getPersonInformation, getPersonSocialMedia, getDetailsAndCast, getVideo, getKeywords, getContentKeywords, getMovies, getUpcomingMovies, getMoviesGenresList, getGenresList, getReviews, getWatchProviders } from "./tmdbService";
 
 const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4OGQyNTEwOTFkMDg5MmQzMWI2NTk4YzcyMDI2NDA3MiIsIm5iZiI6MTY0NzAyMDE5MS42MTMsInN1YiI6IjYyMmI4ODlmNTMyYWNiMDA2Yzc5ODE5YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.APN2znN3b6fwwbwqmA5-i3Sx1PwCvbI9MNOhoLAvbzE';
 
@@ -81,6 +81,10 @@ const findReviews = async(content:string, id:number) => {
   const response = await apiBase.get(getReviews(content, id))
   return response.data
 }
+const findWatchProviders = async(content:string, id:number) => {
+  const response = await apiBase.get(getWatchProviders(content, id))
+  return response.data
+}
 
 
 const apiClient = {
@@ -99,7 +103,8 @@ const apiClient = {
   findMovies,
   findUpComingMovies,
   findGenresList,
-  findReviews
+  findReviews,
+  findWatchProviders
 };
 
 export default apiClient;

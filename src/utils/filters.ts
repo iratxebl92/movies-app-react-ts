@@ -1,4 +1,5 @@
-import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaTiktok, FaRegCommentDots  } from "react-icons/fa";
+import { MdOutlineTextSnippet, MdOndemandVideo, MdOutlineInsertPhoto  } from "react-icons/md";
 import { DetailsInformation } from "../components/Details/DetailsInformation";
 import { Reviews } from "../components/Details/Reviews";
 import { Backdrops } from "../components/Details/Backdrops";
@@ -48,10 +49,10 @@ export const sortOptions = [
 
 
   export const detailsOptions = [
-    { key: "information", label: "info", component: DetailsInformation },
-    { key: "videos", label: "videos", component: Videos },
-    { key: "images", label: "images", component: Backdrops },
-    { key: "reviews", label: "reviews", component: Reviews},
+    { key: "information", label: "info", component: DetailsInformation, icon:MdOutlineTextSnippet  },
+    { key: "videos", label: "videos", component: Videos, icon:MdOndemandVideo },
+    { key: "images", label: "images", component: Backdrops, icon:MdOutlineInsertPhoto },
+    { key: "reviews", label: "reviews", component: Reviews, icon:FaRegCommentDots },
   ]
  
   export const formatDate = (dateString: string, locale: string = "es-ES") => {

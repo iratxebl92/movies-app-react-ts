@@ -19,5 +19,6 @@ export const getContentKeywords = (content: string, id: string) => `https://api.
 export const getMovies = (content: string,  language: string, page: number) => `https://api.themoviedb.org/3/discover/${content}?include_adult=false&include_video=false&page=${page}&sort_by=popularity.desc&9659c14f30068211d6925230b38cb5d5=&language=${language}`;
 export const getUpcomingMovies = () => `https://api.themoviedb.org/3/movie/upcoming`;
 export const getGenresList = (content: string) => `https://api.themoviedb.org/3/genre/${content}/list`;
-export const getReviews = (content: string, id: number) => `/${content}/${id}/reviews`
+export const getReviews = (content: string, id: number) => `/${content}/${id}/reviews`;
+export const getWatchProviders = (content: string, id: number) => `/${content}/${id}/watch/providers`;
 

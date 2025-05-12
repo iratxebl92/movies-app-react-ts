@@ -4,9 +4,9 @@ import { Card } from "./Card";
 import { IMovie } from "../interfaces/IMovie";
 import { SwitchTab } from "./SwitchTab";
 import { useMoviesStore } from "../config/store/store";
-import MovieSkeletonList from "./MovieSkeletonList";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react"
+import MovieSkeletonList from "./Skeleton/MovieSkeletonList";
 
 
 

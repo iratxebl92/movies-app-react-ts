@@ -7,7 +7,7 @@ import { CastModal } from "./CastModal"
 import { ContentShowcase } from "./ContentShowCase"
 
 export const DetailsBody = () => {
-  const {id, type} = useParams()
+  const {id, type} : {id:string, type: "movie" | "tv"} = useParams()
   const {language} = useMoviesStore()
 
   const {data, status} = useDetailsAndCast(type || 'movie', Number(id), language)
@@ -15,10 +15,12 @@ export const DetailsBody = () => {
 
   return (
     <div className="dark:bg-dark text-center align-center justify-center mx-auto">
-       {/* <DetailsBanner data={data} type={type} />
-       <CastSlider castData={data?.credits} status={status} />
-       <CastModal castData={data?.credits} /> */}
+      <DetailsBanner data={data} type={type} />
+      <section className="px-8">
+       {/* <CastSlider castData={data?.credits} status={status} />
+       <CastModal castData={data?.credits} />  */}
        <ContentShowcase data={data} type={type} />
+      </section>
        {/* <Backdrops /> */}
     </div>
   )

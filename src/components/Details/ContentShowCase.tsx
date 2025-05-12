@@ -6,6 +6,7 @@ import { LoadingSpinner } from "../../core/LoadingSpinner"
 import { useTranslation } from "react-i18next"
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from "react-router-dom";
+import { FaTv } from "react-icons/fa";
 
 // Lazy loading de componentes para mejorar el rendimiento inicial
 // Cada componente se cargará solo cuando sea necesario
@@ -20,6 +21,7 @@ interface DetailOption {
     key: string;
     label: string;
     component: React.ComponentType<{ prueba: IMovie }>;
+    icon: React.ElementType;
 }
 
 // Props que recibe el componente
@@ -30,7 +32,7 @@ type ContentShowcaseProps = {
 
 export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
     // Estado para controlar qué pestaña está seleccionada
-    const [selectedOption, setSelectedOption] = useState<any>('reviews')
+    const [selectedOption, setSelectedOption] = useState<any>('information')
     const {t} = useTranslation();
     const location = useLocation();
 
@@ -44,7 +46,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
     // Memorizamos las opciones para evitar recálculos innecesarios
     // Si es tipo "tv", añadimos la opción de temporadas
     const options: DetailOption[] = useMemo(() =>  type === "tv" 
-        ? [...detailsOptions, {key: "seasons", label: "Seasons", component: Season}] 
+        ? [...detailsOptions, {key: "seasons", label: "Seasons", component: Season, icon:FaTv}] 
         : detailsOptions, [type])
 
     if(!data) return null
@@ -76,20 +78,28 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
     return (
         <div className="flex flex-col">
             {/* Barra de navegación con las pestañas */}
-            <div className="min-h-max flex flex-row items-center justify-center gap-2 border border-gray-700 max-w-2xl mx-auto mb-7">
+            <div className=" flex flex-row items-center justify-center gap-2 max-w-4xl md:mx-auto mb-7 h-16">
                 {options.map(option => (
-                    <button 
-                        onClick={() => handleClick(option)} 
-                        className="px-6 py-2 rounded-full focus:underline" 
-                        key={option.key}
-                    >
-                        {t(option.label)}
-                    </button>
+                  <button 
+                  onClick={() => handleClick(option)} 
+                  className={`px-6 py-2 flex flex-row items-center gap-2 md:gap-1.5 lg:gap-2 text-lg hover:opacity-100 relative md:px-2 lg:px-6
+                    ${selectedOption === option.key
+                      ? 'opacity-100 after:absolute after:content-[""] after:bg-violet-600 after:h-[2px] after:w-full after:left-0 after:bottom-0 after:rounded'
+                      : 'opacity-60'}
+                    `}
+                  key={option.key}
+                >   
+                  <option.icon />
+                  <span className="hidden md:block">
+
+                  {t(option.label)}
+                  </span>
+                </button>
                 ))}
             </div>
 
             {/* Contenedor del contenido con altura mínima para evitar saltos */}
-            <div className="min-h-[600px] m-auto px-8 md:px-24">
+            <div className="min-h-[600px] flex">
                 {/* Suspense para manejar la carga de componentes lazy */}
                 <Suspense fallback={<LoadingSpinner />}>
                     {/* AnimatePresence maneja las animaciones de entrada/salida */}

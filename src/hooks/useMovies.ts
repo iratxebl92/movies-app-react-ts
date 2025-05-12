@@ -111,6 +111,12 @@ export const useReviews = (content: string, id: number) => {
     queryFn: () => apiClient.findReviews(content, id),
   });
 }
+export const useWatchProviders = (content: string, id: number) => {
+  return useQuery({
+    queryKey: ["watchProviders"],
+    queryFn: () => apiClient.findWatchProviders(content, id),
+  });
+}
 
 
 
