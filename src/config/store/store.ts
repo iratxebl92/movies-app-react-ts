@@ -17,6 +17,8 @@ interface MoviesStore {
   filterOptions: string,
   videos: any,
   videosType: string,
+  imagesType: string,
+  setImagesType: (type: string) => void,
   setVideosType: (type: string) => void,
   setTheme: (theme: any | undefined) => void;
   setLanguage: (lang: string) => void;
@@ -56,6 +58,8 @@ export const useMoviesStore = create<MoviesStore>()(
       filterOptions: 'vote_count.desc',
       videos: null,
       videosType: 'trailer',
+      imagesType: 'backdrops',
+      setImagesType: (type: string) => set({ imagesType: type }),
       setVideosType: (type: string) => set({ videosType: type }),
       setVideos: (videos: any) => set({ videos: videos }),
       setTheme: (theme) => set({theme}),

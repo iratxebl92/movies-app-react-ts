@@ -3,8 +3,8 @@ import { Fragment, useRef, useState } from "react";
 import { useMoviesStore } from "../../config/store/store";
 import { IoMdClose } from "react-icons/io";
 import { Gallery } from "react-grid-gallery";
-import Lightbox from "yet-another-react-lightbox";
 import { IBackdrops } from "../../interfaces/IBackdrops";
+import Lightbox from "yet-another-react-lightbox";
 import { Fullscreen, Counter } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/counter.css";
@@ -20,7 +20,7 @@ type Image = {
   thumbnail: string;
 };
 
-export const BackdropModal = ({ backdrops }: BackdropsModalProps) => {
+export const BackdropModal = ({ backdrops }) => {
   const { openBackdropModal, setOpenBackdropModal } = useMoviesStore();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null); //index img selected
 

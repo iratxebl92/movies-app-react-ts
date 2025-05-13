@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { IMovie } from "../../interfaces/IMovie";
 import { useKeywords, useWatchProviders } from "../../hooks/useMovies";
 import { useNavigate } from "react-router-dom";
-import { Card } from "../Card";
 import { Cast } from "./Cast";
 import { useEffect, useState } from "react";
 
@@ -18,7 +17,7 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
   const { t } = useTranslation();
   const { data: keywords } = useKeywords(type, data?.id);
   const { data: watchProviders } = useWatchProviders(type, data?.id);
-  console.log(watchProviders)
+
   // Unifica los posibles arrays de keywords
   const allKeywords = [
     ...(keywords?.results || []),
@@ -192,10 +191,22 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
       <div className="lg:w-2/3">
         <div className="bg-neutral-800/50 rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-6">Cast</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-            {data?.credits?.cast?.slice(0, 12).map((cast) => (
-              <Cast key={cast.id} cast={cast} />
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {data?.credits?.cast && [
+              ...data.credits.cast.slice(0, 11).map((cast) => (
+                <Cast key={cast.id} cast={cast} />
+              )),
+              data.credits.cast.length > 11 && (
+                <div key="view-all" className="w-[140px] h-[210px] flex items-center justify-center">
+                  <button 
+                    onClick={() => navigate(`/cast/${data.id}`)}
+                    className="text-[11px] md:text-sm text-neutral-300 hover:bg-neutral-700/50 px-4 py-2 rounded-lg border border-neutral-700/70 transition-colors"
+                  >
+                    View all
+                  </button>
+                </div>
+              )
+            ]}
           </div>
         </div>
       </div>

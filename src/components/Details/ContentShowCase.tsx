@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next"
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from "react-router-dom";
 import { FaTv } from "react-icons/fa";
+import { Images } from "./Images"
 
 // Lazy loading de componentes para mejorar el rendimiento inicial
 // Cada componente se cargará solo cuando sea necesario
@@ -65,7 +66,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
             case 'videos':
                 return <Videos id={data.id} type={type}/>;
             case 'images':
-                return <Backdrops/>;
+                return <Images id={data.id} type={type}/>;
             case 'reviews':
                 return <Reviews id={data.id} type={type} />;
             case 'seasons':
@@ -99,7 +100,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
             </div>
 
             {/* Contenedor del contenido con altura mínima para evitar saltos */}
-            <div className="min-h-[600px] flex">
+            <div className="min-h-[600px] flex justify-center items-center">
                 {/* Suspense para manejar la carga de componentes lazy */}
                 <Suspense fallback={<LoadingSpinner />}>
                     {/* AnimatePresence maneja las animaciones de entrada/salida */}

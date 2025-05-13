@@ -13,7 +13,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
     const [prevDisabled, setPrevDisabled] = useState(false)
     const [nextDisabled, setNextDisabled] = useState(false)
 
-
+console.log(currentVideoIndex, "currentVideoIndex")
   useEffect(() => {
   }, [videos])
   
@@ -21,14 +21,19 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
     if(!videos) return
     if(currentVideoIndex === 0){
       setPrevDisabled(true)
+    }else {
+      setPrevDisabled(false)
     }
     if(currentVideoIndex === videos.results.length - 1){
       setNextDisabled(true)
+    }else {
+      setNextDisabled(false)
     }
-  }, [currentVideoIndex])
+  }, [currentVideoIndex, selectedVideoKey])
 
   const handlePrev = () => {
     if(currentVideoIndex !== 0){
+ 
       setCurrentVideoIndex(currentVideoIndex - 1)
       const prueba = videos.results[currentVideoIndex - 1]
       setSelectedVideoKey(prueba.key)
@@ -37,6 +42,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
 
   const handleNext = () => {
     if(currentVideoIndex < videos.results.length - 1){
+  
       setCurrentVideoIndex(currentVideoIndex + 1)
       const prueba = videos.results[currentVideoIndex + 1]
       setSelectedVideoKey(prueba.key)
@@ -44,9 +50,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
   };
   const submitCloseButton = () => {
     setOpenVideoModal(false)
-    setCurrentVideoIndex(0)
-    setSelectedVideoKey(videos.results[0].key)
-    setVideos(null)
+   
   }
 
   return (
@@ -75,7 +79,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
               />
             </div>
             {
-              videos && (
+              videos?.results && videos.results.length > 1 && (
                 <>
                 <button
                 onClick={handlePrev}
