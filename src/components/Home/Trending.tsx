@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { useTranslation } from "react-i18next";
 import { useMoviesStore } from "../../config/store/store";
 import { useTrendingMovies } from "../../hooks/useMovies";

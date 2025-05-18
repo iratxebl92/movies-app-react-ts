@@ -5,21 +5,33 @@ import { useMoviesStore } from "../../config/store/store";
 import { useParams } from "react-router-dom";
 import { SocialMedia } from "./SocialMedia";
 import { formatDate } from "../../utils/filters";
-
+import { InformationSkeleton } from "../Skeleton/Person/InformationSkeleton";
+import { useEffect, useState } from "react";
 
 export const Information = () => {
-  const {id} = useParams()
+  const {idAndName} = useParams()
+  const [id] = idAndName.split("-");
   const {language} = useMoviesStore()
-  const {data, status} = usePersonInformation(id, language) 
-
+  const {data, isLoading, isSuccess} = usePersonInformation(Number(id), language) 
+  const [showSkeleton, setShowSkeleton] = useState(true);
   const {t} = useTranslation()
+
+  useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
   
   if(!data) return;
   const gender = data?.gender === 0 ? t("notSpecified") : data?.gender === 1 ? t("female") : t("male")
 
   const biographyArray = data && data.biography.split('\n') || []
-
-  console.log(data)
+  if(isLoading || showSkeleton) return <InformationSkeleton />;
+  
   return (
     <div className="py-16">
       <h2 className="text-2xl md:text-4xl pb-4 font-semibold">{data?.name}</h2>

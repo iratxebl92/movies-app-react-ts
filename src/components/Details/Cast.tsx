@@ -8,10 +8,11 @@ type CastProps = {
 
 export const Cast = ({ cast }: CastProps) => {
   const navigate = useNavigate();
-
+console.log(cast)
   const handleClick = () => {
-    navigate(`/person/${cast.id}`);
+    navigate(`/person/${cast.id}-${cast?.name?.replace(/\s+/g, "-")}`);
   };
+
 
   return (
     <div className="mb-2 dark:text-white" onClick={handleClick}>
@@ -38,7 +39,7 @@ export const Cast = ({ cast }: CastProps) => {
           <div className="flex flex-col text-center text-sm w-40 mt-1">
             <p className="font-medium truncate">{cast?.name}</p>
             <p className="text-gray-600 dark:text-gray-300 truncate">
-              {cast?.character}
+              {cast?.character ? cast?.character : cast?.roles[0].character}
             </p>
           </div>
         </motion.div>

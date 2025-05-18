@@ -5,4 +5,7 @@ export interface ICast {
    gender?: number
    name?: string
    profile_path?: string 
+   roles?: {
+      character: string
+   }[]
 }

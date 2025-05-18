@@ -29,7 +29,7 @@ export const useDetailsAndCast = (content: string, id: number, language: string)
 
   return useQuery({
     queryKey: ["detailsAndCast", content, id, language], // Clave única para caché
-    queryFn: () => apiClient.findDetailsAndCast(content, id, language), // Llamada combinada
+    queryFn: () => apiClient.findDetails(content, id, language), // Llamada combinada
   });
 };
 export const useImages = (content: string, id: number) => {
@@ -78,10 +78,10 @@ export const useKeywords = (content:string, id: number) => {
     queryFn: () => apiClient.findKeywords(content, id),
   });
 }
-export const useContentKeywords = (content:string, id: string) => {
+export const useContentKeywords = (content:string, id: string, language: string ) => {
   return useQuery({
-    queryKey: ["contentKeywords", content, id],
-    queryFn: () => apiClient.findContentKeywords(content, id),
+    queryKey: ["contentKeywords", content, id, language],
+    queryFn: () => apiClient.findContentKeywords(content, id, language),
   });
 }
 export const useMovies = (content:string, language: string, page: number) => {
@@ -93,10 +93,10 @@ export const useMovies = (content:string, language: string, page: number) => {
   });
 }
 
-export const useUpcomingMovies = () => {
+export const useUpcomingMovies = (language: string) => {
   return useQuery({
-    queryKey: ["upcoming"],
-    queryFn: () => apiClient.findUpComingMovies(),
+    queryKey: ["upcoming", language],
+    queryFn: () => apiClient.findUpComingMovies(language),
   });
 }
 export const useGenresList = (content: string) => {
@@ -117,9 +117,43 @@ export const useWatchProviders = (content: string, id: number) => {
     queryFn: () => apiClient.findWatchProviders(content, id),
   });
 }
+export const useSeasonDetails = (id: number, seasonNumber: number, language: string) => {
+  return useQuery({
+    queryKey: ["seasonDetails", id, seasonNumber, language],
+    queryFn: () => apiClient.findSeasonDetails(id, seasonNumber, language),
+  });
+}
+export const useRecommendations = (content: string, id: number, language: string) => {
+  return useQuery({
+    queryKey: ["recommendations", content, id, language],
+    queryFn: () => apiClient.findRecommendations(content, id, language),
+  });
+}
 
-
-
+export const useLanguages = () => {
+  return useQuery({
+    queryKey: ["languages"],
+    queryFn: () => apiClient.findLanguages(),
+  });
+}
+export const useTvCredits = ( id: number) => {
+  return useQuery({
+    queryKey: ["tvCredits", id],
+    queryFn: () => apiClient.findTvCredits(id),
+  });
+}
+export const useMovieCredits = ( id: number) => {
+  return useQuery({
+    queryKey: ["movieCredits", id],
+    queryFn: () => apiClient.findMovieCredits(id),
+  });
+}
+export const useCredits = (content: string) => {
+  return useQuery({
+    queryKey: ["credits", content],
+    queryFn: () => apiClient.findCredits(content),
+  });
+}
 
 /*
 La queryKey es como el "ID" de los datos que estás pidiendo. React Query la usa para:

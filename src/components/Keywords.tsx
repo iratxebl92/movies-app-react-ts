@@ -10,17 +10,17 @@ import MovieSkeletonList from "./Skeleton/MovieSkeletonList";
 
 
 
-
 export const Keywords = () => {
    const {keywordsOption, keywordsSelected, language} = useMoviesStore()
   const {t} = useTranslation()
   const { idAndName } = useParams(); // ${id}-${name.replace(/\s+/g, "-")}
+ 
   if(!idAndName) return;
 
   const [id, ...rest] = idAndName.split("-"); //Mirar abajo apuntes
 
   const name = rest.join(" ");
-    const {data, status, isLoading} = useContentKeywords(keywordsSelected, id) 
+    const {data, status, isLoading} = useContentKeywords(keywordsSelected, id, language) 
     
     const results = data?.results
     const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
@@ -28,7 +28,7 @@ export const Keywords = () => {
     const selectedIndex = keywordsSelected === "movie" ? 0 : 1;
 
     const onTabChange = (tab: string) => {
-      keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
+      keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");-
     };
 
 

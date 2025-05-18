@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom"
 import { useDetailsAndCast } from "../../hooks/useMovies"
-import { CastSlider } from "./CastSlider"
 import { DetailsBanner } from "./DetailsBanner"
 import { useMoviesStore } from "../../config/store/store"
-import { CastModal } from "./CastModal"
+
 import { ContentShowcase } from "./ContentShowCase"
+import { Recommendations } from "./Recommendations"
 
 export const DetailsBody = () => {
-  const {id, type} : {id:string, type: "movie" | "tv"} = useParams()
+  const {idAndName, type} : {idAndName:string, type: "movie" | "tv"} = useParams()
+  console.log(idAndName, "idAndName")
+  const [id] = idAndName.split("-");
   const {language} = useMoviesStore()
 
   const {data, status} = useDetailsAndCast(type || 'movie', Number(id), language)
@@ -15,13 +17,12 @@ export const DetailsBody = () => {
 
   return (
     <div className="dark:bg-dark text-center align-center justify-center mx-auto">
-      <DetailsBanner data={data} type={type} />
+    
+    <DetailsBanner data={data} type={type} />
       <section className="px-8">
-       {/* <CastSlider castData={data?.credits} status={status} />
-       <CastModal castData={data?.credits} />  */}
        <ContentShowcase data={data} type={type} />
+       <Recommendations id={id} type={type} language={language} />
       </section>
-       {/* <Backdrops /> */}
     </div>
   )
 }

@@ -21,7 +21,7 @@ const Reviews = lazy(() => import('./Reviews').then(module => ({ default: module
 interface DetailOption {
     key: string;
     label: string;
-    component: React.ComponentType<{ prueba: IMovie }>;
+    component: React.ComponentType<any>;
     icon: React.ElementType;
 }
 
@@ -41,6 +41,12 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
         const hash = location.hash.replace('#', '');
         if (hash === 'reviews') {
             setSelectedOption('reviews');
+            setTimeout(() => {
+                const reviewsSection = document.getElementById('reviews');
+                if (reviewsSection) {
+                    reviewsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 100);
         }
     }, [location]);
 
@@ -70,7 +76,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
             case 'reviews':
                 return <Reviews id={data.id} type={type} />;
             case 'seasons':
-                return <Season/>;
+                return <Season id={data.id} type={type} />;
             default:
                 return null;
         }
@@ -100,7 +106,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
             </div>
 
             {/* Contenedor del contenido con altura mínima para evitar saltos */}
-            <div className="min-h-[600px] flex justify-center items-center">
+            <div className="min-h-[300px] flex ">
                 {/* Suspense para manejar la carga de componentes lazy */}
                 <Suspense fallback={<LoadingSpinner />}>
                     {/* AnimatePresence maneja las animaciones de entrada/salida */}

@@ -51,9 +51,10 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
   return (
     <>
       <OptionsSelect 
-        options={uniqueVideosTypes} 
         style={{width: '300px', marginLeft: '20px'}} 
+        value={selectedType}
         onOptionChange={handleOptionChange}
+        options={uniqueVideosTypes} 
       />
       
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-5 justify-start">
@@ -65,7 +66,7 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
                 alt={video.name}
                 className="w-full h-auto rounded-2xl"
               />
-              <div className="absolute inset-0 rounded-2xl bg-black bg-opacity-40 flex items-center justify-center text-white">
+              <div className="absolute opacity-0 hover:opacity-100 inset-0 rounded-2xl bg-black bg-opacity-40 flex items-center justify-center text-white">
                 <button
                   className="text-2xl cursor-pointer"
                   onClick={() => {

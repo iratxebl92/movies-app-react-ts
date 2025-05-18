@@ -21,9 +21,6 @@ export const lazyComponents = {
   Keywords: lazy(() => import('../components/Keywords').then(module => ({ 
     default: module.Keywords 
   }))),
-  Seasons: lazy(() => import('../components/Seasons/Seasons').then(module => ({ 
-    default: module.Seasons 
-  }))),
   Movies: lazy(() => import('../components/AllContent').then(module => ({ 
     default: module.AllContent 
   }))),
@@ -46,20 +43,16 @@ export const routes: RouteConfig[] = [
     component: 'Home'
   },
   {
-    path: '/details/:type/:id',
+    path: '/details/:type/:idAndName',
     component: 'Details'
   },
   {
-    path: '/person/:id',
+    path: '/person/:idAndName',
     component: 'Person'
   },
   {
     path: '/keywords/:idAndName',
     component: 'Keywords'
-  },
-  {
-    path: '/tv/id/seasons/2',
-    component: 'Seasons'
   },
   {
     path: '/movies',

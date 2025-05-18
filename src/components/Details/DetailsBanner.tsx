@@ -14,7 +14,7 @@ type DetailsBannerProps = {
 };
 
 export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
-  //  useInitialScroll();
+  useInitialScroll();
    
    const { openVideoModal } = useMoviesStore()
    const {data: videos} = useVideos(type, data?.id)

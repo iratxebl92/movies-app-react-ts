@@ -6,7 +6,7 @@ import { Trending } from "./Trending";
 
 export const MoviesHome = () => {
   return (
-    <div className="mt-10 max-w-7xl mx-auto pb-10">
+    <div className="mt-10 mx-8">
       <AnimatedSection>
         <Trending />
       </AnimatedSection>

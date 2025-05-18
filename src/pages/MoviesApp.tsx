@@ -3,6 +3,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Header } from "../components/Header/Header";
 import MovieSkeletonList from "../components/Skeleton/MovieSkeletonList";
 import { LoadingSpinner } from "../core/LoadingSpinner";
+import { Footer } from "../components/Footer";
 
 export const MoviesApp = () => {
   const location = useLocation();
@@ -31,6 +32,7 @@ export const MoviesApp = () => {
             
         </Suspense>
       )}
+      <Footer />
     </div>
   );
 };

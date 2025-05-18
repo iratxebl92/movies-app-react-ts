@@ -13,8 +13,6 @@ interface MoviesStore {
   keywordsSelected: ContentType;
   trendingSelected: 'week' | 'day';
   personContentSelected: 'movie' | 'tv',
-  filterDepartments: string,
-  filterOptions: string,
   videos: any,
   videosType: string,
   imagesType: string,
@@ -33,8 +31,6 @@ interface MoviesStore {
   setOpenCastModal: (open: boolean) => void;
   openBackdropModal: boolean;
   setOpenBackdropModal: (open: boolean) => void;
-  setDepartments: (value: string) => void;
-  setOptions: (value: string) => void;
   setOpenVideoModal: (open: boolean) => void;
   currentVideoIndex: number;
   setCurrentVideoIndex: (index: number) => void;
@@ -54,8 +50,6 @@ export const useMoviesStore = create<MoviesStore>()(
       popularSelected: 'movie',
       keywordsSelected: 'movie',
       personContentSelected: 'movie',
-      filterDepartments: 'all',
-      filterOptions: 'vote_count.desc',
       videos: null,
       videosType: 'trailer',
       imagesType: 'backdrops',
@@ -79,8 +73,6 @@ export const useMoviesStore = create<MoviesStore>()(
       setOpenVideoModal: (open: boolean) => set({ openVideoModal: open }),
       openBackdropModal: false,
       setOpenBackdropModal: (open: boolean) => set({ openBackdropModal: open }),
-      setDepartments: (value) => set({ filterDepartments: value }),
-      setOptions: (value) => set({ filterOptions: value }),
       currentVideoIndex: 0,
       setCurrentVideoIndex: (index: number) => set({ currentVideoIndex: index }),
       selectedVideoKey: '',

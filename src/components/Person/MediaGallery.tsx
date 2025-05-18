@@ -3,46 +3,64 @@ import { useMoviesStore } from "../../config/store/store";
 import { usePersonMovies } from "../../hooks/useMovies";
 import { Card } from "../Card";
 import { useParams } from "react-router-dom";
-import { SortSelector } from "../SortSelector";
-import { sortDepartaments, sortOptions } from "../../utils/filters";
 import { SwitchTab } from "../SwitchTab";
+import { MediaGallerySkeleton } from "../Skeleton/Person/MediaGallerySkeleton";
+import OptionsSelect from "../OptionsSelect";
 
 export const MediaGallery = () => {
-  const {id} = useParams()
-  const { personContentSelected, filterDepartments, filterOptions, personContentOption } = useMoviesStore();
-  const { data, status, isLoading } = usePersonMovies(personContentSelected, id);
+  const { idAndName } = useParams() as { idAndName: string }; // Solo usar si sabemos seguro que viene en la url y es string
+ 
+  const [id] = idAndName.split("-");
+
+  const { personContentSelected, personContentOption } = useMoviesStore();
+
+ 
+  const { data, isLoading } = usePersonMovies(personContentSelected, Number(id));
   const [visibleMovies, setVisibleMovies] = useState(20); // Mostramos inicialmente las peliculas o series que decidamos
-  const gallery = filterDepartments === "acting" ? data?.cast :  [...(data?.cast || []), ...(data?.crew || [])]; //Unimos ambos arrays con spread operator
-  const disabled = useMemo(() => visibleMovies >= gallery?.length, [visibleMovies, gallery?.length]); //Añadimos gallery.length a la dependencia para que cuando estén los datos de la API cargados lo recalcule, sino siempre será mayor viibleMovies ya que de primeras gallery.length será 0 
-
-  const idsUnicos = new Set(); //Esto servirá para guardar los id de las películas/series que ya hemos agregado, para evitar duplicados.
-  if (!gallery) return null; // Si no traer los datos de la API, no renderizamos nada
-  const prueba = gallery
-  .sort((a, b) => {
-    const isDesc = filterOptions.includes('.desc'); // Verifica si debe ser descendente
-    const key = filterOptions.replace('.desc', '').replace('.asc', ''); // Extrae la clave real
-
-    if (typeof a[key] === "string") {
-      // Si es una cadena, ordenamos alfabéticamente
-      return isDesc ? b[key].localeCompare(a[key]) : a[key].localeCompare(b[key]);
-    }
-
-    // Si es un número, ordenamos de forma numérica
-    return isDesc ? b[key] - a[key] : a[key] - b[key];
-  })
-  .filter(item => {
-    if (!idsUnicos.has(item.id)) {
-      idsUnicos.add(item.id);
+  const [showSkeleton, setShowSkeleton] = useState(true);
+  const [departmentSelected, setDepartmentSelected] = useState('All')
+ 
+  const idUnicos = new Set(); //evitar duplicados
+  const departments = (data?.crew ?? []) 
+    .filter((movie: { department: string }) => {
+      if (idUnicos.has(movie.department)) return false; //si cumple no se añade y no sigue ejecutando el código
+      idUnicos.add(movie.department); //si no cumple se añade y se sigue ejecutando el código y se añade el departamento
       return true;
+    })
+    .map((movie: { department: string }) => movie.department); //se añade el departamento a la lista de departamentos
+
+  const departmentsUnicos = ["Acting", ...departments]
+  const optionDepartments = departmentsUnicos.length > 1 ? ["All", ...departmentsUnicos] : departmentsUnicos
+  
+ const selectMovies: string[] = departmentSelected === 'Acting' ? data?.cast : departmentSelected === 'All' ? [...(data?.cast ?? []), ...(data?.crew ?? [])] : data?.crew.filter((movie: { department: string }) => movie.department === departmentSelected) 
+ const disabled = useMemo(() => visibleMovies >= selectMovies?.length - 20, [visibleMovies, selectMovies?.length]); //Añadimos gallery.length a la dependencia para que cuando estén los datos de la API cargados lo recalcule, sino siempre será mayor viibleMovies ya que de primeras gallery.length será 0 
+
+useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 1500);
+
+      return () => clearTimeout(timer);
     }
-    return false;
-  });
+  }, [isLoading]);
+
+  if (isLoading || showSkeleton) return <MediaGallerySkeleton/>;
+
+  if (!data) return null; // Si no traer los datos de la API, no renderizamos nada
+ 
   const onTabChange = (tab: string) => {
     personContentOption(
       tab === "Películas" || tab === "Movies" ? "movie" : "tv"
     );
   };
    const selectedIndex = personContentSelected === "movie" ? 0 : 1;
+
+   const opnDepartmentOptionChange = (option: string) => {
+    setDepartmentSelected(option)
+
+   }
+   console.log(selectMovies)
   return (
     <>
           <SwitchTab
@@ -53,20 +71,19 @@ export const MediaGallery = () => {
         
       />
           <div className="flex justify-end gap-6 mb-8">
-        <SortSelector options={sortOptions} id="options"  />
-        <SortSelector options={sortDepartaments} id="departaments" />
+            <OptionsSelect options={optionDepartments} style={{width: '10rem'}} value={departmentSelected} onOptionChange={opnDepartmentOptionChange} />
       </div>
     <div>
       {
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-7 overflow-hidden ">
-          {prueba.slice(0, visibleMovies).map((item, index) => (
-            <Card movie={item} style={{ width: "85%" }} key={index} />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          {selectMovies.slice(0, visibleMovies).map((item, index) => (
+            <Card movie={item} style={{ width: "100%" }} key={index} />
           ))}
         </div>
       }
       <div className="flex justify-center">
       {/* Al hacer click en Load More, añadimos el nº de pelis/series que decidamos a visibleMovies */}
-      <button disabled={disabled} className={`border-2 rounded-xl p-4 mb-4 text-white  ${disabled ? 'bg-gray-500 cursor-no-drop' : 'bg-red-700 cursor-pointer' }`} onClick={() => setVisibleMovies((prev) => prev + 20)}>
+      <button disabled={disabled} className={`border-2 rounded-xl p-4 mt-4 text-white  ${disabled ? 'hidden' : 'bg-red-700 cursor-pointer' }`} onClick={() => setVisibleMovies((prev) => prev + 20)}>
         Load More
       </button>
       </div>

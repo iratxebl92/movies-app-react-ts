@@ -2,28 +2,45 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import { usePersonImages } from "../../hooks/useMovies";
 import { useParams } from "react-router-dom";
-
+import { PhotosSkeleton } from "../Skeleton/Person/PhotosSkeleton";
+import { useEffect, useState } from "react";
 
 export const Photos = () => {
-  const {id} = useParams()
-  const {data}:any = usePersonImages(id)
+  const { idAndName } = useParams();
+  const [id] = idAndName.split("-");
+  const { data, isLoading } = usePersonImages(Number(id));
+  const [showSkeleton, setShowSkeleton] = useState(true);
+
+  useEffect(() => {
+    if (!isLoading) {
+      // Añadimos un delay de 1.5 segundos después de que los datos estén cargados
+      const timer = setTimeout(() => {
+        setShowSkeleton(false);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
+  if (isLoading || showSkeleton) {
+    return <PhotosSkeleton />;
+  }
+
   return (
-    <>
     <div>
- 
       <Swiper className="mySwiper" spaceBetween={15} slidesPerView="auto">
-        {data?.profiles?.map((image:any, index:number) => (
-          <SwiperSlide key={index}  className="flex flex-col !w-auto"> 
-          {/* Usamos !w-auto para que el swiper slide sea de tamaño auto y fuerza la especificacion de width: auto; en el css por encima de la clase .swiper-slide */}
-            <div className="mb-2 dark:text-white ">
-                <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${image.file_path}`} alt="" className="rounded-lg" />
+        {data?.profiles?.map((image: any, index: number) => (
+          <SwiperSlide key={index} className="flex flex-col !w-auto">
+            <div className="mb-2 dark:text-white">
+              <img 
+                src={`https://www.themoviedb.org/t/p/w220_and_h330_face${image.file_path}`} 
+                alt={`Person photo ${index + 1}`} 
+                className="rounded-lg" 
+              />
             </div>
-
-
           </SwiperSlide>
         ))}
       </Swiper>
     </div>
-        </>
-  )
-}
+  );
+};
