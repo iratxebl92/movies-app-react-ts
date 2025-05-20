@@ -1,8 +1,8 @@
 
 import { useState } from "react";
 import { useMoviesStore } from "../../config/store/store";
-import { SwitchTab } from "../SwitchTab";
-import { Slider } from "../Slider";
+import { SwitchTab } from "../../core/SwitchTab";
+import { Slider } from "../../core/Slider";
 import { usePopularMovies } from "../../hooks/useMovies";
 import { useTranslation } from "react-i18next";
 

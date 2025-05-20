@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { useMovies } from "../hooks/useMovies";
-import MovieSkeletonList from "./Skeleton/MovieSkeletonList";
-import { Card } from "./Card";
-import { IMovie } from "../interfaces/IMovie";
+import { useMovies } from "../../hooks/useMovies";
+import MovieSkeletonList from "../Skeleton/MovieSkeletonList";
+import { Card } from "../../core/Card";
+import { IMovie } from "../../interfaces/IMovie";
 import { AnimatePresence, motion } from "motion/react";
-import { Pagination } from "./Pagination";
-import { MoviesFilter } from "./MoviesFilter";
+import { MediaPagination } from "./MediaPagination";
+import { MediaFilters } from "./MediaFilters";
 
-export const AllContent = () => {
+export const MediaContent = () => {
   const [page, setPage] = useState(1); // Estado para la página actual
   const [type, setType] = useState(""); // Estado para saber si es "movie" o "tv"
   const [showSkeleton, setShowSkeleton] = useState(true); // Controla si se muestra el skeleton loader
@@ -70,7 +70,7 @@ console.log(results)
     <>
     <div className="flex justify-center">
 
-      <MoviesFilter />
+      <MediaFilters />
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={page} // Clave para re-renderizar con animación al cambiar de página
@@ -101,7 +101,7 @@ console.log(results)
       {/* Renderizado del componente de paginación */}
       <div className="flex justify-center py-11 ">
 
-      <Pagination
+      <MediaPagination
         handlePageClick={handleChangePage} // Función para manejar cambio de página
         page={page} // Página actual
         pageCount={Math.min(data?.total_pages || 0, 500)} // Límite de 500 páginas por limitación de TMDb

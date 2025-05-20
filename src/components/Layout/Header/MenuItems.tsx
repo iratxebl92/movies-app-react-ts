@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { FaMoon } from "react-icons/fa";
 import { IoSunnyOutline } from "react-icons/io5";
-import { useMoviesStore } from "../../config/store/store";
+import { useMoviesStore } from "../../../config/store/store";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";

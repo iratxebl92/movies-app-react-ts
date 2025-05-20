@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { MoviesApp } from './pages/MoviesApp'
-import { LazyRoute } from './components/LazyRoute'
-import { lazyComponents, routes } from './routes/lazyRoutes'
+import { MoviesApp } from '../components/Layout/MoviesApp'
+import { LazyRoute } from './LazyRoute'
+import { lazyComponents, routes } from './lazyRoutes'
 
 export const AppRouter = () => {
   return (

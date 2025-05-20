@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { MenuItems } from "./MenuItems";
-import { LogoIcon } from "../../core/components/Icons/LogoIcon";
+import { LogoIcon } from "../../../core/components/Icons/LogoIcon";
 
 export const Header = () => {
   const [isOpenHeader, setIsOpenHeader] = useState(false);

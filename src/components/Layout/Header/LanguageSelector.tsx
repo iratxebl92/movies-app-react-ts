@@ -1,7 +1,7 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { CheckIcon } from '@heroicons/react/20/solid';
-import { useMoviesStore } from '../../config/store/store';
+import { useMoviesStore } from '../../../config/store/store';
 import { useTranslation } from 'react-i18next';
 import { HiLanguage } from "react-icons/hi2";
 

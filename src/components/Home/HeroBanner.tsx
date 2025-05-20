@@ -1,17 +1,19 @@
-import { useMoviesStore } from "../config/store/store";
+import { useMoviesStore } from "../../config/store/store";
 import {
   useGenresList,
   useReviews,
   useUpcomingMovies,
   useVideos,
-} from "../hooks/useMovies";
-import { ButtonWatchTrailer } from "./ButtonWatchTrailer";
-import { ModalVideo } from "./Details/ModalVideo";
-import { LoadingSpinner } from "../core/LoadingSpinner";
+} from "../../hooks/useMovies";
+
+
+import { LoadingSpinner } from "../../core/LoadingSpinner";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ModalVideo } from "../Details/ModalVideo";
+import { ButtonWatchTrailer } from "../../core/ButtonWatchTrailer";
 
-export const Search = () => {
+export const HeroBanner = () => {
   const {language} = useMoviesStore()
   const { t } = useTranslation();
   const { data: upcoming } = useUpcomingMovies(language);

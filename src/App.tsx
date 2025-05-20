@@ -1,8 +1,8 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
-import { AppRouter } from "./AppRouter";
 import { useMoviesStore } from "./config/store/store";
 import { useEffect } from "react";
+import { AppRouter } from "./routes/AppRouter";
 
 const queryClient = new QueryClient();
 

@@ -5,7 +5,7 @@ import { useMoviesStore } from "../../config/store/store";
 import { ModalVideo } from "./ModalVideo";
 import * as motion from "motion/react-client";
 import { IoPlayCircleOutline } from "react-icons/io5";
-import OptionsSelect from "../OptionsSelect";
+import OptionsSelect from "../../core/OptionsSelect";
 
 export const Videos = ({ id, type }: { id: number; type: string }) => {
   const {

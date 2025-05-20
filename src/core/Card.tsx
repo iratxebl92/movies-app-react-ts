@@ -1,5 +1,5 @@
 import * as motion from "motion/react-client"
-import { StarIcon } from "../core/components/Icons/StarIcon";
+import { StarIcon } from "./components/Icons/StarIcon";
 import { NavLink, useNavigate } from "react-router-dom";
 
 // Definición de tipos para las props del componente

@@ -1,7 +1,7 @@
 import ReactPaginate from "react-paginate";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
-export const Pagination = (props: any) => {
+export const MediaPagination = (props: any) => {
   return (
     <ReactPaginate
       breakLabel="..." // Etiqueta que muestra puntos suspensivos entre páginas

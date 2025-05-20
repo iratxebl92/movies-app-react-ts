@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { LoadingSpinner } from '../core/LoadingSpinner'
-import { ErrorBoundary } from './ErrorBoundary'
+import { ErrorBoundary } from '../core/ErrorBoundary'
 
 type LazyRouteProps = {
   component: React.LazyExoticComponent<() => JSX.Element>

@@ -1,13 +1,10 @@
 import { lazy } from 'react'
-import { useLocation } from 'react-router-dom'
-import { TvShows } from '../components/AllContent';
-
 
 
 // Lazy components with proper type definitions
 export const lazyComponents = {
  
-  Home: lazy(() => import('../pages/Home/Home').then(module => ({ 
+  Home: lazy(() => import('../pages/Home').then(module => ({ 
     default: module.Home 
   }))),
   
@@ -15,17 +12,17 @@ export const lazyComponents = {
     default: module.Details 
   }))),
   
-  Person: lazy(() => import('../components/Person/Person').then(module => ({ 
+  Person: lazy(() => import('../pages/Person').then(module => ({ 
     default: module.Person 
   }))),
-  Keywords: lazy(() => import('../components/Keywords').then(module => ({ 
+  Keywords: lazy(() => import('../pages/Keywords/Keywords').then(module => ({ 
     default: module.Keywords 
   }))),
-  Movies: lazy(() => import('../components/AllContent').then(module => ({ 
-    default: module.AllContent 
+  Movies: lazy(() => import('../components/Media/MediaContent').then(module => ({ 
+    default: module.MediaContent 
   }))),
-  TvShows: lazy(() => import('../components/AllContent').then(module => ({ 
-    default: module.AllContent 
+  TvShows: lazy(() => import('../components/Media/MediaContent').then(module => ({ 
+    default: module.MediaContent 
   }))),
 } as const
 

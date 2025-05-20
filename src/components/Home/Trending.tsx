@@ -2,8 +2,8 @@
 import { useTranslation } from "react-i18next";
 import { useMoviesStore } from "../../config/store/store";
 import { useTrendingMovies } from "../../hooks/useMovies";
-import { Slider } from "../Slider";
-import { SwitchTab } from "../SwitchTab";
+import { Slider } from "../../core/Slider";
+import { SwitchTab } from "../../core/SwitchTab";
 
 export const Trending = () => {
 

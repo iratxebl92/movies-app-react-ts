@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
 import { useRecommendations } from "../../hooks/useMovies"
-import { Card } from "../Card"
+import { Card } from "../../core/Card"
 
 export const Recommendations = ({id, type, language}: {id: number, type: string, language: string}) => {
 

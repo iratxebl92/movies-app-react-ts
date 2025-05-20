@@ -6,7 +6,7 @@ import { useInitialScroll } from "../../hooks/useInitialScroll";
 import { useVideos } from "../../hooks/useMovies";
 import { useMoviesStore } from "../../config/store/store";
 import { ModalVideo } from "./ModalVideo";
-import { ButtonWatchTrailer } from "../ButtonWatchTrailer";
+import { ButtonWatchTrailer } from "../../core/ButtonWatchTrailer";
 
 type DetailsBannerProps = {
   data: IMovie;

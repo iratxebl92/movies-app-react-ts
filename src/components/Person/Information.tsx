@@ -1,5 +1,5 @@
 import { usePersonInformation } from "../../hooks/useMovies";
-import { ReadMore } from "../ReadMore";
+import { ReadMore } from "./ReadMore";
 import { useTranslation } from "react-i18next";
 import { useMoviesStore } from "../../config/store/store";
 import { useParams } from "react-router-dom";

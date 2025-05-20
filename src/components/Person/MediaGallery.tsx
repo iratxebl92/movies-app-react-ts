@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMoviesStore } from "../../config/store/store";
 import { usePersonMovies } from "../../hooks/useMovies";
-import { Card } from "../Card";
+import { Card } from "../../core/Card";
 import { useParams } from "react-router-dom";
-import { SwitchTab } from "../SwitchTab";
+import { SwitchTab } from "../../core/SwitchTab";
 import { MediaGallerySkeleton } from "../Skeleton/Person/MediaGallerySkeleton";
-import OptionsSelect from "../OptionsSelect";
+import OptionsSelect from "../../core/OptionsSelect";
 
 export const MediaGallery = () => {
   const { idAndName } = useParams() as { idAndName: string }; // Solo usar si sabemos seguro que viene en la url y es string
