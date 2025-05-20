@@ -5,6 +5,7 @@ import { Card } from "./Card";
 import { IMovie } from "../interfaces/IMovie";
 import { AnimatePresence, motion } from "motion/react";
 import { Pagination } from "./Pagination";
+import { MoviesFilter } from "./MoviesFilter";
 
 export const AllContent = () => {
   const [page, setPage] = useState(1); // Estado para la página actual
@@ -37,7 +38,7 @@ export const AllContent = () => {
   } = useMovies(type, "es", page);
 
   const results = data?.results; // Lista de películas/series
-
+console.log(results)
   // Si se está cargando por primera vez, mostrar skeleton
   if (isLoading) {
     return <MovieSkeletonList />;
@@ -67,6 +68,9 @@ export const AllContent = () => {
 
   return (
     <>
+    <div className="flex justify-center">
+
+      <MoviesFilter />
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={page} // Clave para re-renderizar con animación al cambiar de página
@@ -93,7 +97,7 @@ export const AllContent = () => {
           </div>
         </motion.div>
       </AnimatePresence>
-
+      </div>
       {/* Renderizado del componente de paginación */}
       <div className="flex justify-center py-11 ">
 

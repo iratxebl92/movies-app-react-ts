@@ -5,7 +5,6 @@ export const getTrending = (content:string,  language:string) => `/trending/all/
 export const getTopRated = (content: string, language:string) => `/${content}/top_rated?language=${language}`;
 export const getPopular = (content: string, language:string) => `/${content}/popular?language=${language}`;
 export const getDetails= (content: string, id: number, language: string) =>`/${content}/${id}?language=${language}&append_to_response=credits`; // 'append_to_response' añade el reparto
-  
 export const getImages = (content: string, id: number) => `/${content}/${id}/images`;
 export const getVideo = (content: string, id: number) => `/${content}/${id}/videos`;
 export const getSimmilar = (content: string, id: number) => `/movie/674/similar`;
@@ -23,8 +22,5 @@ export const getWatchProviders = (content: string, id: number) => `/${content}/$
 export const getSeasonDetails = (id: number, seasonNumber: number, language: string) => `/tv/${id}/season/${seasonNumber}?language=${language}`;
 export const getRecommendations = (content: string, id: number, language: string) => `/${content}/${id}/recommendations?language=${language}`;
 export const getLanguages = () => `https://api.themoviedb.org/3/configuration/languages`;
-export const getTvCredits = (id: number) => `/tv/${id}/aggregate_credits`;
 export const getMovieCredits= (id: number) => `/movie/${id}/credits`;
 export const getCredits = (content: string) => `${content}`;
-
-//https://api.themoviedb.org/3/tv/86831/aggregate_credits?
