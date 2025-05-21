@@ -20,13 +20,13 @@ export const MenuItems = () => {
 
   return (
     <nav>
-      <ul className="md:flex md:flex-row md:space-x-4 md:mr-1">
+      <ul className="flex flex-col gap-4 md:gap-0 md:flex-row md:space-x-4 md:mr-1">
         <NavLink
           to="/"
           className={({ isActive }) =>
             isActive
               ? "underline decoration-details decoration-3 font-bold md:pr-5"
-              : "dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details"
+              : "dark:text-white md:pr-5 hover:underline hover:decoration-3 hover:decoration-details"
           }
         >
           {t("home")}
@@ -36,7 +36,7 @@ export const MenuItems = () => {
           className={({ isActive }) =>
             isActive
               ? "underline decoration-details decoration-3 font-bold md:pr-5"
-              : "dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details"
+              : "dark:text-white md:pr-5 hover:underline hover:decoration-3 hover:decoration-details"
           }
         >
           {t("movies")}
@@ -46,34 +46,27 @@ export const MenuItems = () => {
           className={({ isActive }) =>
             isActive
               ? "underline decoration-details decoration-3 font-bold md:pr-5"
-              : "dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details"
+              : "dark:text-white md:pr-5 hover:underline hover:decoration-3 hover:decoration-details"
           }
         >
           {t("tv")}
         </NavLink>
-        <li className="dark:text-white md:pr-5 md:hover:underline hover:decoration-3 md:hover:decoration-details">
+        <li className="flex justify-center dark:text-white md:pr-5 hover:underline hover:decoration-3 hover:decoration-details">
           <div className="dark:hidden">
             <button  onClick={() => toggleTheme('dark')}>
-            <FaMoon className="inline hover:cursor-pointer" />
+            <FaMoon className="inline hover:cursor-pointer hover:text-xl" />
             </button>
 
           </div>
           <div className="hidden dark:flex" >
           <button onClick={() => toggleTheme('light')} >
-            <IoSunnyOutline className="inline hover:cursor-pointer"  />
+            <IoSunnyOutline className="inline hover:cursor-pointer  hover:text-xl"  />
             </button>
           </div>
         </li>
-        <li className="">
+        <li className="flex justify-center ml-7 ">
           <LanguageSelector/>
-          {/* <select
-            value={language}
-            onChange={handleLanguageChange}
-            className="dark:bg-dark dark:text-white"
-          >
-            <option value="es">ES</option>
-            <option value="en">EN</option>
-          </select> */}
+
         </li>
       </ul>
     </nav>

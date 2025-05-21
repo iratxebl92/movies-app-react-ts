@@ -11,7 +11,7 @@ export const Header = () => {
     <header className="relative z-10 flex justify-between pr-0 font-heading dark:text-white md:dark:bg-dark bg-opacity-50 backdrop-blur-md ">
       
         <div className="text-start py-5 pl-5 flex">
-          <p className="text-black md:dark:text-white">KoaFilms</p>
+          <p className="text-black dark:text-white">KoaFilms</p>
           <LogoIcon/>
         </div>
         <div className="md:hidden">
@@ -25,7 +25,7 @@ export const Header = () => {
             isOpenHeader ? "translate-x-0 block" : "translate-x-full hidden"
           }`}
         >
-          <div className="relative mt-10">
+          <div className="relative mt-10" onClick={() => setIsOpenHeader(false)}>
             <MenuItems />
           </div>
           <div className="absolute top-5 right-4">

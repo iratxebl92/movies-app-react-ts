@@ -64,7 +64,7 @@ console.log(results)
           
           className=""
         >
-          <div className="flex flex-wrap ml-24">
+          <div className="flex flex-wrap">
             {isFetching || isLoading ? (
               // Si se está haciendo fetch entre páginas, mostrar skeleton encima
               <div className="h-full w-full p-2">
