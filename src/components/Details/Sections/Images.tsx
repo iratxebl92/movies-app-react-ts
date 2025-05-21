@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GrDownload } from "react-icons/gr";
-import { useImages } from "../../hooks/useMovies";
-import OptionsSelect from "../../core/OptionsSelect";
+import { useImages } from "../../../hooks/useMovies";
+import OptionsSelect from "../../../core/OptionsSelect";
 import Lightbox from "yet-another-react-lightbox";
 import { Fullscreen, Counter } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";

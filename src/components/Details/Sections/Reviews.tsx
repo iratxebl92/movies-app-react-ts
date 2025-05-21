@@ -1,8 +1,8 @@
 import { StarIcon } from "@heroicons/react/20/solid";
-import { useMoviesStore } from "../../config/store/store";
-import { useReviews } from "../../hooks/useMovies";
-import { IReview } from "../../interfaces/IReviews";
-import { formatDate } from "../../utils/filters";
+import { useMoviesStore } from "../../../config/store/store";
+import { useReviews } from "../../../hooks/useMovies";
+import { IReview } from "../../../interfaces/IReviews";
+import { formatDate } from "../../../utils/filters";
 
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";

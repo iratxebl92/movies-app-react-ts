@@ -2,7 +2,7 @@ import { useMoviesStore } from "../../config/store/store";
 import { usePersonSocialMedia } from "../../hooks/useMovies";
 import { socialMedia } from "../../utils/filters";
 
-export const SocialMedia = ({ id }) => {
+export const SocialMedia = ({ id }: { id: number }) => {
   const { data } = usePersonSocialMedia(id);
   const {theme} = useMoviesStore()
 
@@ -17,7 +17,7 @@ export const SocialMedia = ({ id }) => {
 
   return (
     <div style={{ display: "flex", gap: "10px" }}>
-      {filteredSocialMedia.map(({ key, label, icon: Icon, web }) => (
+      {filteredSocialMedia.map(({ key,icon: Icon, web }) => (
         <a
           href={`${web}${data[key]}`} //data[key] obtiene el valor asociado a la clave key en el objeto data, y este valor se concatena con la URL base web para formar el enlace completo.
           key={key}

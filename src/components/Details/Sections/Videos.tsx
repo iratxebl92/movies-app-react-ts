@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { LoadingSpinner } from "../../core/LoadingSpinner";
-import { useVideos } from "../../hooks/useMovies";
-import { useMoviesStore } from "../../config/store/store";
-import { ModalVideo } from "./ModalVideo";
+import { LoadingSpinner } from "../../../core/LoadingSpinner";
+import { useVideos } from "../../../hooks/useMovies";
+import { useMoviesStore } from "../../../config/store/store";
+import { ModalVideo } from "../Modals/ModalVideo";
 import * as motion from "motion/react-client";
 import { IoPlayCircleOutline } from "react-icons/io5";
-import OptionsSelect from "../../core/OptionsSelect";
+import OptionsSelect from "../../../core/OptionsSelect";
 
 export const Videos = ({ id, type }: { id: number; type: string }) => {
   const {
@@ -15,7 +15,6 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
     selectedVideoKey,
     setSelectedVideoKey,
     setVideos,
-    videos
   } = useMoviesStore();
 
   const { data, isLoading } = useVideos(type, id);

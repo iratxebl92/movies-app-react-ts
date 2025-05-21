@@ -43,6 +43,7 @@ useEffect(() => {
 
       return () => clearTimeout(timer);
     }
+    return undefined; //Esto deja claro a TypeScript que todos los caminos devuelven algo (una función o undefined).
   }, [isLoading]);
 
   if (isLoading || showSkeleton) return <MediaGallerySkeleton/>;

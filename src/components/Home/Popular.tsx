@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import { useMoviesStore } from "../../config/store/store";
 import { SwitchTab } from "../../core/SwitchTab";
 import { Slider } from "../../core/Slider";
@@ -25,7 +23,7 @@ export const Popular = () => {
   return (
     <div className="mb-10">
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-2xl font-bold dark:text-white">{t('popular')}</h2>
+        <h2 className="text-xl md:text-2xl md:font-bold dark:text-white">{t('popular')}</h2>
         <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />
       </div>
       <Slider data={data} status={status} />

@@ -1,12 +1,12 @@
-import { CircleRating } from "../../core/components/Icons/CircleRating";
-import { IMovie } from "../../interfaces/IMovie";
+import { CircleRating } from "../../../core/components/Icons/CircleRating";
+import { IMovie } from "../../../interfaces/IMovie";
 import { Suspense } from 'react';
-import { LoadingSpinner } from "../../core/LoadingSpinner";
-import { useInitialScroll } from "../../hooks/useInitialScroll";
-import { useVideos } from "../../hooks/useMovies";
-import { useMoviesStore } from "../../config/store/store";
-import { ModalVideo } from "./ModalVideo";
-import { ButtonWatchTrailer } from "../../core/ButtonWatchTrailer";
+import { LoadingSpinner } from "../../../core/LoadingSpinner";
+import { useInitialScroll } from "../../../hooks/useInitialScroll";
+import { useVideos } from "../../../hooks/useMovies";
+import { useMoviesStore } from "../../../config/store/store";
+import { ModalVideo } from "../Modals/ModalVideo";
+import { ButtonWatchTrailer } from "../../../core/ButtonWatchTrailer";
 
 type DetailsBannerProps = {
   data: IMovie;
@@ -21,9 +21,6 @@ export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
    const trailer = videos?.results.find((video: {type: string}) => video.type === "Trailer") //guardamos solo el trailer
    const rate = data?.vote_average?.toString().substring(0, 3);
    const date = data?.release_date?.substring(0, 4);
-   
-
-  
 
 
   return (

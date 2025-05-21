@@ -1,9 +1,9 @@
 import { FaFacebook, FaTwitter, FaYoutube, FaInstagram, FaTiktok, FaRegCommentDots  } from "react-icons/fa";
 import { MdOutlineTextSnippet, MdOndemandVideo, MdOutlineInsertPhoto  } from "react-icons/md";
-import { DetailsInformation } from "../components/Details/DetailsInformation";
-import { Reviews } from "../components/Details/Reviews";
-import { Backdrops } from "../components/Details/Backdrops";
-import { Videos } from "../components/Details/Videos";
+import { DetailsInformation } from "../components/Details/Sections/DetailsInformation";
+import { Reviews } from "../components/Details/Sections/Reviews";
+import { Images } from "../components/Details/Sections/Images";
+import { Videos } from "../components/Details/Sections/Videos";
 
 export const sortOptions = [
   { key: "vote_count.desc", label: "Most Known For"},
@@ -40,18 +40,11 @@ export const sortOptions = [
     { key: "tiktok_id", label: "TikTok", icon: FaTiktok, web: 'https://www.tiktok.com/@' },
   ];
 
-  const monthsMap = new Map([
-    ["01", "Enero"], ["02", "Febrero"], ["03", "Marzo"], ["04", "Abril"],
-    ["05", "Mayo"], ["06", "Junio"], ["07", "Julio"], ["08", "Agosto"],
-    ["09", "Septiembre"], ["10", "Octubre"], ["11", "Noviembre"], ["12", "Diciembre"]
-  ]);
-  
-
 
   export const detailsOptions = [
     { key: "information", label: "info", component: DetailsInformation, icon:MdOutlineTextSnippet  },
     { key: "videos", label: "videos", component: Videos, icon:MdOndemandVideo },
-    { key: "images", label: "images", component: Backdrops, icon:MdOutlineInsertPhoto },
+    { key: "images", label: "images", component: Images, icon:MdOutlineInsertPhoto },
     { key: "reviews", label: "reviews", component: Reviews, icon:FaRegCommentDots },
   ]
  

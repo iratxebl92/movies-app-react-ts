@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useMoviesStore } from "../../config/store/store";
-import { useDetailsAndCast, useSeasonDetails } from "../../hooks/useMovies";
-import OptionsSelect from "../../core/OptionsSelect";
-import { formatDate } from "../../utils/filters";
-import { StarIcon } from "../../core/components/Icons/StarIcon";
+import { useMoviesStore } from "../../../config/store/store";
+import { useDetailsAndCast, useSeasonDetails } from "../../../hooks/useMovies";
+import OptionsSelect from "../../../core/OptionsSelect";
+import { formatDate } from "../../../utils/filters";
+import { StarIcon } from "../../../core/components/Icons/StarIcon";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const Season = ({ id, type }: { id: number; type: string }) => {

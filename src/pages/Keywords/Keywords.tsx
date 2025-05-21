@@ -8,19 +8,23 @@ import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react"
 import MovieSkeletonList from "../../components/Skeleton/MovieSkeletonList";
 
-
+type urlParamsType = {
+  idAndName: string; 
+  type: "movie" | "tv";
+}
 
 export const Keywords = () => {
    const {keywordsOption, keywordsSelected, language} = useMoviesStore()
   const {t} = useTranslation()
-  const { idAndName } = useParams(); // ${id}-${name.replace(/\s+/g, "-")}
+  const { idAndName } = useParams<urlParamsType>(); // ${id}-${name.replace(/\s+/g, "-")}
  
-  if(!idAndName) return;
+  if(!idAndName) return null;
 
-  const [id, ...rest] = idAndName.split("-"); //Mirar abajo apuntes
-
+  const [id, ...rest] = idAndName.split("-") || []; //Mirar abajo apuntes
   const name = rest.join(" ");
-    const {data, status, isLoading} = useContentKeywords(keywordsSelected, id, language) 
+  if (!id) return null; 
+  
+    const {data, isLoading} = useContentKeywords(keywordsSelected, id, language) 
     
     const results = data?.results
     const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
@@ -46,9 +50,9 @@ export const Keywords = () => {
 
   return (
     <AnimatePresence initial={false}>
-      <motion.div key={keywordsOption} {...opacityMotionTransition}>
+      <motion.div key={keywordsSelected} {...opacityMotionTransition}>
     
-    <div className="mt-7">
+    <div className="mt-7 min-h-[calc(100vh-200px)]">
       <p className="mb-10 text-3xl font-semibold text-center"> {t("resultsKeywordsTitle")} <span className="font-bold"> {name} </span> </p>
       <div className="flex justify-center">
       <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />

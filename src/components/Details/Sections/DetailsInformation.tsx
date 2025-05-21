@@ -1,27 +1,32 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { IMovie } from "../../interfaces/IMovie";
-import { useCredits, useKeywords, useLanguages, useMovieCredits, useTvCredits, useWatchProviders } from "../../hooks/useMovies";
+import { IMovie } from "../../../interfaces/IMovie";
+import { useCredits, useKeywords, useLanguages, useWatchProviders } from "../../../hooks/useMovies";
 import { useNavigate } from "react-router-dom";
-import { Cast } from "./Cast";
+import { Cast } from "../Cast/Cast";
 import { useEffect, useState } from "react";
 import { IoTicketOutline, IoCalendarOutline, IoLanguageOutline, IoFilmOutline, IoTimeOutline } from "react-icons/io5";
 import { TbBrandNetflix, TbBrandApple, TbMovie, TbBrandDisney } from "react-icons/tb";
 import { SiHbo, SiAmazon } from "react-icons/si";
 import { SlPeople } from "react-icons/sl";
+import { ICast } from '../../../interfaces/ICast';
 // Extender la interfaz IMovie para incluir las propiedades que faltan
-interface ExtendedMovie extends IMovie {
-  number_of_seasons?: number;
-  number_of_episodes?: number;
-}
+
 
 type DetailsInformationProps = {
-  data: ExtendedMovie;
+  data: IMovie;
   type: string;
 };
 
+interface Provider {
+  provider_id: number;
+  provider_name: string;
+  logo_path: string;
+  display_priority?: number;
+}
+
 export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
-  const [providersResults, setProvidersResults] = useState<any[]>([]);
+  const [providersResults, setProvidersResults] = useState<Provider[]>([]);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { data: keywords } = useKeywords(type, data?.id);
@@ -32,6 +37,9 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
     type === "tv" ? `/tv/${data?.id}/aggregate_credits` : `/movie/${data?.id}/credits`
   
 )
+console.log(providersResults)
+console.log(watchProviders)
+
 
   // Unifica los posibles arrays de keywords
  const allKeywords = [
@@ -66,10 +74,10 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
   const directorNames = director?.map((crew) => crew.name).join(", ");
   const writerNames = writer?.map((crew) => crew.name).join(", ");
 
-  const getProviderIcon = (providerName: string) => {
-    const provider = providers.find(p => p.provider_name === providerName);
-    return provider?.icon || null;
-  };
+  // const getProviderIcon = (providerName: string) => {
+  //   const provider = providers.find(p => p.provider_name === providerName);
+  //   return provider?.icon || null;
+  // };
 
   const actualLanguage = languages?.find((language: any) => language.iso_639_1 === data?.original_language)
 
@@ -86,10 +94,10 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
           </h2>
           
           <div className="space-y-3 md:space-y-6">
-            {/* Tarjeta de título y lenguaje en móvil */}
-            <div className="grid grid-cols-2 gap-3">
-              {/* Título */}
-              <div className="flex items-start gap-3 bg-gray-100/50 dark:bg-neutral-800/50 rounded-lg p-3 flex-1">
+            {/* Tarjeta de titulo, language, status, studio*/}
+            <div className="grid grid-cols-1 gap-3">
+      
+              <div className="flex  items-start gap-3 bg-gray-100/50 dark:bg-neutral-800/50 rounded-lg p-3 flex-1">
                 <div className="p-2 bg-blue-500/20 rounded-lg">
                   <IoTicketOutline size={20} className="text-blue-600 dark:text-blue-400" />
                 </div>
@@ -97,9 +105,8 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
                   <h3 className="text-xs font-medium text-gray-500 dark:text-neutral-400 mb-0.5">{t("title")}</h3>
                   <p className="text-sm md:text-base font-medium text-gray-900 dark:text-white line-clamp-2">{data?.name || data?.title}</p>
                 </div>
+                
               </div>
-              
-              {/* Lenguaje */}
               <div className="flex items-start gap-3 bg-gray-100/50 dark:bg-neutral-800/50 rounded-lg p-3">
                 <div className="p-2 bg-green-500/20 rounded-lg">
                   <IoLanguageOutline size={20} className="text-green-600 dark:text-green-400" />
@@ -109,11 +116,6 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
                   <p className="text-sm md:text-base font-medium text-gray-900 dark:text-white">{actualLanguage?.name}</p>
                 </div>
               </div>
-            </div>
-            
-            {/* Estado y Estudio en móvil */}
-            <div className="grid grid-cols-2 gap-3">
-              {/* Estado */}
               <div className="flex items-start gap-3 bg-gray-100/50 dark:bg-neutral-800/50 rounded-lg p-3 flex-1">
                 <div className="p-2 bg-yellow-500/20 rounded-lg">
                   <IoCalendarOutline size={20} className="text-yellow-600 dark:text-yellow-400" />
@@ -122,9 +124,7 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
                   <h3 className="text-xs font-medium text-gray-500 dark:text-neutral-400 mb-0.5">{t("status")}</h3>
                   <p className="text-sm md:text-base font-medium text-gray-900 dark:text-white">{data?.status}</p>
                 </div>
-              </div>
-              
-              {/* Estudio */}
+            </div>
               <div className="flex items-start gap-3 bg-gray-100/50 dark:bg-neutral-800/50 rounded-lg p-3">
                 <div className="p-2 bg-purple-500/20 rounded-lg">
                   <IoFilmOutline size={20} className="text-purple-600 dark:text-purple-400" />
@@ -243,7 +243,7 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
-            {credits?.cast?.slice(0, 11).map((cast) => (
+            {credits?.cast?.slice(0, 11).map((cast: ICast) => (
               <Cast key={cast.id} cast={cast} />
             ))}
           </div>

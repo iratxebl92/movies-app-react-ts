@@ -1,12 +1,8 @@
-
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useMoviesStore } from '../../../config/store/store';
 
 
 export const CircleRating = ({rating}:any) => {
-  const {theme} = useMoviesStore();
- 
   return (
     <div className='circleRating'>
    <CircularProgressbar

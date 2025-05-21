@@ -136,16 +136,10 @@ export const useLanguages = () => {
     queryFn: () => apiClient.findLanguages(),
   });
 }
-export const useTvCredits = ( id: number) => {
+export const useTvCredits = ( id: string) => {
   return useQuery({
     queryKey: ["tvCredits", id],
-    queryFn: () => apiClient.findTvCredits(id),
-  });
-}
-export const useMovieCredits = ( id: number) => {
-  return useQuery({
-    queryKey: ["movieCredits", id],
-    queryFn: () => apiClient.findMovieCredits(id),
+    queryFn: () => apiClient.findCredits(id),
   });
 }
 export const useCredits = (content: string) => {

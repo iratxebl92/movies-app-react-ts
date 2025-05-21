@@ -3,7 +3,7 @@ import { LoadingSpinner } from '../core/LoadingSpinner'
 import { ErrorBoundary } from '../core/ErrorBoundary'
 
 type LazyRouteProps = {
-  component: React.LazyExoticComponent<() => JSX.Element>
+  component: React.LazyExoticComponent<() => JSX.Element | null>
 }
 
 export const LazyRoute = ({ component: Component }: LazyRouteProps) => {

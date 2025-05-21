@@ -19,7 +19,7 @@ export const TopRated = () => {
   return (
     <div className="mb-10">
       <div className="flex justify-between items-center mb-5">
-        <h2 className="text-2xl font-bold dark:text-white">{t('topRated')}</h2>
+        <h2 className="text-xl md:text-2xl  md:font-bold dark:text-white">{t('topRated')}</h2>
         <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />
       </div>
       <Slider data={data} status={status} />

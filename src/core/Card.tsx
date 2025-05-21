@@ -1,6 +1,6 @@
 import * as motion from "motion/react-client"
 import { StarIcon } from "./components/Icons/StarIcon";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Definición de tipos para las props del componente
 // movie: contiene toda la información de la película

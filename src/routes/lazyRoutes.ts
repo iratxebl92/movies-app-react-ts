@@ -1,14 +1,15 @@
-import { lazy } from 'react'
+import { lazy, LazyExoticComponent } from 'react'
 
+type LazyComponent = LazyExoticComponent<() => JSX.Element | null>;
 
 // Lazy components with proper type definitions
-export const lazyComponents = {
+export const lazyComponents: Record<string, LazyComponent> = {
  
   Home: lazy(() => import('../pages/Home').then(module => ({ 
     default: module.Home 
   }))),
   
-  Details: lazy(() => import('../pages/Details/Details').then(module => ({ 
+  Details: lazy(() => import('../pages/Details').then(module => ({ 
     default: module.Details 
   }))),
   

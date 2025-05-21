@@ -1,36 +1,36 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useRef, useState } from "react";
-import { useMoviesStore } from "../../config/store/store";
+import { Fragment, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { Gallery } from "react-grid-gallery";
-import { IBackdrops } from "../../interfaces/IBackdrops";
 import Lightbox from "yet-another-react-lightbox";
 import { Fullscreen, Counter } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/counter.css";
+import { useMoviesStore } from "../../../config/store/store";
 
-type BackdropsModalProps = {
-  backdrops: IBackdrops[];
+// Tipos
+type Backdrop = {
+  file_path: string;
 };
-
-type Image = {
+type GalleryImage = {
   src: string;
   width: number;
   height: number;
   thumbnail: string;
 };
 
-export const BackdropModal = ({ backdrops }) => {
+export const BackdropModal = ({ backdrops }: { backdrops: Backdrop[] }) => {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { openBackdropModal, setOpenBackdropModal } = useMoviesStore();
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null); //index img selected
 
   // Convertir imágenes al formato de react-grid-gallery
-  const images: Image[] = backdrops.map((element: IBackdrops) => ({
+  const images: GalleryImage[] = backdrops.map((element) => ({
     src: `https://www.themoviedb.org/t/p/original/${element.file_path}`,
     width: 1920,
     height: 1080,
     thumbnail: `https://www.themoviedb.org/t/p/w300/${element.file_path}`,
   }));
+
   return (
     <Transition appear show={openBackdropModal} as={Fragment}>
       <Dialog
@@ -62,7 +62,6 @@ export const BackdropModal = ({ backdrops }) => {
                 index={lightboxIndex}
                 slides={images.map((img) => ({ src: img.src }))}
                 plugins={[Fullscreen, Counter]}
-               
               />
             )}
           </div>

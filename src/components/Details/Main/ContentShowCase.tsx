@@ -1,29 +1,50 @@
 import React, { Suspense, lazy, useMemo, useEffect } from "react"
 import { useState } from "react"
-import { IMovie } from "../../interfaces/IMovie"
-import { detailsOptions } from "../../utils/filters"
-import { LoadingSpinner } from "../../core/LoadingSpinner"
+import { IMovie } from "../../../interfaces/IMovie"
+import { detailsOptions } from "../../../utils/filters"
+import { LoadingSpinner } from "../../../core/LoadingSpinner"
 import { useTranslation } from "react-i18next"
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from "react-router-dom";
 import { FaTv } from "react-icons/fa";
-import { Images } from "./Images"
+
 
 // Lazy loading de componentes para mejorar el rendimiento inicial
 // Cada componente se cargará solo cuando sea necesario
-const Season = lazy(() => import('./Season').then(module => ({ default: module.Season })))
-const Information = lazy(() => import('./DetailsInformation').then(module => ({ default: module.DetailsInformation })))
-const Videos = lazy(() => import('./Videos').then(module => ({ default: module.Videos })))
-const Backdrops = lazy(() => import('./Backdrops').then(module => ({ default: module.Backdrops })))
-const Reviews = lazy(() => import('./Reviews').then(module => ({ default: module.Reviews })))
+const Season = lazy(() => import('../Sections/Season').then(module => ({ default: module.Season })))
+const Information = lazy(() => import('../Sections/DetailsInformation').then(module => ({ default: module.DetailsInformation })))
+const Videos = lazy(() => import('../Sections/Videos').then(module => ({ default: module.Videos })))
+const Images = lazy(() => import('../Sections/Images').then(module => ({ default: module.Images })))
+const Reviews = lazy(() => import('../Sections/Reviews').then(module => ({ default: module.Reviews })))
 
 // Interfaz que define la estructura de cada opción en el menú de pestañas
-interface DetailOption {
-    key: string;
-    label: string;
-    component: React.ComponentType<any>;
-    icon: React.ElementType;
+
+//interface: Es una forma de definir la forma (shape) de un objeto, principalmente para objetos y clases.
+//type: Es una forma más general de definir tipos, puede ser para objetos, uniones, primitivas, funciones, etc.
+
+type MediaType = "movie" | "tv";
+
+interface DetailsInformationProps  {
+    data: IMovie;
+    type: MediaType;
+  };
+interface DetailsOptionsProps  {
+    id: number;
+    type: MediaType;
 }
+type DetailOption =
+  | {
+      key: string;
+      label: string;
+      component: React.ComponentType<DetailsInformationProps>;
+      icon: React.ElementType;
+    }
+  | {
+      key: string;
+      label: string;
+      component: React.ComponentType<DetailsOptionsProps>;
+      icon: React.ElementType;
+    };
 
 // Props que recibe el componente
 type ContentShowcaseProps = {

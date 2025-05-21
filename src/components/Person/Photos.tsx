@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 export const Photos = () => {
   const { idAndName } = useParams();
+  if (!idAndName) return null;
   const [id] = idAndName.split("-");
   const { data, isLoading } = usePersonImages(Number(id));
   const [showSkeleton, setShowSkeleton] = useState(true);
@@ -20,6 +21,7 @@ export const Photos = () => {
 
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [isLoading]);
 
   if (isLoading || showSkeleton) {

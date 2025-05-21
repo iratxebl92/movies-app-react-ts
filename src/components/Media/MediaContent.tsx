@@ -5,36 +5,23 @@ import { Card } from "../../core/Card";
 import { IMovie } from "../../interfaces/IMovie";
 import { AnimatePresence, motion } from "motion/react";
 import { MediaPagination } from "./MediaPagination";
-import { MediaFilters } from "./MediaFilters";
 
 export const MediaContent = () => {
   const [page, setPage] = useState(1); // Estado para la página actual
   const [type, setType] = useState(""); // Estado para saber si es "movie" o "tv"
-  const [showSkeleton, setShowSkeleton] = useState(true); // Controla si se muestra el skeleton loader
 
   // Detecta si la ruta actual contiene "movies" para decidir el tipo
   useEffect(() => {
     location.pathname.includes("/movies") ? setType("movie") : setType("tv");
   }, [location.pathname]);
 
-  // Simula una carga inicial breve (usado para mostrar skeleton un momento)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSkeleton(false);
-    }, 200);
-
-    return () => clearTimeout(timer); // Limpia el timeout si el componente se desmonta
-  }, []);
-
   // Hook personalizado para obtener películas o series desde la API
   const {
-    status,
     isLoading,
     data,
     isError,
     error,
     isFetching,
-    isPlaceholderData,
   } = useMovies(type, "es", page);
 
   const results = data?.results; // Lista de películas/series
@@ -70,7 +57,6 @@ console.log(results)
     <>
     <div className="flex justify-center">
 
-      <MediaFilters />
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={page} // Clave para re-renderizar con animación al cambiar de página

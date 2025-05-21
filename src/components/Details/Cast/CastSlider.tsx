@@ -1,10 +1,8 @@
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
 import { Cast } from "./Cast";
-import { ICast } from "../../interfaces/ICast";
-import { ICrew } from "../../interfaces/ICrew";
-import { CastModal } from "./CastModal";
-import { useMoviesStore } from "../../config/store/store";
+import { ICast } from "../../../interfaces/ICast";
+import { ICrew } from "../../../interfaces/ICrew";
 import { useTranslation } from "react-i18next";
 
 type CastSliderProps = {
@@ -17,7 +15,6 @@ type CastSliderProps = {
 
 export const CastSlider = ({ castData, status = 'success' }: CastSliderProps) => {
   const { t } = useTranslation();
-  const { openCastModal, setOpenCastModal } = useMoviesStore();
 
   const skeletonSlides = Array.from({ length: 5 });
 
@@ -39,7 +36,6 @@ export const CastSlider = ({ castData, status = 'success' }: CastSliderProps) =>
             {t("topCast")}
             <button
               className="text-slate-600 font-normal text-sm ml-2 dark:text-textDark hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
-              onClick={() => setOpenCastModal(true)}
             >
               {t("cast")}
             </button>
@@ -77,7 +73,6 @@ export const CastSlider = ({ castData, status = 'success' }: CastSliderProps) =>
           )}
         </Swiper>
       </div>
-      {openCastModal && <CastModal castData={castData} />}
     </>
   );
 };

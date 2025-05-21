@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next"
-import { useRecommendations } from "../../hooks/useMovies"
-import { Card } from "../../core/Card"
+import { useRecommendations } from "../../../hooks/useMovies"
+import { Card } from "../../../core/Card"
 
-export const Recommendations = ({id, type, language}: {id: number, type: string, language: string}) => {
+export const Recommendations = ({id, type, language}: {id: string, type: string, language: string}) => {
 
   const {t} = useTranslation()
 
-    const {data: recommendations} = useRecommendations(type, id, language)
+    const {data: recommendations} = useRecommendations(type, Number(id), language)
   return (
     <div>
         <h2 className="text-2xl font-bold my-10 text-start">{t('recommendations')}</h2>

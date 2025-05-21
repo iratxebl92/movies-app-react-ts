@@ -1,12 +1,12 @@
 import { Fragment, useEffect, useState } from "react";
-import { Dialog, Transition, TransitionChild } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import ReactPlayer from "react-player";
-import { useMoviesStore } from "../../config/store/store";
+import { useMoviesStore } from "../../../config/store/store";
 import { IoMdClose } from "react-icons/io";
 
 export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
   
-    const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey, videos, setVideos } =
+    const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey, videos } =
       useMoviesStore();
       
       

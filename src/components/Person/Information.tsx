@@ -10,13 +10,15 @@ import { useEffect, useState } from "react";
 
 export const Information = () => {
   const {idAndName} = useParams()
+  if (!idAndName) return null;
   const [id] = idAndName.split("-");
   const {language} = useMoviesStore()
-  const {data, isLoading, isSuccess} = usePersonInformation(Number(id), language) 
+  const {data, isLoading} = usePersonInformation(Number(id), language) 
   const [showSkeleton, setShowSkeleton] = useState(true);
   const {t} = useTranslation()
 
   useEffect(() => {
+   
     if (!isLoading) {
       const timer = setTimeout(() => {
         setShowSkeleton(false);
@@ -24,7 +26,10 @@ export const Information = () => {
 
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [isLoading]);
+
+
   
   if(!data) return;
   const gender = data?.gender === 0 ? t("notSpecified") : data?.gender === 1 ? t("female") : t("male")
@@ -69,7 +74,7 @@ export const Information = () => {
         </div>
       </div>
       <div className="flex">
-       <SocialMedia id={id}/>
+       <SocialMedia id={Number(id)}/>
       </div>
     </div>
   );

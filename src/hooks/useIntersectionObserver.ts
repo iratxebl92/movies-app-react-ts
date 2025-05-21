@@ -7,6 +7,7 @@ export const useIntersectionObserver = (options = {}) => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
+      if (!entry) return;
       setIsVisible(entry.isIntersecting);
     }, {
       root: null,

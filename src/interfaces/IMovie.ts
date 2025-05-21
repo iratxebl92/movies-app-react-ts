@@ -27,6 +27,8 @@ export interface IMovie {
         cast: Array<{ id: number; name: string }> | Array<any>
         crew: Array<{ id: number; name: string }> | Array<any>
     }
+    number_of_seasons?: number;
+  number_of_episodes?: number;
   }
 
 //   https://github.com/ionivetech/movie-app/blob/main/src/interfaces/IMovie.ts
