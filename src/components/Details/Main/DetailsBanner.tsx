@@ -1,19 +1,21 @@
 import { CircleRating } from "../../../core/components/Icons/CircleRating";
 import { IMovie } from "../../../interfaces/IMovie";
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { LoadingSpinner } from "../../../core/LoadingSpinner";
 import { useInitialScroll } from "../../../hooks/useInitialScroll";
 import { useVideos } from "../../../hooks/useMovies";
 import { useMoviesStore } from "../../../config/store/store";
 import { ModalVideo } from "../Modals/ModalVideo";
 import { ButtonWatchTrailer } from "../../../core/ButtonWatchTrailer";
+import { DetailsBannerSkeleton } from "../../Skeleton/Details/DetailsBannerSkeleton";
 
 type DetailsBannerProps = {
   data: IMovie;
   type: string;
+  isLoading: boolean;
 };
 
-export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
+export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => {
   useInitialScroll();
    
    const { openVideoModal } = useMoviesStore()
@@ -21,10 +23,28 @@ export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
    const trailer = videos?.results.find((video: {type: string}) => video.type === "Trailer") //guardamos solo el trailer
    const rate = data?.vote_average?.toString().substring(0, 3);
    const date = data?.release_date?.substring(0, 4);
+   const [showSkeleton, setShowSkeleton] = useState(true);
 
-
+   useEffect(() => {
+    
+     if (!isLoading) {
+       const timer = setTimeout(() => {
+         setShowSkeleton(false);
+       }, 1500);
+ 
+       return () => clearTimeout(timer);
+     }
+     return undefined;
+   }, [isLoading]);
+ 
+ 
+    if (isLoading || showSkeleton) {
+      return <DetailsBannerSkeleton />;
+      }
+    
+    if(!data) return null;
   return (
-    <Suspense fallback={<LoadingSpinner />}>
+  
     <div className="relative w-full">
       {/* Hero Banner Section */}
       <div 
@@ -49,7 +69,7 @@ export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
               />
             </div>
             <div className="text-white flex flex-col gap-2 md:gap-4 text-start">
-              <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold">{data?.title}</h1>
+              <p className="text-3xl md:text-4xl lg:text-6xl font-bold">{data?.title ? data?.title : data?.name}</p>
               <p className="text-lg md:text-xl lg:text-2xl text-gray-200 italic">
                 {data?.tagline}
               </p>
@@ -94,7 +114,7 @@ export const DetailsBanner = ({ data, type }: DetailsBannerProps) => {
         </div>
       </div>
     </div>
-    </Suspense>
+
   );
 };
 

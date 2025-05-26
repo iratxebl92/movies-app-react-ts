@@ -37,9 +37,6 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
     type === "tv" ? `/tv/${data?.id}/aggregate_credits` : `/movie/${data?.id}/credits`
   
 )
-console.log(providersResults)
-console.log(watchProviders)
-
 
   // Unifica los posibles arrays de keywords
  const allKeywords = [

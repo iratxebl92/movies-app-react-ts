@@ -17,15 +17,15 @@ export const Details = () => {
     if (!idAndName || !type) {
         return null;
       }
-    console.log(idAndName, "idAndName")
+ 
     const id = idAndName.split("-")[0] || "";
     const {language} = useMoviesStore()
 
-    const {data} = useDetailsAndCast(type || 'movie', Number(id), language)
+    const {data, isLoading} = useDetailsAndCast(type || 'movie', Number(id), language)
   return (
     <div className="dark:bg-dark text-center align-center justify-center mx-auto">
     
-    <DetailsBanner data={data} type={type} />
+    <DetailsBanner data={data} type={type} isLoading={isLoading} />
       <section className="px-8">
        <ContentShowcase data={data} type={type} />
        <Recommendations id={id} type={type} language={language} />

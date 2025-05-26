@@ -50,6 +50,7 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
   return (
     <>
       <OptionsSelect 
+        optionKey="type"
         style={{width: '300px', marginLeft: '20px'}} 
         value={selectedType}
         onOptionChange={handleOptionChange}

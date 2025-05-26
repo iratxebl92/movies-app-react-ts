@@ -28,8 +28,10 @@ export const Photos = () => {
     return <PhotosSkeleton />;
   }
 
+  if(!data) return null;
+
   return (
-    <div>
+    <div className="px-8">
       <Swiper className="mySwiper" spaceBetween={15} slidesPerView="auto">
         {data?.profiles?.map((image: any, index: number) => (
           <SwiperSlide key={index} className="flex flex-col !w-auto">

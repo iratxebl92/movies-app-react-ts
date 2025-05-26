@@ -1,6 +1,6 @@
 export default function SkeletonKeywords() {
    return (
-    <div className="!w-[160px] sm:!w-[180px] md:!w-[200px] lg:!w-[220px]">
+    <div className="!w-[160px] sm:!w-[180px] md:!w-[200px] lg:!w-[220px] animate-pulse ">
         <div className="flex flex-col gap-3">
                  {/* Contenedor con aspect ratio 2:3 para el skeleton */}
                  <div className="relative pb-[150%] w-full overflow-hidden">

@@ -23,6 +23,7 @@ export const Season = ({ id, type }: { id: number; type: string }) => {
   return (
     <>
       <OptionsSelect
+        optionKey="season"
         options={seasons}
         style={{ width: "300px" }}
         value={data?.seasons.find((s: any) => s.season_number === selectedSeason)?.name || seasons[0]}

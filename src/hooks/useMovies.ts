@@ -149,6 +149,8 @@ export const useCredits = (content: string) => {
   });
 }
 
+
+
 /*
 La queryKey es como el "ID" de los datos que estás pidiendo. React Query la usa para:
 

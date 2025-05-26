@@ -61,7 +61,7 @@ useEffect(() => {
     setDepartmentSelected(option)
 
    }
-   console.log(selectMovies)
+ 
   return (
     <>
           <SwitchTab

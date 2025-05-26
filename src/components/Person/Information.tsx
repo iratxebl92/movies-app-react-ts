@@ -14,8 +14,8 @@ export const Information = () => {
   const [id] = idAndName.split("-");
   const {language} = useMoviesStore()
   const {data, isLoading} = usePersonInformation(Number(id), language) 
-  const [showSkeleton, setShowSkeleton] = useState(true);
   const {t} = useTranslation()
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   useEffect(() => {
    

@@ -26,7 +26,7 @@ export const Card = ({
   // Función para navegar a la página de detalles
   // Determina si es una película o serie TV basado en first_air_date
   const prueba = (id:number, first_air_date: any, name: string) => {
-    console.log(name)
+  
     const type = first_air_date ? 'tv' : 'movie'
     navigate(`/details/${type}/${id}-${name.replace(/\s+/g, "-")}`)
 

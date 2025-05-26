@@ -101,7 +101,7 @@ const findLanguages = async() => {
 const findCredits = async(content:string) => {
   const response = await apiBase.get(getCredits(content))
   return response.data
-}
+  }
 
 const apiClient = {
   findTrendingMovies,
@@ -124,7 +124,7 @@ const apiClient = {
   findSeasonDetails,
   findRecommendations,
   findLanguages,
-  findCredits
+  findCredits,
 };
 
 export default apiClient;

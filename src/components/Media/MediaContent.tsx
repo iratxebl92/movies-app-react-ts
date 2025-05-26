@@ -5,6 +5,7 @@ import { Card } from "../../core/Card";
 import { IMovie } from "../../interfaces/IMovie";
 import { AnimatePresence, motion } from "motion/react";
 import { MediaPagination } from "./MediaPagination";
+import { MediaFilters } from "./MediaFilters";
 
 export const MediaContent = () => {
   const [page, setPage] = useState(1); // Estado para la página actual
@@ -56,7 +57,9 @@ console.log(results)
   return (
     <>
     <div className="flex justify-center">
-
+      <div className="hidden xl:block w-[20rem]">
+      <MediaFilters/>
+      </div>
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={page} // Clave para re-renderizar con animación al cambiar de página
@@ -64,7 +67,7 @@ console.log(results)
           
           className=""
         >
-          <div className="flex flex-wrap">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 m-4">
             {isFetching || isLoading ? (
               // Si se está haciendo fetch entre páginas, mostrar skeleton encima
               <div className="h-full w-full p-2">
@@ -76,7 +79,6 @@ console.log(results)
                 <Card
                   key={result.id}
                   movie={result}
-                  style={{ width: "200px", margin: "20px" }}
                 />
               ))
             )}
@@ -96,28 +98,3 @@ console.log(results)
     </>
   );
 };
-
-
- {/* <div className="flex justify-center ml-4 mt-4 pb-10">
-    <button
-      className="p-4 bg-slate-500"
-      onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-      disabled={page === 1 || isFetching}
-    >
-      <span> Previous </span>
-    </button>
-    <p className="p-2 mx-2 border-2 border-red-700 rounded-xl" >{page}</p>
-   {
-    Array.from({length: page === data?.total_pages ? page : 5}).map((_, index) => (
-      <p className="p-2 mx-2 border-2 border-red-700 rounded-xl" >{index + 1}</p>
-
-    ))
-   }
-    <button
-      className="p-4 bg-slate-500"
-      onClick={() => setPage((prev) => prev + 1)}
-      disabled={isFetching || page === data?.total_pages}
-    >
-      <span> Next </span>
-    </button>
-  </div> */}

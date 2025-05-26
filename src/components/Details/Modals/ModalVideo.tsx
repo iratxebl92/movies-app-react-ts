@@ -13,7 +13,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
     const [prevDisabled, setPrevDisabled] = useState(false)
     const [nextDisabled, setNextDisabled] = useState(false)
 
-console.log(currentVideoIndex, "currentVideoIndex")
+
   useEffect(() => {
   }, [videos])
   
