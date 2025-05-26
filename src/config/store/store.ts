@@ -37,6 +37,8 @@ interface MoviesStore {
   selectedVideoKey: string;
   setSelectedVideoKey: (key: string) => void;
   setVideos: (videos: any) => void;
+  genresSelected: string[];
+  setGenresSelected: (genres: string[]) => void
 
 }
 
@@ -77,6 +79,10 @@ export const useMoviesStore = create<MoviesStore>()(
       setCurrentVideoIndex: (index: number) => set({ currentVideoIndex: index }),
       selectedVideoKey: '',
       setSelectedVideoKey: (key: string) => set({ selectedVideoKey: key }),
+      genresSelected: [],
+      setGenresSelected: (genres: string[]) => set({
+        genresSelected: genres
+      })
     }),
     {
       name: 'movies-store', // Nombre del localStorage

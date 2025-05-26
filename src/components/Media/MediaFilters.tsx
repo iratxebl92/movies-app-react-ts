@@ -5,6 +5,7 @@ import { RuntimesRange } from "./Filters/RuntimesRange";
 import { GenreList } from "./Filters/GenreList";
 import { SortBy } from "./Filters/SortBy";
 import { ReleaseData } from "./Filters/ReleaseData";
+import { useMoviesStore } from "../../config/store/store";
 
 type FiltersType = {
   releaseDate: string[];
@@ -13,7 +14,7 @@ type FiltersType = {
   runtime: number[];
   sortBy: string;
   language: null;
-  genres: never[];
+  genres: string[] | undefined;
   originCountry: null;
 };
 
@@ -29,9 +30,20 @@ const DEFAULT_FILTERS: FiltersType = {
 };
 export const MediaFilters = () => {
 
+const {genresSelected } = useMoviesStore()
 
   const [filtersParams, setFiltersParams] =
-    useState<FiltersType>(DEFAULT_FILTERS);
+    useState<FiltersType>({
+  releaseDate: ["", `${new Date().getFullYear()}-12-31`],
+  voteAverage: [0, 10],
+  minVoteCount: 0,
+  runtime: [0, 300],
+  sortBy: "popularity.desc",
+  language: null,
+  genres: genresSelected,
+  originCountry: null,
+    });
+    // crear un useEfect y probar a actualizar cada vez que cambie alguna de las propiedades, haciendo que coincida la que cambie y las otras manteniendolas igual.
 
   return (
     <div className="h-auto border-2 border-gray-500 w-full pb-36">

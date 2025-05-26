@@ -57,7 +57,7 @@ console.log(results)
   return (
     <>
     <div className="flex justify-center">
-      <div className="hidden xl:block w-[20rem]">
+      <div className="hidden lg:block w-[20rem]">
       <MediaFilters/>
       </div>
       <AnimatePresence mode="wait" initial={false}>
