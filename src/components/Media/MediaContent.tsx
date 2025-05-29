@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useMoviesStore } from "../../config/store/store";
 import { useMovies } from "../../hooks/useMovies";
 import MovieSkeletonList from "../Skeleton/MovieSkeletonList";
 import { Card } from "../../core/Card";
@@ -6,10 +7,13 @@ import { IMovie } from "../../interfaces/IMovie";
 import { AnimatePresence, motion } from "motion/react";
 import { MediaPagination } from "./MediaPagination";
 import { MediaFilters } from "./MediaFilters";
+import { useLocation } from "react-router-dom";
 
 export const MediaContent = () => {
+  const location = useLocation();
   const [page, setPage] = useState(1); // Estado para la página actual
   const [type, setType] = useState(""); // Estado para saber si es "movie" o "tv"
+  const { filterParams } = useMoviesStore();
 
   // Detecta si la ruta actual contiene "movies" para decidir el tipo
   useEffect(() => {
@@ -23,10 +27,25 @@ export const MediaContent = () => {
     isError,
     error,
     isFetching,
-  } = useMovies(type, "es", page);
+  } = useMovies(
+    type,
+    filterParams.language,
+    page, // page
+    filterParams.runtime_min,
+    filterParams.runtime_max,
+    filterParams.vote_average_min,
+    filterParams.vote_average_max,
+    filterParams.vote_count_min,
+    filterParams.vote_count_max,
+    filterParams.release_date_min,
+    filterParams.release_date_max,
+    filterParams.genres || [],
+    filterParams.sort_by,
+    );
 
   const results = data?.results; // Lista de películas/series
-console.log(results)
+  console.log( filterParams.genres, "results")
+
   // Si se está cargando por primera vez, mostrar skeleton
   if (isLoading) {
     return <MovieSkeletonList />;

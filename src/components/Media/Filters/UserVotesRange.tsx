@@ -1,22 +1,29 @@
 import { useState } from "react";
 import { Slider } from "radix-ui";
+import { useMoviesStore } from "../../../config/store/store";
 
 export const UserVotesRange = () => {
-    const [values, setValues] = useState<number>(0);
+    const [minVoteCount, setMinVoteCount] = useState(0)
+	const {setFilterParams, filterParams} = useMoviesStore()
 
+	const handleUserVotes = (votes: number) => {
+	
+		setMinVoteCount(votes)
+		setFilterParams({vote_count_min: votes})
+	}
   return (
 <>
 <div className="flex justify-between mb-4"> 
 	<p>Minimum User Votes </p>
-	<p> Min: {values}</p>
+	<p> Min: {minVoteCount}</p>
 </div>
     <form>
     <Slider.Root
 			className="relative flex h-5 w-full touch-none select-none items-center"
-			defaultValue={[values]}
+			defaultValue={[minVoteCount]}
 			max={1000}
 			step={50}
-            onValueChange={(value) => setValues(value[0] ?? 0)}
+            onValueChange={(value) => handleUserVotes(value[0] ?? 0)}
 			minStepsBetweenThumbs={50}
             >
 			<Slider.Track className="relative h-[3px] grow rounded-full bg-black">

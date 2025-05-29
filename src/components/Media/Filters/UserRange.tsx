@@ -1,24 +1,34 @@
 
 
 import { Slider } from "radix-ui";
-import { useState } from "react";   
+import { useEffect, useState } from "react";   
+import { useMoviesStore } from "../../../config/store/store";
 export const UserRange = () => {
-    const [values, setValues] = useState([0, 10]);
-  
+	const [minVoteCount, setMinVoteCount] = useState(0)
+	const [maxVoteCount, setMaxVoteCount] = useState(10)
+	const {setFilterParams} = useMoviesStore()
+
+	const handleUserRating = (votes: number[]) => {
+		setMinVoteCount(votes[0] || 0)
+		setMaxVoteCount(votes[1] || 10)
+	}
+  useEffect(() => {
+	setFilterParams({vote_average_min: minVoteCount, vote_average_max: maxVoteCount})
+  }, [minVoteCount, maxVoteCount])
   return (
 <>
 <div className="flex justify-between mb-4"> 
 	<p>User Rating</p>
-	<p>{values[0]} - {values[1]}</p>
+	<p>{minVoteCount} - {maxVoteCount}</p>
 </div>
     <form>
 		<Slider.Root
 			className="relative flex h-5 w-full touch-none select-none items-center"
-			defaultValue={values}
+			defaultValue={[minVoteCount, maxVoteCount]}
             min={0}
 			max={10}
 			step={0.5}
-            onValueChange={(value) => setValues(value)}
+            onValueChange={(value) => handleUserRating(value)}
             minStepsBetweenThumbs={0.5}
 		>
 			<Slider.Track className="relative h-[3px] grow rounded-full bg-black">

@@ -16,8 +16,7 @@ export const GenreList = () => {
   const type = location.pathname.includes("movies") ? "movie" : "tv";
   const { data: genreList } = useGenresList(type);
   const [genres, setGenres] = useState<any>([]); // all genres
-  const [selectedGenres, setSelectedGenres] = useState<any>([]) // selected genres
-  const {genresSelected, setGenresSelected } = useMoviesStore()
+  const { setFilterParams } = useMoviesStore()
 
   useEffect(() => {
   
@@ -32,10 +31,9 @@ export const GenreList = () => {
   }, [genreList])
   useEffect(() => {
     const selectedGenres = genres.filter((genre: GenreListType) => genre.selected === true)
-    setSelectedGenres(selectedGenres)
-    setGenresSelected(selectedGenres)
+    setFilterParams({ genres: selectedGenres.map((genre: GenreListType) => genre.id)})
   }, [genres])
-  
+
 
   const handleGenres = (clickedGenre: GenreListType) => {
     const updatedGenres = genres.map((genre: GenreListType) =>

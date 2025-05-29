@@ -111,7 +111,6 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
   return (
     <>
       <OptionsSelect
-        optionKey="imagesType"
         options={options}
         style={{ width: "300px", marginLeft: "20px" }}
         value={imagesType}

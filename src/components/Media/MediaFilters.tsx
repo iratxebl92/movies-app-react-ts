@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { UserRange } from "./Filters/UserRange";
 import { UserVotesRange } from "./Filters/UserVotesRange";
 import { RuntimesRange } from "./Filters/RuntimesRange";
@@ -6,43 +6,14 @@ import { GenreList } from "./Filters/GenreList";
 import { SortBy } from "./Filters/SortBy";
 import { ReleaseData } from "./Filters/ReleaseData";
 import { useMoviesStore } from "../../config/store/store";
+import { Language } from "./Filters/Language";
 
-type FiltersType = {
-  releaseDate: string[];
-  voteAverage: number[];
-  minVoteCount: number;
-  runtime: number[];
-  sortBy: string;
-  language: null;
-  genres: string[] | undefined;
-  originCountry: null;
-};
-
-const DEFAULT_FILTERS: FiltersType = {
-  releaseDate: ["", `${new Date().getFullYear()}-12-31`],
-  voteAverage: [0, 10],
-  minVoteCount: 0,
-  runtime: [0, 300],
-  sortBy: "popularity.desc",
-  language: null,
-  genres: [],
-  originCountry: null,
-};
 export const MediaFilters = () => {
 
-const {genresSelected } = useMoviesStore()
+const {filterParams} = useMoviesStore()
+  console.log(filterParams.release_date_max, "filterParams")
+  
 
-  const [filtersParams, setFiltersParams] =
-    useState<FiltersType>({
-  releaseDate: ["", `${new Date().getFullYear()}-12-31`],
-  voteAverage: [0, 10],
-  minVoteCount: 0,
-  runtime: [0, 300],
-  sortBy: "popularity.desc",
-  language: null,
-  genres: genresSelected,
-  originCountry: null,
-    });
     // crear un useEfect y probar a actualizar cada vez que cambie alguna de las propiedades, haciendo que coincida la que cambie y las otras manteniendolas igual.
 
   return (
@@ -55,6 +26,9 @@ const {genresSelected } = useMoviesStore()
       </div>
       <div>
         <SortBy/>
+      </div>
+      <div>
+        <Language/>
       </div>
       <div>
        
