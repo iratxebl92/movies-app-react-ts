@@ -25,6 +25,9 @@ export const lazyComponents: Record<string, LazyComponent> = {
   TvShows: lazy(() => import('../components/Media/MediaContent').then(module => ({ 
     default: module.MediaContent 
   }))),
+  CastPage: lazy(() => import('../pages/CastPage').then(module => ({ 
+    default: module.CastPage 
+  }))),
 } as const
 
 // Type for route configuration
@@ -59,5 +62,9 @@ export const routes: RouteConfig[] = [
   {
     path: '/tv-shows',
     component: 'TvShows'
+  },
+  {
+    path: '/cast/:type/:idAndName',
+    component: 'CastPage'
   }
 ] 

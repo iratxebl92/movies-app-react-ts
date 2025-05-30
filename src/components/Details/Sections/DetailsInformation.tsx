@@ -32,17 +32,19 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
   const { data: keywords } = useKeywords(type, data?.id);
   const { data: watchProviders } = useWatchProviders(type, data?.id);
   const { data: languages } = useLanguages();
-
+  
   const {data: credits} = useCredits(
     type === "tv" ? `/tv/${data?.id}/aggregate_credits` : `/movie/${data?.id}/credits`
-  
-)
+  )
+
+  const title = type === 'tv' ? data?.name : type === 'movie' ? data?.title : ''
 
   // Unifica los posibles arrays de keywords
  const allKeywords = [
    ...(keywords?.results || []),
    ...(keywords?.keywords || [])
  ];
+ console.log(data)
   
   const providers =  [
     { provider_name: "Netflix", logo_path: "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg", icon: <TbBrandNetflix className="text-red-600" size={20} /> },
@@ -231,10 +233,12 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
             </div>
             {credits?.cast && credits.cast.length > 11 && (
               <button 
-                onClick={() => navigate(`/cast/${data.id}`)}
+                // onClick={() => navigate(`/cast/${type}/${data.id}`)}
+                onClick={() => navigate(`/cast/${type}/${data.id}-${title?.replace(/\s+/g, "-")}`)
+}
                 className="text-xs md:text-sm bg-blue-100 hover:bg-blue-200 dark:bg-blue-600/20 dark:hover:bg-blue-600/40 text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-blue-200 dark:border-blue-600/40 transition-all"
               >
-                Ver todo el reparto
+                {t("cast")}
               </button>
             )}
           </div>
