@@ -45,21 +45,21 @@ export const CastPage = () => {
   return (
     <div className="max-w-1920 mx-10 min-h-[calc(100vh-160px)]">
       <p className="text-2xl sm:text-3xl text-center">{rest.join(" ")}</p>
-      <div className="flex flex-col sm:flex-row justify-between mt-5 sm:mt-10 ">
-        <p className="text-xl sm:text-2xl text-center mb-4 sm:mb-0 font-semibold">
+      <div className="flex flex-col sm:flex-row justify-start mt-5 sm:mt-10 max-w-[1550px] mx-auto">
+        <p className="text-xl sm:text-2xl text-center mb-4 sm:mb-0 font-semibold mr-10">
           Cast ({credits?.cast.length})
         </p>
         <input
           type="search"
           placeholder="Search cast"
-          className="rounded-lg placeholder:p-4 h-9 w-full sm:w-auto text-black p-4 "
+          className="rounded-lg placeholder:p-4 h-9 w-[187px] md:w-[250px] text-black p-4 "
           value={search}
           onChange={handleSearch}
         />
       </div>
      
         {newCast && newCast.length > 0 ? (
-                <div className="grid grid-cols-2 sm:flex gap-5 sm:flex-wrap sm:justify-center mt-10 last-of-type:justify-start">
+                <div className="grid grid-cols-2 sm:flex gap-5 sm:flex-wrap sm:justify-center mt-10 last-of-type:justify-start max-w-[1550px] mx-auto">
 
          { newCast.map((cast: ICast) =>( <Cast cast={cast} key={cast.id} />))}
           </div>
