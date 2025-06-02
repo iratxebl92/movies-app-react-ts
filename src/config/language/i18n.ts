@@ -11,6 +11,7 @@ i18n
       en: {
         translation: {
           age: "years old",
+          castNoAvalible: "There are no actors or actresses available with that name.",
           knownFor: "Known for",
           gender: "Gender",
           birthday: "Birthday",
@@ -65,6 +66,7 @@ i18n
       es: {
         translation: {
           age: "años",
+          castNoAvalible: "No hay actores ni actrices disponibles con ese nombre",
           knownFor: "Se conoce por",
           gender: "Género",
           birthday: "Cumpleaños",
