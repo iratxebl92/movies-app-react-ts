@@ -43,16 +43,16 @@ export const CastPage = () => {
 
   if (!credits) return null;
   return (
-    <div className="max-w-1920 mx-10 min-h-[calc(100vh-160px)] relative">
+    <div className="max-w-1920 mx-10 min-h-[calc(100vh-160px)]">
       <p className="text-2xl sm:text-3xl text-center">{rest.join(" ")}</p>
-      <div className="flex flex-col sm:flex-row justify-between mt-5 sm:mt-10">
+      <div className="flex flex-col sm:flex-row justify-between mt-5 sm:mt-10 ">
         <p className="text-xl sm:text-2xl text-center mb-4 sm:mb-0 font-semibold">
           Cast ({credits?.cast.length})
         </p>
         <input
           type="search"
           placeholder="Search cast"
-          className="rounded-lg placeholder:p-4 h-9 w-full sm:w-auto text-black p-4"
+          className="rounded-lg placeholder:p-4 h-9 w-full sm:w-auto text-black p-4 "
           value={search}
           onChange={handleSearch}
         />
@@ -65,7 +65,7 @@ export const CastPage = () => {
           </div>
           
         ) : (
-          <div className="flex items-center justify-center absolute inset-0">
+          <div className="flex items-center justify-center min-h-[calc(100vh-400px)]">
             <p className="text-2xl">{t("castNoAvalible")}</p>
           </div>
         )}
