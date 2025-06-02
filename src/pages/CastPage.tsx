@@ -40,12 +40,14 @@ export const CastPage = () => {
     console.log(prueba, "prueba");
     setNewCast(prueba);
   }, [search]);
+  console.log(credits?.cast)
 
   if (!credits) return null;
   return (
     <div className="max-w-1920 mx-10 min-h-[calc(100vh-160px)]">
       <p className="text-2xl sm:text-3xl text-center">{rest.join(" ")}</p>
-      <div className="flex flex-col sm:flex-row justify-start mt-5 sm:mt-10 max-w-[1550px] mx-auto">
+      <div className="flex flex-col sm:flex-row ml-8
+       mt-5 sm:mt-10 max-w-[1550px] mx-auto">
         <p className="text-xl sm:text-2xl text-center mb-4 sm:mb-0 font-semibold mr-10">
           Cast ({credits?.cast.length})
         </p>
@@ -59,9 +61,9 @@ export const CastPage = () => {
       </div>
      
         {newCast && newCast.length > 0 ? (
-                <div className="grid grid-cols-2 sm:flex gap-5 sm:flex-wrap sm:justify-center mt-10 last-of-type:justify-start max-w-[1550px] mx-auto">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 justify-center mt-10 max-w-[1550px] mx-auto">
 
-         { newCast.map((cast: ICast) =>( <Cast cast={cast} key={cast.id} />))}
+         { newCast.map((cast: ICast) =>( <Cast cast={cast} key={cast.id} className="w-48" imageClassName="mt-8" />))}
           </div>
           
         ) : (
