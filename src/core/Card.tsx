@@ -25,9 +25,9 @@ export const Card = ({
   
   // Función para navegar a la página de detalles
   // Determina si es una película o serie TV basado en first_air_date
-  const prueba = (id:number, first_air_date: any, name: string) => {
+  const prueba = (id:number, media_type: string, name: string) => {
   
-    const type = first_air_date ? 'tv' : 'movie'
+    const type = media_type === 'tv' ? 'tv' : 'movie'
     navigate(`/details/${type}/${id}-${name.replace(/\s+/g, "-")}`)
 
   }
@@ -44,7 +44,7 @@ export const Card = ({
       <div 
         className={`flex flex-col cursor-pointer h-full dark:text-white ${className}`}
         style={style} 
-        onClick={() => prueba(movie.id, movie.first_air_date, movie.name? movie.name : movie.title)}
+        onClick={() => prueba(movie.id, movie.media_type, movie.name? movie.name : movie.title)}
       >
         {/* Contenedor de la imagen con aspect ratio 2:3 (usando padding-bottom) */}
         <div className="relative pb-[150%] w-full">
@@ -64,7 +64,7 @@ export const Card = ({
         {/* Contenedor de la información con fondo y bordes redondeados */}
         <div className="px-2 pb-2 bg-slate-300 dark:bg-slate-500 rounded-b-lg flex-1">
           {/* Título de la película/serie con truncamiento a 1 línea */}
-          <p className="font-semibold text-sm leading-7 line-clamp-1">
+          <p title={movie.title ? movie.title : movie.name} className="font-semibold text-sm leading-7 line-clamp-1">
             {movie.title ? movie.title : movie.name}
           </p>
           {/* Contenedor de fecha y puntuación */}

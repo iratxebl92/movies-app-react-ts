@@ -85,7 +85,6 @@ export const useContentKeywords = (content:string, id: string, language: string 
   });
 }
 export const useMovies = (content:string, language: string, page: number, runtime_min: number, runtime_max: number, vote_average_min: number, vote_average_max: number, vote_count_min: number, vote_count_max: number, release_date_min: string, release_date_max: string, genres: string[], sort_by: string) => {
-  console.log(runtime_min, "runtime_min")
   return useQuery({
     queryKey: ["movies", content, language, page, runtime_min, runtime_max, vote_average_min, vote_average_max, vote_count_min, vote_count_max, release_date_min, release_date_max, genres, sort_by],
     queryFn: () => apiClient.findMovies(content, language, page, runtime_min, runtime_max, vote_average_min, vote_average_max, vote_count_min, vote_count_max, release_date_min, release_date_max, genres, sort_by),
@@ -149,6 +148,13 @@ export const useCredits = (content: string) => {
     queryFn: () => apiClient.findCredits(content),
   });
 }
+export const useSearch = (query: string, language: string) => {
+  return useQuery({
+    queryKey: ["search", query, language],
+    queryFn: () => apiClient.findSearch(query, language),
+  });
+}
+
 
 
 

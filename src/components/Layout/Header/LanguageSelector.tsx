@@ -33,11 +33,11 @@ export default function LanguageSelector() {
 
   return (
 
-    <div className="w-20">
+    <div className="w-10">
 
       <Listbox value={currentLanguage} onChange={handleLanguageChange}>
         <div className="relative">
-          <ListboxButton className=" cursor-pointer rounded-lg pl-3 pr-10  text-sm dark:text-white">
+          <ListboxButton className=" cursor-pointer rounded-lg text-sm dark:text-white">
           <HiLanguage/>
             {/* <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -52,12 +52,12 @@ export default function LanguageSelector() {
             leaveTo="opacity-0"
           >
             {/* Lista de opciones de idiomas */}
-            <ListboxOptions className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-gray-800 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-50">
+            <ListboxOptions className="absolute mt-1 max-h-60 w-20 overflow-auto rounded-md bg-gray-800 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm z-50">
            
               {languages.map((language) => (
                 <ListboxOption
                   key={language.value}
-                  className="relative cursor-pointer select-none py-2 pl-10 pr-4 ui-active:bg-gray-700 ui-active:text-white ui-not-active:text-gray-300"
+                  className="relative cursor-pointer select-none py-2 pl-10 ui-active:bg-gray-700 ui-active:text-white ui-not-active:text-gray-300"
                   value={language}
                 >
                   {({ selected }) => (

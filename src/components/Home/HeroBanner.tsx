@@ -18,7 +18,7 @@ export const HeroBanner = () => {
   const { t } = useTranslation();
   const { data: upcoming } = useUpcomingMovies(language);
   const { openVideoModal } = useMoviesStore();
-  const results = upcoming?.results[3] || [];
+  const results = upcoming?.results[0] || [];
   const resultsGenresId = results?.genre_ids;
   const { data: videos } = useVideos("movie", results.id);
   const trailer = videos?.results.find(
@@ -56,18 +56,19 @@ export const HeroBanner = () => {
         <p className="text-3xl text-black dark:text-gray-300 md:text-gray-300 ">{results.title}</p>
         <p className="text-black dark:text-gray-300 dark:opacity-100 opacity-70 md:opacity-100 md:text-gray-300 md:text-lg">{results.overview}</p>
         <div className="mt-4">
-          <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8 items-center">
+          <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-4 items-center">
             {genres.map((genre: { id: number; name: string }) => (
               <span
                 key={genre.id}
-                className="px-1 md:px-2 py-1 md:py-2 rounded-md dark:bg-gray-500 bg-gray-900/50 text-white text-xs h-fit"
+                className="py-1 px-2 rounded-md dark:bg-gray-500/65 bg-gray-900/50  text-white text-xs h-fit"
               >
                 {genre.name}
               </span>
             ))}
-            <div className="flex items-center">
+          </div>
+            <div className="flex items-center gap-2 mb-4">
              
-              <p className="ms-2 text-xs dark:bg-gray-500 bg-gray-900/50 p-2 rounded-md flex">
+              <p className="text-xs dark:bg-gray-500 bg-gray-900/50 p-2 rounded-md flex">
               <svg
                 className="w-4 h-4 text-yellow-300 me-1"
                 aria-hidden="true"
@@ -93,9 +94,8 @@ export const HeroBanner = () => {
               )
             : null
             }
+          <ButtonWatchTrailer className="h-12 text-sm" />
             </div>
-          </div>
-          <ButtonWatchTrailer />
         </div>
         {openVideoModal && <ModalVideo selectedVideoKey={trailer?.key} />}
       </div>

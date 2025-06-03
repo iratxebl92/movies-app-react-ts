@@ -31,7 +31,7 @@ export const Cast = ({ cast, className, imageClassName }: CastProps) => {
                   : "/images/people-icon.png"
               }
               className={clsx(
-                "rounded-lg h-full w-full object-contain",
+                "rounded-lg w-full object-contain",
                 !cast?.profile_path && "border-2 h-72"
               )}
               alt={cast?.name}

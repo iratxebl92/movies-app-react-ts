@@ -26,7 +26,6 @@ export const Language = () => {
     if(languages){
       const completeLanguage = languages?.find((language: {iso_639_1: string, english_name:string}) => language.english_name === selectedLanguage) || ''
       setFilterParams({language: completeLanguage.iso_639_1})
-      console.log(completeLanguage.iso_639_1, "completeLanguage")
     }
     
   }, [selectedLanguage]) 

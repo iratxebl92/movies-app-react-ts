@@ -21,7 +21,8 @@ export const Details = () => {
     const id = idAndName.split("-")[0] || "";
     const {language} = useMoviesStore()
 
-    const {data, isLoading} = useDetailsAndCast(type || 'movie', Number(id), language)
+    const {data, isLoading, isError} = useDetailsAndCast(type || 'movie', Number(id), language)
+
   return (
     <div className="dark:bg-dark text-center align-center justify-center mx-auto">
     
@@ -34,3 +35,4 @@ export const Details = () => {
   )
 }
 
+//TODO: Mirar ejemplo http://localhost:5173/details/movie/241809-Our-Better-World no tiene info, hacer que si isError es true sque la pagina 404

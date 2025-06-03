@@ -3,11 +3,14 @@ import { Suspense } from "react";
 import { Header } from "./Header/Header";
 import MovieSkeletonList from "../Skeleton/MovieSkeletonList";
 import { Footer } from "./Footer";
+import { SearchModal } from '../../core/SearchModal';
+import { useMoviesStore } from "../../config/store/store";
 
 export const MoviesApp = () => {
- 
+ const {searchModal} = useMoviesStore()
+
   return (
-    <div className="dark:bg-dark dark:text-white bg-light min-h-screen">
+    <div className="dark:bg-dark dark:text-white bg-light min-h-screen relative ">
       <Header />
      
         <Suspense fallback={<MovieSkeletonList />}>
@@ -15,6 +18,9 @@ export const MoviesApp = () => {
           <Outlet />
           </div>
         </Suspense>
+        { searchModal &&
+          <SearchModal/>
+        }
       <Footer />
     </div>
   );

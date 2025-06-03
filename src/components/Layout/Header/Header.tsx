@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { IoClose, IoMenu } from "react-icons/io5";
 import { MenuItems } from "./MenuItems";
 import { LogoIcon } from "../../../core/components/Icons/LogoIcon";
@@ -11,7 +12,7 @@ export const Header = () => {
     <header className="relative z-20 flex justify-between pr-0 font-heading dark:text-white md:dark:bg-dark bg-opacity-50 backdrop-blur-md ">
       
         <div className="text-start py-5 pl-5 flex">
-          <p className="text-black dark:text-white">KoaFilms</p>
+          <Link to='/' className="text-black dark:text-white">KoaFilms</Link>
           <LogoIcon/>
         </div>
         <div className="md:hidden">

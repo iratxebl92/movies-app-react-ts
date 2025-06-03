@@ -44,7 +44,7 @@ export const MediaContent = () => {
     );
 
   const results = data?.results; // Lista de películas/series
-  console.log( filterParams.genres, "results")
+
 
   // Si se está cargando por primera vez, mostrar skeleton
   if (isLoading) {

@@ -21,3 +21,4 @@ export const getSeasonDetails = (id: number, seasonNumber: number, language: str
 export const getRecommendations = (content: string, id: number, language: string) => `/${content}/${id}/recommendations?language=${language}`;
 export const getLanguages = () => `https://api.themoviedb.org/3/configuration/languages`;
 export const getCredits = (content: string) => `${content}`;
+export const getSearch = (query: string, language: string) => `/search/multi?query=${query}&language=${language}`;

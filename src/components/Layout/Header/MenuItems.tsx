@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FaMoon } from "react-icons/fa";
+import { FaMoon, FaSearch } from "react-icons/fa";
 import { IoSunnyOutline } from "react-icons/io5";
 import { useMoviesStore } from "../../../config/store/store";
 import { useTranslation } from "react-i18next";
@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
 export const MenuItems = () => {
-  const { toggleTheme, language, setLanguage } = useMoviesStore();
+  const { toggleTheme, language, setLanguage, searchModal, setSearchModal } = useMoviesStore();
   const { i18n, t } = useTranslation();
 
   // Sincronizar el estado `language` con i18next al montar
@@ -54,19 +54,24 @@ export const MenuItems = () => {
         <li className="flex justify-center dark:text-white md:pr-5 hover:underline hover:decoration-3 hover:decoration-details">
           <div className="dark:hidden">
             <button  onClick={() => toggleTheme('dark')}>
-            <FaMoon className="inline hover:cursor-pointer hover:text-xl" />
+            <FaMoon className="inline hover:cursor-pointer hover:text-details" />
             </button>
 
           </div>
           <div className="hidden dark:flex" >
           <button onClick={() => toggleTheme('light')} >
-            <IoSunnyOutline className="inline hover:cursor-pointer  hover:text-xl"  />
+            <IoSunnyOutline className="inline hover:cursor-pointer hover:text-details"  />
             </button>
           </div>
         </li>
-        <li className="flex justify-center ml-7 ">
+        <li className="flex justify-center hover:text-details">
           <LanguageSelector/>
 
+        </li>
+        <li className="flex justify-center">
+          <button className=" text-white  rounded-md" onClick={() => setSearchModal(true)}>
+            <FaSearch className="inline hover:cursor-pointer hover:text-details text-black dark:text-white" />
+          </button>
         </li>
       </ul>
     </nav>

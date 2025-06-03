@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import i18n from "../language/i18n";
+import { SearchModal } from "../../core/SearchModal";
+import { option } from "motion/react-client";
 
 type ContentType = "movie" | "tv";
 
@@ -50,6 +52,8 @@ interface MoviesStore {
     genres: string[] | undefined;
   };
   setFilterParams: (params: Partial<MoviesStore['filterParams']>) => void;
+  searchModal: boolean, 
+  setSearchModal: (option: boolean) => void
 // Explicación del tipado:
 // 1. MoviesStore['filterParams'] -> Accede al tipo de la propiedad filterParams del store
 // 2. Partial<T> -> Hace que todas las propiedades sean opcionales
@@ -118,6 +122,10 @@ export const useMoviesStore = create<MoviesStore>()(
           ...params, // Actualiza los valores nuevos
         }
       })),
+      searchModal: false,
+      setSearchModal: (option) => set({
+      searchModal: option
+      }),
     }),
 
     {

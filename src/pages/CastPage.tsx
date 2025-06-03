@@ -10,7 +10,7 @@ export const CastPage = () => {
   const { type, idAndName } = useParams();
   if (!idAndName) return null;
   const [id, ...rest] = idAndName.split("-");
-  console.log(rest);
+
 
   const { data: credits } = useCredits(
     type === "tv" ? `/tv/${id}/aggregate_credits` : `/movie/${id}/credits`
@@ -20,7 +20,7 @@ export const CastPage = () => {
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
-  console.log(search, "search");
+
 
   //TODO: Mirar bien lo del Search para filtrar por lo que busque
 
@@ -37,10 +37,10 @@ export const CastPage = () => {
          cast.character?.toLowerCase().includes(search.toLowerCase()) ||
         cast.name?.toLowerCase().includes(search.toLowerCase())
     );
-    console.log(prueba, "prueba");
+ 
     setNewCast(prueba);
   }, [search]);
-  console.log(credits?.cast)
+
 
   if (!credits) return null;
   return (

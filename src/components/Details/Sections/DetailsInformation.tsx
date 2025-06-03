@@ -44,7 +44,7 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
    ...(keywords?.results || []),
    ...(keywords?.keywords || [])
  ];
- console.log(data)
+ 
   
   const providers =  [
     { provider_name: "Netflix", logo_path: "/t2yyOv40HZeVlLjYsCsPHnWLk4W.jpg", icon: <TbBrandNetflix className="text-red-600" size={20} /> },

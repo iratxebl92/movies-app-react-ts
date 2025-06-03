@@ -11,7 +11,7 @@ import { Language } from "./Filters/Language";
 export const MediaFilters = () => {
 
 const {filterParams} = useMoviesStore()
-  console.log(filterParams.release_date_max, "filterParams")
+
   
 
     // crear un useEfect y probar a actualizar cada vez que cambie alguna de las propiedades, haciendo que coincida la que cambie y las otras manteniendolas igual.
