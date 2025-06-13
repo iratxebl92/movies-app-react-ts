@@ -59,8 +59,8 @@ i18n
           watchOldest: "Watch Oldest",
           keywords: "Keywords",
           resultsKeywordsTitle: "Results matching:",
-          
-
+          searchPlaceholder: "Search movie, tv shos or people",
+          searchNotResults: "No recent searches"
         },
       },
       es: {
@@ -114,8 +114,8 @@ i18n
           watchOldest: "Ver Antiguo",
           keywords: "Palabras clave",
           resultsKeywordsTitle: "Resultados que coinciden con:",
-
-          
+          searchPlaceholder: "Encuentra tu película, serie o persona favorita",
+          searchNotResults: "Sin búsquedas recientes"
         },
       },
     },

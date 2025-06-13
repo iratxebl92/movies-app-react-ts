@@ -63,3 +63,11 @@ Ayuda a mantener la consistencia del layout
 .swiper-slide {
   width: auto;
 }
+.scroll-thin {
+    --scrollbar-track: rgb(100 116 139 / .16);
+    --scrollbar-thumb: rgb(100 116 139 / .8);
+    --scrollbar-track-radius: 9999px;
+    --scrollbar-thumb-radius: 9999px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+}
