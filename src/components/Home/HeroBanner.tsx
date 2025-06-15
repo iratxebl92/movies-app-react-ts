@@ -27,8 +27,8 @@ export const HeroBanner = () => {
     const randomNumber = upcoming && upcoming.results ? Math.floor(Math.random() * upcoming.results?.length) : 0
 setHeroMovie(randomNumber)
   }, [location.pathname]);
-
-  const results = heroMovie && upcoming?.results[heroMovie] || [];
+  const results = (upcoming?.results && heroMovie !== null) && upcoming.results[heroMovie] || 0
+  
   const resultsGenresId = results?.genre_ids;
   const { data: videos } = useVideos("movie", results.id);
   const trailer = videos?.results.find(

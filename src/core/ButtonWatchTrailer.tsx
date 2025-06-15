@@ -9,14 +9,15 @@ type ButtonWatchTrailerProps = {
 
 export const ButtonWatchTrailer = ({className}: ButtonWatchTrailerProps) => {
     const {t} = useTranslation()
-    const { setOpenVideoModal } = useMoviesStore()
-    const prueba = () => {
+    const { setOpenVideoModal, setIsWatchTrailerButton } = useMoviesStore()
+    const handleOpenTrailer = () => {
+        setIsWatchTrailerButton(true)
         setOpenVideoModal(true)
-        }
+    }
   return (
     <button
       className={clsx("flex items-center gap-2 bg-black/60 hover:bg-slate-700 transition-colors p-2 rounded-xl", className)}
-      onClick={prueba}
+      onClick={handleOpenTrailer}
     >
       <IoPlayCircleOutline className="text-white/80 w-10 h-10 " />
       {t("watchTrailer")}

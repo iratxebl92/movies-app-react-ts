@@ -37,6 +37,8 @@ interface MoviesStore {
   selectedVideoKey: string;
   setSelectedVideoKey: (key: string) => void;
   setVideos: (videos: any) => void;
+  isWatchTrailerButton: boolean;
+  setIsWatchTrailerButton: (value: boolean) => void;
   filterParams: {
     release_date_min: string;
     release_date_max: string;
@@ -104,6 +106,8 @@ export const useMoviesStore = create<MoviesStore>()(
         set({ currentVideoIndex: index }),
       selectedVideoKey: "",
       setSelectedVideoKey: (key: string) => set({ selectedVideoKey: key }),
+      isWatchTrailerButton: false,
+      setIsWatchTrailerButton: (value: boolean) => set({ isWatchTrailerButton: value }),
       filterParams: {
         release_date_min: "",
         release_date_max: "",

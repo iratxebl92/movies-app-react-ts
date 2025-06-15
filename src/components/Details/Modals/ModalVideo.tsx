@@ -6,13 +6,13 @@ import { IoMdClose } from "react-icons/io";
 
 export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
   
-    const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey, videos } =
+    const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey, videos, isWatchTrailerButton, setIsWatchTrailerButton } =
       useMoviesStore();
       
       
     const [prevDisabled, setPrevDisabled] = useState(false)
     const [nextDisabled, setNextDisabled] = useState(false)
-
+console.log(videos, "videos")
 
   useEffect(() => {
   }, [videos])
@@ -50,7 +50,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
   };
   const submitCloseButton = () => {
     setOpenVideoModal(false)
-   
+    setIsWatchTrailerButton(false)
   }
 
   return (
@@ -79,7 +79,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
               />
             </div>
             {
-              videos?.results && videos.results.length > 1 && (
+              videos?.results && videos.results.length > 1 && !isWatchTrailerButton && (
                 <>
                 <button
                 onClick={handlePrev}
