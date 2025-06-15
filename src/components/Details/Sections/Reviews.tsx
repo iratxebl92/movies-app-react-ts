@@ -52,7 +52,7 @@ export const Reviews = ({ id, type }: ReviewsPropsType) => {
           role="alert"
           aria-live="assertive"
         >
-          <p className="text-2xl font-bold text-center text-neutral-500" aria-label="No hay reseñas disponibles">
+          <p className="text-2xl font-bold text-center text-neutral-500" aria-label={t("reviewsMessage")}>
             {t("reviewsMessage")}
           </p>
         </div>
@@ -106,7 +106,7 @@ export const Reviews = ({ id, type }: ReviewsPropsType) => {
                   aria-expanded={review.read_more} // Añadido para indicar si el contenido está expandido
                   aria-controls={`review-content-${review.id}`} // Añadido para asociar el botón con el contenido
                 >
-                  {review.read_more ? "Read Less" : "Read More"}
+                  {review.read_more ? t('readLess') : t('readMore')}
                 </button>
               </>
             )}

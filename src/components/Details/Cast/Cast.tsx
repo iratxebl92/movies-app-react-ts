@@ -28,19 +28,19 @@ export const Cast = ({ cast, className, imageClassName }: CastProps) => {
               src={
                 cast?.profile_path
                   ? `https://www.themoviedb.org/t/p/original${cast?.profile_path}`
-                  : "/images/people-icon.png"
+                  : "/images/icon-default.png"
               }
               className={clsx(
-                "rounded-lg w-full object-contain",
-                !cast?.profile_path && "border-2 h-72"
+                "rounded-lg w-full object-cover object-top h-60",
+                !cast?.profile_path && "border"
               )}
               alt={cast?.name}
               title={cast?.name}
             />
           </div>
-          <div className="flex flex-col text-center text-sm w-40 mt-1">
-            <p className="font-medium truncate">{cast?.name}</p>
-            <p className="text-gray-600 dark:text-gray-300 truncate">
+          <div className="flex flex-col text-center  w-38 mt-1">
+            <p className="font-medium truncate text-sm">{cast?.name}</p>
+            <p className="text-gray-600 dark:text-gray-300 truncate text-xs hover:whitespace-normal hover:cursor-default">
               {cast?.character
                 ? cast.character
                 : cast?.roles && cast.roles[0]

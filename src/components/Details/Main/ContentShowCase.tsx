@@ -127,7 +127,7 @@ export const ContentShowcase = ({data, type}: ContentShowcaseProps) => {
             </div>
 
             {/* Contenedor del contenido con altura mínima para evitar saltos */}
-            <div className="min-h-[300px] flex ">
+            <div className="min-h-[300px] flex justify-center items-center">
                 {/* Suspense para manejar la carga de componentes lazy */}
                 <Suspense fallback={<LoadingSpinner />}>
                     {/* AnimatePresence maneja las animaciones de entrada/salida */}

@@ -1,13 +1,14 @@
+import clsx from "clsx";
 import { CircleRating } from "../../../core/components/Icons/CircleRating";
 import { IMovie } from "../../../interfaces/IMovie";
-import { Suspense, useState, useEffect } from 'react';
-import { LoadingSpinner } from "../../../core/LoadingSpinner";
+import {  useState, useEffect } from 'react';
 import { useInitialScroll } from "../../../hooks/useInitialScroll";
 import { useVideos } from "../../../hooks/useMovies";
 import { useMoviesStore } from "../../../config/store/store";
 import { ModalVideo } from "../Modals/ModalVideo";
 import { ButtonWatchTrailer } from "../../../core/ButtonWatchTrailer";
 import { DetailsBannerSkeleton } from "../../Skeleton/Details/DetailsBannerSkeleton";
+
 
 type DetailsBannerProps = {
   data: IMovie;
@@ -53,18 +54,23 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
             after:bg-gradient-to-t after:from-light/100 after:via-light/50 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/2  dark:after:from-dark/100 dark:after:via-dark/50
             relative w-full h-[100vh] min-h-[600px] transition-opacity duration-500`}
         >
+          {
+        data?.backdrop_path &&
         <img
           className="w-full h-full object-cover object-center"
-          src={`https://www.themoviedb.org/t/p/original/${data?.backdrop_path}`}
+          src={ `https://www.themoviedb.org/t/p/original/${data?.backdrop_path}`}
           alt={data?.title}
         />
+          }
         <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/60 to-dark/50" /> 
         <div className="absolute inset-0 flex items-center px-4 md:px-8 lg:px-16">
-          <div className="z-10 flex flex-col  lg:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
-            <div className="w-48 md:w-64 lg:w-96 rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
+          <div className="z-10 flex flex-col xl:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
+            <div className="w-[24rem] h-[35rem] lg:w-[25rem] xl:w-[32rem] xl:h-[42rem] rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 flex-shrink-0">
               <img
-                className="w-full h-full object-cover"
-                src={`https://www.themoviedb.org/t/p/original/${data?.poster_path}`}
+                className={clsx("w-full h-full", {
+                  "": !data.poster_path
+                })}
+                src={data?.poster_path ? `https://www.themoviedb.org/t/p/original/${data?.poster_path}` : '/images/image-icono.jpg'}
                 alt={data?.title}
               />
             </div>
@@ -96,7 +102,7 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
               <p className="text-sm md:text-base text-white dark:text-gray-300 leading-relaxed max-w-5xl text-start">
                 {data?.overview}
               </p>
-              <div className="mt-4 md:mt-9 ">
+              <div className="-mt-4">
                 <ButtonWatchTrailer/>
               </div>
               {
@@ -107,7 +113,6 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
                   />
                 )
               }
-              
               
             </div>
           </div>

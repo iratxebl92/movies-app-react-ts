@@ -6,8 +6,10 @@ import { useParams } from "react-router-dom";
 import { SwitchTab } from "../../core/SwitchTab";
 import { MediaGallerySkeleton } from "../Skeleton/Person/MediaGallerySkeleton";
 import OptionsSelect from "../../core/OptionsSelect";
+import { useTranslation } from "react-i18next";
 
 export const MediaGallery = () => {
+  const { t } = useTranslation();
   const { idAndName } = useParams() as { idAndName: string }; // Solo usar si sabemos seguro que viene en la url y es string
  
   const [id] = idAndName.split("-");
@@ -62,6 +64,7 @@ useEffect(() => {
 
    }
  
+ 
   return (
     <>
           <SwitchTab
@@ -75,17 +78,24 @@ useEffect(() => {
             <OptionsSelect options={optionDepartments} style={{width: '10rem'}} value={departmentSelected} onOptionChange={opnDepartmentOptionChange} />
       </div>
     <div>
-      {
+      { selectMovies.length > 0 ?
+      (
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
           {selectMovies.slice(0, visibleMovies).map((item, index) => (
             <Card movie={item} style={{ width: "100%" }} key={index} />
           ))}
         </div>
+        )
+        : 
+        <div className="flex justify-center items-center h-full min-h-[20vh]">
+          <p className="text-2xl font-bold">{t('noMoviesOrTvShows')}</p>
+        </div>
       }
       <div className="flex justify-center">
       {/* Al hacer click en Load More, añadimos el nº de pelis/series que decidamos a visibleMovies */}
       <button disabled={disabled} className={`border-2 rounded-xl p-4 mt-4 text-white  ${disabled ? 'hidden' : 'bg-red-700 cursor-pointer' }`} onClick={() => setVisibleMovies((prev) => prev + 20)}>
-        Load More
+        {t('loadMore')}
       </button>
       </div>
     </div>

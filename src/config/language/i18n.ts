@@ -60,7 +60,17 @@ i18n
           keywords: "Keywords",
           resultsKeywordsTitle: "Results matching:",
           searchPlaceholder: "Search movie, tv shos or people",
-          searchNotResults: "No recent searches"
+          searchNotResults: "No recent searches",
+          noMoviesOrTvShows: "No movies or tv shows available",
+          loadMore: "Load More",
+          noRecommendations: "No recommendations available",
+          noVideos: "No videos yet",
+          readMore: "Read more",
+          readLess: "Read less",
+          backHome: "Back to Home",
+          notFound: "Page Not Found",
+          notFoundMessage: "Oops! The page you're looking for doesn't exist or has been moved.",
+          notInformation: "Information not available"
         },
       },
       es: {
@@ -115,7 +125,17 @@ i18n
           keywords: "Palabras clave",
           resultsKeywordsTitle: "Resultados que coinciden con:",
           searchPlaceholder: "Encuentra tu película, serie o persona favorita",
-          searchNotResults: "Sin búsquedas recientes"
+          searchNotResults: "Sin búsquedas recientes",
+          noMoviesOrTvShows: "No hay películas o series disponibles",
+          loadMore: "Cargar Más",
+          noRecommendations: "No hay recomendaciones disponibles",
+          noVideos: "No hay videos todavía",
+          readMore: "Leer más",
+          readLess: "Leer menos",
+          backHome: "Volver al inicio",
+          notFound: "Página no encontrada",
+          notFoundMessage: "¡Vaya! La página que estás buscando no existe o ha sido movida.",
+          notInformation: "Información no disponible"
         },
       },
     },

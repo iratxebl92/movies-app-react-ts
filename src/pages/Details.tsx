@@ -4,6 +4,8 @@ import { DetailsBanner } from "../components/Details/Main/DetailsBanner"
 import { useDetailsAndCast } from "../hooks/useMovies"
 import { useMoviesStore } from "../config/store/store"
 import { useParams } from "react-router-dom"
+import { LoadingSpinner } from "../core/LoadingSpinner"
+import { NotFound } from "../core/NotFound"
 
 type urlParamsType = {
     idAndName: string; 
@@ -15,13 +17,16 @@ export const Details = () => {
     const {idAndName, type} = useParams<urlParamsType>()
 
     if (!idAndName || !type) {
-        return null;
-      }
+        return <NotFound />;
+    }
  
     const id = idAndName.split("-")[0] || "";
     const {language} = useMoviesStore()
 
     const {data, isLoading, isError} = useDetailsAndCast(type || 'movie', Number(id), language)
+    
+
+    if(isError) return <NotFound />
 
   return (
     <div className="dark:bg-dark text-center align-center justify-center mx-auto">

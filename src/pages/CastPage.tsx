@@ -4,6 +4,7 @@ import { ICast } from "../interfaces/ICast";
 import { Cast } from "../components/Details/Cast/Cast";
 import { ChangeEvent, useEffect, useState } from "react";
 import { t } from "i18next";
+import { NotFound } from "../core/NotFound";
 
 export const CastPage = () => {
   const [search, setSearch] = useState("");
@@ -12,7 +13,7 @@ export const CastPage = () => {
   const [id, ...rest] = idAndName.split("-");
 
 
-  const { data: credits } = useCredits(
+  const { data: credits, isError } = useCredits(
     type === "tv" ? `/tv/${id}/aggregate_credits` : `/movie/${id}/credits`
   );
   const [newCast, setNewCast] = useState([]);
@@ -21,8 +22,8 @@ export const CastPage = () => {
     setSearch(e.target.value);
   };
 
-
-  //TODO: Mirar bien lo del Search para filtrar por lo que busque
+  if(isError) return <NotFound/>
+  
 
   useEffect(() => {
     if (credits) {

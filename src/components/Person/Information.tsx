@@ -43,7 +43,7 @@ export const Information = () => {
       <div>
       {
       biographyArray[0] === '' ? 
-        <p>Sin información</p>
+        <p>{t("notInformation")}</p>
         : 
       (<ReadMore id="biography-text" text={biographyArray} />)
       }
@@ -51,15 +51,15 @@ export const Information = () => {
       <div className="grid grid-cols-2 md:grid-cols-5 my-6 gap-6 md:gap-4">
         <div>
             <p className="font-bold">{t('knownFor')}</p>
-            <p>{data?.known_for_department}</p>
+            <p>{data?.known_for_department ? data?.known_for_department : '-'}</p>
         </div>
         <div>
             <p className="font-bold">{t('gender')}</p>
-            <p>{gender} </p>
+            <p>{gender ? gender : '-' } </p>
         </div>
         <div>
             <p className="font-bold">{t('birthday')} </p>
-            <p>{data?.birthday? formatDate(data.birthday, language) : "Sin información"}</p>
+            <p>{data?.birthday? formatDate(data.birthday, language) : "-"}</p>
         </div>
         {
           data?.deathday &&
@@ -70,7 +70,7 @@ export const Information = () => {
         }
         <div>
             <p className="font-bold">{t('placeBirthday')} </p>
-            <p>{data?.place_of_birth} </p>
+            <p>{data?.place_of_birth ? data?.place_of_birth : '-'} </p>
         </div>
       </div>
       <div className="flex">

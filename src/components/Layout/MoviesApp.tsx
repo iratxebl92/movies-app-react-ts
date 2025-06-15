@@ -14,7 +14,7 @@ export const MoviesApp = () => {
       <Header />
      
         <Suspense fallback={<MovieSkeletonList />}>
-          <div className="max-w-[1550px] content-center m-auto lg:w-320">
+          <div className="max-w-[1550px] content-center m-auto lg:w-320 min-h-[calc(100vh-160px)]">
           <Outlet />
           </div>
         </Suspense>

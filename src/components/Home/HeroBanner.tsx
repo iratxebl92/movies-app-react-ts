@@ -8,17 +8,27 @@ import {
 
 
 import { LoadingSpinner } from "../../core/LoadingSpinner";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ModalVideo } from "../Details/Modals/ModalVideo";
 import { ButtonWatchTrailer } from "../../core/ButtonWatchTrailer";
+import { useEffect, useState } from "react";
 
 export const HeroBanner = () => {
+  const [heroMovie, setHeroMovie] = useState<number | null>(null)
   const {language} = useMoviesStore()
   const { t } = useTranslation();
   const { data: upcoming } = useUpcomingMovies(language);
   const { openVideoModal } = useMoviesStore();
-  const results = upcoming?.results[0] || [];
+  const location = useLocation()
+
+
+  useEffect(() => {
+    const randomNumber = upcoming && upcoming.results ? Math.floor(Math.random() * upcoming.results?.length) : 0
+setHeroMovie(randomNumber)
+  }, [location.pathname]);
+
+  const results = heroMovie && upcoming?.results[heroMovie] || [];
   const resultsGenresId = results?.genre_ids;
   const { data: videos } = useVideos("movie", results.id);
   const trailer = videos?.results.find(

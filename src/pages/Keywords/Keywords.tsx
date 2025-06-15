@@ -7,6 +7,7 @@ import { useMoviesStore } from "../../config/store/store";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react"
 import MovieSkeletonList from "../../components/Skeleton/MovieSkeletonList";
+import { NotFound } from "../../core/NotFound";
 
 type urlParamsType = {
   idAndName: string; 
@@ -24,7 +25,7 @@ export const Keywords = () => {
   const name = rest.join(" ");
   if (!id) return null; 
   
-    const {data, isLoading} = useContentKeywords(keywordsSelected, id, language) 
+    const {data, isLoading, isError} = useContentKeywords(keywordsSelected, id, language) 
     
     const results = data?.results
     const options = language === "es" ? ["Películas", "Tv Show"] : ["Movies", "Tv Show"];
@@ -35,7 +36,7 @@ export const Keywords = () => {
       keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
     }
 
-
+    if(isError) return <NotFound/>
 
     const opacityMotionTransition = {
       variants: {
