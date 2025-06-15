@@ -35,8 +35,8 @@ console.log(videos, "videos")
     if(currentVideoIndex !== 0){
  
       setCurrentVideoIndex(currentVideoIndex - 1)
-      const prueba = videos.results[currentVideoIndex - 1]
-      setSelectedVideoKey(prueba.key)
+      const previousVideo = videos.results[currentVideoIndex - 1]
+      setSelectedVideoKey(previousVideo.key)
     } 
   };
 
@@ -44,8 +44,8 @@ console.log(videos, "videos")
     if(currentVideoIndex < videos.results.length - 1){
   
       setCurrentVideoIndex(currentVideoIndex + 1)
-      const prueba = videos.results[currentVideoIndex + 1]
-      setSelectedVideoKey(prueba.key)
+      const nextVideo = videos.results[currentVideoIndex + 1]
+      setSelectedVideoKey(nextVideo.key)
     }
   };
   const submitCloseButton = () => {

@@ -33,13 +33,12 @@ export const CastPage = () => {
 
   useEffect(() => {
     //Boolean([]) === true si al filter añadimos || [] aunque no cumpla y sea false se va a convertir en true, por eso devolveria siempre todo el cast
-    const prueba = credits?.cast?.filter(
+    const filterCast = credits?.cast?.filter(
       (cast: ICast) =>
          cast.character?.toLowerCase().includes(search.toLowerCase()) ||
         cast.name?.toLowerCase().includes(search.toLowerCase())
     );
- 
-    setNewCast(prueba);
+    setNewCast(filterCast);
   }, [search]);
 
 
