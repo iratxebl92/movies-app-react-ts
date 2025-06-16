@@ -5,6 +5,10 @@ import { useMoviesStore } from '../../../config/store/store';
 import { useTranslation } from 'react-i18next';
 import { HiLanguage } from "react-icons/hi2";
 
+interface LanguageSelectorProps {
+  closeMenu?: (() => void) | undefined;
+}
+
 // Definición de los idiomas disponibles en la aplicación
 const languages = [
   { name: 'ES', value: 'es' },
@@ -14,7 +18,7 @@ const languages = [
 // Tipo TypeScript que representa un idioma del array languages
 type Language = typeof languages[number];
 
-export default function LanguageSelector() {
+export default function LanguageSelector({ closeMenu }: LanguageSelectorProps) {
 
   const { language, setLanguage } = useMoviesStore();
   
@@ -27,8 +31,12 @@ export default function LanguageSelector() {
   // Función que maneja el cambio de idioma
   // Actualiza tanto el store global como la configuración de i18n
   const handleLanguageChange = (newLanguage: Language) => {
+    console.log(newLanguage)
     setLanguage(newLanguage.value);
     i18n.changeLanguage(newLanguage.value);
+    if (closeMenu) {
+      closeMenu();
+    }
   };
 
   return (

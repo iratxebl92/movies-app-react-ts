@@ -24,11 +24,12 @@ export const Card = ({
   const movieVoteAverage = movie?.vote_average.toString().substr(0,3);
   
   // Función para navegar a la página de detalles
-  // Determina si es una película o serie TV basado en first_air_date
-  const handleSelectedCard = (id:number, media_type: string, name: string) => {
-    const type = media_type === 'tv' ? 'tv' : 'movie'
+  // Determina si es una película o serie TV basado en las propiedades del objeto
+  const handleSelectedCard = (movie:any, id:number, media_type: string, name: string) => {
+    // Si media_type está presente, lo usamos directamente
+    // Si no, determinamos el tipo basado en las propiedades del objeto
+    const type = media_type || (movie.first_air_date ? 'tv' : 'movie')
     navigate(`/details/${type}/${id}-${name.replace(/\s+/g, "-")}`)
-
   }
 
   return (
@@ -43,7 +44,7 @@ export const Card = ({
       <div 
         className={`flex flex-col cursor-pointer h-full dark:text-white ${className}`}
         style={style} 
-        onClick={() => handleSelectedCard(movie.id, movie.media_type, movie.name? movie.name : movie.title)}
+        onClick={() => handleSelectedCard(movie, movie.id, movie.media_type, movie.name? movie.name : movie.title)}
       >
         {/* Contenedor de la imagen con aspect ratio 2:3 (usando padding-bottom) */}
         <div className="relative pb-[150%] w-full">

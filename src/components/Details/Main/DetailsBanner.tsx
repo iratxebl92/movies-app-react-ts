@@ -52,7 +52,7 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
           className={`
             after:content-['']
             after:bg-gradient-to-t after:from-light/100 after:via-light/50 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-1/2  dark:after:from-dark/100 dark:after:via-dark/50
-            relative w-full h-[100vh] min-h-[600px] transition-opacity duration-500`}
+            relative w-full h-screen min-h-[925px] transition-opacity duration-500`}
         >
           {
         data?.backdrop_path &&
@@ -65,7 +65,7 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
         <div className="absolute inset-0 bg-gradient-to-b from-dark/80 via-dark/60 to-dark/50" /> 
         <div className="absolute inset-0 flex items-center px-4 md:px-8 lg:px-16">
           <div className="z-10 flex flex-col xl:flex-row gap-4 md:gap-8 items-center max-w-[1920px] mx-auto w-full">
-            <div className="w-[24rem] h-[35rem] lg:w-[25rem] xl:w-[32rem] xl:h-[42rem] rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 flex-shrink-0">
+            <div className="w-[12rem] h-[18rem] md:w-[19rem] md:h-[27rem] lg:w-[20rem] xl:w-[29rem] xl:h-[42rem] rounded-lg overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300 flex-shrink-0">
               <img
                 className={clsx("w-full h-full", {
                   "": !data.poster_path
@@ -102,7 +102,7 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
               <p className="text-sm md:text-base text-white dark:text-gray-300 leading-relaxed max-w-5xl text-start">
                 {data?.overview}
               </p>
-              <div className="-mt-4">
+              <div>
                 <ButtonWatchTrailer/>
               </div>
               {

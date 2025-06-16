@@ -6,8 +6,12 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import LanguageSelector from "./LanguageSelector";
 
-export const MenuItems = () => {
-  const { toggleTheme, language, setLanguage, searchModal, setSearchModal } = useMoviesStore();
+interface MenuItemsProps {
+  closeMenu?: () => void;
+}
+
+export const MenuItems = ({ closeMenu }: MenuItemsProps) => {
+  const { toggleTheme, language, setLanguage, setSearchModal } = useMoviesStore();
   const { i18n, t } = useTranslation();
 
   // Sincronizar el estado `language` con i18next al montar
@@ -17,12 +21,18 @@ export const MenuItems = () => {
     }
   }, [i18n.language, setLanguage]);
 
+  const handleMenuClick = () => {
+    if (closeMenu) {
+      closeMenu();
+    }
+  };
 
   return (
     <nav>
       <ul className="flex flex-col gap-4 md:gap-0 md:flex-row md:space-x-4 md:mr-1">
         <NavLink
           to="/"
+          onClick={handleMenuClick}
           className={({ isActive }) =>
             isActive
               ? "underline decoration-details decoration-3 font-bold md:pr-5"
@@ -33,6 +43,7 @@ export const MenuItems = () => {
         </NavLink>
         <NavLink
           to="/movies"
+          onClick={handleMenuClick}
           className={({ isActive }) =>
             isActive
               ? "underline decoration-details decoration-3 font-bold md:pr-5"
@@ -43,6 +54,7 @@ export const MenuItems = () => {
         </NavLink>
         <NavLink
           to="/tv-shows"
+          onClick={handleMenuClick}
           className={({ isActive }) =>
             isActive
               ? "underline decoration-details decoration-3 font-bold md:pr-5"
@@ -53,23 +65,33 @@ export const MenuItems = () => {
         </NavLink>
         <li className="flex justify-center dark:text-white md:pr-5 hover:underline hover:decoration-3 hover:decoration-details">
           <div className="dark:hidden">
-            <button  onClick={() => toggleTheme('dark')}>
+            <button onClick={() => {
+              toggleTheme('dark');
+              handleMenuClick();
+            }}>
             <FaMoon className="inline hover:cursor-pointer hover:text-details" />
             </button>
-
           </div>
           <div className="hidden dark:flex" >
-          <button onClick={() => toggleTheme('light')} >
+          <button onClick={() => {
+            toggleTheme('light');
+            handleMenuClick();
+          }}>
             <IoSunnyOutline className="inline hover:cursor-pointer hover:text-details"  />
             </button>
           </div>
         </li>
         <li className="flex justify-center hover:text-details">
-          <LanguageSelector/>
-
+          <LanguageSelector closeMenu={closeMenu}/>
         </li>
         <li className="flex justify-center">
-          <button className=" text-white  rounded-md" onClick={() => setSearchModal(true)}>
+          <button 
+            className="text-white rounded-md" 
+            onClick={() => {
+              setSearchModal(true);
+              handleMenuClick();
+            }}
+          >
             <FaSearch className="inline hover:cursor-pointer hover:text-details text-black dark:text-white" />
           </button>
         </li>

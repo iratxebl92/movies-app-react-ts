@@ -61,9 +61,9 @@ export const CastPage = () => {
       </div>
      
         {newCast && newCast.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 justify-center mt-10 max-w-[1550px] mx-auto">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 justify-center mt-10 max-w-[1550px] mx-auto">
 
-         { newCast.map((cast: ICast) =>( <Cast cast={cast} key={cast.id} className="w-48" imageClassName="mt-8" />))}
+         { newCast.map((cast: ICast) =>( <Cast cast={cast} key={cast.id} className="w-[8rem] sm:w-44 lg:w-48" imageClassName="mt-8" />))}
           </div>
           
         ) : (

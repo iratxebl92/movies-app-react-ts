@@ -5,14 +5,12 @@ import { RuntimesRange } from "./Filters/RuntimesRange";
 import { GenreList } from "./Filters/GenreList";
 import { SortBy } from "./Filters/SortBy";
 import { ReleaseData } from "./Filters/ReleaseData";
-import { useMoviesStore } from "../../config/store/store";
+
 import { Language } from "./Filters/Language";
 
 export const MediaFilters = () => {
 
-const {filterParams} = useMoviesStore()
 
-  
 
     // crear un useEfect y probar a actualizar cada vez que cambie alguna de las propiedades, haciendo que coincida la que cambie y las otras manteniendolas igual.
 

@@ -17,7 +17,7 @@ export const Header = () => {
         </div>
         <div className="md:hidden">
         <div>
-          <button className={`pr-3 py-5 pl-5 ${isOpenHeader ? 'hidden' : ''}`} onClick={() => setIsOpenHeader(true)}>
+          <button className={`pr-3 py-5 pl-5 mr-3 ${isOpenHeader ? 'hidden' : ''}`} onClick={() => setIsOpenHeader(true)}>
             <IoMenu />
           </button>
         </div>
@@ -26,8 +26,8 @@ export const Header = () => {
             isOpenHeader ? "translate-x-0 block" : "translate-x-full hidden"
           }`}
         >
-          <div className="relative mt-10" onClick={() => setIsOpenHeader(false)}>
-            <MenuItems />
+          <div className="relative mt-10">
+            <MenuItems closeMenu={() => setIsOpenHeader(false)} />
           </div>
           <div className="absolute top-5 right-4">
             <button onClick={() => setIsOpenHeader(false)}>

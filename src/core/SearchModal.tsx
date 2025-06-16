@@ -2,7 +2,7 @@ import { Transition, Dialog, DialogPanel } from "@headlessui/react";
 import { useMoviesStore } from "../config/store/store";
 import { Fragment } from "react/jsx-runtime";
 import { useSearch } from "../hooks/useMovies";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { ISearch } from "../interfaces/ISearch";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
@@ -16,7 +16,6 @@ export const SearchModal = () => {
     searchHistory,
     setSearchHistory,
   } = useMoviesStore();
-  const [recentSearch, setRecentSearch] = useState<ISearch[]>(searchHistory);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -98,6 +97,7 @@ export const SearchModal = () => {
                   onChange={handleSearchQuery}
                   className="placeholder:text-xs sm:placeholder:text-sm w-full p-2 text-sm sm:text-base rounded-lg dark:bg-gray-400 dark:placeholder:text-white dark:placeholder:opacity-70 dark:text-white"
                   data-autofocus
+                  
                 />
               </div>
               <div className="max-h-[40vh] overflow-auto w-full pt-7 scroll-thin">

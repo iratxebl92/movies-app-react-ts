@@ -4,7 +4,7 @@ import { useMoviesStore } from "../../../config/store/store";
 
 export const UserVotesRange = () => {
     const [minVoteCount, setMinVoteCount] = useState(0)
-	const {setFilterParams, filterParams} = useMoviesStore()
+	const {setFilterParams} = useMoviesStore()
 
 	const handleUserVotes = (votes: number) => {
 	
