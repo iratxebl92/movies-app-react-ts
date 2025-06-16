@@ -71,7 +71,9 @@ i18n
           notFound: "Page Not Found",
           notFoundMessage: "Oops! The page you're looking for doesn't exist or has been moved.",
           notInformation: "Information not available",
-          noResults: "No content available"
+          noResults: "No content available",
+          infoDetails: "Overview",
+          noCastAvailable: "Cast information not available"
         },
       },
       es: {
@@ -137,7 +139,9 @@ i18n
           notFound: "Página no encontrada",
           notFoundMessage: "¡Vaya! La página que estás buscando no existe o ha sido movida.",
           notInformation: "Información no disponible",
-          noResults: "Sin resultados"
+          noResults: "Sin resultados",
+          infoDetails: "Información General",
+          noCastAvailable: "Información del reparto no disponible"
         },
       },
     },

@@ -229,7 +229,7 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
           <div className="flex justify-between items-center mb-4 md:mb-6">
             <div className="flex items-center gap-2">
               <SlPeople className="text-blue-600 dark:text-blue-400" size={20} />
-              <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">Cast</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">{t('topCast')}</h2>
             </div>
             {credits?.cast && credits.cast.length > 11 && (
               <button 
@@ -243,10 +243,18 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
             )}
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
-            {credits?.cast?.slice(0, 11).map((cast: ICast) => (
-              <Cast key={cast.id} cast={cast} />
-            ))}
+          <div className="h-full items-center">
+            {credits?.cast?.length === 0 ? (
+              <div className="flex items-center justify-center h-full">
+               <p className="text-2xl font-bold text-center text-neutral-500">{t('noCastAvailable')}</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 md:gap-4">
+              {credits?.cast?.slice(0, 11).map((cast: ICast) => (
+                <Cast key={cast.id} cast={cast} />
+              ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -83,8 +83,14 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
                 <div className="flex items-center gap-2 md:gap-4">
                   <CircleRating rating={rate} />
                   <span className="text-base md:text-xl">{date}</span>
-                  <span>•</span>
-                  <span className="text-base md:text-xl">{data?.runtime ? `${data?.runtime} min` : `${data?.number_of_episodes} episodes`}</span>
+                  {
+                    data?.runtime || data?.number_of_episodes ? 
+                    <>
+                    <span>•</span>
+                    <span className="text-base md:text-xl">{data?.runtime ? `${data?.runtime} min` : `${data?.number_of_episodes} episodes`}</span>
+                    </>
+                    : ''
+                  }
                 </div>
               </div>
               <div className="flex">
@@ -102,9 +108,13 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
               <p className="text-sm md:text-base text-white dark:text-gray-300 leading-relaxed max-w-5xl text-start">
                 {data?.overview}
               </p>
+              {
+                data?.video ? 
               <div>
                 <ButtonWatchTrailer/>
               </div>
+              : ''
+              }
               {
                 openVideoModal && (
                   <ModalVideo
