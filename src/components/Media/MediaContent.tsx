@@ -6,14 +6,18 @@ import { Card } from "../../core/Card";
 import { IMovie } from "../../interfaces/IMovie";
 import { AnimatePresence, motion } from "motion/react";
 import { MediaPagination } from "./MediaPagination";
-import { MediaFilters } from "./MediaFilters";
 import { useLocation } from "react-router-dom";
+import { NotFound } from "../../core/NotFound";
+import { GenreList } from "./Filters/GenreList";
+import { useTranslation } from "react-i18next";
+import clsx from "clsx";
 
 export const MediaContent = () => {
   const location = useLocation();
   const [page, setPage] = useState(1); // Estado para la página actual
   const [type, setType] = useState(""); // Estado para saber si es "movie" o "tv"
-  const { filterParams } = useMoviesStore();
+  const { filterParams, language } = useMoviesStore();
+  const { t } = useTranslation();
 
   // Detecta si la ruta actual contiene "movies" para decidir el tipo
   useEffect(() => {
@@ -25,26 +29,15 @@ export const MediaContent = () => {
     isLoading,
     data,
     isError,
-    error,
     isFetching,
   } = useMovies(
     type,
-    filterParams.language,
-    page, // page
-    filterParams.runtime_min,
-    filterParams.runtime_max,
-    filterParams.vote_average_min,
-    filterParams.vote_average_max,
-    filterParams.vote_count_min,
-    filterParams.vote_count_max,
-    filterParams.release_date_min,
-    filterParams.release_date_max,
+    language,
+    page,
     filterParams.genres || [],
-    filterParams.sort_by,
     );
 
   const results = data?.results; // Lista de películas/series
-
 
   // Si se está cargando por primera vez, mostrar skeleton
   if (isLoading) {
@@ -53,7 +46,7 @@ export const MediaContent = () => {
 
   // Si hubo un error en la llamada a la API, mostrar mensaje de error
   if (isError) {
-    return <h1>{error.message}</h1>;
+    return <NotFound/>
   }
 
   // Maneja el cambio de página desde la paginación
@@ -74,46 +67,48 @@ export const MediaContent = () => {
   } as const;
 
   return (
-    <>
-    <div className="flex justify-center">
-      <div className="hidden lg:block w-[20rem]">
-      <MediaFilters/>
-      </div>
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={page} // Clave para re-renderizar con animación al cambiar de página
-          {...opacityMotionTransition}
-          
-          className=""
-        >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 m-4">
-            {isFetching || isLoading ? (
-              // Si se está haciendo fetch entre páginas, mostrar skeleton encima
-              <div className="h-full w-full p-2">
-                <MovieSkeletonList />
-              </div>
-            ) : (
-              // Renderiza cada tarjeta de película
-              results?.map((result: IMovie) => (
-                <Card
-                  key={result.id}
-                  movie={result}
-                />
-              ))
-            )}
+    <div className="min-h-screen">
+      <GenreList/>
+      <div className={clsx("flex justify-center min-h-[calc(100vh-246px)]",{
+        "items-center": !results || results.length === 0
+      })}>
+        {!results || results.length === 0 ? (
+          <div className="flex justify-center items-center h-full" aria-label={t('noResults')}>
+            <p className="text-2xl font-bold text-center text-neutral-500 ">{t('noResults')}</p>
           </div>
-        </motion.div>
-      </AnimatePresence>
+        ) : (
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={page}
+              {...opacityMotionTransition}
+              className=""
+            >
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-4">
+                {isFetching || isLoading ? (
+                  <MovieSkeletonList />
+                ) : (
+                  results?.map((result: IMovie) => (
+                    <Card
+                      key={result.id}
+                      movie={result}
+                    />
+                  ))
+                )}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        )}
       </div>
       {/* Renderizado del componente de paginación */}
-      <div className="flex justify-center py-11 ">
-
-      <MediaPagination
-        handlePageClick={handleChangePage} // Función para manejar cambio de página
-        page={page} // Página actual
-        pageCount={Math.min(data?.total_pages || 0, 500)} // Límite de 500 páginas por limitación de TMDb
-        />
+      {results && results.length > 0 && (
+        <div className="flex justify-center py-11">
+          <MediaPagination
+            handlePageClick={handleChangePage}
+            page={page}
+            pageCount={Math.min(data?.total_pages || 0, 500)}
+          />
         </div>
-    </>
+      )}
+    </div>
   );
 };

@@ -22,15 +22,22 @@ export const Header = () => {
           </button>
         </div>
         <div
-          className={`z-2 h-auto w-full pb-5 bg-slate-400 dark:bg-dark backdrop-blur-md text-center fixed top-0 right-0 transform transition-transform duration-500 ease-linear ${
-            isOpenHeader ? "translate-x-0 block" : "translate-x-full hidden"
+          className={`z-2 h-screen w-full bg-slate-400/95 dark:bg-dark/95 backdrop-blur-md text-center fixed top-0 right-0 transform transition-all duration-300 ease-in-out ${
+            isOpenHeader ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
           }`}
         >
-          <div className="relative mt-10">
+          <div className="relative mt-10 transform transition-all duration-300 ease-in-out"
+               style={{ 
+                 transform: isOpenHeader ? 'translateY(0)' : 'translateY(-20px)',
+                 opacity: isOpenHeader ? 1 : 0 
+               }}>
             <MenuItems closeMenu={() => setIsOpenHeader(false)} />
           </div>
           <div className="absolute top-5 right-4">
-            <button onClick={() => setIsOpenHeader(false)}>
+            <button 
+              onClick={() => setIsOpenHeader(false)}
+              className="transform transition-transform duration-200 hover:scale-110"
+            >
               <IoClose />
             </button>
           </div>

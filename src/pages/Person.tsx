@@ -5,7 +5,7 @@ import { MediaGallery } from "../components/Person/MediaGallery"
 
 export const Person = () => {
   return (
-    <div className="max-w-1920 mx-10">
+    <div className="max-w-1920 mx-10 mb-2">
       <Information />
       <Photos />
       <MediaGallery />

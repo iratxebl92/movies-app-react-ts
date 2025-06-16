@@ -84,10 +84,10 @@ export const useContentKeywords = (content:string, id: string, language: string 
     queryFn: () => apiClient.findContentKeywords(content, id, language),
   });
 }
-export const useMovies = (content:string, language: string, page: number, runtime_min: number, runtime_max: number, vote_average_min: number, vote_average_max: number, vote_count_min: number, vote_count_max: number, release_date_min: string, release_date_max: string, genres: string[], sort_by: string) => {
+export const useMovies = (content:string, language: string, page: number, genres: string[]) => {
   return useQuery({
-    queryKey: ["movies", content, language, page, runtime_min, runtime_max, vote_average_min, vote_average_max, vote_count_min, vote_count_max, release_date_min, release_date_max, genres, sort_by],
-    queryFn: () => apiClient.findMovies(content, language, page, runtime_min, runtime_max, vote_average_min, vote_average_max, vote_count_min, vote_count_max, release_date_min, release_date_max, genres, sort_by),
+    queryKey: ["movies", content, language, page, genres],
+    queryFn: () => apiClient.findMovies(content, language, page, genres),
     placeholderData: keepPreviousData, // mantiene datos anteriores mientras carga los nuevos
     staleTime: 5000,
   });
@@ -101,7 +101,7 @@ export const useUpcomingMovies = (language: string) => {
 }
 export const useGenresList = (content: string) => {
   return useQuery({
-    queryKey: ["genresList"],
+    queryKey: ["genresList", content],
     queryFn: () => apiClient.findGenresList(content),
   });
 }

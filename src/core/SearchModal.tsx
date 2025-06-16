@@ -2,7 +2,7 @@ import { Transition, Dialog, DialogPanel } from "@headlessui/react";
 import { useMoviesStore } from "../config/store/store";
 import { Fragment } from "react/jsx-runtime";
 import { useSearch } from "../hooks/useMovies";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useRef, useEffect } from "react";
 import { ISearch } from "../interfaces/ISearch";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
@@ -20,6 +20,15 @@ export const SearchModal = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const { data } = useSearch(searchQuery, language);
+  const inputRef = useRef<HTMLInputElement>(null);
+  //useRef lo que hace es empieza siendo null y cuando se muestra en pantalla el input coge su etiqueta html
+
+  useEffect(() => {
+   
+    if (searchModal && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [searchModal]);
 
   const handleSearchQuery = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -91,13 +100,12 @@ export const SearchModal = () => {
             <DialogPanel className="space-y-4 bg-white p-4 sm:p-6 md:p-8 lg:p-12 z-20 dark:bg-gray-600 rounded-3xl w-[95%] sm:w-[90%] md:w-[80%] lg:max-w-md">
               <div className="w-full">
                 <input
+                  ref={inputRef}
                   type="search"
                   placeholder={t("searchPlaceholder")}
                   value={searchQuery}
                   onChange={handleSearchQuery}
                   className="placeholder:text-xs sm:placeholder:text-sm w-full p-2 text-sm sm:text-base rounded-lg dark:bg-gray-400 dark:placeholder:text-white dark:placeholder:opacity-70 dark:text-white"
-                  data-autofocus
-                  
                 />
               </div>
               <div className="max-h-[40vh] overflow-auto w-full pt-7 scroll-thin">
@@ -226,7 +234,7 @@ export const SearchModal = () => {
                   ))}
                   </div>
                 ) : (
-                  <p className="text-center dark:text-white dark:text-opacity-70">
+                  <p className="text-center dark:text-white dark:text-opacity-70 my-4">
                     {t("searchNotResults")}
                   </p>
                 )}

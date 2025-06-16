@@ -42,7 +42,7 @@ export const Card = ({
     >
       {/* Contenedor principal del card */}
       <div 
-        className={`flex flex-col cursor-pointer h-full dark:text-white ${className}`}
+        className={`flex flex-col cursor-pointer h-full dark:text-white md:min-w-[200px] max-w-[220px] ${className}`}
         style={style} 
         onClick={() => handleSelectedCard(movie, movie.id, movie.media_type, movie.name? movie.name : movie.title)}
       >
@@ -51,7 +51,7 @@ export const Card = ({
           {/* Imagen del poster que se ajusta al contenedor manteniendo proporciones */}
           {movie.poster_path ?
           <img
-            src={`https://www.themoviedb.org/t/p/w220_and_h330_face${movie.poster_path}`}
+            src={`https://www.themoviedb.org/t/p/w342${movie.poster_path}`}
             alt={movie.title || movie.name}
             className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
           />
@@ -64,7 +64,7 @@ export const Card = ({
         {/* Contenedor de la información con fondo y bordes redondeados */}
         <div className="px-2 pb-2 bg-slate-300 dark:bg-slate-500 rounded-b-lg flex-1">
           {/* Título de la película/serie con truncamiento a 1 línea */}
-          <p title={movie.title ? movie.title : movie.name} className="font-semibold text-sm leading-7 line-clamp-1">
+          <p title={movie.title ? movie.title : movie.name} className="font-semibold text-sm leading-7 line-clamp-1 min-h-[1.75rem]">
             {movie.title ? movie.title : movie.name}
           </p>
           {/* Contenedor de fecha y puntuación */}

@@ -40,16 +40,6 @@ interface MoviesStore {
   isWatchTrailerButton: boolean;
   setIsWatchTrailerButton: (value: boolean) => void;
   filterParams: {
-    release_date_min: string;
-    release_date_max: string;
-    vote_average_min: number;
-    vote_average_max: number;
-    vote_count_min: number;
-    vote_count_max: number;
-    runtime_min: number;
-    runtime_max: number;
-    sort_by: string;
-    language: string;
     genres: string[] | undefined;
   };
   setFilterParams: (params: Partial<MoviesStore['filterParams']>) => void;
@@ -109,16 +99,6 @@ export const useMoviesStore = create<MoviesStore>()(
       isWatchTrailerButton: false,
       setIsWatchTrailerButton: (value: boolean) => set({ isWatchTrailerButton: value }),
       filterParams: {
-        release_date_min: "",
-        release_date_max: "",
-        vote_average_min: 0,
-        vote_average_max: 10,
-        vote_count_min: 0,
-        vote_count_max: 10,
-        runtime_min: 0,
-        runtime_max: 300,
-        sort_by: "",
-        language: i18n.language,
         genres: [],
       },
       setFilterParams: (params) => set((state) => ({

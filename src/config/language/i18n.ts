@@ -70,7 +70,8 @@ i18n
           backHome: "Back to Home",
           notFound: "Page Not Found",
           notFoundMessage: "Oops! The page you're looking for doesn't exist or has been moved.",
-          notInformation: "Information not available"
+          notInformation: "Information not available",
+          noResults: "No content available"
         },
       },
       es: {
@@ -135,7 +136,8 @@ i18n
           backHome: "Volver al inicio",
           notFound: "Página no encontrada",
           notFoundMessage: "¡Vaya! La página que estás buscando no existe o ha sido movida.",
-          notInformation: "Información no disponible"
+          notInformation: "Información no disponible",
+          noResults: "Sin resultados"
         },
       },
     },
