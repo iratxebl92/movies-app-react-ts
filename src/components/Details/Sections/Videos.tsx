@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { LoadingSpinner } from "../../../core/LoadingSpinner";
 import { useVideos } from "../../../hooks/useMovies";
 import { useMoviesStore } from "../../../config/store/store";
 import { ModalVideo } from "../Modals/ModalVideo";
@@ -7,6 +6,8 @@ import * as motion from "motion/react-client";
 import { IoPlayCircleOutline } from "react-icons/io5";
 import OptionsSelect from "../../../core/OptionsSelect";
 import { t } from "i18next";
+import { VideoSkeleton } from "../../Skeleton/VideosSkeleton";
+
 
 export const Videos = ({ id, type }: { id: number; type: string }) => {
   const {
@@ -30,6 +31,7 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
       }
     }
   }, [data]);
+  if(isLoading) return <VideoSkeleton/>
 
   useEffect(() => {
     if (data?.results && selectedType) {
@@ -43,7 +45,6 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
     setSelectedType(type);
   };
 
-  if (isLoading) return <LoadingSpinner />;
   if (!data?.results) return null;
 
   const uniqueVideosTypes = [...new Set(data.results.map((video: any) => video.type))];
@@ -61,7 +62,7 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
       />
    }
       
-      <div className="w-full">
+      <div className="w-full min-h-[200px]">
         {
           data?.results && data?.results.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-5 justify-start">

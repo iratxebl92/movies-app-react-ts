@@ -7,20 +7,22 @@ import { Fullscreen, Counter } from "yet-another-react-lightbox/plugins";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/counter.css";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
+import { ImagesSkeleton } from "../../Skeleton/Person/ImagesSkeleton";
 
 export const Images = ({ id, type }: { id: number; type: string }) => {
   const [imagesType, setImagesType] = useState<string>("backdrops");
-  const { data: images } = useImages(type, id);
+  const { data: images, isLoading } = useImages(type, id);
   const backdrops = images?.backdrops || undefined;
   const posters = images?.posters || undefined;
   const options = ["backdrops", "posters"];
   const [selectedImages, setSelectedImages] = useState<any>(backdrops);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
+  const { t } = useTranslation();
   const handleOptionChange = (option: string) => {
     setImagesType(option);
   };
-
+  
   useEffect(() => {
     if (!images) return;
     if (imagesType === "backdrops") {
@@ -29,14 +31,15 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
       setSelectedImages(posters);
     }
   }, [imagesType, backdrops, posters]);
-
+  
   if (!images) return null;
-
+  
   const imagesLocal = (selectedImages || []).map((element: any) => ({
     src: `https://www.themoviedb.org/t/p/original/${element.file_path}`,
     thumbnail: `https://www.themoviedb.org/t/p/w300/${element.file_path}`,
   }));
-
+  
+  if(isLoading) return <ImagesSkeleton/>
 
   const toDataURL = async (url: string) => {
     try {
@@ -110,35 +113,49 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
   };
   return (
     <>
-      <OptionsSelect
-        options={options}
-        style={{ width: "300px", marginLeft: "20px" }}
-        value={imagesType}
-        onOptionChange={handleOptionChange}
-      />
-      <div className="p-6">
-        <div className={`grid ${imagesType === "backdrops" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"} gap-5`}>
-          {imagesLocal.slice(0, 20).map((img: any, idx: any) => (
-            <div key={idx} className="relative group">
-              <img
-                src={img.thumbnail}
-                alt=""
-                className={`rounded-xl cursor-pointer object-cover ${imagesType === "backdrops" ? "w-full h-60" : ""} transition-transform group-hover:scale-105 shadow-md`}
-                onClick={() => setLightboxIndex(idx)}
-              />
-              <button 
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDownload(img.src);
-                }}
-                className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <GrDownload/>
-              </button>
-            </div>
-          ))}
+      {!imagesLocal.length ? (
+        <div
+          className="w-full h-full flex items-center"
+          role="alert"
+          aria-live="assertive"
+        >
+          <p className="text-2xl font-bold text-center text-neutral-500" aria-label={t("noImagesAvailable")}>
+            {t("noImagesAvailable")}
+          </p>
         </div>
-      </div>
+      ) : (
+        <>
+          <OptionsSelect
+            options={options}
+            style={{ width: "300px", marginLeft: "20px" }}
+            value={imagesType}
+            onOptionChange={handleOptionChange}
+          />
+          <div className="p-6">
+            <div className={`grid ${imagesType === "backdrops" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"} gap-5`}>
+              {imagesLocal.slice(0, 20).map((img: any, idx: any) => (
+                <div key={idx} className="relative group">
+                  <img
+                    src={img.thumbnail}
+                    alt=""
+                    className={`rounded-xl cursor-pointer object-cover ${imagesType === "backdrops" ? "w-full h-60" : ""} transition-transform group-hover:scale-105 shadow-md`}
+                    onClick={() => setLightboxIndex(idx)}
+                  />
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDownload(img.src);
+                    }}
+                    className="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <GrDownload/>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
       {lightboxIndex !== null && (
         <Lightbox
           open={true}

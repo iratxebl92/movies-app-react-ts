@@ -73,7 +73,9 @@ i18n
           notInformation: "Information not available",
           noResults: "No content available",
           infoDetails: "Overview",
-          noCastAvailable: "Cast information not available"
+          noCastAvailable: "Cast information not available",
+          noImagesAvailable: "Images not available"
+
         },
       },
       es: {
@@ -141,7 +143,8 @@ i18n
           notInformation: "Información no disponible",
           noResults: "Sin resultados",
           infoDetails: "Información General",
-          noCastAvailable: "Información del reparto no disponible"
+          noCastAvailable: "Información del reparto no disponible",
+          noImagesAvailable: "Imágenes no disponibles"
         },
       },
     },

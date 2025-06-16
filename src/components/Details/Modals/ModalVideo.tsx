@@ -1,22 +1,23 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ReactPlayer from "react-player";
 import { useMoviesStore } from "../../../config/store/store";
 import { IoMdClose } from "react-icons/io";
+import { useVideo } from "./hooks/useVideo";
 
 export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
   
     const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey, videos, isWatchTrailerButton, setIsWatchTrailerButton } =
       useMoviesStore();
-      
-      
-    const [prevDisabled, setPrevDisabled] = useState(false)
-    const [nextDisabled, setNextDisabled] = useState(false)
+      const {
+        prevDisabled,
+        setPrevDisabled,
+        nextDisabled,
+        setNextDisabled
+      } = useVideo()
+
 console.log(videos, "videos")
 
-  useEffect(() => {
-  }, [videos])
-  
   useEffect(() => {
     if(!videos) return
     if(currentVideoIndex === 0){
@@ -105,3 +106,4 @@ console.log(videos, "videos")
     </Transition>
   );
 };
+
