@@ -1,25 +1,19 @@
-import { useMoviesStore } from "../../config/store/store";
-import { usePersonSocialMedia } from "../../hooks/useMovies";
-import { socialMedia } from "../../utils/filters";
+import { useSocialMedia } from "./hooks/useSocialMedia";
 
 export const SocialMedia = ({ id }: { id: number }) => {
-  const { data } = usePersonSocialMedia(id);
-  const {theme} = useMoviesStore()
+  const socialMediaData = useSocialMedia(id);
 
-  
-  // Si data no trae nada no hace todo lo de fuera del if
-  if (!data) {
-    return null; 
+  if (!socialMediaData) {
+    return null;
   }
 
-  const filteredSocialMedia = socialMedia.filter(({ key }) => (data[key])); //Se accede al valor de data[key] y si es "" o null no lo guarda. toma cada objeto de socialMedia, extrae su key y verifica si data[key] tiene un valor. Si data[key] es undefined o null, la condición es falsa y esa red social se excluye del array filtrado. Y he desestructurado key en vez de poner value y luego value.key directamente {key}. 
-
+  const { filteredSocialMedia, theme, data } = socialMediaData;
 
   return (
     <div style={{ display: "flex", gap: "10px" }}>
-      {filteredSocialMedia.map(({ key,icon: Icon, web }) => (
+      {filteredSocialMedia.map(({ key, icon: Icon, web }) => (
         <a
-          href={`${web}${data[key]}`} //data[key] obtiene el valor asociado a la clave key en el objeto data, y este valor se concatena con la URL base web para formar el enlace completo.
+          href={`${web}${data[key]}`}
           key={key}
           target="_blank"
           rel="noopener noreferrer"

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { GrDownload } from "react-icons/gr";
-import { useImages } from "../../../hooks/useMovies";
 import OptionsSelect from "../../../core/OptionsSelect";
 import Lightbox from "yet-another-react-lightbox";
 import { Fullscreen, Counter } from "yet-another-react-lightbox/plugins";
@@ -8,42 +7,23 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/counter.css";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-import { ImagesSkeleton } from "../../Skeleton/Person/ImagesSkeleton";
+import { ImagesSkeleton } from "../../Skeleton/ImagesSkeleton";
+import { useImage } from "./hooks/useImage";
 
 export const Images = ({ id, type }: { id: number; type: string }) => {
-  const [imagesType, setImagesType] = useState<string>("backdrops");
-  const { data: images, isLoading } = useImages(type, id);
-  const backdrops = images?.backdrops || undefined;
-  const posters = images?.posters || undefined;
-  const options = ["backdrops", "posters"];
-  const [selectedImages, setSelectedImages] = useState<any>(backdrops);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const { t } = useTranslation();
-  const handleOptionChange = (option: string) => {
-    setImagesType(option);
-  };
-  
-  useEffect(() => {
-    if (!images) return;
-    if (imagesType === "backdrops") {
-      setSelectedImages(backdrops);
-    } else {
-      setSelectedImages(posters);
-    }
-  }, [imagesType, backdrops, posters]);
-  
-  if (!images) return null;
-  
-  const imagesLocal = (selectedImages || []).map((element: any) => ({
-    src: `https://www.themoviedb.org/t/p/original/${element.file_path}`,
-    thumbnail: `https://www.themoviedb.org/t/p/w300/${element.file_path}`,
-  }));
-  
-  if(isLoading) return <ImagesSkeleton/>
+  const { 
+    imagesType,
+    imagesLocal,
+    isLoading,
+    isFetching,
+    showSkeleton,
+    handleOptionChange
+  } = useImage(type, id);
 
   const toDataURL = async (url: string) => {
     try {
-      /* Using Axios with specific headers to mitigate CORS issues */
       const response = await axios.get(url, { 
         responseType: "blob",
         headers: {
@@ -57,7 +37,6 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
       return blobUrl;
     } catch (error) {
       console.error("Error downloading image:", error);
-      // If direct download fails, try opening in new tab
       window.open(url, '_blank');
       return null;
     }
@@ -65,34 +44,22 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
 
   const handleDownload = async (url: string) => {
     try {
-      // Get filename from the URL
       const filename = url.split('/').pop() || "image.jpg";
-      
-      // Try with proxy approach
       const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
-      
-      // Fetch through proxy
       const response = await fetch(proxyUrl);
       const blob = await response.blob();
-      
-      // Create object URL
       const blobUrl = URL.createObjectURL(blob);
-      
-      // Create download link
       const a = document.createElement('a');
       a.href = blobUrl;
       a.download = filename;
       document.body.appendChild(a);
       a.click();
-      
-      // Cleanup
       document.body.removeChild(a);
       URL.revokeObjectURL(blobUrl);
     } catch (error) {
       console.error("Download failed, trying backup method:", error);
       
       try {
-        // Backup method - use local proxy if available
         const blobUrl = await toDataURL(url);
         if (blobUrl) {
           const filename = url.split('/').pop() || "image.jpg";
@@ -111,6 +78,9 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
       }
     }
   };
+
+  if(showSkeleton || isLoading || isFetching) return <ImagesSkeleton/>
+
   return (
     <>
       {!imagesLocal.length ? (
@@ -126,7 +96,7 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
       ) : (
         <>
           <OptionsSelect
-            options={options}
+            options={["backdrops", "posters"]}
             style={{ width: "300px", marginLeft: "20px" }}
             value={imagesType}
             onOptionChange={handleOptionChange}

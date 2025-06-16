@@ -1,26 +1,26 @@
-
 import { useTranslation } from "react-i18next";
-import { useMoviesStore } from "../../config/store/store";
-import { useTopRatedMovies } from "../../hooks/useMovies";
 import { Slider } from "../../core/Slider";
 import { SwitchTab } from "../../core/SwitchTab";
+import { useHome } from "./hooks/useHome";
 
 export const TopRated = () => {
-  const { language, topRatedSelected, topRatedOption } = useMoviesStore();
   const { t } = useTranslation();
-  const { data, status } = useTopRatedMovies(topRatedSelected, language);
+  const { getSectionData, handleTabChange } = useHome();
+  const { data, status, options, selectedIndex } = getSectionData("topRated");
 
-  const onTabChange = (tab: string) => {
-    topRatedOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
-  };
-
-  const options = [t('movies'), t('tv')]
-  const selectedIndex = topRatedSelected === "movie" ? 0 : 1;
   return (
     <div className="mb-10">
-      <div className="flex justify-between items-center mb-5">
-        <h2 className="text-xl md:text-2xl  md:font-bold dark:text-white">{t('topRated')}</h2>
-        <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />
+      <div className="flex justify-between items-center mb-5 flex-wrap gap-2">
+        <p className="flex-1 text-lg font-semibold md:text-2xl md:font-bold dark:text-white">
+          {t('topRated')}
+        </p>
+        <div className=" md:w-fit text-xs md:text-base">
+          <SwitchTab 
+            options={options} 
+            onTabChange={(tab) => handleTabChange("topRated", tab)} 
+            selectedIndex={selectedIndex} 
+          />
+        </div>
       </div>
       <Slider data={data} status={status} />
     </div>

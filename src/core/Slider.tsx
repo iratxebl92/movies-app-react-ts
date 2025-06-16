@@ -17,14 +17,6 @@ export const Slider = ({ data, status }: SliderProps) => {
   // Crea un array de 5 elementos para el skeleton loading
   const skeletonSlides = Array.from({ length: 5 });
 
-  // Muestra un mensaje de error si el estado es 'error'
-  if (status === 'error') {
-    return (
-      <div className="flex items-center justify-center h-60 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <p className="text-red-500">Error loading content</p>
-      </div>
-    );
-  }
 
   // Determina si está cargando basado en el estado
   const isLoading = status === 'loading' || status === 'pending';

@@ -1,14 +1,11 @@
 import clsx from "clsx";
 import { CircleRating } from "../../../core/components/Icons/CircleRating";
 import { IMovie } from "../../../interfaces/IMovie";
-import {  useState, useEffect } from 'react';
 import { useInitialScroll } from "../../../hooks/useInitialScroll";
-import { useVideos } from "../../../hooks/useMovies";
-import { useMoviesStore } from "../../../config/store/store";
 import { ModalVideo } from "../Modals/ModalVideo";
 import { ButtonWatchTrailer } from "../../../core/ButtonWatchTrailer";
 import { DetailsBannerSkeleton } from "../../Skeleton/Details/DetailsBannerSkeleton";
-
+import { useDetailsBanner } from "./hooks/useDetailsBanner";
 
 type DetailsBannerProps = {
   data: IMovie;
@@ -18,34 +15,15 @@ type DetailsBannerProps = {
 
 export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => {
   useInitialScroll();
-   
-   const { openVideoModal } = useMoviesStore()
-   const {data: videos} = useVideos(type, data?.id)
-   const trailer = videos?.results.find((video: {type: string}) => video.type === "Trailer") //guardamos solo el trailer
-   const rate = data?.vote_average?.toString().substring(0, 3);
-   const date = data?.release_date?.substring(0, 4);
-   const [showSkeleton, setShowSkeleton] = useState(true);
+  const { openVideoModal, trailer, rate, date, showSkeleton } = useDetailsBanner(data, type, isLoading);
 
-   useEffect(() => {
+  if (isLoading || showSkeleton) {
+    return <DetailsBannerSkeleton />;
+  }
     
-     if (!isLoading) {
-       const timer = setTimeout(() => {
-         setShowSkeleton(false);
-       }, 1500);
- 
-       return () => clearTimeout(timer);
-     }
-     return undefined;
-   }, [isLoading]);
- 
- 
-    if (isLoading || showSkeleton) {
-      return <DetailsBannerSkeleton />;
-      }
-    
-    if(!data) return null;
+  if(!data) return null;
+
   return (
-  
     <div className="relative w-full">
       {/* Hero Banner Section */}
       <div 
@@ -119,17 +97,14 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
                 openVideoModal && (
                   <ModalVideo
                     selectedVideoKey={trailer?.key}
-                  
                   />
                 )
               }
-              
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
 };
 

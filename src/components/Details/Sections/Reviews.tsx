@@ -1,11 +1,8 @@
 import { StarIcon } from "@heroicons/react/20/solid";
-import { useMoviesStore } from "../../../config/store/store";
-import { useReviews } from "../../../hooks/useMovies";
 import { IReview } from "../../../interfaces/IReviews";
 import { formatDate } from "../../../utils/filters";
-
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useReview } from "./hooks/useReview";
 
 type ReviewsPropsType = {
   id: number;
@@ -13,37 +10,11 @@ type ReviewsPropsType = {
 };
 
 export const Reviews = ({ id, type }: ReviewsPropsType) => {
-  const [localReviews, setLocalReviews] = useState<IReview[]>([]);
-  const { data: reviews } = useReviews(type, id);
-  const { language } = useMoviesStore();
-  const {t} = useTranslation()
-  useEffect(() => {
-    if (!reviews) return;
-    setLocalReviews(
-      reviews.results.map((review: IReview) => {
-        review.read_more = false;
-        //añadimos al objeto de la review read_more para controlar el button Read More
-        return review;
-      })
-    );
-  }, [reviews]);
-  if (!reviews) return null;
+  const { t } = useTranslation();
+  const { localReviews, handleReadMore, language } = useReview(type, id);
 
-  const userLang = language || "es-ES";
+  if (!localReviews.length) return null;
 
-  const handleReadMore = (id: string) => {
-    const updateData = localReviews.map((review: IReview) => {
-      if (review.id === id) {
-        return {
-          ...review,
-          read_more: !review.read_more,
-        };
-      }
-      return review;
-    });
-
-    setLocalReviews(updateData);
-  };
   return (
     <>
       {!localReviews.length ? (
@@ -60,65 +31,64 @@ export const Reviews = ({ id, type }: ReviewsPropsType) => {
         <>
           {localReviews.map((review: IReview) => (
             <div
-            key={review.id}
-            className="text-left w-full flex flex-col mb-5 last:mb-0 pb-5 last:pb-0 space-y-3 border-b last:border-b-0 dark:border-slate-400 dark:border-opacity-20 border-slate-300"
-            role="article" // Añadido para indicar que es un artículo
-            aria-labelledby={`review-${review.id}`} // Añadido para asociar el contenido con un ID único
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex mb-4 items-center">
-                <img
-                  width={50}
-                  height={50}
-                  src={`https://api.dicebear.com/6.x/bottts/svg?seed=${review.author}`}
-                  alt={`Avatar de ${review.author}`} // Añadido para describir la imagen
-                />
-          
-                <div className="flex flex-col ml-2">
-                  <p id={`review-${review.id}`} className="font-bold">
-                    {review.author}
-                  </p>
-                  <p className="text-xs opacity-65">
-                    {formatDate(review.created_at, userLang)}
-                  </p>
+              key={review.id}
+              className="text-left w-full flex flex-col mb-5 last:mb-0 pb-5 last:pb-0 space-y-3 border-b last:border-b-0 dark:border-slate-400 dark:border-opacity-20 border-slate-300"
+              role="article"
+              aria-labelledby={`review-${review.id}`}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex mb-4 items-center">
+                  <img
+                    width={50}
+                    height={50}
+                    src={`https://api.dicebear.com/6.x/bottts/svg?seed=${review.author}`}
+                    alt={`Avatar de ${review.author}`}
+                  />
+                  <div className="flex flex-col ml-2">
+                    <p id={`review-${review.id}`} className="font-bold">
+                      {review.author}
+                    </p>
+                    <p className="text-xs opacity-65">
+                      {formatDate(review.created_at, language)}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex space-x-1">
+                  <StarIcon
+                    width={"20px"}
+                    height={"20px"}
+                    style={{ color: "#EFCE4A" }}
+                  />
+                  <p>{review.author_details.rating}</p>
                 </div>
               </div>
-              <div className="flex space-x-1">
-                <StarIcon
-                  width={"20px"}
-                  height={"20px"}
-                  style={{ color: "#EFCE4A" }}
-                />
-                <p>{review.author_details.rating}</p>
-              </div>
-            </div>
           
-            {review.content.length > 300 && (
-              <>
-                <p className="font-normal md:text-base text-sm text-slate-950 dark:text-slate-100 md:leading-loose leading-relaxed">
-                  {review.read_more
-                    ? review.content
-                    : `${review.content.slice(0, 299)}...`}
-                </p>
-                <button
-                  className="text-blue-500 text-left font-medium text-sm"
-                  onClick={() => handleReadMore(review.id)}
-                  aria-expanded={review.read_more} // Añadido para indicar si el contenido está expandido
-                  aria-controls={`review-content-${review.id}`} // Añadido para asociar el botón con el contenido
+              {review.content.length > 300 && (
+                <>
+                  <p className="font-normal md:text-base text-sm text-slate-950 dark:text-slate-100 md:leading-loose leading-relaxed">
+                    {review.read_more
+                      ? review.content
+                      : `${review.content.slice(0, 299)}...`}
+                  </p>
+                  <button
+                    className="text-blue-500 text-left font-medium text-sm"
+                    onClick={() => handleReadMore(review.id)}
+                    aria-expanded={review.read_more}
+                    aria-controls={`review-content-${review.id}`}
+                  >
+                    {review.read_more ? t('readLess') : t('readMore')}
+                  </button>
+                </>
+              )}
+              {review.content.length <= 300 && (
+                <p
+                  id={`review-content-${review.id}`}
+                  className="font-normal md:text-base text-sm text-slate-950 dark:text-slate-100 md:leading-loose leading-relaxed"
                 >
-                  {review.read_more ? t('readLess') : t('readMore')}
-                </button>
-              </>
-            )}
-            {review.content.length <= 300 && (
-              <p
-                id={`review-content-${review.id}`} // Añadido para identificar el contenido
-                className="font-normal md:text-base text-sm text-slate-950 dark:text-slate-100 md:leading-loose leading-relaxed"
-              >
-                {review.content}
-              </p>
-            )}
-          </div>
+                  {review.content}
+                </p>
+              )}
+            </div>
           ))}
         </>
       )}

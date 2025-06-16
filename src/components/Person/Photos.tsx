@@ -1,34 +1,20 @@
 import { SwiperSlide, Swiper } from "swiper/react";
 import "swiper/css";
-import { usePersonImages } from "../../hooks/useMovies";
-import { useParams } from "react-router-dom";
 import { PhotosSkeleton } from "../Skeleton/Person/PhotosSkeleton";
-import { useEffect, useState } from "react";
+import { usePhotos } from "./hooks/usePhotos";
 
 export const Photos = () => {
-  const { idAndName } = useParams();
-  if (!idAndName) return null;
-  const [id] = idAndName.split("-");
-  const { data, isLoading } = usePersonImages(Number(id));
-  const [showSkeleton, setShowSkeleton] = useState(true);
+  const photosData = usePhotos();
 
-  useEffect(() => {
-    if (!isLoading) {
-      // Añadimos un delay de 1.5 segundos después de que los datos estén cargados
-      const timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 1500);
-
-      return () => clearTimeout(timer);
-    }
-    return undefined;
-  }, [isLoading]);
+  if (!photosData) return null;
+  
+  const { data, isLoading, showSkeleton } = photosData;
 
   if (isLoading || showSkeleton) {
     return <PhotosSkeleton />;
   }
 
-  if(!data) return null;
+  if (!data) return null;
 
   return (
     <div className="px-8">

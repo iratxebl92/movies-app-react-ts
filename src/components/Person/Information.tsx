@@ -1,80 +1,58 @@
-import { usePersonInformation } from "../../hooks/useMovies";
 import { ReadMore } from "./ReadMore";
 import { useTranslation } from "react-i18next";
-import { useMoviesStore } from "../../config/store/store";
-import { useParams } from "react-router-dom";
 import { SocialMedia } from "./SocialMedia";
 import { formatDate } from "../../utils/filters";
 import { InformationSkeleton } from "../Skeleton/Person/InformationSkeleton";
-import { useEffect, useState } from "react";
+import { useInformation } from "./hooks/useInformation";
 
 export const Information = () => {
-  const {idAndName} = useParams()
-  if (!idAndName) return null;
-  const [id] = idAndName.split("-");
-  const {language} = useMoviesStore()
-  const {data, isLoading} = usePersonInformation(Number(id), language) 
-  const {t} = useTranslation()
-  const [showSkeleton, setShowSkeleton] = useState(true);
+  const { t, i18n } = useTranslation();
+  const informationData = useInformation();
+  const language = i18n.language;
 
-  useEffect(() => {
-   
-    if (!isLoading) {
-      const timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 1500);
-
-      return () => clearTimeout(timer);
-    }
-    return undefined;
-  }, [isLoading]);
-
-
+  if (!informationData) return null;
   
-  if(!data) return;
-  const gender = data?.gender === 0 ? t("notSpecified") : data?.gender === 1 ? t("female") : t("male")
+  const { data, isLoading, showSkeleton, gender, biographyArray, id } = informationData;
 
-  const biographyArray = data && data.biography.split('\n') || []
-  if(isLoading || showSkeleton) return <InformationSkeleton />;
+  if (!data) return null;
+  if (isLoading || showSkeleton) return <InformationSkeleton />;
   
   return (
     <div className="py-16">
       <h2 className="text-2xl md:text-4xl pb-4 font-semibold">{data?.name}</h2>
       <div>
-      {
-      biographyArray[0] === '' ? 
-        <p>{t("notInformation")}</p>
-        : 
-      (<ReadMore id="biography-text" text={biographyArray} />)
-      }
+        {biographyArray[0] === '' ? 
+          <p>{t("notInformation")}</p>
+          : 
+          <ReadMore id="biography-text" text={biographyArray} />
+        }
       </div>
       <div className="grid grid-cols-2 md:grid-cols-5 my-6 gap-6 md:gap-4">
         <div>
-            <p className="font-bold">{t('knownFor')}</p>
-            <p>{data?.known_for_department ? data?.known_for_department : '-'}</p>
+          <p className="font-bold">{t('knownFor')}</p>
+          <p>{data?.known_for_department ? data?.known_for_department : '-'}</p>
         </div>
         <div>
-            <p className="font-bold">{t('gender')}</p>
-            <p>{gender ? gender : '-' } </p>
+          <p className="font-bold">{t('gender')}</p>
+          <p>{gender ? gender : '-'}</p>
         </div>
         <div>
-            <p className="font-bold">{t('birthday')} </p>
-            <p>{data?.birthday? formatDate(data.birthday, language) : "-"}</p>
+          <p className="font-bold">{t('birthday')}</p>
+          <p>{data?.birthday ? formatDate(data.birthday, language) : "-"}</p>
         </div>
-        {
-          data?.deathday &&
+        {data?.deathday && (
           <div>
-            <p className="font-bold">{t('deathDay')} </p>
-            <p> {formatDate(data?.deathday, language)} {`(${data?.deathday.slice(0,4) - data?.birthday.slice(0,4) } ${t("age")})`} </p>
-        </div>       
-        }
+            <p className="font-bold">{t('deathDay')}</p>
+            <p>{formatDate(data?.deathday, language)} {`(${Number(data?.deathday?.slice(0,4)) - Number(data?.birthday?.slice(0,4))} ${t("age")})`}</p>
+          </div>
+        )}
         <div>
-            <p className="font-bold">{t('placeBirthday')} </p>
-            <p>{data?.place_of_birth ? data?.place_of_birth : '-'} </p>
+          <p className="font-bold">{t('placeBirthday')}</p>
+          <p>{data?.place_of_birth ? data?.place_of_birth : '-'}</p>
         </div>
       </div>
       <div className="flex">
-       <SocialMedia id={Number(id)}/>
+        <SocialMedia id={id ? Number(id) : 0} />
       </div>
     </div>
   );

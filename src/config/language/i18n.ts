@@ -74,8 +74,8 @@ i18n
           noResults: "No content available",
           infoDetails: "Overview",
           noCastAvailable: "Cast information not available",
-          noImagesAvailable: "Images not available"
-
+          noImagesAvailable: "Images not available",
+          footerMesagge: "Movie App. All rights reserved."
         },
       },
       es: {
@@ -144,7 +144,8 @@ i18n
           noResults: "Sin resultados",
           infoDetails: "Información General",
           noCastAvailable: "Información del reparto no disponible",
-          noImagesAvailable: "Imágenes no disponibles"
+          noImagesAvailable: "Imágenes no disponibles",
+           footerMesagge: "App de Películas. Todos los derechos reservados."
         },
       },
     },

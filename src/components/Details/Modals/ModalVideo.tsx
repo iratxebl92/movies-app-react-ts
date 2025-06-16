@@ -1,58 +1,21 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import ReactPlayer from "react-player";
-import { useMoviesStore } from "../../../config/store/store";
 import { IoMdClose } from "react-icons/io";
-import { useVideo } from "./hooks/useVideo";
+import { useModalVideo } from "./hooks/useModalVideo";
 
 export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
-  
-    const { openVideoModal, setOpenVideoModal, setCurrentVideoIndex, currentVideoIndex, setSelectedVideoKey, videos, isWatchTrailerButton, setIsWatchTrailerButton } =
-      useMoviesStore();
-      const {
-        prevDisabled,
-        setPrevDisabled,
-        nextDisabled,
-        setNextDisabled
-      } = useVideo()
-
-console.log(videos, "videos")
-
-  useEffect(() => {
-    if(!videos) return
-    if(currentVideoIndex === 0){
-      setPrevDisabled(true)
-    }else {
-      setPrevDisabled(false)
-    }
-    if(currentVideoIndex === videos.results.length - 1){
-      setNextDisabled(true)
-    }else {
-      setNextDisabled(false)
-    }
-  }, [currentVideoIndex, selectedVideoKey])
-
-  const handlePrev = () => {
-    if(currentVideoIndex !== 0){
- 
-      setCurrentVideoIndex(currentVideoIndex - 1)
-      const previousVideo = videos.results[currentVideoIndex - 1]
-      setSelectedVideoKey(previousVideo.key)
-    } 
-  };
-
-  const handleNext = () => {
-    if(currentVideoIndex < videos.results.length - 1){
-  
-      setCurrentVideoIndex(currentVideoIndex + 1)
-      const nextVideo = videos.results[currentVideoIndex + 1]
-      setSelectedVideoKey(nextVideo.key)
-    }
-  };
-  const submitCloseButton = () => {
-    setOpenVideoModal(false)
-    setIsWatchTrailerButton(false)
-  }
+  const {
+    openVideoModal,
+    setOpenVideoModal,
+    videos,
+    isWatchTrailerButton,
+    prevDisabled,
+    nextDisabled,
+    handlePrev,
+    handleNext,
+    submitCloseButton
+  } = useModalVideo(selectedVideoKey)
 
   return (
     <Transition appear show={openVideoModal} 
@@ -99,7 +62,6 @@ console.log(videos, "videos")
               </>
               )
             }
-        
           </div>
         </div>
       </Dialog>

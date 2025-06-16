@@ -5,18 +5,7 @@ import { Reviews } from "../components/Details/Sections/Reviews";
 import { Images } from "../components/Details/Sections/Images";
 import { Videos } from "../components/Details/Sections/Videos";
 
-export const sortOptions = [
-  { key: "vote_count.desc", label: "Most Known For"},
-  { key: "vote_average.asc", label: "Rating Ascending" },
-  { key: "vote_average.desc", label: "Rating Descending" },
-  // { key: "vote_count.asc", label: "Popularity Ascending" },
-  { key: "popularity.asc", label: "Popularity Ascending" },
-  { key: "popularity.desc", label: "Popularity Descending" },
-  { key: "release_date.asc", label: "Release Date Ascending" },
-  { key: "release_date.desc", label: "Release Date Descending" },
-  { key: "title.asc", label: "Name (A-Z)" },
-  { key: "title.desc", label: "Name (Z-A)" }
-]
+
 
   export const sortDepartaments = [
         {key: "all", label: "All Departments"},

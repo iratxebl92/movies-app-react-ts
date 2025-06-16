@@ -6,8 +6,9 @@ import { Footer } from "./Footer";
 import { SearchModal } from '../../core/SearchModal';
 import { useMoviesStore } from "../../config/store/store";
 
+
 export const MoviesApp = () => {
- const {searchModal} = useMoviesStore()
+  const {searchModal} = useMoviesStore()
 
   return (
     <div className="dark:bg-dark dark:text-white bg-light min-h-screen relative ">

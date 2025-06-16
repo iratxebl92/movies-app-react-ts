@@ -1,111 +1,71 @@
-import { useEffect, useMemo, useState } from "react";
-import { useMoviesStore } from "../../config/store/store";
-import { usePersonMovies } from "../../hooks/useMovies";
 import { Card } from "../../core/Card";
-import { useParams } from "react-router-dom";
 import { SwitchTab } from "../../core/SwitchTab";
 import { MediaGallerySkeleton } from "../Skeleton/Person/MediaGallerySkeleton";
 import OptionsSelect from "../../core/OptionsSelect";
 import { useTranslation } from "react-i18next";
+import { useMediaGallery } from "./hooks/useMediaGallery";
 
 export const MediaGallery = () => {
   const { t } = useTranslation();
-  const { idAndName } = useParams() as { idAndName: string }; // Solo usar si sabemos seguro que viene en la url y es string
- 
-  const [id] = idAndName.split("-");
-
-  const { personContentSelected, personContentOption } = useMoviesStore();
-
- 
-  const { data, isLoading } = usePersonMovies(personContentSelected, Number(id));
-  const [visibleMovies, setVisibleMovies] = useState(20); // Mostramos inicialmente las peliculas o series que decidamos
-  const [showSkeleton, setShowSkeleton] = useState(true);
-  const [departmentSelected, setDepartmentSelected] = useState('All')
- 
-  const idUnicos = new Set(); //evitar duplicados
-  const departments = (data?.crew ?? []) 
-    .filter((movie: { department: string }) => {
-      if (idUnicos.has(movie.department)) return false; //si cumple no se añade y no sigue ejecutando el código
-      idUnicos.add(movie.department); //si no cumple se añade y se sigue ejecutando el código y se añade el departamento
-      return true;
-    })
-    .map((movie: { department: string }) => movie.department); //se añade el departamento a la lista de departamentos
-
-  const departmentsUnicos = ["Acting", ...departments]
-  const optionDepartments = departmentsUnicos.length > 1 ? ["All", ...departmentsUnicos] : departmentsUnicos
-  
- const selectMovies: string[] = departmentSelected === 'Acting' ? data?.cast : departmentSelected === 'All' ? [...(data?.cast ?? []), ...(data?.crew ?? [])] : data?.crew.filter((movie: { department: string }) => movie.department === departmentSelected) 
- const disabled = useMemo(() => visibleMovies >= selectMovies?.length - 20, [visibleMovies, selectMovies?.length]); //Añadimos gallery.length a la dependencia para que cuando estén los datos de la API cargados lo recalcule, sino siempre será mayor viibleMovies ya que de primeras gallery.length será 0 
-
-useEffect(() => {
-    if (!isLoading) {
-      const timer = setTimeout(() => {
-        setShowSkeleton(false);
-      }, 1500);
-
-      return () => clearTimeout(timer);
-    }
-    return undefined; //Esto deja claro a TypeScript que todos los caminos devuelven algo (una función o undefined).
-  }, [isLoading]);
+  const {
+    isLoading,
+    showSkeleton,
+    data,
+    selectMovies,
+    visibleMovies,
+    setVisibleMovies,
+    disabled,
+    optionDepartments,
+    departmentSelected,
+    selectedIndex,
+    onTabChange,
+    onDepartmentOptionChange
+  } = useMediaGallery();
 
   if (isLoading || showSkeleton) return <MediaGallerySkeleton/>;
+  if (!data) return null;
 
-  if (!data) return null; // Si no traer los datos de la API, no renderizamos nada
- 
-  const onTabChange = (tab: string) => {
-    personContentOption(
-      tab === "Películas" || tab === "Movies" ? "movie" : "tv"
-    );
-  };
-   const selectedIndex = personContentSelected === "movie" ? 0 : 1;
-
-   const opnDepartmentOptionChange = (option: string) => {
-    setDepartmentSelected(option)
-
-   }
- 
- 
   return (
     <>
-          <SwitchTab
+      <SwitchTab
         options={["Movies", "Tv Show"]}
         onTabChange={onTabChange}
         className="flex justify-center py-10"
         selectedIndex={selectedIndex}
-        
       />
-          <div className="flex justify-end gap-6 mb-8">
-            <OptionsSelect options={optionDepartments} style={{width: '10rem'}} value={departmentSelected} onOptionChange={opnDepartmentOptionChange} />
+      <div className="flex justify-end gap-6 mb-8">
+        <OptionsSelect 
+          options={optionDepartments} 
+          style={{width: '10rem'}} 
+          value={departmentSelected} 
+          onOptionChange={onDepartmentOptionChange} 
+        />
       </div>
-    <div>
-      { selectMovies.length > 0 ?
-      (
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-          {selectMovies.slice(0, visibleMovies).map((item, index) => (
-            <Card movie={item} style={{ width: "100%" }} key={index} />
-          ))}
+      <div>
+        {selectMovies.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+            {selectMovies.slice(0, visibleMovies).map((item, index) => (
+              <Card movie={item} style={{ width: "100%" }} key={index} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center h-full min-h-[20vh]">
+            <p className="text-2xl font-bold">{t('noMoviesOrTvShows')}</p>
+          </div>
+        )}
+        <div className="flex justify-center">
+          <button 
+            disabled={disabled} 
+            className={`border-2 rounded-xl p-4 mt-4 text-white ${disabled ? 'hidden' : 'bg-red-700 cursor-pointer'}`} 
+            onClick={() => setVisibleMovies((prev) => prev + 20)}
+          >
+            {t('loadMore')}
+          </button>
         </div>
-        )
-        : 
-        <div className="flex justify-center items-center h-full min-h-[20vh]">
-          <p className="text-2xl font-bold">{t('noMoviesOrTvShows')}</p>
-        </div>
-      }
-      <div className="flex justify-center">
-      {/* Al hacer click en Load More, añadimos el nº de pelis/series que decidamos a visibleMovies */}
-      <button disabled={disabled} className={`border-2 rounded-xl p-4 mt-4 text-white  ${disabled ? 'hidden' : 'bg-red-700 cursor-pointer' }`} onClick={() => setVisibleMovies((prev) => prev + 20)}>
-        {t('loadMore')}
-      </button>
       </div>
-    </div>
-      </>
+    </>
   );
 };
-//TODO: Hacer el type de data bien hecho
-{
-  /* <img className="rounded-xl w-full h-full" src={`https://www.themoviedb.org/t/p/original//gakVVTn9QDupSHvgXm6XHNdmRJf.jpg`} alt="" /> */
-}
 
 
 /*

@@ -1,31 +1,20 @@
-import { useState } from "react";
-import { useMoviesStore } from "../../../config/store/store";
-import { useDetailsAndCast, useSeasonDetails } from "../../../hooks/useMovies";
 import OptionsSelect from "../../../core/OptionsSelect";
 import { formatDate } from "../../../utils/filters";
 import { StarIcon } from "../../../core/components/Icons/StarIcon";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSeason } from "./hooks/useSeason";
 
 export const Season = ({ id, type }: { id: number; type: string }) => {
-  const [selectedSeason, setSelectedSeason] = useState(0);
-  const { language } = useMoviesStore();
-  const { data } = useDetailsAndCast(type, id, language);
+  const { selectedSeason, seasonData, seasons, handleSeasonChange, language } = useSeason(id, type);
 
-  const { data: seasonData } = useSeasonDetails(id, selectedSeason, language);
-  if (!seasonData || !data?.seasons) return null;
-  const seasons: string[] = data?.seasons.map((season: any) => season.name) || [];
-
-  const handleSeasonChange = (season: string) => {
-    const seasonInfo = data?.seasons.find((s: any) => s.name === season);
-    setSelectedSeason(seasonInfo?.season_number);
-  };
+  if (!seasonData || !seasons.length) return null;
 
   return (
     <>
       <OptionsSelect
         options={seasons}
         style={{ width: "300px" }}
-        value={data?.seasons.find((s: any) => s.season_number === selectedSeason)?.name || seasons[0]}
+        value={seasons[selectedSeason] || seasons[0]}
         onOptionChange={handleSeasonChange}
       />
       <AnimatePresence mode="wait">
