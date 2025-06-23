@@ -14,7 +14,6 @@ export const Reviews = ({ id, type }: ReviewsPropsType) => {
   const { t } = useTranslation();
   const { localReviews, handleReadMore, language, loading } = useReview(type, id);
 
-  console.log(localReviews.length)
   if (loading) return <ReviewsSkeleton />;
 
   return (

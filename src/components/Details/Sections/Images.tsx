@@ -9,6 +9,11 @@ import { useTranslation } from "react-i18next";
 import { ImagesSkeleton } from "../../Skeleton/ImagesSkeleton";
 import { useImage } from "./hooks/useImage";
 
+type ImageType = "backdrops" | "posters";
+type ImageItem = {
+  src: string;
+  thumbnail: string;
+};
 export const Images = ({ id, type }: { id: number; type: string }) => {
 
   const { t } = useTranslation();
@@ -47,12 +52,12 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
             style={{ width: "300px", marginLeft: "20px" }}
             value={imagesType}
             onOptionChange={handleOptionChange}
-            getOptionLabel={(option: any) => option}
-            getOptionValue={(option: any) => option}
+            getOptionLabel={(option: ImageType) => option}
+            getOptionValue={(option: ImageType) => option}
           />
           <div className="p-6">
             <div className={`grid ${imagesType === "backdrops" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"} gap-5`}>
-              {imagesLocal.slice(0, 20).map((img: any, idx: any) => (
+              {imagesLocal.slice(0, 20).map((img: ImageItem, idx: number) => (
                 <div key={idx} className="relative group">
                   <img
                     src={img.thumbnail}
@@ -80,7 +85,7 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
           open={true}
           close={() => setLightboxIndex(null)}
           index={lightboxIndex}
-          slides={imagesLocal.map((img: any) => ({ src: img.src }))}
+          slides={imagesLocal.map((img: ImageItem) => ({ src: img.src }))}
           plugins={[Fullscreen, Counter]}
         />
       )}

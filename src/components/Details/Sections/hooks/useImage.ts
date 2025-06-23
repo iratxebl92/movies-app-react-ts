@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useImages } from "../../../../hooks/useMovies";
 import axios from "axios";
+import { IBackdrops } from "../../../../interfaces/IBackdrops";
 
 export const useImage = (type: string, id: number) => {
   const [imagesType, setImagesType] = useState<string>("backdrops");
@@ -28,7 +29,7 @@ export const useImage = (type: string, id: number) => {
     setImagesType(option);
   };
 
-  const imagesLocal = (selectedImages || []).map((element: any) => ({
+  const imagesLocal = (selectedImages || []).map((element: IBackdrops) => ({
     src: `https://www.themoviedb.org/t/p/original/${element.file_path}`,
     thumbnail: `https://www.themoviedb.org/t/p/w300/${element.file_path}`,
   }));

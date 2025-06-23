@@ -1,7 +1,7 @@
 // src/hooks/useIntersectionObserver.ts
 import { useEffect, useRef, useState } from 'react';
 
-export const useIntersectionObserver = (options = {}) => {
+export const useIntersectionObserver = (options: IntersectionObserverInit = {}) => {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 

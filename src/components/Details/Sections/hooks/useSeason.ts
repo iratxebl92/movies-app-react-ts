@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMoviesStore } from "../../../../config/store/store";
 import { useDetailsAndCast, useSeasonDetails } from "../../../../hooks/useMovies";
+import { ISeason } from "../../../../interfaces/ISeason";
 
 export const useSeason = (id: number, type: string) => {
   const { language } = useMoviesStore();
@@ -16,7 +17,7 @@ export const useSeason = (id: number, type: string) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSeasonChange = (season: any) => {
+  const handleSeasonChange = (season: ISeason) => {
     setSelectedSeason(season.season_number);
   };
 

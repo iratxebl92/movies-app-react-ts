@@ -3,6 +3,8 @@ import { formatDate } from "../../../utils/filters";
 import { StarIcon } from "../../../core/components/Icons/StarIcon";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSeason } from "./hooks/useSeason";
+import { IEpisode } from '../../../interfaces/IEpisode';
+
 
 export const Season = ({ id, type }: { id: number; type: string }) => {
   const { selectedSeason, seasonData, seasons, handleSeasonChange, language } = useSeason(id, type);
@@ -29,7 +31,7 @@ export const Season = ({ id, type }: { id: number; type: string }) => {
           <div className='text-start leading-7 my-8'>
             {seasonData.overview && <p className="opacity-80">{seasonData.overview} </p>}
           </div>
-          {seasonData.episodes.map((episode: any) => (
+          {seasonData.episodes.map((episode: IEpisode) => (
             <div key={episode.id} className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-4 mb-11 lg:mb-4">
               <div className="rounded-xl h-52 md:h-[25rem] md:w-[45rem] lg:h-[15rem] lg:w-[30rem] overflow-hidden">
                 {

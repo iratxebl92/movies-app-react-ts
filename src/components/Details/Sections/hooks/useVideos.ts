@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useVideos } from "../../../../hooks/useMovies";
 import { useMoviesStore } from "../../../../config/store/store";
+import { IVideo } from "../../../../interfaces/IVideo";
 
 export const useVideo = (type: string, id: number) => {
   const {
@@ -12,7 +13,7 @@ export const useVideo = (type: string, id: number) => {
 
   const { data, isLoading, isFetching } = useVideos(type, id);
   const [selectedType, setSelectedType] = useState<string>("");
-  const [filteredVideos, setFilteredVideos] = useState<any[]>([]);
+  const [filteredVideos, setFilteredVideos] = useState<IVideo[]>([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -29,7 +30,7 @@ export const useVideo = (type: string, id: number) => {
 
   useEffect(() => {
     if (data?.results) {
-      const types = [...new Set(data.results.map((video: any) => video.type))];
+      const types = [...new Set(data.results.map((video: IVideo) => video.type))];
       if (types.length > 0 && !selectedType) {
         setSelectedType(types[0] as string);
       }
@@ -38,9 +39,9 @@ export const useVideo = (type: string, id: number) => {
 
   useEffect(() => {
     if (data?.results && selectedType) {
-      const filtered = data.results.filter((video: any) => video.type === selectedType);
+      const filtered = data.results.filter((video: IVideo) => video.type === selectedType);
       setFilteredVideos(filtered);
-      setVideos({ results: filtered });
+      setVideos(filtered);
     }
   }, [data, selectedType]);
 
@@ -54,19 +55,20 @@ export const useVideo = (type: string, id: number) => {
     setCurrentVideoIndex(index);
   };
 
-  const uniqueVideosTypes = data?.results ? [...new Set(data.results.map((video: any) => video.type))] : [];
+  const uniqueVideosTypes = data?.results ? [...new Set(data.results.map((video: IVideo) => video.type))] : [];
 
   return {
-    data,
     isLoading,
     isFetching,
-    showSkeleton,
     selectedType,
+    setSelectedType,
     filteredVideos,
-    uniqueVideosTypes,
+    showSkeleton,
+    loading,
     handleOptionChange,
     handleVideoClick,
-    loading
+    uniqueVideosTypes,
+    data,
   };
 };
   

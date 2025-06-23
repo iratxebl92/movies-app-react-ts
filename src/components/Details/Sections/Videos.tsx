@@ -4,8 +4,14 @@ import { t } from "i18next";
 import { VideoSkeleton } from "../../Skeleton/VideosSkeleton";
 import * as motion from "motion/react-client";
 import { useVideo } from "./hooks/useVideos";
-import { useState, useEffect } from "react";
 
+type Video = {
+  id: string;
+  key: string;
+  name: string;
+  site: string;
+  type: string;
+};
 export const Videos = ({ id, type }: { id: number; type: string }) => {
   const {
     data,
@@ -34,15 +40,15 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
           value={selectedType}
           onOptionChange={handleOptionChange}
           options={uniqueVideosTypes} 
-          getOptionLabel={(option: any) => option}
-          getOptionValue={(option: any) => option}
+          getOptionLabel={(option: string) => option}
+          getOptionValue={(option: string) => option}
         />
       )}
       
       <div className="w-full min-h-[200px]">
         {data?.results && data?.results.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 p-5 justify-start">
-            {filteredVideos.map((video: any, index: number) => (
+            {filteredVideos.map((video: Video, index: number) => (
               <motion.div key={video.id} whileHover={{ scale: 1.016 }} className="h-full">
                 <div className="relative">
                   <img

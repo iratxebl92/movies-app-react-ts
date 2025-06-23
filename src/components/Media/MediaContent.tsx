@@ -40,7 +40,7 @@ export const MediaContent = () => {
     return <NotFound/>;
   }
 
-  return (w
+  return (
     <div className="min-h-screen">
       <GenreList/>
       <div className={clsx("flex justify-center min-h-[calc(100vh-246px)]")}> 
@@ -51,7 +51,7 @@ export const MediaContent = () => {
             className="w-full"
           >
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-4">
-              {isFetching || isLoading || !results || results.length === 0 ? (
+              {isFetching || isLoading || !results ? (
                 <MovieSkeletonList />
               ) : (
                 results?.map((result: IMovie) => (

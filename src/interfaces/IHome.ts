@@ -2,9 +2,9 @@ export type SectionType = "popular" | "topRated" | "trending";
 export type ContentType = "movie" | "tv";
 export type TimeWindow = "week" | "day";
 
-export interface BaseSectionConfig {
+export interface BaseSectionConfig<T = unknown> {
   selected: string;
-  useData: (type: string, language: string) => any;
+  useData: (type: string, language: string) => T;
   getOptions: (t: (key: string) => string) => string[];
   getSelectedIndex: (selected: string) => number;
 }

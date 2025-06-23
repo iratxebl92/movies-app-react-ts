@@ -10,6 +10,11 @@ interface Provider {
   logo_path: string;
   display_priority?: number;
 }
+interface Language {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
 
 export const useDetailsInformation = (data: IMovie, type: string) => {
   const [providersResults, setProvidersResults] = useState<Provider[]>([]);
@@ -40,7 +45,7 @@ export const useDetailsInformation = (data: IMovie, type: string) => {
   useEffect(() => {
     if (watchProviders) {
       const selectedProviders = watchProviders?.results?.ES?.flatrate?.filter(
-        (provider: any) =>
+        (provider: Provider) =>
           providers.map((p) => p.provider_name).includes(provider.provider_name)
       );
       setProvidersResults(selectedProviders);
@@ -52,7 +57,7 @@ export const useDetailsInformation = (data: IMovie, type: string) => {
   const directorNames = director?.map((crew) => crew.name).join(", ");
   const writerNames = writer?.map((crew) => crew.name).join(", ");
 
-  const actualLanguage = languages?.find((language: any) => language.iso_639_1 === data?.original_language);
+  const actualLanguage = languages?.find((language: Language) => language.iso_639_1 === data?.original_language);
 
   return {
     providersResults,

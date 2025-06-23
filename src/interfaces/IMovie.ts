@@ -1,3 +1,5 @@
+import { ISeason } from "./ISeason";
+
 export interface IMovie {
     adult?: boolean
     backdrop_path: string
@@ -28,7 +30,8 @@ export interface IMovie {
         crew: Array<{ id: number; name: string }> | Array<any>
     }
     number_of_seasons?: number;
-  number_of_episodes?: number;
-  }
+    number_of_episodes?: number;
+    seasons?: ISeason[];
+}
 
 //   https://github.com/ionivetech/movie-app/blob/main/src/interfaces/IMovie.ts

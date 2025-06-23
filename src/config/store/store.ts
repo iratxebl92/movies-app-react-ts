@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import i18n from "../language/i18n";
 import { ISearch } from "../../interfaces/ISearch";
+import { IVideo } from "../../interfaces/IVideo";
 
 type ContentType = "movie" | "tv";
 
@@ -13,19 +14,19 @@ interface MoviesStore {
   keywordsSelected: ContentType;
   trendingSelected: "week" | "day";
   personContentSelected: "movie" | "tv";
-  videos: any;
+  videos: IVideo[];
   videosType: string;
   imagesType: string;
   setImagesType: (type: string) => void;
   setVideosType: (type: string) => void;
-  setTheme: (theme: any | undefined) => void;
+  setTheme: (theme: "light" | "dark" | undefined) => void;
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: "week" | "day") => void;
   popularOption: (content: ContentType) => void;
   keywordsOption: (content: ContentType) => void;
   personContentOption: (content: ContentType) => void;
-  toggleTheme: (content: any) => void;
+  toggleTheme: (content: "light" | "dark") => void;
   openCastModal: boolean;
   openVideoModal: boolean;
   setOpenCastModal: (open: boolean) => void;
@@ -36,7 +37,7 @@ interface MoviesStore {
   setCurrentVideoIndex: (index: number) => void;
   selectedVideoKey: string;
   setSelectedVideoKey: (key: string) => void;
-  setVideos: (videos: any) => void;
+  setVideos: (videos: IVideo[]) => void;
   isWatchTrailerButton: boolean;
   setIsWatchTrailerButton: (value: boolean) => void;
   filterParams: {
@@ -47,15 +48,6 @@ interface MoviesStore {
   setSearchModal: (option: boolean) => void,
   searchHistory: ISearch[],
   setSearchHistory: (search: ISearch[]) => void
-// Explicación del tipado:
-// 1. MoviesStore['filterParams'] -> Accede al tipo de la propiedad filterParams del store
-// 2. Partial<T> -> Hace que todas las propiedades sean opcionales
-// 3. (params: ...) => void -> Función que recibe params y no devuelve nada
-// 
-// Ejemplos de uso:
-// setFilterParams({ release_date_max: "2024-12-31" }) // ✅ Solo una propiedad
-// setFilterParams({ release_date_min: "2024-01-01", vote_average_min: 5 }) // ✅ Varias propiedades
-// setFilterParams({ invalidProperty: "value" }) // ❌ Error: propiedad no existe
 }
 
 export const useMoviesStore = create<MoviesStore>()(
@@ -68,11 +60,12 @@ export const useMoviesStore = create<MoviesStore>()(
       popularSelected: "movie",
       keywordsSelected: "movie",
       personContentSelected: "movie",
-      videos: null,
+      videos: [],
       videosType: "trailer",
       imagesType: "backdrops",
       setImagesType: (type: string) => set({ imagesType: type }),
       setVideosType: (type: string) => set({ videosType: type }),
+      setVideos: (videos: IVideo[]) => set({ videos: videos }),
       setVideos: (videos: any) => set({ videos: videos }),
       setTheme: (theme) => set({ theme }),
       setLanguage: (lang) => {
