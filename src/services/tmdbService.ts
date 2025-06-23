@@ -13,7 +13,7 @@ export const getKeywords = (content: string,id: number) => `https://api.themovie
 export const getContentKeywords = (content: string, id: string, language: string) => `https://api.themoviedb.org/3/discover/${content}?with_keywords=${id}&language=${language}`;
 export const getUpcomingMovies = (language: string) => `https://api.themoviedb.org/3/movie/upcoming?language=${language}`;
 export const getGenresList = (content: string) => `https://api.themoviedb.org/3/genre/${content}/list`;
-export const getReviews = (content: string, id: number) => `/${content}/${id}/reviews`;
+export const getReviews = (content: string, id: number, language: string) => `/${content}/${id}/reviews?language=${language}`;
 export const getWatchProviders = (content: string, id: number) => `/${content}/${id}/watch/providers`;
 export const getSeasonDetails = (id: number, seasonNumber: number, language: string) => `/tv/${id}/season/${seasonNumber}?language=${language}`;
 export const getRecommendations = (content: string, id: number, language: string) => `/${content}/${id}/recommendations?language=${language}`;

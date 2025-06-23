@@ -5,8 +5,8 @@ import { useMoviesStore } from "../../../../config/store/store";
 
 export const useReview = (type: string, id: number) => {
   const [localReviews, setLocalReviews] = useState<IReview[]>([]);
-  const { data: reviews } = useReviews(type, id);
   const { language } = useMoviesStore();
+  const { data: reviews } = useReviews(type, id, language);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

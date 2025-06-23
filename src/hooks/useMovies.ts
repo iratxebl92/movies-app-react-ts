@@ -117,10 +117,10 @@ export const useGenresList = (content: string) => {
     queryFn: () => apiClient.findGenresList(content),
   });
 };
-export const useReviews = (content: string, id: number) => {
+export const useReviews = (content: string, id: number, language: string) => {
   return useQuery<ReviewsApiResponse>({
-    queryKey: ["reviews"],
-    queryFn: () => apiClient.findReviews(content, id),
+    queryKey: ["reviews", content, id, language],
+    queryFn: () => apiClient.findReviews(content, id, language),
   });
 };
 export const useWatchProviders = (content: string, id: number) => {

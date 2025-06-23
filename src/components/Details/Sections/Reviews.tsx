@@ -13,7 +13,7 @@ type ReviewsPropsType = {
 export const Reviews = ({ id, type }: ReviewsPropsType) => {
   const { t } = useTranslation();
   const { localReviews, handleReadMore, language, loading } = useReview(type, id);
-
+console.log(localReviews)
   if (loading) return <ReviewsSkeleton />;
 
   return (
@@ -30,10 +30,10 @@ export const Reviews = ({ id, type }: ReviewsPropsType) => {
         </div>
       ) : (
         <>
-          {localReviews.map((review: IReview) => (
+          {localReviews?.map((review: IReview) => (
             <div
               key={review.id}
-              className="text-left w-full flex flex-col mb-5 last:mb-0 pb-5 last:pb-0 space-y-3 border-b last:border-b-0 dark:border-slate-400 dark:border-opacity-20 border-slate-300"
+              className="m-auto max-w-[1000px] text-left w-full flex flex-col mb-5 last:mb-0 pb-5 last:pb-0 space-y-3 border-b last:border-b-0 dark:border-slate-400 dark:border-opacity-20 border-slate-300"
               role="article"
               aria-labelledby={`review-${review.id}`}
             >

@@ -75,8 +75,8 @@ const findGenresList = async(content:string) => {
   return response.data
 }
 
-const findReviews = async(content:string, id:number) => {
-  const response = await apiBase.get(getReviews(content, id))
+const findReviews = async(content:string, id:number, language: string) => {
+  const response = await apiBase.get(getReviews(content, id, language))
   return response.data
 }
 const findWatchProviders = async(content:string, id:number) => {

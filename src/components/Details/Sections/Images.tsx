@@ -25,10 +25,9 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
     loading,
     handleDownload,
     lightboxIndex, 
-    setLightboxIndex
+    setLightboxIndex,
+    handleOptionChange
   } = useImage(type, id);
-
-  const [imagesTypeState, setImagesTypeState] = useState<ImageType>("backdrops");
 
   const imageTypeOptions: ImageType[] = ["backdrops", "posters"];
 
@@ -51,8 +50,8 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
           <OptionsSelect<ImageType>
             options={imageTypeOptions}
             style={{ width: "300px", marginLeft: "20px" }}
-            value={imagesTypeState}
-            onOptionChange={setImagesTypeState}
+            value={imagesType as ImageType}
+            onOptionChange={handleOptionChange as (option: ImageType) => void}
             getOptionLabel={(option) => option}
             getOptionValue={(option) => option}
           />
