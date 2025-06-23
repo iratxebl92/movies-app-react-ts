@@ -96,7 +96,7 @@ export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => 
               {
                 openVideoModal && (
                   <ModalVideo
-                    selectedVideoKey={trailer?.key}
+                    selectedVideoKey={trailer?.key || ""}
                   />
                 )
               }

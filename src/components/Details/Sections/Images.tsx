@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { GrDownload } from "react-icons/gr";
 import OptionsSelect from "../../../core/OptionsSelect";
 import Lightbox from "yet-another-react-lightbox";
@@ -8,6 +7,7 @@ import "yet-another-react-lightbox/plugins/counter.css";
 import { useTranslation } from "react-i18next";
 import { ImagesSkeleton } from "../../Skeleton/ImagesSkeleton";
 import { useImage } from "./hooks/useImage";
+import { useState } from "react";
 
 type ImageType = "backdrops" | "posters";
 type ImageItem = {
@@ -22,14 +22,15 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
     imagesLocal,
     isLoading,
     isFetching,
-    handleOptionChange,
     loading,
     handleDownload,
     lightboxIndex, 
     setLightboxIndex
   } = useImage(type, id);
 
+  const [imagesTypeState, setImagesTypeState] = useState<ImageType>("backdrops");
 
+  const imageTypeOptions: ImageType[] = ["backdrops", "posters"];
 
   if(loading || isLoading || isFetching) return <ImagesSkeleton/>
 
@@ -47,13 +48,13 @@ export const Images = ({ id, type }: { id: number; type: string }) => {
         </div>
       ) : (
         <>
-          <OptionsSelect
-            options={["backdrops", "posters"]}
+          <OptionsSelect<ImageType>
+            options={imageTypeOptions}
             style={{ width: "300px", marginLeft: "20px" }}
-            value={imagesType}
-            onOptionChange={handleOptionChange}
-            getOptionLabel={(option: ImageType) => option}
-            getOptionValue={(option: ImageType) => option}
+            value={imagesTypeState}
+            onOptionChange={setImagesTypeState}
+            getOptionLabel={(option) => option}
+            getOptionValue={(option) => option}
           />
           <div className="p-6">
             <div className={`grid ${imagesType === "backdrops" ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5"} gap-5`}>

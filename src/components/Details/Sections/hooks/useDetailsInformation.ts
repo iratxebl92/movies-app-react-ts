@@ -48,7 +48,7 @@ export const useDetailsInformation = (data: IMovie, type: string) => {
         (provider: Provider) =>
           providers.map((p) => p.provider_name).includes(provider.provider_name)
       );
-      setProvidersResults(selectedProviders);
+      setProvidersResults(selectedProviders || []);
     }
   }, [watchProviders]);
 

@@ -1,3 +1,5 @@
+import { IEpisode } from "./IEpisode";
+
 export interface ISeason {
     air_date?: string;
     episode_count: number;
@@ -7,4 +9,5 @@ export interface ISeason {
     poster_path: string | null;
     season_number: number;
     vote_average: number;
+    episodes?: IEpisode[];
   }

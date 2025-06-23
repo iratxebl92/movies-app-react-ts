@@ -6,6 +6,7 @@ import { SlPeople } from "react-icons/sl";
 import { IMovie } from '../../../interfaces/IMovie';
 import { useDetailsInformation } from './hooks/useDetailsInformation';
 import { ICast } from '../../../interfaces/ICast';
+import { IKeyword } from '../../../interfaces';
 
 type DetailsInformationProps = {
   data: IMovie;
@@ -203,7 +204,7 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
         <div className="bg-gray-100/30 dark:bg-neutral-800/30 rounded-lg md:rounded-xl p-3 md:p-5 mt-8">
           <h3 className="text-lg md:text-xl font-semibold mb-3 text-start py-2 text-gray-900 dark:text-white">{t("keywords")}</h3>
           <div className="flex flex-wrap gap-1.5 md:gap-2">
-            {allKeywords.map(({ name, id }: { name: string; id: string }) => (
+            {(allKeywords as IKeyword[]).map(({ name, id }) => (
               <Link
                 key={id}
                 to={`/keywords/${id}-${name.replace(/\s+/g, "-")}`}

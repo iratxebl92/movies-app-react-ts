@@ -17,7 +17,7 @@ export const useVideo = (type: string, id: number) => {
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {

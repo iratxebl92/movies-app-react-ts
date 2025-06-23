@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useMoviesStore } from "../../../config/store/store";
 import { usePersonMovies } from "../../../hooks/useMovies";
 import { useParams } from "react-router-dom";
+import { IMovie } from '../../../interfaces/IMovie';
 
 export const useMediaGallery = () => {
   const { idAndName } = useParams() as { idAndName: string };
@@ -12,23 +13,28 @@ export const useMediaGallery = () => {
   const [showSkeleton, setShowSkeleton] = useState(true);
   const [departmentSelected, setDepartmentSelected] = useState('All');
 
-  const idUnicos = new Set();
-  const departments = (data?.crew ?? [])
-    .filter((movie: { department: string }) => {
-      if (idUnicos.has(movie.department)) return false;
-      idUnicos.add(movie.department);
+  const castDepartments = data?.cast?.map((movie: IMovie & { department?: string }) => movie.department).filter(Boolean) ?? [];
+  const crewDepartments = data?.crew?.map((movie: IMovie & { department?: string }) => movie.department).filter(Boolean) ?? [];
+  const allDepartments = Array.from(new Set(["Acting", ...castDepartments, ...crewDepartments].filter(Boolean)));
+  const optionDepartments = allDepartments.length > 1 ? ["All", ...allDepartments] : allDepartments;
+
+  const removeDuplicatesById = (movies: IMovie[]): IMovie[] => {
+    const seen = new Set<number>();
+    return movies.filter(movie => {
+      if (seen.has(movie.id)) return false;
+      seen.add(movie.id);
       return true;
-    })
-    .map((movie: { department: string }) => movie.department);
+    });
+  };
 
-  const departmentsUnicos = ["Acting", ...departments];
-  const optionDepartments = departmentsUnicos.length > 1 ? ["All", ...departmentsUnicos] : departmentsUnicos;
+  const sortByPopularity = (movies: IMovie[]) =>
+    movies.slice().sort((a, b) => (Number(b.popularity) || 0) - (Number(a.popularity) || 0));
 
-  const selectMovies: string[] = departmentSelected === 'Acting' 
-    ? data?.cast 
-    : departmentSelected === 'All' 
-      ? [...(data?.cast ?? []), ...(data?.crew ?? [])] 
-      : data?.crew.filter((movie: { department: string }) => movie.department === departmentSelected);
+  const selectMovies: IMovie[] = departmentSelected === 'All'
+    ? sortByPopularity(removeDuplicatesById([...(data?.cast ?? []), ...(data?.crew ?? [])]))
+    : departmentSelected === 'Acting'
+      ? sortByPopularity(data?.cast ?? [])
+      : sortByPopularity(data?.crew?.filter((movie: IMovie & { department?: string }) => movie.department === departmentSelected) ?? []);
 
   const disabled = useMemo(() => visibleMovies >= selectMovies?.length - 20, [visibleMovies, selectMovies?.length]);
 

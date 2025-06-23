@@ -52,7 +52,7 @@ export const Keywords = () => {
     <AnimatePresence initial={false}>
       <motion.div key={keywordsSelected} {...opacityMotionTransition}>
     
-    <div className="mt-7 min-h-[calc(100vh-200px)]">
+    <div className="mt-7 mx-4 min-h-[calc(100vh-200px)]">
       <p className="mb-10 text-3xl font-semibold text-center"> {t("resultsKeywordsTitle")} <span className="font-bold"> {name} </span> </p>
       <div className="flex justify-center">
       <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />

@@ -1,5 +1,6 @@
 import { useSocialMedia } from "./hooks/useSocialMedia";
 
+
 export const SocialMedia = ({ id }: { id: number }) => {
   const socialMediaData = useSocialMedia(id);
 

@@ -44,7 +44,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
               />
             </div>
             {
-              videos?.results && videos.results.length > 1 && !isWatchTrailerButton && (
+              videos && videos.length > 1 && !isWatchTrailerButton && (
                 <>
                 <button
                 onClick={handlePrev}

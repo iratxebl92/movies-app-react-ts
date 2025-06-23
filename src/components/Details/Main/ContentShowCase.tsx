@@ -66,7 +66,7 @@ export const ContentShowcase = ({data, type}: Types.ContentShowcaseProps) => {
             </div>
 
             {/* Contenedor del contenido con altura mínima para evitar saltos */}
-            <div className="min-h-[300px] flex justify-center">
+            <div className="min-h-[300px] flex justify-center p-[26px]">
                 {/* Suspense para manejar la carga de componentes lazy */}
                 <Suspense fallback={<LoadingSpinner />}>
                     {/* AnimatePresence maneja las animaciones de entrada/salida */}

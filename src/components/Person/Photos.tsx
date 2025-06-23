@@ -26,7 +26,6 @@ export const Photos = () => {
                 src={`https://www.themoviedb.org/t/p/w220_and_h330_face${image.file_path}`} 
                 alt={`Foto de la persona ${index + 1}`} 
                 className="rounded-lg" 
-                loading="lazy"
                 role="img"
                 aria-label={`Foto de la persona ${index + 1}`}
               />

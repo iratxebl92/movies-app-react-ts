@@ -54,13 +54,12 @@ export const Card = ({
             src={`https://www.themoviedb.org/t/p/w342${movie.poster_path}`}
             alt={movie.title || movie.name}
             className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
-            loading="lazy"
             role="img"
             aria-label={`Póster de ${movie.title || movie.name}`}
           />
           :
           <div className="absolute top-0 left-0 w-full h-full bg-gray-500 rounded-t-lg">
-            <img src="/images/icono-img.png" alt="Póster no disponible" loading="lazy" role="img" aria-label="Póster no disponible" />
+            <img src="/images/icono-img.png" alt="Póster no disponible"role="img" aria-label="Póster no disponible" />
           </div>
           }
         </div>

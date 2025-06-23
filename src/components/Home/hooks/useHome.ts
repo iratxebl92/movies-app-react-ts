@@ -12,6 +12,7 @@ import {
   useVideos,
 } from "../../../hooks/useMovies";
 import { ContentSectionConfig, SectionConfigs, SectionType, TimeSectionConfig } from "../../../interfaces/IHome";
+import { IMovie } from "../../../interfaces/IMovie";
 
 
 
@@ -23,36 +24,36 @@ export const useHome = () => {
 
   // Hero Banner data
   const { data: upcoming } = useUpcomingMovies(language);
-  const results = (upcoming?.results && heroMovie !== null) && upcoming.results[heroMovie] || 0;
+  const results: IMovie | null = (upcoming?.results && heroMovie !== null && upcoming.results[heroMovie]) ? upcoming.results[heroMovie] : null;
   const resultsGenresId = results?.genre_ids;
-  const { data: videos } = useVideos("movie", results.id);
+  const { data: videos } = useVideos("movie", results?.id ?? 0);
   const trailer = videos?.results.find(
     (video: { type: string }) => video.type === "Trailer"
   );
   const rate = results?.vote_average?.toString().substring(0, 3);
   const { data: genresList } = useGenresList("movie");
-  const { data: reviewsData } = useReviews("movie", results.id);
+  const { data: reviewsData } = useReviews("movie", results?.id ?? 0);
 
   // Section configurations
   const sectionConfigs: SectionConfigs = {
     popular: {
       selected: popularSelected,
       option: popularOption,
-      useData: usePopularMovies,
+      useData: usePopularMovies as any,
       getOptions: (t: (key: string) => string) => [t('movies'), t('tv')],
       getSelectedIndex: (selected: string) => selected === "movie" ? 0 : 1
     },
     topRated: {
       selected: topRatedSelected,
       option: topRatedOption,
-      useData: useTopRatedMovies,
+      useData: useTopRatedMovies as any,
       getOptions: (t: (key: string) => string) => [t('movies'), t('tv')],
       getSelectedIndex: (selected: string) => selected === "movie" ? 0 : 1
     },
     trending: {
       selected: trendingSelected,
       option: trendingOption,
-      useData: useTrendingMovies,
+      useData: useTrendingMovies as any,
       getOptions: (t: (key: string) => string) => [t('week'), t('day')],
       getSelectedIndex: (selected: string) => selected === "week" ? 0 : 1
     }
@@ -83,7 +84,7 @@ export const useHome = () => {
 
   const getSectionData = (section: SectionType) => {
     const config = sectionConfigs[section];
-    const { data, status } = config.useData(config.selected, language);
+    const { data, status } = (config.useData as any)(config.selected, language);
     return {
       data,
       status,

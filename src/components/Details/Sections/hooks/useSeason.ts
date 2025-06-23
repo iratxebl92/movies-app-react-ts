@@ -6,19 +6,19 @@ import { ISeason } from "../../../../interfaces/ISeason";
 export const useSeason = (id: number, type: string) => {
   const { language } = useMoviesStore();
   const { data } = useDetailsAndCast(type, id, language);
-  // Usar el primer season_number disponible como default
   const seasons = data?.seasons || [];
-  const [selectedSeason, setSelectedSeason] = useState(seasons[0]?.season_number || 1);
-  const { data: seasonData } = useSeasonDetails(id, selectedSeason, language);
+  const [selectedSeason, setSelectedSeason] = useState(0);
+  const { data: seasonData } = useSeasonDetails(id, seasons[selectedSeason]?.season_number ?? 1, language);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
   const handleSeasonChange = (season: ISeason) => {
-    setSelectedSeason(season.season_number);
+    const index = seasons.findIndex(s => s.id === season.id);
+    if (index !== -1) setSelectedSeason(index);
   };
 
   return {

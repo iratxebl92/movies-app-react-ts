@@ -12,6 +12,8 @@ export const HeroBanner = () => {
   const { heroData } = useHome();
   const { results, trailer, rate, reviewsData, genres, isLoading } = heroData;
 
+  if (!results) return null;
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -71,7 +73,7 @@ export const HeroBanner = () => {
             <ButtonWatchTrailer className="h-12 text-sm" />
           </div>
         </div>
-        {openVideoModal && <ModalVideo selectedVideoKey={trailer?.key} />}
+        {openVideoModal && <ModalVideo selectedVideoKey={trailer?.key || ""} />}
       </div>
     </section>
   );

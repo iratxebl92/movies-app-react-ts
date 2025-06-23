@@ -8,4 +8,5 @@ export interface IPersonSocialMedia {
   tvrage_id: number | null;
   twitter_id: string | null;
   wikidata_id: string | null;
+  [key: string]: string | number | null | undefined;
 } 

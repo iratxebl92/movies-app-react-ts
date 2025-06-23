@@ -24,6 +24,7 @@ export const Details = () => {
 
     const {data, isLoading, isError} = useDetailsAndCast(type || 'movie', Number(id), language)
     
+    if (!data) return null;
 
     if(isError) return <NotFound />
 
@@ -31,10 +32,10 @@ export const Details = () => {
     <div className="dark:bg-dark text-center align-center justify-center mx-auto">
     
     <DetailsBanner data={data} type={type} isLoading={isLoading} />
-      <section className="px-8">
-       <ContentShowcase data={data} type={type} />
+    <ContentShowcase data={data} type={type} />
+    <section className="px-8">
        <Recommendations id={id} type={type} language={language} />
-      </section>
+    </section>
     </div>
   )
 }

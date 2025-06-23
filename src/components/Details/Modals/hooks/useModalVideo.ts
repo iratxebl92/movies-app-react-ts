@@ -24,7 +24,7 @@ export const useModalVideo = (selectedVideoKey: string) => {
     }else {
       setPrevDisabled(false)
     }
-    if(currentVideoIndex === videos.results.length - 1){
+    if(currentVideoIndex === videos.length - 1){
       setNextDisabled(true)
     }else {
       setNextDisabled(false)
@@ -34,16 +34,16 @@ export const useModalVideo = (selectedVideoKey: string) => {
   const handlePrev = () => {
     if(currentVideoIndex !== 0){
       setCurrentVideoIndex(currentVideoIndex - 1)
-      const previousVideo = videos.results[currentVideoIndex - 1]
-      setSelectedVideoKey(previousVideo.key)
+      const previousVideo = videos[currentVideoIndex - 1]
+      if (previousVideo) setSelectedVideoKey(previousVideo.key)
     } 
   };
 
   const handleNext = () => {
-    if(currentVideoIndex < videos.results.length - 1){
+    if(currentVideoIndex < videos.length - 1){
       setCurrentVideoIndex(currentVideoIndex + 1)
-      const nextVideo = videos.results[currentVideoIndex + 1]
-      setSelectedVideoKey(nextVideo.key)
+      const nextVideo = videos[currentVideoIndex + 1]
+      if (nextVideo) setSelectedVideoKey(nextVideo.key)
     }
   };
 

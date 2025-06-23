@@ -16,7 +16,7 @@ export const CastPage = () => {
   const { data: credits, isError } = useCredits(
     type === "tv" ? `/tv/${id}/aggregate_credits` : `/movie/${id}/credits`
   );
-  const [newCast, setNewCast] = useState([]);
+  const [newCast, setNewCast] = useState<ICast[]>([]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -27,7 +27,7 @@ export const CastPage = () => {
 
   useEffect(() => {
     if (credits) {
-      setNewCast(credits?.cast);
+      setNewCast(credits?.cast ?? []);
     }
   }, [credits]);
 
@@ -38,7 +38,7 @@ export const CastPage = () => {
          cast.character?.toLowerCase().includes(search.toLowerCase()) ||
         cast.name?.toLowerCase().includes(search.toLowerCase())
     );
-    setNewCast(filterCast);
+    setNewCast(filterCast ?? []);
   }, [search]);
 
 

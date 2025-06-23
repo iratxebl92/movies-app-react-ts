@@ -19,7 +19,7 @@ interface MoviesStore {
   imagesType: string;
   setImagesType: (type: string) => void;
   setVideosType: (type: string) => void;
-  setTheme: (theme: "light" | "dark" | undefined) => void;
+  setTheme: (theme: "light" | "dark") => void;
   setLanguage: (lang: string) => void;
   topRatedOption: (content: ContentType) => void;
   trendingOption: (content: "week" | "day") => void;
@@ -65,9 +65,8 @@ export const useMoviesStore = create<MoviesStore>()(
       imagesType: "backdrops",
       setImagesType: (type: string) => set({ imagesType: type }),
       setVideosType: (type: string) => set({ videosType: type }),
-      setVideos: (videos: IVideo[]) => set({ videos: videos }),
-      setVideos: (videos: any) => set({ videos: videos }),
-      setTheme: (theme) => set({ theme }),
+      setVideos: (videos: IVideo[]) => set({ videos }),
+      setTheme: (theme: "light" | "dark") => set({ theme }),
       setLanguage: (lang) => {
         i18n.changeLanguage(lang); // Cambiamos el idioma en i18n
         set({ language: lang }); // Actualizamos el estado global

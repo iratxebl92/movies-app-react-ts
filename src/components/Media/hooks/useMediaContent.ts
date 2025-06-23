@@ -11,7 +11,7 @@ export const useMediaContent = () => {
   const { filterParams, language } = useMoviesStore();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, []);
 

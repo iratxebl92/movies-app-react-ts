@@ -21,10 +21,15 @@ export const MediaGallery = () => {
     onTabChange,
     onDepartmentOptionChange
   } = useMediaGallery();
-
+console.log(data)
   if (isLoading || showSkeleton) return <MediaGallerySkeleton/>;
-  if (!data) return null;
+  
+  // Wrapper para OptionsSelect
+  const handleDepartmentOptionChange = (option: string | undefined) => {
+    if (typeof option === 'string') onDepartmentOptionChange(option);
+  };
 
+console.log(selectMovies, "select")
   return (
     <>
       <SwitchTab
@@ -34,11 +39,11 @@ export const MediaGallery = () => {
         selectedIndex={selectedIndex}
       />
       <div className="flex justify-end gap-6 mb-8">
-        <OptionsSelect 
+        <OptionsSelect<string | undefined> 
           options={optionDepartments} 
           style={{width: '10rem'}} 
-          value={departmentSelected} 
-          onOptionChange={onDepartmentOptionChange} 
+          value={departmentSelected as string | undefined} 
+          onOptionChange={handleDepartmentOptionChange}
           getOptionLabel={(option: any) => option}
           getOptionValue={(option: any) => option}
         />
