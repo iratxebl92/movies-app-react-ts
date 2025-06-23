@@ -39,6 +39,8 @@ export const MediaGallery = () => {
           style={{width: '10rem'}} 
           value={departmentSelected} 
           onOptionChange={onDepartmentOptionChange} 
+          getOptionLabel={(option: any) => option}
+          getOptionValue={(option: any) => option}
         />
       </div>
       <div>

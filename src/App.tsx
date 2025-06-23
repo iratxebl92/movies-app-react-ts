@@ -4,7 +4,15 @@ import { useMoviesStore } from "./config/store/store";
 import { useEffect } from "react";
 import { AppRouter } from "./routes/AppRouter";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10 * 60 * 1000, // 10 minutos
+      gcTime: 10 * 60 * 1000,    // 10 minutos
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 function App() {
   const {theme} = useMoviesStore()

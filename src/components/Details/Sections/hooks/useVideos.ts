@@ -14,7 +14,11 @@ export const useVideo = (type: string, id: number) => {
   const [selectedType, setSelectedType] = useState<string>("");
   const [filteredVideos, setFilteredVideos] = useState<any[]>([]);
   const [showSkeleton, setShowSkeleton] = useState(true);
-
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSkeleton(false);
@@ -61,7 +65,8 @@ export const useVideo = (type: string, id: number) => {
     filteredVideos,
     uniqueVideosTypes,
     handleOptionChange,
-    handleVideoClick
+    handleVideoClick,
+    loading
   };
 };
   

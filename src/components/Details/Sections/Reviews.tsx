@@ -3,6 +3,7 @@ import { IReview } from "../../../interfaces/IReviews";
 import { formatDate } from "../../../utils/filters";
 import { useTranslation } from "react-i18next";
 import { useReview } from "./hooks/useReview";
+import ReviewsSkeleton from "../../Skeleton/ReviewsSkeleton";
 
 type ReviewsPropsType = {
   id: number;
@@ -11,15 +12,16 @@ type ReviewsPropsType = {
 
 export const Reviews = ({ id, type }: ReviewsPropsType) => {
   const { t } = useTranslation();
-  const { localReviews, handleReadMore, language } = useReview(type, id);
+  const { localReviews, handleReadMore, language, loading } = useReview(type, id);
 
-  if (!localReviews.length) return null;
+  console.log(localReviews.length)
+  if (loading) return <ReviewsSkeleton />;
 
   return (
     <>
       {!localReviews.length ? (
         <div
-          className="w-full h-full flex items-center"
+          className="w-full h-full flex items-center justify-center min-h-[200px]"
           role="alert"
           aria-live="assertive"
         >

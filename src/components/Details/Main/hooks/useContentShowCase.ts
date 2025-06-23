@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { IMovie } from "../../../../interfaces/IMovie";
 import { detailsOptions } from "../../../../utils/filters";
 import { FaTv } from "react-icons/fa";
 import { 

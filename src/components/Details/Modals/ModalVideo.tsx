@@ -32,6 +32,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
             <button
               onClick={() => submitCloseButton()}
               className="absolute top-1 right-1 text-2xl font-bold text-gray-300 hover:cursor-pointer hover:text-gray-400"
+              aria-label="Cerrar modal de video"
             >
               <IoMdClose />
             </button>
@@ -49,6 +50,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
                 onClick={handlePrev}
                 className={`absolute left-2 top-1/2 text-white text-3xl ${prevDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 disabled={prevDisabled}
+                aria-label="Video anterior"
               >
                 ←
               </button>
@@ -56,6 +58,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
                 onClick={handleNext}
                 className={`absolute right-2 top-1/2 text-white text-3xl ${nextDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
                 disabled={nextDisabled}
+                aria-label="Video siguiente"
               >
                 →
               </button>

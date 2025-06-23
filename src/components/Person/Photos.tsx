@@ -24,8 +24,11 @@ export const Photos = () => {
             <div className="mb-2 dark:text-white">
               <img 
                 src={`https://www.themoviedb.org/t/p/w220_and_h330_face${image.file_path}`} 
-                alt={`Person photo ${index + 1}`} 
+                alt={`Foto de la persona ${index + 1}`} 
                 className="rounded-lg" 
+                loading="lazy"
+                role="img"
+                aria-label={`Foto de la persona ${index + 1}`}
               />
             </div>
           </SwiperSlide>

@@ -2,13 +2,18 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useMoviesStore } from "../../../config/store/store";
 import { useMovies } from "../../../hooks/useMovies";
-import { IMovie } from "../../../interfaces/IMovie";
+
 
 export const useMediaContent = () => {
   const location = useLocation();
   const [page, setPage] = useState(1);
   const [type, setType] = useState("");
   const { filterParams, language } = useMoviesStore();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     location.pathname.includes("/movies") ? setType("movie") : setType("tv");
@@ -51,6 +56,7 @@ export const useMediaContent = () => {
     page,
     handleChangePage,
     opacityMotionTransition,
-    totalPages: Math.min(data?.total_pages || 0, 500)
+    totalPages: Math.min(data?.total_pages || 0, 500),
+    loading
   };
 };

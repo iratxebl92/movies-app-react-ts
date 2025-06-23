@@ -6,8 +6,8 @@ import { SwitchTab } from "../../core/SwitchTab";
 import { useMoviesStore } from "../../config/store/store";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react"
-import MovieSkeletonList from "../../components/Skeleton/MovieSkeletonList";
 import { NotFound } from "../../core/NotFound";
+import SkeletonKeywords from "../../components/Skeleton/SkeletonKeywords";
 
 type urlParamsType = {
   idAndName: string; 
@@ -35,7 +35,6 @@ export const Keywords = () => {
     const onTabChange = (tab: string) => {
       keywordsOption(tab === "Películas" || tab === "Movies" ? "movie" : "tv");
     }
-
     if(isError) return <NotFound/>
 
     const opacityMotionTransition = {
@@ -58,15 +57,15 @@ export const Keywords = () => {
       <div className="flex justify-center">
       <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />
       </div>
-    <div className="flex flex-wrap ml-24">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-6">
       {
         isLoading ? (
-         <MovieSkeletonList/>
+         Array.from({ length: 12 }).map((_, i) => <div key={i} className="mb-6"><SkeletonKeywords /></div>)
         )
         :
     
       results?.map((result:IMovie) => (
-        <Card movie={result} style={{width: '200px', margin: "20px"}} />
+        <Card movie={result} />
       ))
     
       }

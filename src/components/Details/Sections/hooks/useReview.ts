@@ -7,6 +7,12 @@ export const useReview = (type: string, id: number) => {
   const [localReviews, setLocalReviews] = useState<IReview[]>([]);
   const { data: reviews } = useReviews(type, id);
   const { language } = useMoviesStore();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (!reviews) return;
@@ -35,7 +41,8 @@ export const useReview = (type: string, id: number) => {
   return {
     localReviews,
     handleReadMore,
-    language
+    language,
+    loading
   };
 };
   

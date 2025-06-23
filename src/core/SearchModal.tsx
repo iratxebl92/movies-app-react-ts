@@ -35,6 +35,7 @@ export const SearchModal = () => {
         open={searchModal}
         onClose={() => setSearchModal(false)}
         className="relative z-50"
+        aria-label="Buscador de películas, series o personas"
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <div className="absolute inset-0 bg-gray-600/65 z-1" />
@@ -48,6 +49,7 @@ export const SearchModal = () => {
                   value={searchQuery}
                   onChange={handleSearchQuery}
                   className="placeholder:text-xs sm:placeholder:text-sm w-full p-2 text-sm sm:text-base rounded-lg dark:bg-gray-400 dark:placeholder:text-white dark:placeholder:opacity-70 dark:text-white"
+                  aria-label={t("searchPlaceholder")}
                 />
               </div>
               <div className="max-h-[40vh] overflow-auto w-full pt-7 scroll-thin">
@@ -116,6 +118,7 @@ export const SearchModal = () => {
                       <button 
                         className="text-red-500 font-semibold mr-2 text-sm hover:text-red-400" 
                         onClick={clearSearchHistory}
+                        aria-label="Limpiar historial de búsqueda"
                       >
                         Clear
                       </button>

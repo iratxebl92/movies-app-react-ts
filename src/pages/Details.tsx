@@ -15,8 +15,6 @@ type urlParamsType = {
 export const Details = () => {
 
     const {idAndName, type} = useParams<urlParamsType>()
-    console.log(type, "type")
-
     if (!idAndName || !type) {
         return <NotFound />;
     }

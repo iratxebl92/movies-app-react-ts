@@ -68,7 +68,7 @@ export const MenuItems = ({ closeMenu }: MenuItemsProps) => {
             <button onClick={() => {
               toggleTheme('dark');
               handleMenuClick();
-            }}>
+            }} aria-label="Activar modo oscuro">
             <FaMoon className="inline hover:cursor-pointer hover:text-details" />
             </button>
           </div>
@@ -76,7 +76,7 @@ export const MenuItems = ({ closeMenu }: MenuItemsProps) => {
           <button onClick={() => {
             toggleTheme('light');
             handleMenuClick();
-          }}>
+          }} aria-label="Activar modo claro">
             <IoSunnyOutline className="inline hover:cursor-pointer hover:text-details"  />
             </button>
           </div>
@@ -91,6 +91,7 @@ export const MenuItems = ({ closeMenu }: MenuItemsProps) => {
               setSearchModal(true);
               handleMenuClick();
             }}
+            aria-label="Abrir buscador"
           >
             <FaSearch className="inline hover:cursor-pointer hover:text-details text-black dark:text-white" />
           </button>

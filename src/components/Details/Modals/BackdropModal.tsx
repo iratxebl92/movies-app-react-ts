@@ -44,6 +44,7 @@ export const BackdropModal = ({ backdrops }: { backdrops: Backdrop[] }) => {
             <button
               onClick={() => setOpenBackdropModal(false)}
               className="absolute top-1 right-1 text-2xl font-bold text-gray-500 hover:text-gray-800"
+              aria-label="Cerrar modal de imágenes"
             >
               <IoMdClose />
             </button>

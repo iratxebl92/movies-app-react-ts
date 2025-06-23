@@ -43,6 +43,7 @@ export const MediaPagination = (props: any) => {
               "!bg-slate-100 dark:!bg-slate-800 opacity-50 cursor-not-allowed": props.page === 1
             }
           )}
+          aria-label="Página anterior"
         >
           <IconChevronLeft className="w-5 h-5" />
         </button>
@@ -62,6 +63,7 @@ export const MediaPagination = (props: any) => {
               "!bg-slate-100 dark:!bg-slate-800 opacity-50 cursor-not-allowed": props.page === props.pageCount
             }
           )}
+          aria-label="Página siguiente"
         >
           <IconChevronRight className="w-5 h-5" />
         </button>

@@ -17,7 +17,7 @@ export const Header = () => {
         </div>
         <div className="md:hidden">
         <div>
-          <button className={`pr-3 py-5 pl-5 mr-3 ${isOpenHeader ? 'hidden' : ''}`} onClick={() => setIsOpenHeader(true)}>
+          <button className={`pr-3 py-5 pl-5 mr-3 ${isOpenHeader ? 'hidden' : ''}`} onClick={() => setIsOpenHeader(true)} aria-label="Abrir menú de navegación">
             <IoMenu />
           </button>
         </div>
@@ -37,6 +37,7 @@ export const Header = () => {
             <button 
               onClick={() => setIsOpenHeader(false)}
               className="transform transition-transform duration-200 hover:scale-110"
+              aria-label="Cerrar menú de navegación"
             >
               <IoClose />
             </button>

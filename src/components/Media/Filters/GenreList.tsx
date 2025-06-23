@@ -51,7 +51,7 @@ export const GenreList = () => {
     <div>
       <div className="flex flex-wrap gap-2 mx-10 my-8">
         {genres.map((genre: { id: number; name: string, selected: boolean }) => (
-          <button onClick={() => handleGenres(genre)} className={` ${genre.selected? 'bg-details' : ''} text-white border-2 rounded-full w-fit p-2 text-xs md:text-sm hover:scale-105 hover:cursor-pointer `}>
+          <button onClick={() => handleGenres(genre)} className={` ${genre.selected? 'bg-details' : 'bg-gray-200 dark:bg-transparent'} dark:text-white border-2 rounded-full w-fit p-2 text-xs md:text-sm hover:scale-105 hover:cursor-pointer `}>
             {" "}
             {genre.name}{" "}
           </button>

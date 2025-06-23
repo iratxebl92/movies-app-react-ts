@@ -3,7 +3,6 @@ import { LoadingSpinner } from "../../../core/LoadingSpinner"
 import { AnimatePresence, motion } from 'framer-motion';
 import { useContentShowCase } from "./hooks/useContentShowCase";
 import * as Types from "../../../interfaces/IContentShowCase";
-import { IMovie } from "../../../interfaces/IMovie";
 
 // Lazy loading de componentes para mejorar el rendimiento inicial
 const Season = lazy(() => import('../Sections/Season').then(module => ({ default: module.Season })))
@@ -56,6 +55,7 @@ export const ContentShowcase = ({data, type}: Types.ContentShowcaseProps) => {
                       : 'opacity-60'}
                     `}
                   key={option.key}
+                  aria-label={`Pestaña ${t(option.label)}`}
                 >   
                   <option.icon />
                   <span className="hidden md:block">
@@ -66,7 +66,7 @@ export const ContentShowcase = ({data, type}: Types.ContentShowcaseProps) => {
             </div>
 
             {/* Contenedor del contenido con altura mínima para evitar saltos */}
-            <div className="min-h-[300px] flex justify-center items-center">
+            <div className="min-h-[300px] flex justify-center">
                 {/* Suspense para manejar la carga de componentes lazy */}
                 <Suspense fallback={<LoadingSpinner />}>
                     {/* AnimatePresence maneja las animaciones de entrada/salida */}
@@ -79,6 +79,7 @@ export const ContentShowcase = ({data, type}: Types.ContentShowcaseProps) => {
                             exit={{ opacity: 0, x: -20 }}
                             transition={{ duration: 0.3, ease: "easeInOut" }}
                             id={selectedOption === 'reviews' ? 'reviews' : undefined}
+                            className="w-full"
                         >
                             {Component && content && <Component {...content.props} />}
                         </motion.div>

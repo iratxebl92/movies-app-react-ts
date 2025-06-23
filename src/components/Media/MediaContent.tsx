@@ -19,49 +19,56 @@ export const MediaContent = () => {
     page,
     handleChangePage,
     opacityMotionTransition,
-    totalPages
+    totalPages,
+    loading
   } = useMediaContent();
 
-  if (isLoading) {
-    return <MovieSkeletonList />;
+  if (loading) {
+    return (
+      <div className="min-h-screen">
+        <GenreList/>
+        <div className="flex justify-center min-h-[calc(100vh-246px)]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-4 w-full">
+            <MovieSkeletonList />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (isError) {
     return <NotFound/>;
   }
 
-  return (
+  return (w
     <div className="min-h-screen">
       <GenreList/>
-      <div className={clsx("flex justify-center min-h-[calc(100vh-246px)]",{
-        "items-center": !results || results.length === 0
-      })}>
-        {!results || results.length === 0 ? (
-          <div className="flex justify-center items-center h-full" aria-label={t('noResults')}>
-            <p className="text-2xl font-bold text-center text-neutral-500 ">{t('noResults')}</p>
-          </div>
-        ) : (
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={page}
-              {...opacityMotionTransition}
-              className=""
-            >
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-4">
-                {isFetching || isLoading ? (
-                  <MovieSkeletonList />
-                ) : (
-                  results?.map((result: IMovie) => (
-                    <Card
-                      key={result.id}
-                      movie={result}
-                    />
-                  ))
-                )}
+      <div className={clsx("flex justify-center min-h-[calc(100vh-246px)]")}> 
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={page}
+            {...opacityMotionTransition}
+            className="w-full"
+          >
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 m-4">
+              {isFetching || isLoading || !results || results.length === 0 ? (
+                <MovieSkeletonList />
+              ) : (
+                results?.map((result: IMovie) => (
+                  <Card
+                    key={result.id}
+                    movie={result}
+                  />
+                ))
+              )}
+            </div>
+            {(!isFetching && !isLoading && results && results.length === 0) && (
+              <div className="col-span-full flex justify-center items-center h-full" aria-label={t('noResults')}>
+                <p className="text-2xl font-bold text-center text-neutral-500 ">{t('noResults')}</p>
               </div>
-            </motion.div>
-          </AnimatePresence>
-        )}
+            )}
+          </motion.div>
+        </AnimatePresence>
       </div>
       {results && results.length > 0 && (
         <div className="flex justify-center py-11">

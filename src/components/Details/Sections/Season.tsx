@@ -6,7 +6,6 @@ import { useSeason } from "./hooks/useSeason";
 
 export const Season = ({ id, type }: { id: number; type: string }) => {
   const { selectedSeason, seasonData, seasons, handleSeasonChange, language } = useSeason(id, type);
-
   if (!seasonData || !seasons.length) return null;
 
   return (
@@ -16,6 +15,8 @@ export const Season = ({ id, type }: { id: number; type: string }) => {
         style={{ width: "300px" }}
         value={seasons[selectedSeason] || seasons[0]}
         onOptionChange={handleSeasonChange}
+        getOptionLabel={(season) => season.name}
+        getOptionValue={(season) => season.id}
       />
       <AnimatePresence mode="wait">
         <motion.div
@@ -31,11 +32,26 @@ export const Season = ({ id, type }: { id: number; type: string }) => {
           {seasonData.episodes.map((episode: any) => (
             <div key={episode.id} className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-4 mb-11 lg:mb-4">
               <div className="rounded-xl h-52 md:h-[25rem] md:w-[45rem] lg:h-[15rem] lg:w-[30rem] overflow-hidden">
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${episode.still_path}`}
-                  alt="episode image"
-                  className="rounded-xl w-full h-full object-cover"
-                />
+                {
+                  episode.still_path 
+                  ?
+                  <img
+                    src={`https://image.tmdb.org/t/p/original/${episode.still_path}`}
+                    alt="episode image"
+                    className="rounded-xl w-full h-full object-cover"
+                  />
+                  :
+                  <div className="flex items-center justify-center bg-gray-200 w-full h-full rounded-xl">
+                    <img
+                      src="/images/icono-img.png"
+                      alt="Póster no disponible"
+                      loading="lazy"
+                      role="img"
+                      aria-label="Póster no disponible"
+                      className="object-contain w-2/3 h-2/3"
+                    />
+                  </div>
+                }
               </div>
               <div className="flex flex-col gap-2 text-start">
                 <div>

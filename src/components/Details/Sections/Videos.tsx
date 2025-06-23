@@ -4,6 +4,7 @@ import { t } from "i18next";
 import { VideoSkeleton } from "../../Skeleton/VideosSkeleton";
 import * as motion from "motion/react-client";
 import { useVideo } from "./hooks/useVideos";
+import { useState, useEffect } from "react";
 
 export const Videos = ({ id, type }: { id: number; type: string }) => {
   const {
@@ -15,10 +16,13 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
     filteredVideos,
     uniqueVideosTypes,
     handleOptionChange,
-    handleVideoClick
+    handleVideoClick,
+    loading
   } = useVideo(type, id);
 
-  if(showSkeleton || isLoading || isFetching) return <VideoSkeleton/>
+
+
+  if(loading || showSkeleton || isLoading || isFetching) return <VideoSkeleton/>
 
   if (!data?.results) return null;
 
@@ -30,6 +34,8 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
           value={selectedType}
           onOptionChange={handleOptionChange}
           options={uniqueVideosTypes} 
+          getOptionLabel={(option: any) => option}
+          getOptionValue={(option: any) => option}
         />
       )}
       
