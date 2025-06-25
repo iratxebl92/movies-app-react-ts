@@ -4,7 +4,7 @@ import { useMoviesStore } from "../../../../config/store/store";
 import { IMovie } from "../../../../interfaces/IMovie";
 
 export const useDetailsBanner = (data: IMovie, type: string, isLoading: boolean) => {
-  const { openVideoModal } = useMoviesStore();
+  const { openVideoModal, selectedVideoKey } = useMoviesStore();
   const { data: videos } = useVideos(type, data?.id);
   const trailer = videos?.results.find((video: { type: string }) => video.type === "Trailer");
   const rate = data?.vote_average?.toString().substring(0, 3);
@@ -28,6 +28,7 @@ export const useDetailsBanner = (data: IMovie, type: string, isLoading: boolean)
     rate,
     date,
     showSkeleton,
-    isLoading
+    isLoading,
+    selectedVideoKey
   };
 };
