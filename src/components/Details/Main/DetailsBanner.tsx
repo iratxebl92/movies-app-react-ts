@@ -15,7 +15,7 @@ type DetailsBannerProps = {
 
 export const DetailsBanner = ({ data, type, isLoading }: DetailsBannerProps) => {
   useInitialScroll();
-  const { openVideoModal, trailer, rate, date, showSkeleton, selectedVideoKey } = useDetailsBanner(data, type, isLoading);
+  const { openVideoModal, rate, date, showSkeleton, selectedVideoKey } = useDetailsBanner(data, type, isLoading);
 
   if (isLoading || showSkeleton) {
     return <DetailsBannerSkeleton />;

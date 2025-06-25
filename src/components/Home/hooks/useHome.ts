@@ -32,7 +32,7 @@ export const useHome = () => {
   );
   const rate = results?.vote_average?.toString().substring(0, 3);
   const { data: genresList } = useGenresList("movie");
-  const { data: reviewsData } = useReviews("movie", results?.id ?? 0);
+  const { data: reviewsData } = useReviews("movie", results?.id ?? 0, language);
 
   // Section configurations
   const sectionConfigs: SectionConfigs = {

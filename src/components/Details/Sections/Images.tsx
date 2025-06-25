@@ -7,7 +7,7 @@ import "yet-another-react-lightbox/plugins/counter.css";
 import { useTranslation } from "react-i18next";
 import { ImagesSkeleton } from "../../Skeleton/ImagesSkeleton";
 import { useImage } from "./hooks/useImage";
-import { useState } from "react";
+
 
 type ImageType = "backdrops" | "posters";
 type ImageItem = {
