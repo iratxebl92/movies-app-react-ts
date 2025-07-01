@@ -3,21 +3,17 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ModalVideo } from "../Details/Modals/ModalVideo";
 import { ButtonWatchTrailer } from "../../core/ButtonWatchTrailer";
-import { LoadingSpinner } from "../../core/LoadingSpinner";
 import { useHome } from "./hooks/useHome";
 
 export const HeroBanner = () => {
   const { openVideoModal } = useMoviesStore();
   const { t } = useTranslation();
   const { heroData } = useHome();
-  const { results, trailer, rate, reviewsData, genres, isLoading } = heroData;
+  const { results, trailer, rate, reviewsData, genres } = heroData;
 
   if (!results) return null;
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
+ 
   return (
     <section className="relative">
       <div

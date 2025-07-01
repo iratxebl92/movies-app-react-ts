@@ -57,7 +57,7 @@ export const Keywords = () => {
       <div className="flex justify-center">
       <SwitchTab options={options} onTabChange={onTabChange} selectedIndex={selectedIndex} />
       </div>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6 mb-6">
       {
         isLoading ? (
          Array.from({ length: 12 }).map((_, i) => <div key={i} className="mb-6"><SkeletonKeywords /></div>)
