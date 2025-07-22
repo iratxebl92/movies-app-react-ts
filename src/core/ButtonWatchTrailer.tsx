@@ -19,7 +19,7 @@ export const ButtonWatchTrailer = ({className}: ButtonWatchTrailerProps) => {
       className={clsx("flex items-center gap-2 bg-black/60 hover:bg-slate-700 transition-colors p-2 rounded-xl", className)}
       onClick={handleOpenTrailer}
     >
-      <IoPlayCircleOutline className="text-white/80 w-10 h-10 " />
+      <IoPlayCircleOutline className="text-white/80 w-8 h-8 " />
       {t("watchTrailer")}
     </button>
   );

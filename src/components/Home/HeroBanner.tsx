@@ -33,9 +33,12 @@ export const HeroBanner = () => {
           src={`https://image.tmdb.org/t/p/original//${results.backdrop_path}`}
           alt=""
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent z-10" />
+        {/* Overlay degradado desde abajo */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10" />
       </div>
 
-      <div className="md:absolute md:bottom-10 md:w-2/4 md:ml-7 text-gray-100 p-4 font-semibold rounded-3xl md:bg-gradient-to-r md:from-[rgba(10,0,0,0.3)] md:to-transparent">
+      <div className="md:absolute md:bottom-10 md:w-2/4 md:ml-7 text-gray-100 p-4 font-semibold rounded-3xl z-20 relative">
         <p className="text-3xl leading-tight mb-2 text-black dark:text-gray-300 md:text-gray-300">
           {results.title}
         </p>
@@ -78,7 +81,7 @@ export const HeroBanner = () => {
               {rate}
             </p>
 
-            {reviewsData?.total_results ? (
+            {reviewsData && reviewsData?.total_results ? (
               <>
                 <span className="w-1 h-1 bg-gray-500 rounded-full" />
                 <Link
@@ -92,7 +95,7 @@ export const HeroBanner = () => {
               </>
             ) : null}
 
-            <ButtonWatchTrailer className="h-12 text-sm" />
+            <ButtonWatchTrailer className="h-10 text-sm" />
           </div>
         </div>
 
