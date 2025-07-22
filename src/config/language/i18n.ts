@@ -75,7 +75,9 @@ i18n
           infoDetails: "Overview",
           noCastAvailable: "Cast information not available",
           noImagesAvailable: "Images not available",
-          footerMesagge: "Movie App. All rights reserved."
+          footerMesagge: "Movie App. All rights reserved.",
+          seeMore: "See More",
+          seeLess: "See Less"
         },
       },
       es: {
@@ -145,7 +147,9 @@ i18n
           infoDetails: "Información General",
           noCastAvailable: "Información del reparto no disponible",
           noImagesAvailable: "Imágenes no disponibles",
-           footerMesagge: "App de Películas. Todos los derechos reservados."
+           footerMesagge: "App de Películas. Todos los derechos reservados.",
+           seeMore: "Ver Más",
+           seeLess: "Ver Menos"
         },
       },
     },

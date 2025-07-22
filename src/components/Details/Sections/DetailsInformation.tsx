@@ -36,7 +36,7 @@ export const DetailsInformation = ({ data, type }: DetailsInformationProps) => {
           <div className="bg-gradient-to-br from-white/90 to-gray-100/60 dark:from-neutral-900/90 dark:to-neutral-800/60 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl backdrop-blur-sm border border-gray-200/30 dark:border-neutral-700/30 h-full">
             <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-6 flex items-center gap-2">
               <IoFilmOutline className="text-blue-600 dark:text-blue-400" />
-              <span>Información General</span>
+              <span>{t("infoDetails")}</span>
             </h2>
             
             <div className="space-y-3 md:space-y-6">

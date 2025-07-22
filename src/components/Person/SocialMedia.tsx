@@ -28,22 +28,3 @@ export const SocialMedia = ({ id }: { id: number }) => {
   );
 };
 
-/*
-los iconos de react-icons se muestran como componentes de react 
-import { FaFacebook } from "react-icons/fa";
-<FaFacebook />
-
-Los iconos los hemos guardado como propiedad del objeto --> icon: FaFacebook
-
-en .map hemos desestructurado las propiedades y renombramos icon {key, label, icon: Icon, web} en vez de poner value y luego value.key etc.
-
-Lo que hace icon: Icon es renombrar la propiedad icon como Icon para que sea más fácil de usar en el JSX.
-Usamos <Icon /> para renderizar el componente de ese icono en el JSX.
-
-Sin desestructurar, para icon seria asi (hay dos opciones) :
-  {React.createElement(value.icon, { style: { fontSize: "24px" } })}
-  o
- value.icon style={{ fontSize: "24px" }} /> 
-
- El método React.createElement es una forma más explícita de crear un componente dinámicamente. Como value.icon es un componente de React, usamos React.createElement para renderizarlo. Esto es necesario si no estás usando JSX directamente con <Icon /> (que es lo que ocurre cuando desestructuramos y asignamos el icono a Icon).
-*/

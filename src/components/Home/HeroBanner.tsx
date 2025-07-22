@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useMoviesStore } from "../../config/store/store";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -11,14 +12,20 @@ export const HeroBanner = () => {
   const { heroData } = useHome();
   const { results, trailer, rate, reviewsData, genres } = heroData;
 
+  const [showFullOverview, setShowFullOverview] = useState(false);
+
   if (!results) return null;
 
- 
+  const truncatedOverview =
+    results.overview.length > 200 && !showFullOverview
+      ? `${results.overview.slice(0, 200)}...`
+      : results.overview;
+
   return (
     <section className="relative">
       <div
         className="flex justify-end relative inset-0 opacity-100 
-          before:absolute before:left-0 before:bg-gradient-to-r before:from-dark before:to-transparent before:z-12 before:content-[''] before:w-96 before:h-full
+          before:absolute before:left-0 before:bg-gradient-to-r before:from-dark before:to-transparent before:z-12 before:content-[''] before:w-2/3 before:h-full
           after:absolute after:bottom-0 after:bg-gradient-to-t after:from-dark after:to-transparent after:z-12 after:content-[''] after:w-full after:h-72"
       >
         <img
@@ -28,9 +35,23 @@ export const HeroBanner = () => {
         />
       </div>
 
-      <div className="md:absolute md:bottom-10 md:w-2/4 md:ml-7 text-gray-100 p-4 font-semibold rounded-3xl ">
-        <p className="text-3xl text-black dark:text-gray-300 md:text-gray-300 ">{results.title}</p>
-        <p className="text-black dark:text-gray-300 dark:opacity-100 opacity-70 md:opacity-100 md:text-gray-300 md:text-lg">{results.overview}</p>
+      <div className="md:absolute md:bottom-10 md:w-2/4 md:ml-7 text-gray-100 p-4 font-semibold rounded-3xl md:bg-gradient-to-r md:from-[rgba(10,0,0,0.3)] md:to-transparent">
+        <p className="text-3xl leading-tight mb-2 text-black dark:text-gray-300 md:text-gray-300">
+          {results.title}
+        </p>
+
+        <p className="text-black dark:text-gray-300 dark:opacity-100 opacity-70 md:opacity-100 md:text-gray-300 md:text-lg">
+          {truncatedOverview}
+          {results.overview.length > 200 && (
+            <button
+              onClick={() => setShowFullOverview(!showFullOverview)}
+              className="ml-2 text-sm text-blue-300 hover:underline"
+            >
+              {showFullOverview ? t("seeLess") : t("seeMore")}
+            </button>
+          )}
+        </p>
+
         <div className="mt-4">
           <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-4 items-center">
             {genres.map((genre: { id: number; name: string }) => (
@@ -42,6 +63,7 @@ export const HeroBanner = () => {
               </span>
             ))}
           </div>
+
           <div className="flex items-center gap-2 mb-4">
             <p className="text-xs dark:bg-gray-500 bg-gray-900/50 p-2 rounded-md flex">
               <svg
@@ -55,23 +77,27 @@ export const HeroBanner = () => {
               </svg>
               {rate}
             </p>
+
             {reviewsData?.total_results ? (
               <>
-                <span className="w-1 h-1  bg-gray-500 rounded-full "></span>
+                <span className="w-1 h-1 bg-gray-500 rounded-full" />
                 <Link
                   to={`/details/movie/${results.id}#reviews`}
                   className="text-xs hover:underline dark:bg-gray-500 bg-gray-900/50 p-2 rounded-md"
                 >
-                  <span className=" px-1 py-1 rounded-md text-white">{reviewsData.total_results} {t("reviews")}</span>{" "}
+                  <span className="px-1 py-1 rounded-md text-white">
+                    {reviewsData.total_results} {t("reviews")}
+                  </span>
                 </Link>
               </>
             ) : null}
+
             <ButtonWatchTrailer className="h-12 text-sm" />
           </div>
         </div>
+
         {openVideoModal && <ModalVideo selectedVideoKey={trailer?.key || ""} />}
       </div>
     </section>
   );
 };
-

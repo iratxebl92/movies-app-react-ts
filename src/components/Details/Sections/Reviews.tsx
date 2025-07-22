@@ -97,18 +97,3 @@ console.log(localReviews)
   );
 };
 
-// src={`https://api.dicebear.com/6.x/bottts/svg?seed=${review.author}`}
-/*
-Accesibilidad:
-role="alert": Indica que el contenido es importante y debe ser anunciado por los lectores de pantalla.
-aria-live="assertive": Asegura que el mensaje se anuncie de inmediato cuando se renderiza.
-aria-label: Proporciona una descripción accesible del contenido.
-
-
-role="article": Indica que cada reseña es un artículo, lo que ayuda a los lectores de pantalla a entender la estructura del contenido.
-aria-labelledby: Asocia el contenido de la reseña con un ID único, lo que permite a los lectores de pantalla identificar el contenido de manera más efectiva.
-alt en la imagen: Se añadió un texto alternativo descriptivo para la imagen del autor, lo que mejora la accesibilidad para los usuarios de lectores de pantalla.
-aria-expanded: Indica si el contenido de la reseña está expandido o colapsado, lo que es útil para los usuarios que utilizan tecnologías de asistencia.
-aria-controls: Asocia el botón "Leer más" con el contenido que controla, lo que proporciona contexto adicional a los usuarios de lectores de pantalla.
-id en el párrafo de contenido: Se añadió un ID para identificar el contenido de la reseña, lo que permite una mejor navegación y referencia.
-*/

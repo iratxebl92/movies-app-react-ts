@@ -43,17 +43,3 @@ export const DetailsBannerSkeleton = () => {
     </div>
   );
 };
-{
-  /* <div className="absolute inset-0 flex flex-col lg:flex-row items-center px-4 md:px-8 lg:px-16">
-<div className="flex flex-col gap-4 md:gap-8">
-    <div className="w-48 md:w-64 lg:w-96 h-600 rounded-lg overflow-hidden shadow-2xl transform transition-transform duration-300">
-    <div className="h-full w-full  bg-gray-200 dark:bg-neutral-800 rounded-lg"/>
-</div>
-<div className="flex flex-col gap-2 md:gap-4 text-start w-full">
-    <div className="bg-gray-200 dark:bg-neutral-800 rounded-lg h-4 w-3/4 border-2 border-blue-500" />
-    <div className="bg-gray-200 dark:bg-neutral-800 rounded-lg h-4 w-4/6 border-2 border-blue-500" />
-    <div className="bg-gray-200 dark:bg-neutral-800 rounded-lg h-4 w-2/6 border-2 border-blue-500" />
-</div>
-</div>
-</div> */
-}

@@ -77,4 +77,3 @@ export const Videos = ({ id, type }: { id: number; type: string }) => {
     </>
   );
 }
-// https://www.youtube.com/watch?v=gk5mmrCVwSc es con la key https://api.themoviedb.org/3/tv/1668/videos?

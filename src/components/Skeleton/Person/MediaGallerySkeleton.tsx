@@ -34,9 +34,3 @@ export const MediaGallerySkeleton = () => {
 }
 
 
-//barra tab
-// botones
-//pelis
-//boton load more
-
-//https://www.themoviedb.org/t/p/w220_and_h330_face/qW9mc8nXOfvKGJDZkqvoppCsC26.jpg

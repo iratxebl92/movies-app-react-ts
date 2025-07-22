@@ -33,4 +33,3 @@ export const Recommendations = ({id, type, language}: {id: string, type: string,
   )
 }
 
-//flex flex-wrap gap-8 content-center justify-center
