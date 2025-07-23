@@ -13,7 +13,7 @@ type ReviewsPropsType = {
 export const Reviews = ({ id, type }: ReviewsPropsType) => {
   const { t } = useTranslation();
   const { localReviews, handleReadMore, language, loading } = useReview(type, id);
-console.log(localReviews)
+
   if (loading) return <ReviewsSkeleton />;
 
   return (

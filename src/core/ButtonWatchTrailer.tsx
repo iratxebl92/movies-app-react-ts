@@ -15,7 +15,7 @@ export const ButtonWatchTrailer = ({className}: ButtonWatchTrailerProps) => {
         setOpenVideoModal(true)
     }
   return (
-    <button
+    <button 
       className={clsx("flex items-center gap-2 bg-black/60 hover:bg-slate-700 transition-colors p-2 rounded-xl", className)}
       onClick={handleOpenTrailer}
     >

@@ -21,7 +21,7 @@ export const MediaGallery = () => {
     onTabChange,
     onDepartmentOptionChange
   } = useMediaGallery();
-console.log(data)
+
   if (isLoading || showSkeleton) return <MediaGallerySkeleton/>;
   
   // Wrapper para OptionsSelect
@@ -29,7 +29,6 @@ console.log(data)
     if (typeof option === 'string') onDepartmentOptionChange(option);
   };
 
-console.log(selectMovies, "select")
   return (
     <>
       <SwitchTab

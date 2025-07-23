@@ -13,10 +13,10 @@ export const MediaPagination = (props: any) => {
         pageCount={props.pageCount} // Total de páginas a mostrar
         renderOnZeroPageCount={null} // No renderiza nada si el conteo es 0
         forcePage={props.page - 1} // Fuerza la página activa (ReactPaginate empieza en 0)
-        nextLabel={<IconChevronRight className="w-5 h-5" />} // Icono de siguiente página
-        previousLabel={<IconChevronLeft className="w-5 h-5" />} // Icono de página anterior
+        nextLabel={<IconChevronRight className="w-5 h-5" />} 
+        previousLabel={<IconChevronLeft className="w-5 h-5" />} 
 
-        // Estilos de Tailwind para los elementos del paginador
+   
         containerClassName="flex space-x-3 hidden md:flex" // Hide on mobile, show on desktop
         pageClassName="min-w-[35px] h-[35px] hidden md:flex text-slate-500 dark:text-slate-300 font-medium text-sm bg-slate-200 dark:bg-slate-700 rounded-lg"
         pageLinkClassName="w-full h-full px-4 pt-[2px] flex items-center justify-center"
@@ -32,10 +32,10 @@ export const MediaPagination = (props: any) => {
       />
 
       {/* Mobile Pagination */}
-      <div className="flex md:hidden items-center space-x-3"> {/* Show only on mobile */}
+      <div className="flex md:hidden items-center space-x-3"> 
         {/* Previous Button */}
         <button
-          onClick={() => props.handlePageClick({ selected: props.page - 2 })} // Adjust for 0-indexed selected
+          onClick={() => props.handlePageClick({ selected: props.page - 2 })}
           disabled={props.page === 1}
           className={clsx(
             "min-w-[35px] h-[35px] flex items-center justify-center text-slate-500 dark:text-slate-300 font-semibold text-lg bg-slate-200 dark:bg-slate-700 rounded-lg",

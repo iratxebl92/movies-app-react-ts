@@ -16,7 +16,7 @@ export const ModalVideo = ({selectedVideoKey}: {selectedVideoKey: string}) => {
     handleNext,
     submitCloseButton
   } = useModalVideo(selectedVideoKey)
-console.log(selectedVideoKey, "selected")
+
   return (
     <Transition appear show={openVideoModal} 
     as={Fragment}

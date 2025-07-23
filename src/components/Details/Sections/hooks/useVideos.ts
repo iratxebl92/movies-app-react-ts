@@ -50,7 +50,6 @@ export const useVideo = (type: string, id: number) => {
   };
 
   const handleVideoClick = (videoKey: string, index: number) => {
-    console.log(videoKey)
     setSelectedVideoKey(videoKey);
     setOpenVideoModal(true);
     setCurrentVideoIndex(index);
