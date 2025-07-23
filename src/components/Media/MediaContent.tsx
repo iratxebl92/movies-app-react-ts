@@ -8,6 +8,7 @@ import { NotFound } from "../../core/NotFound";
 import { GenreList } from "./Filters/GenreList";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import { opacityMotionTransition } from "../../utils/filters";
 
 export const MediaContent = () => {
   const { t } = useTranslation();
@@ -18,7 +19,6 @@ export const MediaContent = () => {
     results,
     page,
     handleChangePage,
-    opacityMotionTransition,
     totalPages,
     loading
   } = useMediaContent();

@@ -63,5 +63,15 @@ import { Videos } from "../components/Details/Sections/Videos";
   };
   //Map es una estructura de datos que almacena pares clave -> valor, similar a un Object, pero más eficiente cuando se trata de búsquedas.
   
-  //TODO: Mirar bien y coger apuntes de https://chatgpt.com/c/67de9049-6208-8006-ba25-83676373e4ab
+export const opacityMotionTransition = {
+      variants: {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 }
+      },
+      initial: "hidden",
+      animate: "visible",
+      exit: "hidden",
+      transition: { duration: 0.250 }
+    } as const;
+
 

@@ -37,17 +37,7 @@ export const useMediaContent = () => {
     setPage(selected + 1);
   };
 
-  const opacityMotionTransition = {
-    variants: {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1 },
-    },
-    initial: "hidden",
-    animate: "visible",
-    exit: "hidden",
-    transition: { duration: 0.2 },
-  } as const;
-
+ 
   return {
     isLoading,
     isError,
@@ -55,7 +45,6 @@ export const useMediaContent = () => {
     results,
     page,
     handleChangePage,
-    opacityMotionTransition,
     totalPages: Math.min(data?.total_pages || 0, 500),
     loading
   };
