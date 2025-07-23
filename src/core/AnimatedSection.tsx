@@ -24,3 +24,4 @@ export const AnimatedSection = ({ children }: { children: React.ReactNode }) => 
     );
   };
 
+  
