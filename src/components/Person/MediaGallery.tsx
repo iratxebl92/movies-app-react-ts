@@ -10,7 +10,6 @@ export const MediaGallery = () => {
   const {
     isLoading,
     showSkeleton,
-    data,
     selectMovies,
     visibleMovies,
     setVisibleMovies,
